@@ -1,0 +1,41 @@
+.container {
+  height: 64px;
+  width: 260px;
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: #1d1f22;
+  border-radius: 100px;
+  padding: 0 24px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+
+  /* Grayscale/Gray 60% */
+
+  color: #8e8f90;
+}
+
+.item > span {
+  margin-top: 5px;
+}
+.active {
+  transition: color s;
+  color: white;
+  font-weight: 500;
+}

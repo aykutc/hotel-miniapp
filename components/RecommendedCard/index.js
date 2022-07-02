@@ -9,6 +9,7 @@ function RecommendedCard({
   discountPrice,
   price,
   img,
+  imgWebp,
   imageStyles,
   ...props
 }) {
@@ -16,16 +17,11 @@ function RecommendedCard({
     <div className={styles.recommendCardWrapper} {...props}>
       <OptimizedImage
         file={img}
+        fileWebp={imgWebp}
         style={imageStyles}
         type={"jpg"}
       ></OptimizedImage>
-      {/* <Image
-        threshold="0.1"
-        width="230px"
-        height="118px"
-        src="home/hotel.png"
-        alt=""
-      /> */}
+
       <div className={styles.recommendBottomArea}>
         <div className={styles.tag}>
           <p className={styles.hotelName}>{subTitle}</p>

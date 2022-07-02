@@ -21,6 +21,7 @@ function Explore({ exploreArray, recommendedArray }) {
               title={item.title}
               description={item.description}
               img={item.img}
+              imgWebp={item.imgWebp}
               logo={item.logo}
             ></ExploreCard>
           );
@@ -37,6 +38,7 @@ function Explore({ exploreArray, recommendedArray }) {
               subTitle={item.subTitle}
               block={item.block}
               img={item.img}
+              imgWebp={item.imgWebp}
               price={item.price}
               discountPrice={item.discountPrice}
               imageStyles={{ width: "100%", height: 118, display: "block" }}

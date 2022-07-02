@@ -2,13 +2,14 @@ import React from "react";
 import OptimizedImage from "../OptimizedImage";
 import styles from "./ExploreCard.module.css";
 
-function ExploreCard({ index, title, description, img, logo }) {
+function ExploreCard({ index, title, description, img, imgWebp, logo }) {
   return (
     <div className={styles.cardWrapper}>
       <OptimizedImage
         className={styles.bgImage}
         loading={index < 2 ? "eager" : "lazy"}
         file={img}
+        fileWebp={imgWebp}
         type="jpg"
       ></OptimizedImage>
       <OptimizedImage

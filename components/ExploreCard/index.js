@@ -2,13 +2,19 @@ import React from "react";
 import OptimizedImage from "../OptimizedImage";
 import styles from "./ExploreCard.module.css";
 
-function ExploreCard({ title, description, img, logo }) {
+function ExploreCard({ index, title, description, img, logo }) {
   return (
     <div className={styles.cardWrapper}>
-      <OptimizedImage className={styles.bgImage} file={img}></OptimizedImage>
+      <OptimizedImage
+        className={styles.bgImage}
+        loading={index < 2 ? "eager" : "lazy"}
+        file={img}
+        type="jpg"
+      ></OptimizedImage>
       <OptimizedImage
         className={styles.regionIcon}
         file={logo}
+        type="png"
       ></OptimizedImage>
 
       <div className={styles.textArea}>

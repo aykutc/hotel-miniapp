@@ -9,10 +9,16 @@ function RecommendedCard({
   discountPrice,
   price,
   img,
+  imageStyles,
+  ...props
 }) {
   return (
-    <div className={styles.recommendCardWrapper}>
-      <OptimizedImage file={img}></OptimizedImage>
+    <div className={styles.recommendCardWrapper} {...props}>
+      <OptimizedImage
+        file={img}
+        style={imageStyles}
+        type={"jpg"}
+      ></OptimizedImage>
       {/* <Image
         threshold="0.1"
         width="230px"

@@ -11,6 +11,7 @@ function HomeMenu({ activeMenu, setActiveMenu }) {
   return (
     <div className={styles.container}>
       <button
+        key={"explore"}
         className={[styles.item]}
         onClick={() => {
           onClick("Explore");
@@ -24,6 +25,7 @@ function HomeMenu({ activeMenu, setActiveMenu }) {
         </span>
       </button>
       <button
+        key={"favorites"}
         className={styles.item}
         onClick={() => {
           onClick("Favorites");
@@ -37,6 +39,7 @@ function HomeMenu({ activeMenu, setActiveMenu }) {
         </span>
       </button>
       <button
+        key={"stays"}
         className={styles.item}
         onClick={() => {
           onClick("Stays");

@@ -5758,6 +5758,11 @@ xtend@^4.0.0, xtend@^4.0.2:
   resolved "https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz"
   integrity sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
 
+yall-js@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/yall-js/-/yall-js-4.0.2.tgz#2c36756593b1df6bb82bd9428388d7be304e6a08"
+  integrity sha512-C3C8S1sHPyqcKqF7XLCDugxzP8UOQ99htWCVuYLo2UZ0Mx/mIuip6FOGBPpp0cqOVKgyHOLafUK19L6yG1CmXQ==
+
 yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npmjs.org/yallist/-/yallist-2.1.2.tgz"

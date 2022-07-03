@@ -1,14 +1,23 @@
 import ExploreCard from "@/components/ExploreCard";
 import HeaderTitle from "@/components/HeaderTitle";
 import RecommendedCard from "@/components/RecommendedCard";
-import React from "react";
 import styles from "@/styles/Home.module.css";
 
-function Explore({ exploreArray, recommendedArray }) {
+function Explore({ exploreArray, recommendedArray, user }) {
   return (
     <>
       <div className={styles.header}>
-        <HeaderTitle>HI EMILY,</HeaderTitle>
+        <HeaderTitle>
+          <div style={{ marginRight: 6 }}>HI</div>
+          {user ? (
+            user.name + ","
+          ) : (
+            <div
+              className="shine"
+              style={{ width: 100, height: 16, marginLeft: 4 }}
+            ></div>
+          )}
+        </HeaderTitle>
       </div>
       <div style={{ height: 24 }}></div>
       <div className={styles.title}>Explore by NEOM Region</div>
@@ -23,6 +32,7 @@ function Explore({ exploreArray, recommendedArray }) {
               img={item.img}
               imgWebp={item.imgWebp}
               logo={item.logo}
+              logoWebp={item.logoWebp}
             ></ExploreCard>
           );
         })}

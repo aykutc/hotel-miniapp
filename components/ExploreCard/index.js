@@ -2,7 +2,15 @@ import React from "react";
 import OptimizedImage from "../OptimizedImage";
 import styles from "./ExploreCard.module.css";
 
-function ExploreCard({ index, title, description, img, imgWebp, logo }) {
+function ExploreCard({
+  index,
+  title,
+  description,
+  img,
+  imgWebp,
+  logo,
+  logoWebp,
+}) {
   return (
     <div className={styles.cardWrapper}>
       <OptimizedImage
@@ -15,6 +23,7 @@ function ExploreCard({ index, title, description, img, imgWebp, logo }) {
       <OptimizedImage
         className={styles.regionIcon}
         file={logo}
+        fileWebp={logoWebp}
         type="png"
       ></OptimizedImage>
 

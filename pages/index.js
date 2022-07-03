@@ -12,9 +12,9 @@ export async function getStaticProps() {
 }
 
 export default function Home() {
-  React.useEffect(() => {
+  /*   React.useEffect(() => {
     Router.replace("/home");
-  }, []);
+  }, []); */
 
   return (
     <div className={styles.container}>

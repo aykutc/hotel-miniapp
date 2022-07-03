@@ -1,5 +1,3 @@
-import React from "react";
-
 const OptimizedImage = ({
   file,
   fileWebp,
@@ -13,6 +11,7 @@ const OptimizedImage = ({
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
         src={fileWebp}
         alt={file}
+        fetchpriority={loading === "eager" ? "high" : "low"}
         loading={loading}
         {...props}
       />
@@ -34,6 +33,7 @@ const OptimizedImage = ({
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
         src={require(`../../public/images/${file}?resize&sizes[]=640&sizes[]=740&sizes[]=828&sizes[]=1080&sizes[]=1920&sizes[]=2048&sizes[]=3840`)}
         alt={file}
+        fetchpriority={loading === "eager" ? "high" : "low"}
         loading={loading}
         {...props}
       />

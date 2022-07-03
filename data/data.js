@@ -1,5 +1,7 @@
-/* import oxagonLogo from "./public/images/logos/trojena.jpg";
-import oxagonBg from "./public/images/trojena-bg.jpg";
+import oxagonLogoWebp from "../public/images/logos/oxagon.png?webp";
+import lineLogoWebp from "../public/images/logos/line.png?webp";
+import trojenaLogoWebp from "../public/images/logos/trojena.png?webp";
+/* import oxagonBg from "./public/images/trojena-bg.jpg";
 import lineLogo from "./public/images/logos/trojena.jpg";
 import lineBg from "./public/images/trojena-bg.jpg"; */
 import oxagonBgWebp from "../public/images/oxagon-bg.jpg?webp";
@@ -13,6 +15,7 @@ const ExploreArray = [
     title: "TROJENA",
     description: "The mountains of NEOM",
     logo: "logos/trojena.png",
+    logoWebp: trojenaLogoWebp,
     img: "trojena-bg.jpg",
     imgWebp: trojenaBgWebp,
   },
@@ -20,6 +23,7 @@ const ExploreArray = [
     title: "OXAGON",
     description: "A blueprint for advanced & clean industries",
     logo: "logos/oxagon.png",
+    logoWebp: oxagonLogoWebp,
     img: "oxagon-bg.jpg",
     imgWebp: oxagonBgWebp,
   },
@@ -27,6 +31,7 @@ const ExploreArray = [
     title: "THE LINE",
     description: "A Revolution in Urban Living",
     logo: "logos/line.png",
+    logoWebp: lineLogoWebp,
     img: "line-bg.jpg",
     imgWebp: lineBgWebp,
   },

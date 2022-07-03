@@ -5,15 +5,14 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link
+          {/*  <link
             href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap"
             rel="preload"
             as="font"
-          />
+          /> */}
         </Head>
         <body>
           <Main />
-
           <NextScript />
         </body>
       </Html>

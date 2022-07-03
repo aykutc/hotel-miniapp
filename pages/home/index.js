@@ -4,11 +4,11 @@ import Head from "next/head";
 import React from "react";
 import styles from "@/styles/Home.module.css";
 import HomeMenu from "@/components/HomeMenu";
-/* import Explore from "@/components/home/Explore"; */
-/* import Favorites from "@/components/home/Favorites"; */
-import dynamic from "next/dynamic";
+import Explore from "@/components/home/Explore";
+import Favorites from "@/components/home/Favorites";
+/* import dynamic from "next/dynamic";
 const Favorites = dynamic(() => import("@/components/home/Favorites"), {});
-const Explore = dynamic(() => import("@/components/home/Explore"), {});
+const Explore = dynamic(() => import("@/components/home/Explore"), {}); */
 
 /* import trojenaLogo from "../public/images/logos/trojena.jpg"; */
 /* import trojenaBg from "../public/images/trojena-bg.jpg";

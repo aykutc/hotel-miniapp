@@ -41,7 +41,6 @@ const OptimizedImage = ({ src, alt, maxWidth, className, ...props }) => {
   return (
     <div
       ref={imageRef}
-      className={styles.container}
       style={{
         width: "100%",
         maxWidth: maxWidth ? `${maxWidth}px` : "100%",

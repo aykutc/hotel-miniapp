@@ -27,7 +27,7 @@
   text-align: center;
 
   /* Grayscale/Gray 60% */
-  transition: all 1s;
+  /* transition: all 1s; */
 
   color: #8e8f90;
 }
@@ -36,7 +36,7 @@
   margin-top: 5px;
 }
 .active {
-  transition: all 1s;
+  /* transition: all 1s; */
 
   color: white;
   font-weight: 500;

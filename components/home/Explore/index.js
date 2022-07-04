@@ -20,7 +20,7 @@ function Explore({ exploreArray, recommendedArray, user }) {
         </HeaderTitle>
       </div>
       <div style={{ height: 24 }}></div>
-      <div className={styles.title}>Explore by NEOM Region</div>
+      <div className={styles.title}>Explore by NEOM Region,</div>
       <div className={styles.exploreContainer}>
         {exploreArray.map((item, index) => {
           return (

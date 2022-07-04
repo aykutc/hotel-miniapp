@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Outfit";
+  src: url("./../public/outfit.woff2") format("woff2");
+  font-display: swap;
+}
 html,
 body {
   padding: 0;

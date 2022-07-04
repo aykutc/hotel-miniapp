@@ -3,9 +3,9 @@ import { ExploreArray, RecommendedArray } from "data/data";
 import Head from "next/head";
 import React from "react";
 import styles from "@/styles/Home.module.css";
-import HomeMenu from "@/components/HomeMenu";
-import Explore from "@/components/home/Explore";
-import Favorites from "@/components/home/Favorites";
+import HomeMenu from "@/components/HomeComponents/HomeMenu";
+import Explore from "@/components/HomeComponents/Explore";
+import Favorites from "@/components/HomeComponents/Favorites";
 /* import dynamic from "next/dynamic";
 const Favorites = dynamic(() => import("@/components/home/Favorites"), {});
   */
@@ -29,7 +29,7 @@ function Home({ exploreArray, recommendedArray }) {
     return url;
   };
 
-  React.useEffect(() => {
+  /*   React.useEffect(() => {
     const address =
       window.location.protocol + "//" + window.location.host + "/home";
 
@@ -40,7 +40,7 @@ function Home({ exploreArray, recommendedArray }) {
     } else {
       checkLogin(generateUrl(address));
     }
-  }, []);
+  }, []); */
 
   const checkLogin = async (authAddress) => {
     const user = localStorage.getItem("user");
@@ -102,7 +102,7 @@ function Home({ exploreArray, recommendedArray }) {
       {activeMenu === "Favorites" && (
         <Favorites recommendedArray={recommendedArray} />
       )}
-      <div style={{ height: 80 }}></div>
+      <div style={{ height: 100 }}></div>
       <HomeMenu
         activeMenu={activeMenu}
         setActiveMenu={setActiveMenu}

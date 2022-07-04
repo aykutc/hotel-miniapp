@@ -1,5 +1,5 @@
 import React from "react";
-import OptimizedImage from "../OptimizedImage";
+import OptimizedImage from "../../OptimizedImage";
 import styles from "./ExploreCard.module.css";
 
 function ExploreCard({
@@ -10,9 +10,10 @@ function ExploreCard({
   imgWebp,
   logo,
   logoWebp,
+  ...props
 }) {
   return (
-    <div className={styles.cardWrapper}>
+    <div className={styles.cardWrapper} {...props}>
       <div className={styles.bgImage}>
         <OptimizedImage
           loading={index < 2 ? "eager" : "lazy"}

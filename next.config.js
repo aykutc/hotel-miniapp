@@ -33,7 +33,7 @@ module.exports = withPlugins(
           test: /\.(jpe?g|png|webp)$/i,
           adapter: require("responsive-loader/sharp"),
           sizes: [360, 720, 1080],
-          quality: 70,
+          quality: 85,
         },
         mozjpeg: {
           quality: 75,

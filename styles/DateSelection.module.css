@@ -1,0 +1,27 @@
+.container {
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 18px;
+  height: 100vh;
+  overflow: hidden;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkContainer {
+  height: 52px;
+  margin-top: 17px;
+  display: flex;
+}
+
+.checkInOut {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}

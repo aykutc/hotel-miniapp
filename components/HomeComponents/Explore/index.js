@@ -1,7 +1,8 @@
-import ExploreCard from "@/components/ExploreCard";
+import ExploreCard from "@/components/HomeComponents/ExploreCard";
 import HeaderTitle from "@/components/HeaderTitle";
 import RecommendedCard from "@/components/RecommendedCard";
 import styles from "@/styles/Home.module.css";
+import Router from "next/router";
 
 function Explore({ exploreArray, recommendedArray, user }) {
   return (
@@ -13,9 +14,17 @@ function Explore({ exploreArray, recommendedArray, user }) {
             user.name + ","
           ) : (
             <div
-              className="shine"
-              style={{ width: 100, height: 16, marginLeft: 4 }}
-            ></div>
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <div
+                className="shine"
+                style={{ width: 100, height: 16, marginLeft: 4 }}
+              ></div>
+            </div>
           )}
         </HeaderTitle>
       </div>
@@ -33,6 +42,9 @@ function Explore({ exploreArray, recommendedArray, user }) {
               imgWebp={item.imgWebp}
               logo={item.logo}
               logoWebp={item.logoWebp}
+              onClick={() => {
+                Router.push("/date-selection");
+              }}
             ></ExploreCard>
           );
         })}

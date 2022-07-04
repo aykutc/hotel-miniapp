@@ -17,6 +17,7 @@
   display: block;
   opacity: 0;
   transition: opacity 200ms ease-out;
+  object-fit: cover;
 }
 
 .image.loading {

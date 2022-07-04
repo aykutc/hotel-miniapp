@@ -17,7 +17,7 @@ const nextConfig = {
   images: {
     disableStaticImages: true,
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
 };
 module.exports = withPlugins(
   [
@@ -32,7 +32,26 @@ module.exports = withPlugins(
         responsive: {
           test: /\.(jpe?g|png|webp)$/i,
           adapter: require("responsive-loader/sharp"),
-          sizes: [512, 720, 1024, 1440],
+          sizes: [360, 720, 1080],
+          quality: 70,
+        },
+        mozjpeg: {
+          quality: 75,
+        },
+        optipng: {
+          optimizationLevel: 3,
+        },
+        pngquant: false,
+        gifsicle: {
+          interlaced: true,
+          optimizationLevel: 3,
+        },
+        svgo: {
+          // enable/disable svgo plugins here
+        },
+        webp: {
+          preset: "default",
+          quality: 70,
         },
       },
     ],

@@ -26,7 +26,7 @@
     "react-dom": "npm:@preact/compat",
     "react-ssr-prepass": "npm:preact-ssr-prepass",
     "responsive-loader": "^3.0.4",
-    "sharp": "^0.30.7",
+    "sharp": "latest",
     "url-loader": "^4.1.1",
     "webp-loader": "^0.6.0"
   },

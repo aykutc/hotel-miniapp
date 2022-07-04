@@ -5,15 +5,10 @@ import React from "react";
 import styles from "@/styles/Home.module.css";
 import HomeMenu from "@/components/HomeMenu";
 import Explore from "@/components/home/Explore";
-/* import Favorites from "@/components/home/Favorites";
- */ import dynamic from "next/dynamic";
+import Favorites from "@/components/home/Favorites";
+/* import dynamic from "next/dynamic";
 const Favorites = dynamic(() => import("@/components/home/Favorites"), {});
-/* const Explore = dynamic(() => import("@/components/home/Explore"), {}); */
-
-/* import trojenaBg from "../public/images/trojena-bg.jpg";
- */
-/* import profilePic from "../public/images/hotel-5.png"; */
-/* import { ExploreArray } from "data/data"; */
+  */
 
 export async function getStaticProps() {
   return {
@@ -34,9 +29,8 @@ function Home({ exploreArray, recommendedArray }) {
     return url;
   };
 
-  /*   React.useEffect(() => {
-    const address =
-      window.location.protocol + "//" + window.location.host + "/home";
+  /*  React.useEffect(() => {
+    const address = window.location.protocol + "//" + window.location.host;
 
     const urlParams = new URLSearchParams(window.location.href);
     const myParam = urlParams.get("code");
@@ -45,8 +39,8 @@ function Home({ exploreArray, recommendedArray }) {
     } else {
       checkLogin(generateUrl(address));
     }
-  }, []);
- */
+  }, []); */
+
   const checkLogin = async (authAddress) => {
     const user = localStorage.getItem("user");
 
@@ -112,22 +106,6 @@ function Home({ exploreArray, recommendedArray }) {
         activeMenu={activeMenu}
         setActiveMenu={setActiveMenu}
       ></HomeMenu>
-      {/* <button onClick={handler}>click</button> */}
-
-      {/* <button
-        id="frame"
-        onClick={() => {
-          openidwindow = window.open(
-            "https://idp.kobilshift-app01-eotsr.shift.kobil.com/auth/realms/flutter/protocol/openid-connect/auth?client_id=test-openid&redirect_uri=http://test:3000/code&scope=openid&response_type=code&response_mode=query&nonce=o3w1vsredlp&prompt=none",
-            "_blank",
-            "toolbar=0,location=0,menubar=0"
-          );
-          alert(openidwindow);
-          console.log(openidwindow);
-        }}
-      >
-        aa
-      </button> */}
     </div>
   );
 }

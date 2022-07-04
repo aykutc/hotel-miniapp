@@ -22,7 +22,10 @@ function ExploreCard({
         ></OptimizedImage>
       </div>
       <div className={styles.regionIcon}>
-        <OptimizedImage src={logo} type="png"></OptimizedImage>
+        <OptimizedImage
+          src={logo}
+          style={{ height: "100%", width: "100%" }}
+        ></OptimizedImage>
       </div>
       <div className={styles.textArea}>
         <p className={styles.title}>{title}</p>

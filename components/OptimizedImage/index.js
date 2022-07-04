@@ -106,12 +106,12 @@ function Image({
             findExtension[0] === "jpg" ? "jpeg" : findExtension[0];
           return (
             <React.Fragment key={`image_${index}`}>
-              {/*  <source srcSet={webpPath} media={media} type="image/webp" />
+              <source srcSet={webpPath} media={media} type="image/webp" />
               <source
                 srcSet={fallbackPath}
                 media={media}
                 type={`image/${fallbackMimeType}`}
-              /> */}
+              />
             </React.Fragment>
           );
         })}

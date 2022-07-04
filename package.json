@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "deploy": "next build && next export && firebase deploy",
+    "openid": "next build && next export && firebase hosting:channel:deploy openid",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/outfit": "^4.5.8",
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
@@ -28,7 +30,9 @@
     "webp-loader": "^0.6.0"
   },
   "devDependencies": {
+    "@zeit/next-css": "^1.0.1",
     "eslint": "8.18.0",
-    "eslint-config-next": "12.2.0"
+    "eslint-config-next": "12.2.0",
+    "next-purgecss": "^4.0.0"
   }
 }

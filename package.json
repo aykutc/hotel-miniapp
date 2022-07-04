@@ -7,6 +7,7 @@
     "build": "next build",
     "deploy": "next build && next export && firebase deploy",
     "openid": "next build && next export && firebase hosting:channel:deploy openid",
+    "image": "next build && next export && firebase hosting:channel:deploy image",
     "start": "next start",
     "lint": "next lint"
   },

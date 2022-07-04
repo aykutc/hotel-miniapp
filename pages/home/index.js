@@ -10,7 +10,6 @@ import Explore from "@/components/home/Explore";
 const Favorites = dynamic(() => import("@/components/home/Favorites"), {});
 /* const Explore = dynamic(() => import("@/components/home/Explore"), {}); */
 
-/* import trojenaLogo from "../public/images/logos/trojena.jpg"; */
 /* import trojenaBg from "../public/images/trojena-bg.jpg";
  */
 /* import profilePic from "../public/images/hotel-5.png"; */
@@ -35,7 +34,7 @@ function Home({ exploreArray, recommendedArray }) {
     return url;
   };
 
-  React.useEffect(() => {
+  /*   React.useEffect(() => {
     const address =
       window.location.protocol + "//" + window.location.host + "/home";
 
@@ -47,7 +46,7 @@ function Home({ exploreArray, recommendedArray }) {
       checkLogin(generateUrl(address));
     }
   }, []);
-
+ */
   const checkLogin = async (authAddress) => {
     const user = localStorage.getItem("user");
 

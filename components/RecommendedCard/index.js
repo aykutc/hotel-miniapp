@@ -16,7 +16,7 @@ function RecommendedCard({
   return (
     <div className={styles.recommendCardWrapper} {...props}>
       <OptimizedImage
-        file={img}
+        src={img}
         fileWebp={imgWebp}
         style={imageStyles}
         type={"jpg"}

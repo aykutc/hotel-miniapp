@@ -13,20 +13,17 @@ function ExploreCard({
 }) {
   return (
     <div className={styles.cardWrapper}>
-      <OptimizedImage
-        className={styles.bgImage}
-        loading={index < 2 ? "eager" : "lazy"}
-        file={img}
-        fileWebp={imgWebp}
-        type="jpg"
-      ></OptimizedImage>
-      <OptimizedImage
-        className={styles.regionIcon}
-        file={logo}
-        fileWebp={logoWebp}
-        type="png"
-      ></OptimizedImage>
-
+      <div className={styles.bgImage}>
+        <OptimizedImage
+          loading={index < 2 ? "eager" : "lazy"}
+          src={img}
+          fileWebp={imgWebp}
+          type="jpg"
+        ></OptimizedImage>
+      </div>
+      <div className={styles.regionIcon}>
+        <OptimizedImage src={logo} type="png"></OptimizedImage>
+      </div>
       <div className={styles.textArea}>
         <p className={styles.title}>{title}</p>
         <p className={styles.description}>{description}</p>

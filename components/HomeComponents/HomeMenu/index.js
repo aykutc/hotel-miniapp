@@ -3,10 +3,12 @@ import styles from "./HomeMenu.module.css";
 import Favorites from "../../icons/Favorites";
 import Stays from "../../icons/Stays";
 import Explore from "../../icons/Explore";
+import { saveHomeActiveTab } from "data/api";
 
 function HomeMenu({ activeMenu, setActiveMenu }) {
   const onClick = (val) => {
     setActiveMenu(val);
+    saveHomeActiveTab(val);
   };
   return (
     <div className={styles.container}>

@@ -1,7 +1,7 @@
 import React from "react";
 import Search from "../icons/Search";
 
-function SearchBar({ onClick, onChange, value, inputRef }) {
+function SearchBar({ onClick, onFocus, onBlur, onChange, value, inputRef }) {
   return (
     <div className="searchContainer">
       <div className="input-icon">
@@ -12,6 +12,8 @@ function SearchBar({ onClick, onChange, value, inputRef }) {
         ref={inputRef}
         onChange={onChange}
         value={value}
+        onFocus={onFocus}
+        onBlur={onBlur}
         type="text"
         placeholder="Search for a destination..."
       />

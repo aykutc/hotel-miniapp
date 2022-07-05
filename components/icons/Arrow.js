@@ -1,7 +1,7 @@
 import * as React from "react";
 
 // rotate = up | down | left | right
-const Arrow = ({ rotate = "up",color="#8E8F90", ...props }) => {
+const Arrow = ({ rotate = "up", color = "#8E8F90", ...props }) => {
   const rotateArrow = () => {
     if (rotate === "up") {
       return 270;

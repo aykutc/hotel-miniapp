@@ -19,6 +19,7 @@ import Accessibility from "@/components/icons/Accessibility";
 import Calendar from "@/components/icons/Calendar";
 import Bed from "@/components/icons/Bed";
 import SummaryCard from "@/components/HotelDetails/SummaryCard";
+import Router from "next/router";
 
 export async function getStaticProps() {
   return {
@@ -60,7 +61,12 @@ function HotelDetail(props) {
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
-        <div className={styles.circle}>
+        <div
+          className={styles.circle}
+          onClick={() => {
+            Router.back();
+          }}
+        >
           <Arrow rotate="left" color="white" />
         </div>
         <div className={styles.headerRightSide}>
@@ -76,6 +82,7 @@ function HotelDetail(props) {
         style={{
           height: "294px",
           width: "100%",
+          zIndex: -100,
         }}
         src={hotelDetail.img}
         type="jpg"
@@ -85,14 +92,16 @@ function HotelDetail(props) {
         {true ? (
           <SummaryCard
             style={{
-              marginTop: "-82px",
+              /* marginTop: "-82px", */
+
               marginBottom: "24px",
+              zIndex: 100,
             }}
             hotelName="The Ultra-Luxury Mansions"
             digitalKeyOnCkick={() => {}}
             messageOnClick={() => {}}
             checkInOnClick={() => {}}
-            confirmCode={"Confirmation #0099123456"}
+            confirmCode={"#0099123456"}
             totalDay="3"
             checkIn={{
               date: 24,

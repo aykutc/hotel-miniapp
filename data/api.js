@@ -9,3 +9,13 @@ const getItem = (key) => {
 const saveRegion = (value) => {
   saveItem("region", value);
 };
+
+const saveHomeActiveTab = (value) => {
+  saveItem("homeActiveTab", value);
+};
+const getHomeActiveTab = (value) => {
+  const val = getItem("homeActiveTab");
+  return val;
+};
+
+export { saveRegion, saveHomeActiveTab, getHomeActiveTab };

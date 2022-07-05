@@ -1,267 +1,261 @@
 .container {
-    /*  padding-left: 24px;
+  /*  padding-left: 24px;
     padding-right: 24px;
     padding-top: 18px; */
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-    overflow-y: scroll;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
 
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .headerContainer {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    padding: 55px 116px 23px 24px;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  padding: 55px 116px 23px 24px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .headerRightSide {
-    display: flex;
-    gap: 12px
+  display: flex;
+  gap: 12px;
 }
 
 .circle {
-    background: rgba(0, 0, 0, 0.1);
-    border: 0.5px solid rgba(255, 255, 255, 0.4);
-    width: 36px;
-    height: 36px;
-    border-radius: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: rgba(0, 0, 0, 0.1);
+  border: 0.5px solid rgba(255, 255, 255, 0.4);
+  width: 36px;
+  height: 36px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
 .detailContainer {
-    padding: 24px;
+  padding: 24px;
+  transform: translateY(-82px);
 }
 
 .tag {
-    width: min-content;
-    background: #f3efe5;
-    border-radius: 4px;
+  width: min-content;
+  background: #f3efe5;
+  border-radius: 4px;
 
-    padding: 1px 6px;
-    margin-bottom: 12px;
+  padding: 1px 6px;
+  margin-bottom: 12px;
 }
 
 .hotelName {
-    margin: 0px;
-    font-family: "Outfit";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
+  margin: 0px;
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
 
-    letter-spacing: 1px;
-    text-transform: uppercase;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 
-    color: #1d1f22;
+  color: #1d1f22;
 }
 
 .textArea {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .title {
-    margin: 0px;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22.68px;
-    letter-spacing: 0.01em;
+  margin: 0px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22.68px;
+  letter-spacing: 0.01em;
 
-    color: #1d1f22;
+  color: #1d1f22;
 
-    text-align: start;
+  text-align: start;
 }
 
 .description {
-    margin: 0;
+  margin: 0;
 
-    font-style: normal;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 16px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
 
-    color: #565759;
+  color: #565759;
 
-    text-align: start;
-    margin-bottom: 12px;
+  text-align: start;
+  margin-bottom: 12px;
 }
 
 .ratingArea {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
 }
 
 .rate {
-    margin: 0;
+  margin: 0;
 
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
 
-    letter-spacing: 0.01em;
+  letter-spacing: 0.01em;
 
-    color: #1D1F22;
+  color: #1d1f22;
 }
 
 .reviews {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
 
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
-
-    color: #565759;
+  color: #565759;
 }
 
-
 .divider {
-    width: 8px;
-    height: 0px;
+  width: 8px;
+  height: 0px;
 
-    border: 1px solid #E8E9E9;
-    transform: rotate(90deg);
+  border: 1px solid #e8e9e9;
+  transform: rotate(90deg);
 }
 
 .horizontalDivider {
-    width: 100%;
-    height: 0px;
-    left: 24px;
-    top: 1047px;
+  width: 100%;
+  height: 0px;
+  left: 24px;
+  top: 1047px;
 
-    /* Grayscale/Gray 40% */
+  /* Grayscale/Gray 40% */
 
-    border: 1px solid #E8E9E966;
+  border: 1px solid #e8e9e966;
 
-    margin: 14px 0px;
+  margin: 14px 0px;
 }
 
 /* Recommend Start */
 .recommendedContainer {
-    display: flex;
-    flex-direction: row;
-    overflow-x: scroll;
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
-    margin-right: -24px;
-    padding-right: 48px;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  margin-right: -24px;
+  padding-right: 48px;
 }
 
-
 .title {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 23px;
-    color: var(--primary-neom-dark);
-    margin-bottom: 16px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  color: var(--primary-neom-dark);
+  margin-bottom: 16px;
 }
 
 /* Recommend End */
 
-
 /* Amenities Start */
 
 .amentiensContainer {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .amenity {
-    display: flex;
-    flex-direction: row;
-    gap: 14px
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
 }
 
 .amenityText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
 
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-
-
-    color: #1D1F22;
+  color: #1d1f22;
 }
 
 /* Amenities End */
 
 /* About Start */
 .aboutContainer {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .aboutText {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
 
-    color: #565759;
-    margin-bottom: 8px;
+  color: #565759;
+  margin-bottom: 8px;
 }
 
 .readMore {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
 
-    text-decoration-line: underline;
+  text-decoration-line: underline;
 
-    color: #8E8F90;
+  color: #8e8f90;
 }
 
 /* About End */
 
 /* Map Detail End */
 .mapDetailContainer {
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .mapDetail {
-    display: flex;
-    flex-direction: column;
-    gap: 8px
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .locationText {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
 
-    color: #1D1F22;
+  color: #1d1f22;
 }
 
 .phoneText {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    text-decoration-line: underline;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  text-decoration-line: underline;
 
-    color: #8E8F90;
+  color: #8e8f90;
 }
 
 /* Map Detail End */
@@ -269,62 +263,61 @@
 /* Room End */
 
 .roomContainer {
-    background: #FFFFFF;
+  background: #ffffff;
 
-    border: 1px solid #E8E9E9;
-    border-radius: 4px;
-    padding: 14px;
-    margin: 24px 0px;
+  border: 1px solid #e8e9e9;
+  border-radius: 4px;
+  padding: 14px;
+  margin: 24px 0px;
 
-    display: flex;
-    flex-direction: row;
-    gap: 14px
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
 }
 
 .roomContainerDivider {
-    width: 1px;
-    background-color: #E8E9E9;
+  width: 1px;
+  background-color: #e8e9e9;
 }
 
 .roomWrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 14px;
-    flex: .4
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  flex: 0.4;
 }
 
 .dateWrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 14px;
-    flex: .6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  flex: 0.6;
 }
 
 .roomTextWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .roomTitle {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
 
-    color: #1D1F22;
+  color: #1d1f22;
 }
 
 .roomSubTitle {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
 
-    color: #8E8F90;
+  color: #8e8f90;
 }
-
 
 /* Room End */

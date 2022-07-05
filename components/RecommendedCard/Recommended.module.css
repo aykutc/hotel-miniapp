@@ -10,7 +10,12 @@
   border: 1px solid #1d1f2212;
   margin-right: 10px;
 }
-
+.recommendCardWrapper:active {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.recommendCardWrapper:focus {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
 .recommendBottomArea {
   padding: 14px;
   border-top: 1px solid #1d1f2212;

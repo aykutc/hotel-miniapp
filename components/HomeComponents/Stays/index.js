@@ -2,6 +2,7 @@ import HeaderTitle from "@/components/HeaderTitle";
 import NoData from "@/components/NoData";
 import Tabs from "@/components/Tabs";
 import styles from "@/styles/Home.module.css";
+import Router from "next/router";
 import { useState } from "react";
 import UpcomingCard from "../UpcomingCard";
 
@@ -64,7 +65,12 @@ function Stays({}) {
           ? currentTab?.noData
           : currentTab?.data.map((item, index) => {
               return (
-                <div key={item + index}>
+                <div
+                  key={item + index}
+                  onClick={() => {
+                    Router.push("/hotel-detail");
+                  }}
+                >
                   <UpcomingCard
                     showFavorite
                     img={item.img}

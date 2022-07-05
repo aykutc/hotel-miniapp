@@ -1,7 +1,7 @@
 import * as React from "react";
 import Router from "next/router";
 
-const Back = (props) => (
+const Back = ({ onClick, props }) => (
   <div
     className="div"
     style={{
@@ -11,7 +11,11 @@ const Back = (props) => (
       alignItems: "center",
     }}
     onClick={() => {
-      Router.back();
+      if (onClick) {
+        onClick();
+      } else {
+        Router.back();
+      }
     }}
   >
     <svg width={10} height={16} fill="none" xmlns="http://www.w3.org/2000/svg">

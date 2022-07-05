@@ -1,7 +1,7 @@
 import * as React from "react";
 
 // rotate = up | down | left | right
-const Arrow = ({ rotate = "up", ...props }) => {
+const Arrow = ({ rotate = "up",color="#8E8F90", ...props }) => {
   const rotateArrow = () => {
     if (rotate === "up") {
       return 270;
@@ -26,7 +26,7 @@ const Arrow = ({ rotate = "up", ...props }) => {
     >
       <path
         d="M1.375 0.75L6.625 6L1.375 11.25"
-        stroke="#8E8F90"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"

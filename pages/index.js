@@ -9,6 +9,9 @@ import Favorites from "@/components/HomeComponents/Favorites";
 import HeaderTitle from "@/components/HeaderTitle";
 import Tabs from "@/components/Tabs";
 import Stays from "@/components/HomeComponents/Stays";
+import Search from "@/components/icons/Search";
+import SearchBar from "@/components/SearchBar";
+import Router from "next/router";
 /* import dynamic from "next/dynamic";
 const Favorites = dynamic(() => import("@/components/home/Favorites"), {});
   */
@@ -22,11 +25,11 @@ export async function getStaticProps() {
   };
 }
 function Home({ exploreArray, recommendedArray }) {
-  const [activeMenu, setActiveMenu] = React.useState("Stays");
+  const [activeMenu, setActiveMenu] = React.useState("Explore");
   const [user, setUser] = React.useState(null);
   React.useEffect(() => {
     console.log(document.getElementById("exploreContainer"));
-    window.document?.getElementById("exploreContainer").scroll(0, 200);
+    window.document?.getElementById("exploreContainer")?.scroll(0, 48);
   }, []);
   const generateUrl = (redirectUri) => {
     const url =
@@ -124,16 +127,13 @@ function Home({ exploreArray, recommendedArray }) {
           </div>
           <div className="exploreContainer" id="exploreContainer">
             <div className="searchContainer">
-              <div className="search">
-                <div className="input-icons">
-                  {/*      <i class="fa fa-user icon">
-              </i> */}
-                  <input
-                    className="input-field"
-                    type="text"
-                    placeholder="Username"
-                  />
-                </div>
+              <div
+                className="search"
+                onClick={() => {
+                  Router.push("/search");
+                }}
+              >
+                <SearchBar></SearchBar>
               </div>
               <Explore
                 exploreArray={exploreArray}
@@ -157,15 +157,9 @@ function Home({ exploreArray, recommendedArray }) {
       ></HomeMenu>
       <style jsx>{`
         .search {
-          height: 100px;
+          padding-right: 24px;
         }
-        .search input {
-          background: #ffffff;
-          /* Grayscale/Gray 40% */
 
-          border: 1px solid #e8e9e9;
-          border-radius: 4px;
-        }
         .exploreContainer {
           position: relative;
           overflow: scroll;

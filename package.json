@@ -24,6 +24,7 @@
     "preact-render-to-string": "^5.2.0",
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",
+    "react-scroll-hooks": "^0.1.1",
     "react-ssr-prepass": "npm:preact-ssr-prepass",
     "responsive-loader": "^3.0.4",
     "sharp": "latest",

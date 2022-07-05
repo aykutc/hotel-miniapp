@@ -6,6 +6,7 @@ import styles from "@/styles/Home.module.css";
 import HomeMenu from "@/components/HomeComponents/HomeMenu";
 import Explore from "@/components/HomeComponents/Explore";
 import Favorites from "@/components/HomeComponents/Favorites";
+import HeaderTitle from "@/components/HeaderTitle";
 /* import dynamic from "next/dynamic";
 const Favorites = dynamic(() => import("@/components/home/Favorites"), {});
   */
@@ -21,6 +22,10 @@ export async function getStaticProps() {
 function Home({ exploreArray, recommendedArray }) {
   const [activeMenu, setActiveMenu] = React.useState("Explore");
   const [user, setUser] = React.useState(null);
+  React.useEffect(() => {
+    console.log(document.getElementById("exploreContainer"));
+    window.document?.getElementById("exploreContainer").scroll(0, 200);
+  }, []);
   const generateUrl = (redirectUri) => {
     const url =
       "https://idp.kobilshift-app01-eotsr.shift.kobil.com/auth/realms/flutter/protocol/openid-connect/auth?client_id=test-openid&redirect_uri=" +
@@ -93,12 +98,52 @@ function Home({ exploreArray, recommendedArray }) {
       </Head>
 
       {activeMenu === "Explore" && (
-        <Explore
-          exploreArray={exploreArray}
-          recommendedArray={recommendedArray}
-          user={user}
-        ></Explore>
+        <>
+          <div className="header">
+            <HeaderTitle>
+              <div style={{ marginRight: 6 }}>HI</div>
+              {user ? (
+                user.name + ","
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <div
+                    className="shine"
+                    style={{ width: 100, height: 16, marginLeft: 4 }}
+                  ></div>
+                </div>
+              )}
+            </HeaderTitle>
+          </div>
+          <div className="exploreContainer" id="exploreContainer">
+            <div className="searchContainer">
+              <div className="search">
+                <div className="input-icons">
+                  {/*      <i class="fa fa-user icon">
+              </i> */}
+                  <input
+                    className="input-field"
+                    type="text"
+                    placeholder="Username"
+                  />
+                </div>
+              </div>
+              <Explore
+                exploreArray={exploreArray}
+                recommendedArray={recommendedArray}
+                user={user}
+              ></Explore>
+            </div>
+            <div className="any"></div>
+          </div>
+        </>
       )}
+
       {activeMenu === "Favorites" && (
         <Favorites recommendedArray={recommendedArray} />
       )}
@@ -107,6 +152,36 @@ function Home({ exploreArray, recommendedArray }) {
         activeMenu={activeMenu}
         setActiveMenu={setActiveMenu}
       ></HomeMenu>
+      <style jsx>{`
+        .search {
+          height: 100px;
+        }
+        .search input {
+          background: #ffffff;
+          /* Grayscale/Gray 40% */
+
+          border: 1px solid #e8e9e9;
+          border-radius: 4px;
+        }
+        .exploreContainer {
+          position: relative;
+          overflow: scroll;
+          height: 95vh;
+
+          /* transform: translateY(-200px); */
+        }
+        .searchContainer {
+          /* background-color: yellow; */
+        }
+        .header {
+          height: 58px;
+          display: flex;
+          align-items: center;
+        }
+        .any {
+          height: 200px;
+        }
+      `}</style>
     </div>
   );
 }

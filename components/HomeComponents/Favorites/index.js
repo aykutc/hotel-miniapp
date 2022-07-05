@@ -17,6 +17,7 @@ function Favorites({ recommendedArray }) {
               key={item.title}
             >
               <RecommendedCard
+                showFavorite
                 key={item.title}
                 title={item.title}
                 subTitle={item.subTitle}

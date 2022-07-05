@@ -1,4 +1,5 @@
 import React from "react";
+import Arrow from "../icons/Arrow";
 import OptimizedImage from "../OptimizedImage";
 import styles from "./Recommended.module.css";
 
@@ -20,7 +21,6 @@ function RecommendedCard({
         style={{ ...imageStyles, height: 118 }}
         type={"jpg"}
       ></OptimizedImage>
-
       <div className={styles.recommendBottomArea}>
         <div className={styles.tag}>
           <p className={styles.hotelName}>{subTitle}</p>

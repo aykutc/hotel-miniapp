@@ -1,0 +1,49 @@
+.dateBoxTitle {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #1d1f22;
+}
+
+.allDaysContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 32px;
+  margin-bottom: 56px;
+}
+.gridContainer,
+.prevDays,
+.currentDays,
+.selectedCurrentDays .nextDays {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  opacity: 0.9;
+  min-width: 34px;
+  color: #8e8f90;
+  cursor: pointer;
+}
+.prevDays,
+.nextDays {
+  color: #e8e9e9;
+}
+
+.selectedCurrentDays {
+  background-color: #b89535;
+  border-radius: 50%;
+  padding: 10px;
+  max-width: 40px;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gridContainer {
+  width: 100%;
+}

@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./HomeMenu.module.css";
-import Favorites from "../icons/Favorites";
-import Stays from "../icons/Stays";
-import Explore from "../icons/Explore";
+import Favorites from "../../icons/Favorites";
+import Stays from "../../icons/Stays";
+import Explore from "../../icons/Explore";
 
 function HomeMenu({ activeMenu, setActiveMenu }) {
   const onClick = (val) => {

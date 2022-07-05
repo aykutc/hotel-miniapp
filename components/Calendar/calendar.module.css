@@ -1,0 +1,64 @@
+.back {
+  position: absolute;
+  top: 22px;
+  left: 24.5px;
+}
+
+.checkContainer {
+  height: 52px;
+  margin-top: 17px;
+  display: flex;
+  position: relative;
+  left: -24px;
+  width: calc(100% + 48px);
+  border-bottom: 1px solid #e8e9e9;
+}
+/* .checkInOutBorderBottom {
+  position: absolute;
+  bottom: 0;
+  height: 1px;
+  background-color: #e8e9e9;
+  width: calc(100% + 48px);
+  left: -24px;
+}
+.activeCheckInOutBorderBottom {
+  position: absolute;
+  bottom: 0;
+  height: 1px;
+  background-color: var(--primary-neom-dark);
+  left: -24px;
+} */
+
+.checkInOut {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.daysContainer {
+  height: 46px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.daysNames {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #8e8f90;
+}
+
+.dateboxContainer {
+  height: 80vh;
+  overflow: scroll;
+  margin-top: 24px;
+}

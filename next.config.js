@@ -17,28 +17,26 @@ const nextConfig = {
   images: {
     disableStaticImages: true,
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
 };
 module.exports = withPlugins(
   [
     [
       optimizedImages,
       {
-        responsive: {
-          adapter: require("responsive-loader/sharp"),
-        },
-
-        // these are the default values so you don't have to provide them if they are good enough for your use-case.
-        // but you can overwrite them here with any valid value you want.
         inlineImageLimit: 8192,
-        imagesFolder: "images",
-        imagesName: "[name]-[hash].[ext]",
-        handleImages: ["jpeg", "png", "svg", "webp", "gif"],
-        removeOriginalExtension: false,
+        handleImages: ["jpeg", "png", "webp", "gif"],
         optimizeImages: true,
         optimizeImagesInDev: true,
+        defaultImageLoader: "responsive-loader",
+        responsive: {
+          test: /\.(jpe?g|png|webp)$/i,
+          adapter: require("responsive-loader/sharp"),
+          sizes: [360, 720, 1080],
+          quality: 85,
+        },
         mozjpeg: {
-          quality: 80,
+          quality: 75,
         },
         optipng: {
           optimizationLevel: 3,
@@ -53,7 +51,7 @@ module.exports = withPlugins(
         },
         webp: {
           preset: "default",
-          quality: 75,
+          quality: 70,
         },
       },
     ],

@@ -16,6 +16,7 @@
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
+    "mapbox-gl": "^2.9.1",
     "next": "^11.1.4",
     "next-compose-plugins": "^2.2.1",
     "next-optimized-images": "^2.6.2",

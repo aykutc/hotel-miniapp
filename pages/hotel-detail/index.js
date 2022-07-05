@@ -18,6 +18,7 @@ import Parking from "@/components/icons/Parking";
 import Accessibility from "@/components/icons/Accessibility";
 import Calendar from "@/components/icons/Calendar";
 import Bed from "@/components/icons/Bed";
+import SummaryCard from "@/components/HotelDetails/SummaryCard";
 
 export async function getStaticProps() {
   return {
@@ -73,7 +74,6 @@ function HotelDetail(props) {
       </div>
       <OptimizedImage
         style={{
-          position: "sticky",
           height: "294px",
           width: "100%",
         }}
@@ -82,50 +82,77 @@ function HotelDetail(props) {
       />
 
       <div className={styles.detailContainer}>
-        {/* Detail Start  */}
-        <div className={styles.tag}>
-          <p className={styles.hotelName}>{hotelDetail.subTitle}</p>
-        </div>
-        <div className={styles.textArea}>
-          <p className={styles.title}>{hotelDetail.title}</p>
-          <p className={styles.description}>{hotelDetail.block}</p>
-        </div>
-        <div className={styles.ratingArea}>
-          <Star />
-          <p className={styles.rate}>{hotelDetail.rate}</p>
-          <span className={styles.divider} />
-          <p className={styles.reviews}>{hotelDetail.reviews} reviews</p>
-        </div>
-
-        {/* Detail End  */}
-
-        {/* Room Start  */}
-        <div className={styles.roomContainer}>
-          <div className={styles.dateWrapper}>
-            <Calendar />
-            <div className={styles.roomTextWrapper}>
-              <p className={styles.roomTitle}>
-                {hotelDetail.booking.calander.date}
-              </p>
-              <p className={styles.roomSubTitle}>
-                {hotelDetail.booking.calander.time} Nights
-              </p>
+        {true ? (
+          <SummaryCard
+            style={{
+              marginTop: "-82px",
+              marginBottom: "24px",
+            }}
+            hotelName="The Ultra-Luxury Mansions"
+            digitalKeyOnCkick={() => {}}
+            messageOnClick={() => {}}
+            checkInOnClick={() => {}}
+            confirmCode={"Confirmation #0099123456"}
+            totalDay="3"
+            checkIn={{
+              date: 24,
+              day: "FRI",
+              month: "JUN",
+            }}
+            checkOut={{
+              date: 27,
+              day: "MON",
+              month: "JUN",
+            }}
+          />
+        ) : (
+          <>
+            {/* Detail Start  */}
+            <div className={styles.tag}>
+              <p className={styles.hotelName}>{hotelDetail.subTitle}</p>
             </div>
-          </div>
-          <div className={styles.roomContainerDivider} />
-          <div className={styles.roomWrapper}>
-            <Bed />
-            <div className={styles.roomTextWrapper}>
-              <p className={styles.roomTitle}>
-                {hotelDetail.booking.room.count} Room
-              </p>
-              <p className={styles.roomSubTitle}>
-                {hotelDetail.booking.room.adult} Adult
-              </p>
+            <div className={styles.textArea}>
+              <p className={styles.title}>{hotelDetail.title}</p>
+              <p className={styles.description}>{hotelDetail.block}</p>
             </div>
-          </div>
-        </div>
-        {/* Room Start  */}
+            <div className={styles.ratingArea}>
+              <Star />
+              <p className={styles.rate}>{hotelDetail.rate}</p>
+              <span className={styles.divider} />
+              <p className={styles.reviews}>{hotelDetail.reviews} reviews</p>
+            </div>
+
+            {/* Detail End  */}
+
+            {/* Room Start  */}
+            <div className={styles.roomContainer}>
+              <div className={styles.dateWrapper}>
+                <Calendar />
+                <div className={styles.roomTextWrapper}>
+                  <p className={styles.roomTitle}>
+                    {hotelDetail.booking.calander.date}
+                  </p>
+                  <p className={styles.roomSubTitle}>
+                    {hotelDetail.booking.calander.time} Nights
+                  </p>
+                </div>
+              </div>
+              <div className={styles.roomContainerDivider} />
+              <div className={styles.roomWrapper}>
+                <Bed />
+                <div className={styles.roomTextWrapper}>
+                  <p className={styles.roomTitle}>
+                    {hotelDetail.booking.room.count} Room
+                  </p>
+                  <p className={styles.roomSubTitle}>
+                    {hotelDetail.booking.room.adult} Adult
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/* Room Start  */}
+          </>
+        )}
 
         {/* Map Detail Start  */}
         <div className={styles.mapDetailContainer}>

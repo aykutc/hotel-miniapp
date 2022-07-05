@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Arrow from "../icons/Arrow";
+import Like from "../icons/Like";
 import OptimizedImage from "../OptimizedImage";
 import styles from "./Recommended.module.css";
 
@@ -12,8 +13,11 @@ function RecommendedCard({
   img,
   imgWebp,
   imageStyles,
+  showFavorite,
+  favorite,
   ...props
 }) {
+  const [isLike, setIsLike] = useState(false);
   return (
     <div className={styles.recommendCardWrapper} {...props}>
       <OptimizedImage
@@ -21,6 +25,14 @@ function RecommendedCard({
         style={{ ...imageStyles, height: 118 }}
         type={"jpg"}
       ></OptimizedImage>
+      {showFavorite && (
+        <Like
+          onClick={() => setIsLike(!isLike)}
+          fill={isLike ? "white" : "transparent"}
+          style={{ position: "absolute", top: 10, right: 10 }}
+        />
+      )}
+
       <div className={styles.recommendBottomArea}>
         <div className={styles.tag}>
           <p className={styles.hotelName}>{subTitle}</p>

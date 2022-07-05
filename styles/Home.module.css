@@ -6,6 +6,7 @@
   flex-direction: column;
   overflow: hidden;
 }
+
 .header {
   height: 58px;
   display: flex;
@@ -25,20 +26,27 @@
   flex-direction: row;
   overflow-x: scroll;
   padding: 12px 0px;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
+
 .recommendedContainer {
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
   padding: 12px 0px;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
+
 .exploreContainer::-webkit-scrollbar {
   display: none;
 }
+
 .recommendedContainer::-webkit-scrollbar {
   display: none;
 }
@@ -93,4 +101,11 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.staysContainer {
+  display: flex;
+  flex: 1;
+  margin-right: 24px;
+  margin-top: 24px;
 }

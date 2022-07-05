@@ -7,6 +7,8 @@ import HomeMenu from "@/components/HomeComponents/HomeMenu";
 import Explore from "@/components/HomeComponents/Explore";
 import Favorites from "@/components/HomeComponents/Favorites";
 import HeaderTitle from "@/components/HeaderTitle";
+import Tabs from "@/components/Tabs";
+import Stays from "@/components/HomeComponents/Stays";
 /* import dynamic from "next/dynamic";
 const Favorites = dynamic(() => import("@/components/home/Favorites"), {});
   */
@@ -20,7 +22,7 @@ export async function getStaticProps() {
   };
 }
 function Home({ exploreArray, recommendedArray }) {
-  const [activeMenu, setActiveMenu] = React.useState("Explore");
+  const [activeMenu, setActiveMenu] = React.useState("Stays");
   const [user, setUser] = React.useState(null);
   React.useEffect(() => {
     console.log(document.getElementById("exploreContainer"));
@@ -147,6 +149,7 @@ function Home({ exploreArray, recommendedArray }) {
       {activeMenu === "Favorites" && (
         <Favorites recommendedArray={recommendedArray} />
       )}
+      {activeMenu === "Stays" && <Stays />}
       <div style={{ height: 100 }}></div>
       <HomeMenu
         activeMenu={activeMenu}

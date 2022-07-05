@@ -3,6 +3,12 @@
   src: url("./../public/outfit.woff2") format("woff2");
   font-display: swap;
 }
+
+p,
+span {
+  margin: 0
+}
+
 html,
 body {
   padding: 0;
@@ -13,9 +19,12 @@ body {
     env(safe-area-inset-bottom) env(safe-area-inset-left); */
   width: 100%;
   overflow-x: hidden;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
+
 body ::-webkit-scrollbar {
   display: none;
 }
@@ -43,8 +52,9 @@ button {
   /* Corrects inability to style clickable `input` types in iOS */
   -webkit-appearance: none;
 }
+
 button,
-button > * {
+button>* {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -67,13 +77,11 @@ a {
 
 .shine {
   background: #f6f7f8;
-  background-image: linear-gradient(
-    to right,
-    #f6f7f8 0%,
-    #edeef1 20%,
-    #f6f7f8 40%,
-    #f6f7f8 100%
-  );
+  background-image: linear-gradient(to right,
+      #f6f7f8 0%,
+      #edeef1 20%,
+      #f6f7f8 40%,
+      #f6f7f8 100%);
   background-repeat: no-repeat;
   background-size: 800px 104px;
   display: inline-block;
@@ -85,6 +93,7 @@ a {
   -webkit-animation-name: placeholderShimmer;
   -webkit-animation-timing-function: linear;
 }
+
 @-webkit-keyframes placeholderShimmer {
   0% {
     background-position: -468px 0;

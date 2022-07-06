@@ -19,7 +19,7 @@ import Accessibility from "@/components/icons/Accessibility";
 import Calendar from "@/components/icons/Calendar";
 import Bed from "@/components/icons/Bed";
 import SummaryCard from "@/components/HotelDetails/SummaryCard";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 
 export async function getStaticProps() {
   return {
@@ -27,12 +27,15 @@ export async function getStaticProps() {
   };
 }
 function HotelDetail(props) {
+  const router = useRouter();
+  console.log(router.query.img);
+  const { confirmCode, checkIn, checkOut, hotelName, totalDay } = router.query;
   const [hotelDetail, setHotelDetail] = React.useState({
-    subTitle: "TROJENA",
-    title: "The Ultra-Luxury Mansions",
-    block: "Block A-21",
-    discountPrice: "$114.99",
-    price: "$124.43",
+    subTitle: router.query.subTitle,
+    title: router.query.title,
+    block: router.query.block,
+    discountPrice: router.query.discountPrice,
+    price: router.query.price,
     img: "hotel1.jpg",
     rate: "4.9",
     reviews: "227",
@@ -88,8 +91,13 @@ function HotelDetail(props) {
         type="jpg"
       />
 
-      <div className={styles.detailContainer}>
-        {true ? (
+      <div
+        className={styles.detailContainer}
+        style={{
+          transform: confirmCode ? "translateY(-82px)" : "translateY(0)",
+        }}
+      >
+        {!!confirmCode ? (
           <SummaryCard
             style={{
               /* marginTop: "-82px", */
@@ -97,12 +105,12 @@ function HotelDetail(props) {
               marginBottom: "24px",
               zIndex: 100,
             }}
-            hotelName="The Ultra-Luxury Mansions"
             digitalKeyOnCkick={() => {}}
             messageOnClick={() => {}}
             checkInOnClick={() => {}}
-            confirmCode={"#0099123456"}
-            totalDay="3"
+            hotelName={hotelName}
+            confirmCode={confirmCode}
+            totalDay={totalDay}
             checkIn={{
               date: 24,
               day: "FRI",
@@ -224,6 +232,9 @@ function HotelDetail(props) {
         </div>
         {/* Recommend End  */}
       </div>
+      <FloatingBottomButton onClick={() => {}}>
+        SEE AVAILABLE ROOMS
+      </FloatingBottomButton>
     </div>
   );
 }

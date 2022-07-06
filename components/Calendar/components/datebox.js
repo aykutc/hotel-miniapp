@@ -11,19 +11,20 @@ const DateBox = ({ allDays, borderBottom, setDuration }) => {
   const selectDay = (day, item) => {
     const { time } = item;
     setSelected(
-      (selected[`${borderBottom}`]?.day === day &&
-        selected[`${borderBottom}`]?.time === item.time) ||
-        (selected[`${borderBottom}`]?.day === day &&
-          selected[`${borderBottom}`]?.time === item.time)
-        ? {
-            ...selected,
-            [`${borderBottom}`]: {
-              ...selected[`${borderBottom}`],
-              time: "",
-              day: 0,
-            },
-          }
-        : borderBottom === "CHECK-OUT"
+      // (selected[`${borderBottom}`]?.day === day &&
+      //   selected[`${borderBottom}`]?.time === item.time) ||
+        // (selected[`${borderBottom}`]?.day === day &&
+        //   selected[`${borderBottom}`]?.time === item.time)
+        // ? {
+        //     ...selected,
+        //     [`${borderBottom}`]: {
+        //       ...selected[`${borderBottom}`],
+        //       time: "",
+        //       day: 0,
+        //     },
+        //   }
+        // : 
+        borderBottom === "CHECK-OUT"
         ? new Date(day + time) >
             (selected["CHECK-IN"]?.day
               ? new Date(selected["CHECK-IN"]?.day + selected["CHECK-IN"]?.time)

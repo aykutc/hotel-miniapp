@@ -68,7 +68,14 @@ function Stays({}) {
                 <div
                   key={item + index}
                   onClick={() => {
-                    Router.push("/hotel-detail");
+                    Router.push({
+                      pathname: "/hotel-detail",
+                      query: {
+                        confirmCode: "#0099123456",
+                        totalDay: "3",
+                        hotelName: "The Ultra-Luxury Mansions",
+                      },
+                    });
                   }}
                 >
                   <UpcomingCard

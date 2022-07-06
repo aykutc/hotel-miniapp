@@ -4,6 +4,7 @@ import React from "react";
 import styles from "@/styles/DateSelection.module.css";
 import FloatingBottomButton from "@/components/FloatingBottomButton";
 import Back from "@/components/icons/Back";
+import Router from "next/router";
 
 export async function getStaticProps() {
   return {
@@ -29,7 +30,23 @@ function Dates(props) {
       </div>
 
       <Callendar setSelection={setDateSelection}></Callendar>
-      <FloatingBottomButton>
+      <FloatingBottomButton
+        onClick={() => {
+          Router.push({
+            pathname: "/check-detail",
+            query: {
+              checkIn:
+                dateSelection["CHECK-IN"].day +
+                " " +
+                dateSelection["CHECK-IN"].time,
+              checkOUT:
+                dateSelection["CHECK-OUT"].day +
+                " " +
+                dateSelection["CHECK-OUT"].time,
+            },
+          });
+        }}
+      >
         {dateSelection.durationAmount
           ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
           : `SELECT ${

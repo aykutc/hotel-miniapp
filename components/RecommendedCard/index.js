@@ -1,3 +1,4 @@
+import Router from "next/router";
 import React, { useState } from "react";
 import Arrow from "../icons/Arrow";
 import Like from "../icons/Like";
@@ -19,7 +20,27 @@ function RecommendedCard({
 }) {
   const [isLike, setIsLike] = useState(false);
   return (
-    <div className={styles.recommendCardWrapper} {...props}>
+    <div
+      className={styles.recommendCardWrapper}
+      {...props}
+      onClick={() => {
+        Router.push({
+          pathname: "/hotel-detail",
+          query: {
+            subTitle,
+            title,
+            block,
+            discountPrice,
+            price,
+            img,
+            imgWebp,
+            imageStyles,
+            showFavorite,
+            favorite,
+          },
+        });
+      }}
+    >
       <OptimizedImage
         src={img}
         style={{ ...imageStyles, height: 118 }}

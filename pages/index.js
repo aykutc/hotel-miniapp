@@ -12,10 +12,10 @@ import SearchBar from "@/components/SearchBar";
 import Back from "@/components/icons/Back";
 import SearchContent from "@/components/HomeComponents/SearchContent";
 import { getHomeActiveTab } from "data/api";
+import BottomSheet from "@/components/BottomSheet";
 /* import dynamic from "next/dynamic";
 const Favorites = dynamic(() => import("@/components/home/Favorites"), {});
   */
-
 export async function getStaticProps() {
   return {
     props: {
@@ -33,7 +33,12 @@ function Home({ exploreArray, recommendedArray, searchData }) {
   const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
-    window.document?.getElementById("exploreContainer")?.scroll(0, 105);
+    if (activeMenu) {
+      window.document?.getElementById("exploreContainer")?.scroll(0, 105);
+    }
+  }, [activeMenu]);
+
+  React.useEffect(() => {
     setActiveMenu(getHomeActiveTab() || "Explore");
   }, []);
   const generateUrl = (redirectUri) => {
@@ -130,7 +135,7 @@ function Home({ exploreArray, recommendedArray, searchData }) {
           </HeaderTitle>
         </div>
       )}
-
+      {/* <BottomSheet></BottomSheet> */}
       {activeMenu === "Explore" && (
         <>
           <div className="exploreContainer" id="exploreContainer">

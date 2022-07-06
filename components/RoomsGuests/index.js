@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import GuestContainer from "../GuestContainer";
+import GuestContainer from "./components/GuestContainer";
 import styles from "./RoomsGuests.module.css";
 import Add from "../icons/Add";
 
@@ -7,12 +7,15 @@ const RoomsGuests = () => {
     const [roomContainer, setRoomContainer] = useState([
         { roomNo: 1, adults: 0, kids: 0 },
     ]);
-    console.log(roomContainer);
-    const roomRemover = (item) => {
-        roomContainer.map(
-            (e) =>
-                e.roomNo === item.roomNo && roomContainer.pop(roomContainer.indexOf(e))
-        );
+    // console.log(roomContainer);
+    const roomRemover = (index) => {
+        roomContainer.splice(index, 1);
+        console.log(roomContainer);
+        let roomNumber = 1;
+        roomContainer.map(e => {
+            e.roomNo = roomNumber;
+            roomNumber++;
+        });
         setRoomContainer([...roomContainer]);
     };
     return (
@@ -22,7 +25,7 @@ const RoomsGuests = () => {
                     <div className={styles.roomContainer}>
                         <div className={styles.roomNo}>Room {item.roomNo}</div>
                         {item.roomNo > 1 && (
-                            <button className={styles.removeButton} onClick={() => roomRemover(item)}>
+                            <button className={styles.removeButton} onClick={() => roomRemover(index)}>
                                 Remove
                             </button>
                         )}

@@ -45,9 +45,13 @@
 }
 
 .marker {
-  position: relative;
-  width: 10px;
-  height: 10px;
-  border-radius: 100%;
+  display: block;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  width: 10;
+  height: 10;
+  box-sizing: border-box;
   border: 1px solid black;
 }

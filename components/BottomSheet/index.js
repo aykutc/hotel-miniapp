@@ -1,9 +1,16 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { CupertinoPane } from 'cupertino-pane';
-import Close from '../icons/Close';
-import HeaderTitle from '../HeaderTitle';
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import { CupertinoPane } from "cupertino-pane";
+import Close from "../icons/Close";
+import HeaderTitle from "../HeaderTitle";
 
-const BottomSheet = ({ onDismiss, isOpen, children, title, leftComponent }) => {
+const BottomSheet = ({
+  onDismiss,
+  isOpen,
+  children,
+  title,
+  leftComponent,
+  className,
+}) => {
   let myPane = useRef();
   const isOpenRef = useRef();
 
@@ -20,7 +27,8 @@ const BottomSheet = ({ onDismiss, isOpen, children, title, leftComponent }) => {
 
   useEffect(() => {
     myPane.current = new CupertinoPane(
-      ".cupertino-pane", // Pane container selector
+      "." + className,
+      // Pane container selector
       {
         buttonDestroy: false,
         showDraggable: false,
@@ -46,7 +54,7 @@ const BottomSheet = ({ onDismiss, isOpen, children, title, leftComponent }) => {
   }, []);
 
   return (
-    <div className="cupertino-pane">
+    <div className={className}>
       <div
         style={{
           display: "flex",

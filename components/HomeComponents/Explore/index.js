@@ -44,7 +44,12 @@ function Explore({ exploreArray, recommendedArray, user }) {
                 logo={item.logo}
                 logoWebp={item.logoWebp}
                 onClick={() => {
-                  Router.push("/date-selection");
+                  Router.push({
+                    pathname: "/date-selection",
+                    query: {
+                      title: item.title,
+                    },
+                  });
                 }}
               ></ExploreCard>
             );

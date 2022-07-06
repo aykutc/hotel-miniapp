@@ -37,6 +37,8 @@
 
     border: 1px solid #E8E9E9;
     border-radius: 100px;
+    width: auto;
+    flex: none;
 }
 
 .filterText {
@@ -44,5 +46,15 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
+    color: #8E8F90;
+
+}
+
+.resetButton {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: right;
     color: #8E8F90;
 }

@@ -2,7 +2,7 @@
   /*  padding-left: 24px;
     padding-right: 24px;
     padding-top: 18px; */
-  position: relative;
+  /* position: relative; */
   height: 100vh;
   overflow: hidden;
   overflow-y: scroll;
@@ -161,6 +161,7 @@
   /* Firefox */
   margin-right: -24px;
   padding-right: 48px;
+  margin-bottom: 100px;
 }
 
 .title {

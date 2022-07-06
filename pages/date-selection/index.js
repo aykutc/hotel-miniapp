@@ -45,6 +45,9 @@ function Dates(props) {
                 dateSelection["CHECK-OUT"].day +
                 " " +
                 dateSelection["CHECK-OUT"].time,
+              rooms: 1,
+              adults: 1,
+              kids: 0,
             },
           });
         }}

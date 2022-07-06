@@ -4,17 +4,15 @@ import styles from "./RoomsGuests.module.css";
 import Add from "../icons/Add";
 
 const RoomsGuests = ({
-  rooms = [{ roomNo: 1, adults: 0, kids: 0 }],
+  rooms = [{ roomNo: 1, adults: 1, kids: 0 }],
   setRooms,
 }) => {
   const [roomContainer, setRoomContainer] = useState(rooms);
-  // console.log(roomContainer);
   useEffect(() => {
     setRooms(roomContainer);
   }, [roomContainer, setRooms]);
   const roomRemover = (index) => {
     roomContainer.splice(index, 1);
-    console.log(roomContainer);
     let roomNumber = 1;
     roomContainer.map((e) => {
       e.roomNo = roomNumber;

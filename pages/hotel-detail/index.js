@@ -20,6 +20,7 @@ import Calendar from "@/components/icons/Calendar";
 import Bed from "@/components/icons/Bed";
 import SummaryCard from "@/components/HotelDetails/SummaryCard";
 import Router, { useRouter } from "next/router";
+import RoomSummary from "@/components/RoomSummary";
 
 export async function getStaticProps() {
   return {
@@ -31,11 +32,9 @@ function HotelDetail(props) {
   console.log(router.query.img);
   const { confirmCode, checkIn, checkOut, hotelName, totalDay } = router.query;
   const [hotelDetail, setHotelDetail] = React.useState({
-    subTitle: router.query.subTitle,
-    title: router.query.title,
-    block: router.query.block,
-    discountPrice: router.query.discountPrice,
-    price: router.query.price,
+    title: "The Ultra-Luxury Mansions",
+    subTitle: "TROJENA",
+    block: "Block A-21",
     img: "hotel1.jpg",
     rate: "4.9",
     reviews: "227",
@@ -142,30 +141,8 @@ function HotelDetail(props) {
             {/* Detail End  */}
 
             {/* Room Start  */}
-            <div className={styles.roomContainer}>
-              <div className={styles.dateWrapper}>
-                <Calendar />
-                <div className={styles.roomTextWrapper}>
-                  <p className={styles.roomTitle}>
-                    {hotelDetail.booking.calander.date}
-                  </p>
-                  <p className={styles.roomSubTitle}>
-                    {hotelDetail.booking.calander.time} Nights
-                  </p>
-                </div>
-              </div>
-              <div className={styles.roomContainerDivider} />
-              <div className={styles.roomWrapper}>
-                <Bed />
-                <div className={styles.roomTextWrapper}>
-                  <p className={styles.roomTitle}>
-                    {hotelDetail.booking.room.count} Room
-                  </p>
-                  <p className={styles.roomSubTitle}>
-                    {hotelDetail.booking.room.adult} Adult
-                  </p>
-                </div>
-              </div>
+            <div style={{ marginBottom: "24px", marginTop: "24px" }}>
+              <RoomSummary booking={hotelDetail.booking} />
             </div>
             {/* Room Start  */}
           </>

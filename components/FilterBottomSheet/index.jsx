@@ -9,10 +9,10 @@ function FilterBottomSheet() {
   const [sortBy, setSortBy] = useState('Distance');
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', padding: '24px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', padding: '24px', gap: '40px', height: 'calc(100vh - 140px)' }}>
       <SelectBox title="Sort By" data={['Distance', 'Price Range', 'Rating']} selected={sortBy} setSelected={setSortBy} />
-      <Slider value={distance} setValue={setDistance} minValue={1} maxValue={150} leftText={'1 mi'} rightText={distance + ' mi'} />
-      <MultipleSlider value={priceRange} setValue={setPriceRange} minValue={100} maxValue={2000} leftText={'$' + priceRange[0]} rightText={'$' + priceRange[1]} />
+      <Slider title="Distance" value={distance} setValue={setDistance} minValue={1} maxValue={150} leftText={'1 mi'} rightText={distance + ' mi'} />
+      <MultipleSlider title="Price Range" value={priceRange} setValue={setPriceRange} minValue={100} maxValue={2000} leftText={'$' + priceRange[0]} rightText={'$' + priceRange[1]} />
     </div>
   );
 }

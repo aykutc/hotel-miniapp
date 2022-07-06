@@ -1,6 +1,5 @@
 import BottomSheet from '@/components/BottomSheet';
 import Callendar from '@/components/Calendar';
-import FilterBottomSheet from '@/components/FilterBottomSheet';
 import FloatingBottomButton from '@/components/FloatingBottomButton';
 import HeaderTitle from '@/components/HeaderTitle';
 import SearchContent from '@/components/HomeComponents/SearchContent';
@@ -38,7 +37,7 @@ function CheckDetail() {
   return (
     <>
       <BottomSheet className={'bottom-sheet-2'} title="DATES" isOpen={isDateModalOpen} onDismiss={() => setIsDateModalOpen(false)}>
-        {/*         <div
+        <div
           style={{
             padding: '0px 24px',
             height: 'calc(100vh - 170px)',
@@ -65,8 +64,7 @@ function CheckDetail() {
           >
             {dateSelection.durationAmount ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS` : `SELECT ${dateSelection['CHECK-IN'] === undefined ? 'CHECK IN' : 'CHECK OUT'} DATE`}
           </FloatingBottomButton>
-        </div> */}
-        <FilterBottomSheet />
+        </div>
       </BottomSheet>
       <BottomSheet className={'bottom-sheet-1'} title="ROOMS & GUESTS" isOpen={isRoomModalOpen} onDismiss={() => setIsRoomModalOpen(false)}>
         <>

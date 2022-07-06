@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './slider.module.css';
 
-const MultipleSlider = ({ value, setValue, minValue, maxValue, leftText, rightText }) => {
+const MultipleSlider = ({ title, value, setValue, minValue, maxValue, leftText, rightText }) => {
   const handleInput = (e) => {
     if (e.target.name === 'min') {
       setValue([e.target.value, value[1]]);
@@ -18,15 +18,30 @@ const MultipleSlider = ({ value, setValue, minValue, maxValue, leftText, rightTe
   }, [value]);
 
   return (
-    <div style={{ display: 'flex', gap: '6px', alignItems: 'center', whiteSpace: 'nowrap', margin: '16px 0' }}>
-      <p style={{ width: '40px', minWidth: '40px' }}>{leftText}</p>
+    <div>
+      <p
+        style={{
+          padding: 0,
+          margin: 0,
+          fontStyle: 'normal',
+          fontWeight: '500',
+          fontSize: 16,
+          color: '#1D1F22',
+          paddingBottom: 2,
+        }}
+      >
+        {title}
+      </p>
+      <div style={{ display: 'flex', gap: '6px', alignItems: 'center', whiteSpace: 'nowrap', margin: '16px 0' }}>
+        <p style={{ width: '40px', minWidth: '40px' }}>{leftText}</p>
 
-      <div id="container" className={styles.sliderContainer}>
-        <input onInput={handleInput} name="min" type="range" value={value[0]} min={minValue} max={maxValue} step="1" />
-        <input onInput={handleInput} name="max" type="range" value={value[1]} min={minValue} max={maxValue} step="1" />
+        <div id="container" className={styles.sliderContainer}>
+          <input onInput={handleInput} name="min" type="range" value={value[0]} min={minValue} max={maxValue} step="1" />
+          <input onInput={handleInput} name="max" type="range" value={value[1]} min={minValue} max={maxValue} step="1" />
+        </div>
+
+        <p style={{ width: '40px', minWidth: '40px' }}>{rightText}</p>
       </div>
-
-      <p style={{ width: '40px', minWidth: '40px' }}>{rightText}</p>
     </div>
   );
 };

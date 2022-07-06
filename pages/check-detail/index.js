@@ -1,46 +1,62 @@
-import BottomSheet from '@/components/BottomSheet';
-import Callendar from '@/components/Calendar';
-import FloatingBottomButton from '@/components/FloatingBottomButton';
-import HeaderTitle from '@/components/HeaderTitle';
-import SearchContent from '@/components/HomeComponents/SearchContent';
-import Back from '@/components/icons/Back';
-import Location from '@/components/icons/Location';
-import RoomsGuests from '@/components/RoomsGuests';
-import RoomSummary from '@/components/RoomSummary';
-import SearchBar from '@/components/SearchBar';
-import { SearchRegionArray } from 'data/data';
-import Router, { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import styles from './check-detail.module.css';
+import BottomSheet from "@/components/BottomSheet";
+import Callendar from "@/components/Calendar";
+import FloatingBottomButton from "@/components/FloatingBottomButton";
+import HeaderTitle from "@/components/HeaderTitle";
+import SearchContent from "@/components/HomeComponents/SearchContent";
+import Back from "@/components/icons/Back";
+import Location from "@/components/icons/Location";
+import RoomBottomSheet from "@/components/RoomBottomSheet";
+import RoomsGuests from "@/components/RoomsGuests";
+import RoomSummary from "@/components/RoomSummary";
+import SearchBar from "@/components/SearchBar";
+import SearchBottomSheet from "@/components/SearchBottomSheet";
+import { SearchRegionArray } from "data/data";
+import Router, { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import styles from "./check-detail.module.css";
 
 function CheckDetail() {
+  const router = useRouter();
+
+  const { checkIn, checkOut, title, rooms, adults, kids } = router.query;
+
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
   const [isRegionModalOpen, setIsRegionModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [dateSelection, setDateSelection] = useState({});
-  const [roomSelection, setRoomSelection] = useState([{ roomNo: 1, adults: 0, kids: 0 }]);
-
-  const router = useRouter();
-  const { checkIn, checkOut, title } = router.query;
+  const [roomSelection, setRoomSelection] = useState({
+    rooms: rooms | 1,
+    adults: adults | 1,
+    kids: kids | 0,
+  });
+  useEffect(() => {
+    setRoomSelection({
+      rooms,
+      adults,
+      kids,
+    });
+  }, [router.query]);
+  console.log("roomSelection", roomSelection);
+  console.log("1111", rooms);
   const booking = {
     calander: {
-      date: 'Jun 24 - Jun 27',
-      time: '3',
-    },
-    room: {
-      count: 1,
-      adult: 1,
-      child: 0,
+      date: "Jun 24 - Jun 27",
+      time: "3",
     },
   };
   return (
     <>
-      <BottomSheet className={'bottom-sheet-2'} title="DATES" isOpen={isDateModalOpen} onDismiss={() => setIsDateModalOpen(false)}>
+      <BottomSheet
+        className={"bottom-sheet-2"}
+        title="DATES"
+        isOpen={isDateModalOpen}
+        onDismiss={() => setIsDateModalOpen(false)}
+      >
         <div
           style={{
-            padding: '0px 24px',
-            height: 'calc(100vh - 170px)',
+            padding: "0px 24px",
+            height: "calc(100vh - 170px)",
           }}
         >
           <Callendar setSelection={setDateSelection} />
@@ -50,11 +66,20 @@ function CheckDetail() {
               setDateSelection({});
               Router.push(
                 {
-                  pathname: '/check-detail',
+                  pathname: "/check-detail",
                   query: {
-                    checkIn: dateSelection['CHECK-IN'].day + ' ' + dateSelection['CHECK-IN'].time,
-                    checkOut: dateSelection['CHECK-OUT'].day + ' ' + dateSelection['CHECK-OUT'].time,
+                    checkIn:
+                      dateSelection["CHECK-IN"].day +
+                      " " +
+                      dateSelection["CHECK-IN"].time,
+                    checkOut:
+                      dateSelection["CHECK-OUT"].day +
+                      " " +
+                      dateSelection["CHECK-OUT"].time,
                     title,
+                    rooms: roomSelection.count,
+                    kids: roomSelection.kids,
+                    adults: roomSelection.adults,
                   },
                 },
                 undefined,
@@ -62,53 +87,56 @@ function CheckDetail() {
               );
             }}
           >
-            {dateSelection.durationAmount ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS` : `SELECT ${dateSelection['CHECK-IN'] === undefined ? 'CHECK IN' : 'CHECK OUT'} DATE`}
+            {dateSelection.durationAmount
+              ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
+              : `SELECT ${
+                  dateSelection["CHECK-IN"] === undefined
+                    ? "CHECK IN"
+                    : "CHECK OUT"
+                } DATE`}
           </FloatingBottomButton>
         </div>
       </BottomSheet>
-      <BottomSheet className={'bottom-sheet-1'} title="ROOMS & GUESTS" isOpen={isRoomModalOpen} onDismiss={() => setIsRoomModalOpen(false)}>
-        <>
-          <RoomsGuests rooms={roomSelection} setRooms={setRoomSelection} />
-          <FloatingBottomButton
-            onClick={async () => {
-              setIsRoomModalOpen(false);
-              setRoomSelection({});
-              Router.push(
-                {
-                  pathname: '/check-detail',
-                  query: {
-                    checkIn,
-                    checkOut,
-                    title,
-                    room: [],
-                  },
+      <BottomSheet
+        className={"bottom-sheet-1"}
+        title="ROOMS & GUESTS"
+        isOpen={isRoomModalOpen}
+        onDismiss={() => setIsRoomModalOpen(false)}
+      >
+        <RoomBottomSheet
+          onClick={(rooms) => {
+            setIsRoomModalOpen(false);
+            setRoomSelection({
+              rooms: rooms.count,
+              kids: rooms.kids,
+              adults: rooms.adults,
+            });
+            Router.push(
+              {
+                pathname: "/check-detail",
+                query: {
+                  checkIn,
+                  checkOut,
+                  title,
+                  rooms: rooms.count,
+                  kids: rooms.kids,
+                  adults: rooms.adults,
                 },
-                undefined,
-                { shallow: true }
-              );
-            }}
-          >
-            APPLY
-          </FloatingBottomButton>
-        </>
+              },
+              undefined,
+              { shallow: true }
+            );
+          }}
+          setIsRoomModalOpen={setIsDateModalOpen}
+        ></RoomBottomSheet>
       </BottomSheet>
-      <BottomSheet className={'bottom-sheet-3'} title="ROOMS & GUESTS" isOpen={isRegionModalOpen} onDismiss={() => setIsRegionModalOpen(false)}>
-        <div style={{ padding: 24, height: 'calc(100vh - 170px)' }}>
-          <div className={styles.search}>
-            <Back
-              onClick={() => {
-                setSearchTerm('');
-              }}
-            ></Back>
-            <SearchBar
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-              }}
-            ></SearchBar>
-          </div>
-          <SearchContent searchData={SearchRegionArray} searchTerm={searchTerm} />
-        </div>
+      <BottomSheet
+        className={"bottom-sheet-3"}
+        title="REGION"
+        isOpen={isRegionModalOpen}
+        onDismiss={() => setIsRegionModalOpen(false)}
+      >
+        <SearchBottomSheet />
       </BottomSheet>
 
       <div className={styles.checkDetailContainer}>
@@ -126,6 +154,9 @@ function CheckDetail() {
         </div>
         <RoomSummary
           booking={booking}
+          rooms={roomSelection.rooms}
+          kids={roomSelection.kids}
+          adults={roomSelection.adults}
           onDateClick={() => {
             setIsDateModalOpen(true);
           }}
@@ -136,10 +167,14 @@ function CheckDetail() {
         <FloatingBottomButton
           onClick={() => {
             Router.push({
-              pathname: '/results',
+              pathname: "/results",
               query: {
                 checkIn,
                 checkOut,
+                title,
+                rooms: roomSelection.rooms,
+                kids: roomSelection.kids,
+                adults: roomSelection.adults,
               },
             });
           }}

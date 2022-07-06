@@ -96,7 +96,7 @@ const DateBox = ({ allDays, borderBottom, setDuration }) => {
                           : selected["CHECK-OUT"]?.day === day &&
                             selected["CHECK-OUT"]?.time === item.time
                           ? "linear-gradient(90deg, #F3EFE5 50%, #fff 50%)"
-                          : "null"
+                          : "transparent"
                         : "transparent",
                   }}
                 >

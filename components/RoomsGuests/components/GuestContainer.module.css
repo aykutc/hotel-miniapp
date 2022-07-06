@@ -3,12 +3,12 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px;
-  height: 38px;
 }
 .incDecSvgContainer {
   display: flex;
   position: relative;
   width: 123px;
+  height: 38px;
   justify-content: center;
   align-items: center;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./GuestContainer.module.css";
-import Plus from "../icons/Plus";
-import Minus from "../icons/Minus";
+import Plus from "../../icons/Plus";
+import Minus from "../../icons/Minus";
 
 const GuestContainer = ({ item, setRoomContainer, roomContainer, guest }) => {
     const guestNumberHandler = (operation) => {

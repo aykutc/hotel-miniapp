@@ -1,5 +1,5 @@
 .callendarButton {
-  position: absolute;
+  position: fixed;
   bottom: 40px;
   margin-left: auto;
   margin-right: auto;

@@ -28,6 +28,7 @@ const Review = () => {
         paddingLeft: 24,
         paddingRight: 24,
         paddingTop: 18,
+        paddingBottom: 70,
         display: "flex",
         flex: "1",
         flexDirection: "column",

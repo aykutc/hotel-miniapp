@@ -21,6 +21,8 @@ import Bed from "@/components/icons/Bed";
 import SummaryCard from "@/components/HotelDetails/SummaryCard";
 import Router, { useRouter } from "next/router";
 import RoomSummary from "@/components/RoomSummary";
+import BottomSheet from "@/components/BottomSheet";
+import RoomsGuests from "@/components/RoomsGuests";
 
 export async function getStaticProps() {
   return {
@@ -60,9 +62,27 @@ function HotelDetail(props) {
     },
   });
 
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsModalOpen(true);
+    }, 1000);
+  }, []);
+
+  console.log("render");
+
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
+        <BottomSheet
+          title="ROOMS & GUESTS"
+          isOpen={isModalOpen}
+          onDismiss={() => setIsModalOpen(false)}
+          leftComponent={"Reset"}
+        >
+          <RoomsGuests />
+        </BottomSheet>
         <div
           className={styles.circle}
           onClick={() => {

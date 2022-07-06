@@ -48,7 +48,10 @@ function RecommendedCard({
       ></OptimizedImage>
       {showFavorite && (
         <Like
-          onClick={() => setIsLike(!isLike)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsLike(!isLike);
+          }}
           fill={isLike ? "white" : "transparent"}
           style={{ position: "absolute", top: 10, right: 10 }}
         />

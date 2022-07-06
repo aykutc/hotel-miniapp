@@ -36,6 +36,10 @@ function Results() {
           <Location />
           <p className={styles.filterText}>Troasdasdasdajena</p>
         </div>
+        <div className={styles.filterItem}>
+          <Location />
+          <p className={styles.filterText}>Troasdasdasdajena</p>
+        </div>
       </div>
       {selectedTab === "LIST VIEW" ? (
         <div style={{ display: "flex", flexDirection: "column" }}>

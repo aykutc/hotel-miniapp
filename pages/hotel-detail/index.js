@@ -21,8 +21,6 @@ import Bed from "@/components/icons/Bed";
 import SummaryCard from "@/components/HotelDetails/SummaryCard";
 import Router, { useRouter } from "next/router";
 import RoomSummary from "@/components/RoomSummary";
-import BottomSheet from "@/components/BottomSheet";
-import RoomsGuests from "@/components/RoomsGuests";
 
 export async function getStaticProps() {
   return {
@@ -75,14 +73,6 @@ function HotelDetail(props) {
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
-        <BottomSheet
-          title="ROOMS & GUESTS"
-          isOpen={isModalOpen}
-          onDismiss={() => setIsModalOpen(false)}
-          leftComponent={"Reset"}
-        >
-          <RoomsGuests />
-        </BottomSheet>
         <div
           className={styles.circle}
           onClick={() => {

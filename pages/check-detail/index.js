@@ -1,15 +1,17 @@
+import BottomSheet from "@/components/BottomSheet";
 import FloatingBottomButton from "@/components/FloatingBottomButton";
 import HeaderTitle from "@/components/HeaderTitle";
 import Location from "@/components/icons/Location";
+import RoomsGuests from "@/components/RoomsGuests";
 import RoomSummary from "@/components/RoomSummary";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./check-detail.module.css";
 
 function CheckDetail() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const { checkIn, checkOut } = router.query;
-  console.log(checkIn);
   const booking = {
     calander: {
       date: "Jun 24 - Jun 27",
@@ -30,8 +32,22 @@ function CheckDetail() {
         <Location />
         <p className={styles.regionText}>TROJENA</p>
       </div>
-      <RoomSummary booking={booking} />
+      <RoomSummary
+        booking={booking}
+        onDateClick={() => {}}
+        onRoomClick={() => {
+          setIsModalOpen(true);
+        }}
+      />
       <FloatingBottomButton>SEE RESULTS</FloatingBottomButton>
+      <BottomSheet
+        title="ROOMS & GUESTS"
+        isOpen={isModalOpen}
+        onDismiss={() => setIsModalOpen(false)}
+        leftComponent={"Reset"}
+      >
+        <RoomsGuests />
+      </BottomSheet>
     </div>
   );
 }

@@ -67,34 +67,20 @@ function CheckDetail() {
             setIsRoomModalOpen(true);
           }}
         />
-        <FloatingBottomButton>SEE RESULTS</FloatingBottomButton>
+        <FloatingBottomButton
+          onClick={() => {
+            Router.push({
+              pathname: "/results",
+              query: {
+                checkIn,
+                checkOut,
+              },
+            });
+          }}
+        >
+          SEE RESULTS
+        </FloatingBottomButton>
       </div>
-      <div className={styles.regionContainer}>
-        <Location />
-        <p className={styles.regionText}>{router.query.title}</p>
-      </div>
-      <RoomSummary
-        booking={booking}
-        onDateClick={() => {
-          setIsDateModalOpen(true);
-        }}
-        onRoomClick={() => {
-          setIsRoomModalOpen(true);
-        }}
-      />
-      <FloatingBottomButton
-        onClick={() => {
-          Router.push({
-            pathname: "/results",
-            query: {
-              checkIn,
-              checkOut,
-            },
-          });
-        }}
-      >
-        SEE RESULTS
-      </FloatingBottomButton>
     </>
   );
 }

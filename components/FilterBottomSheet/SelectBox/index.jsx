@@ -55,14 +55,3 @@ const SelectBox = ({ title, data, selected, setSelected, ...props }) => {
 };
 
 export default SelectBox;
-/*
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 20px;
-letter-spacing: 0.01em;
-
-
-color: #1D1F22;
-
-*/

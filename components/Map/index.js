@@ -63,10 +63,6 @@ const Map = () => {
       subEl.innerText = marker.properties.message;
       el.appendChild(subEl);
 
-      el.addEventListener('click', () => {
-        window.alert(marker.properties.message);
-      });
-
       // Add markers to the map.
       new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map);
     }

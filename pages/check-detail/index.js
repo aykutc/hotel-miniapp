@@ -4,7 +4,7 @@ import HeaderTitle from "@/components/HeaderTitle";
 import Location from "@/components/icons/Location";
 import RoomsGuests from "@/components/RoomsGuests";
 import RoomSummary from "@/components/RoomSummary";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import React, { useState } from "react";
 import styles from "./check-detail.module.css";
 
@@ -59,7 +59,19 @@ function CheckDetail() {
           setIsRoomModalOpen(true);
         }}
       />
-      <FloatingBottomButton>SEE RESULTS</FloatingBottomButton>
+      <FloatingBottomButton
+        onClick={() => {
+          Router.push({
+            pathname: "/results",
+            query: {
+              checkIn,
+              checkOut,
+            },
+          });
+        }}
+      >
+        SEE RESULTS
+      </FloatingBottomButton>
     </div>
   );
 }

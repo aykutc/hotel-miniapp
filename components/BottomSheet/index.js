@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { CupertinoPane } from "cupertino-pane";
 import Close from "../icons/Close";
 import HeaderTitle from "../HeaderTitle";
@@ -12,49 +18,40 @@ const BottomSheet = ({
   className,
 }) => {
   let myPane = useRef();
-  const isOpenRef = useRef();
 
   useEffect(() => {
-    isOpenRef.current = isOpen;
-
-    if (isOpen) myPane.current?.present?.({ animate: true });
-    else myPane.current?.destroy?.({ animate: true });
-  }, [isOpen]);
-
-  const onDidDismiss = () => {
-    if (isOpenRef.current) myPane.current?.present?.({ animate: true });
-  };
-
-  useEffect(() => {
-    myPane.current = new CupertinoPane(
-      "." + className,
-      // Pane container selector
-      {
-        buttonDestroy: false,
-        showDraggable: false,
-        backdrop: true,
-        fitHeight: true,
-        parentElement: "body", // Parent container
-        breaks: {
-          middle: { enabled: true, bounce: true },
-        },
-        events: {
-          onDidDismiss: onDidDismiss,
-          onWillDismiss: onDismiss,
-        },
-        fastSwipeClose: true,
-        bottomClose: true,
-        lowerThanBottom: false,
-      }
-    );
+    if (!myPane.current) {
+      myPane.current = new CupertinoPane(
+        "." + className,
+        // Pane container selector
+        {
+          buttonDestroy: false,
+          showDraggable: false,
+          backdrop: true,
+          fitHeight: true,
+          parentElement: "body", // Parent container
+          breaks: {
+            middle: { enabled: true, bounce: true },
+          },
+          events: {
+            onDidDismiss: onDismiss,
+          },
+          fastSwipeClose: true,
+          bottomClose: true,
+          lowerThanBottom: false,
+        }
+      );
+    }
 
     if (isOpen) {
       myPane.current.present({ animate: true });
+    } else {
+      myPane.current.destroy({ animate: true });
     }
-  }, []);
+  }, [isOpen]);
 
   return (
-    <div className={className}>
+    <div className={className} style={{ visibility: "hidden" }}>
       <div
         style={{
           display: "flex",
@@ -65,7 +62,11 @@ const BottomSheet = ({
       >
         {leftComponent || <div />}
         <HeaderTitle>{title}</HeaderTitle>
-        <Close onClick={onDismiss} />
+        <Close
+          onClick={() =>
+            myPane.current.destroy({ animate: true }).then(onDismiss)
+          }
+        />
       </div>
 
       {children}

@@ -1,56 +1,66 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import styles from "./slider.module.css";
 
-const Slider = () => {
-  const [price, setPrice] = useState(40);
+const Slider = ({
+  value,
+  setValue,
+  minValue,
+  maxValue,
+  leftText,
+  rightText,
+  title,
+}) => {
   const handleInput = (e) => {
-    setPrice(e.target.value);
+    setValue(e.target.value);
   };
+
+  const _value = ((value - minValue) / (maxValue - minValue)) * 100;
+
   return (
-    <>
-      <div>
-        <input type="range" className="slider" onInput={handleInput} />
-        <p>Value: {price}</p>
+    <div>
+      <p
+        style={{
+          padding: 0,
+          margin: 0,
+          fontStyle: "normal",
+          fontWeight: "500",
+          fontSize: 16,
+          color: "#1D1F22",
+          paddingBottom: 2,
+        }}
+      >
+        {title}
+      </p>
+      <div
+        style={{
+          display: "flex",
+          gap: "6px",
+          alignItems: "center",
+          whiteSpace: "nowrap",
+          margin: "16px 0",
+        }}
+      >
+        <p style={{ width: "40px", minWidth: "40px" }}>{leftText}</p>
+
+        <input
+          style={{
+            background:
+              "linear-gradient(to right, #b89535 0%, #b89535 " +
+              _value +
+              "%, #E8E9E9 " +
+              _value +
+              "%, #E8E9E9 100%)",
+          }}
+          type="range"
+          value={value}
+          min={minValue}
+          max={maxValue}
+          className={styles.slider}
+          onInput={handleInput}
+        />
+        <p style={{ width: "40px", minWidth: "40px" }}>{rightText}</p>
       </div>
-      <style jsx>
-        {`
-          slider::-ms-track {
-            width: 300px;
-            height: 5px;
-
-            /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
-            background: transparent;
-
-            /*leave room for the larger thumb to overflow with a transparent border */
-            border-color: transparent;
-            border-width: 6px 0;
-
-            /*remove default tick marks*/
-            color: transparent;
-          }
-          slider::-ms-fill-lower {
-            background: #777;
-            border-radius: 10px;
-          }
-          slider::-ms-fill-upper {
-            background: #ddd;
-            border-radius: 10px;
-          }
-          slider::-ms-thumb {
-            border: none;
-            height: 16px;
-            width: 16px;
-            border-radius: 50%;
-            background: goldenrod;
-          }
-          slider:focus::-ms-fill-lower {
-            background: #888;
-          }
-          slider:focus::-ms-fill-upper {
-            background: #ccc;
-          }
-        `}
-      </style>
-    </>
+    </div>
   );
 };
 

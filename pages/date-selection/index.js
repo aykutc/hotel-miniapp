@@ -41,7 +41,7 @@ function Dates(props) {
                 dateSelection["CHECK-IN"].day +
                 " " +
                 dateSelection["CHECK-IN"].time,
-              checkOUT:
+              checkOut:
                 dateSelection["CHECK-OUT"].day +
                 " " +
                 dateSelection["CHECK-OUT"].time,

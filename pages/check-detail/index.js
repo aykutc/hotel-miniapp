@@ -1,8 +1,10 @@
 import BottomSheet from "@/components/BottomSheet";
 import Callendar from "@/components/Calendar";
 import FloatingBottomButton from "@/components/FloatingBottomButton";
+import Header from "@/components/Header";
 import HeaderTitle from "@/components/HeaderTitle";
 import SearchContent from "@/components/HomeComponents/SearchContent";
+import Arrow from "@/components/icons/Arrow";
 import Back from "@/components/icons/Back";
 import Location from "@/components/icons/Location";
 import RoomBottomSheet from "@/components/RoomBottomSheet";
@@ -36,9 +38,19 @@ function CheckDetail() {
       adults,
       kids,
     });
+    setDateSelection({
+      "CHECK-IN": {
+        time: checkIn?.split(" ")[1] + " " + checkIn?.split(" ")[2],
+        day: Number(checkIn?.split(" ")[0]),
+      },
+      "CHECK-OUT": {
+        time: checkOut?.split(" ")[1] + " " + checkOut?.split(" ")[2],
+        day: Number(checkOut?.split(" ")[0]),
+      },
+      durationAmount: 2,
+    });
   }, [router.query]);
-  console.log("roomSelection", roomSelection);
-  console.log("1111", rooms);
+
   const booking = {
     calander: {
       date: "Jun 24 - Jun 27",
@@ -63,7 +75,6 @@ function CheckDetail() {
           <FloatingBottomButton
             onClick={async () => {
               setIsDateModalOpen(false);
-              setDateSelection({});
               Router.push(
                 {
                   pathname: "/check-detail",
@@ -77,7 +88,7 @@ function CheckDetail() {
                       " " +
                       dateSelection["CHECK-OUT"].time,
                     title,
-                    rooms: roomSelection.count,
+                    rooms: roomSelection.rooms,
                     kids: roomSelection.kids,
                     adults: roomSelection.adults,
                   },
@@ -140,9 +151,16 @@ function CheckDetail() {
       </BottomSheet>
 
       <div className={styles.checkDetailContainer}>
-        <div className={styles.header}>
+        <Header>
+          <Arrow
+            style={{ marginRight: 24 }}
+            onClick={() => {
+              Router.back();
+            }}
+            rotate="left"
+          ></Arrow>
           <HeaderTitle>DETAILS</HeaderTitle>
-        </div>
+        </Header>
         <div
           className={styles.regionContainer}
           onClick={() => {
@@ -153,6 +171,8 @@ function CheckDetail() {
           <p className={styles.regionText}>{router.query.title}</p>
         </div>
         <RoomSummary
+          checkIn={checkIn}
+          checkOut={checkOut}
           booking={booking}
           rooms={roomSelection.rooms}
           kids={roomSelection.kids}

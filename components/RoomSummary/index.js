@@ -10,18 +10,17 @@ function RoomSummary({
   kids = 0,
   adults = 1,
   rooms = 1,
+  checkIn = "24 JUN 22",
+  checkOut = "27 JUN 22",
 }) {
   const subTitle = () => {
     let str = "";
-    console.log("first,", kids);
     if (adults == 1) {
       str += adults.toString() + "Adult";
     } else if (adults > 1) {
       str += adults.toString() + "Adults";
     }
     if (kids == 1) {
-      console.log("aaa");
-
       str += ", " + kids.toString() + "Kid";
     } else if (kids > 1) {
       str += ", " + kids.toString() + "Kids";
@@ -33,8 +32,19 @@ function RoomSummary({
       <div className={styles.dateWrapper} onClick={onDateClick}>
         <Calendar />
         <div className={styles.roomTextWrapper}>
-          <p className={styles.roomTitle}>{booking.calander.date}</p>
-          <p className={styles.roomSubTitle}>{booking.calander.time} Nights</p>
+          <p className={styles.roomTitle}>
+            {checkIn?.split(" ")[1] +
+              " " +
+              checkIn?.split(" ")[0] +
+              " - " +
+              checkOut?.split(" ")[1] +
+              " " +
+              checkOut?.split(" ")[0]}
+          </p>
+          <p className={styles.roomSubTitle}>
+            {Number(checkOut?.split(" ")[0]) - Number(checkIn?.split(" ")[0])}{" "}
+            Nights
+          </p>
         </div>
       </div>
       <div className={styles.roomContainerDivider} />

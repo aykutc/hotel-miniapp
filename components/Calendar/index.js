@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 import { callendarHandler, dateFormatter } from "./dateHelpers";
-/* import Back from "../../assets/Back.svg";
- */
 import styles from "./calendar.module.css";
 import FloatingBottomButton from "../FloatingBottomButton";
 import DateBox from "./components/datebox";
 
 const daysNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-
-// type allDaysTypes = [] | allDaysInsideTypes;
 
 const Callendar = ({ setSelection }) => {
   let [monthChanger, setMonthChanger] = useState(new Date().getMonth());
@@ -46,7 +42,6 @@ const Callendar = ({ setSelection }) => {
 
   return (
     <>
-      {/* <img src={Back} alt="Back_image" className="back" /> */}
       <div className={styles.checkContainer}>
         {["CHECK-IN", "CHECK-OUT"].map((e) => (
           <React.Fragment key={e}>

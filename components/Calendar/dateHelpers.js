@@ -1,7 +1,7 @@
 export const callendarHandler = (monthChanger) => {
   const date = new Date();
   date.setMonth(monthChanger);
-  date.setDate(8);
+  date.setDate(7);
   const months = [
     "January",
     "February",
@@ -33,17 +33,16 @@ export const callendarHandler = (monthChanger) => {
   let prevDays = [];
   let nextDays = [];
 
-  const firstDayIndex = date.getDay();
-  // console.log(firstDayIndex)
+  const firstDayIndex = date.getDay() + 1;
   const lastDayIndex = new Date(
     date.getFullYear(),
     date.getMonth() + 1,
     0
   ).getDay();
-  const nextDaysCount = lastDayIndex ? 7 - lastDayIndex : 0;
+  const nextDaysCount = lastDayIndex ? 6 - lastDayIndex : 6;
 
-  for (let x = firstDayIndex; x > 0; x--) {
-    prevDays.push(prevLastDay - x + 1);
+  for (let x = firstDayIndex - 1; x >= 0; x--) {
+    prevDays.push(prevLastDay - x);
   }
 
   for (let i = 1; i <= lastDay; i++) {

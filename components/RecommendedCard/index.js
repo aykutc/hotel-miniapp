@@ -1,5 +1,5 @@
 import Router from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Arrow from "../icons/Arrow";
 import Like from "../icons/Like";
 import OptimizedImage from "../OptimizedImage";
@@ -16,14 +16,30 @@ function RecommendedCard({
   imageStyles,
   showFavorite,
   favorite,
+  info,
+  roomSelect,
+  setSelectedRoom,
+  selectedRoom,
+  item,
+  roomAmount,
   ...props
 }) {
   const [isLike, setIsLike] = useState(false);
+  const [selected, setSelected] = useState(false);
+
+  useEffect(() => {
+    roomSelect && (selected ? setSelectedRoom([...selectedRoom, item]) : selectedRoom.map((e, index) => {
+      item.id === e.id && selectedRoom.splice(index, 1);
+      setSelectedRoom(selectedRoom)
+    })
+    );
+  }, [selected, setSelectedRoom, item, roomSelect]);
+
   return (
     <div
-      className={styles.recommendCardWrapper}
+      className={roomSelect ? styles.roomsWrapper : styles.recommendCardWrapper}
       {...props}
-      onClick={() => {
+      onClick={!roomSelect ? () => {
         Router.push({
           pathname: "/hotel-detail",
           query: {
@@ -39,7 +55,7 @@ function RecommendedCard({
             favorite,
           },
         });
-      }}
+      } : undefined}
     >
       <OptimizedImage
         src={img}
@@ -55,21 +71,32 @@ function RecommendedCard({
       )}
 
       <div className={styles.recommendBottomArea}>
-        <div className={styles.tag}>
+        {subTitle && <div className={styles.tag}>
           <p className={styles.hotelName}>{subTitle}</p>
-        </div>
+        </div>}
         <div className={styles.recommendTextArea}>
           <p className={styles.recommendTitle}>{title}</p>
-          <p className={styles.recommendDescription}>{block}</p>
+          <p className={styles.recommendDescription}
+            style={{
+              fontSize: roomSelect && "12px",
+              lineHeight: roomSelect && "15px"
+            }}>
+            {info || block}</p>
         </div>
 
         <div className={styles.priceArea}>
           <p className={styles.discountedPrice}>
-            {discountPrice}
+            {price || discountPrice}
             <span>/night</span>
           </p>
-          <p className={styles.price}>{price}</p>
+          {roomSelect || <p className={styles.price}>{price}</p>}
         </div>
+        {roomSelect && <button className={styles.roomsButton}
+          onClick={() => setSelected(!selected)}
+          style={{ backgroundColor: selected ? "#1D1F22" : "#e8e9e9", color: selected ? "#fff" : "#565759" }}
+        >
+          {selected ? "SELECTED" : "SELECT"}
+        </button>}
       </div>
     </div>
   );

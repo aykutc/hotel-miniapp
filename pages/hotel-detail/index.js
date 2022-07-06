@@ -29,7 +29,6 @@ export async function getStaticProps() {
 }
 function HotelDetail(props) {
   const router = useRouter();
-  console.log(router.query.img);
   const { confirmCode, checkIn, checkOut, hotelName, totalDay } = router.query;
   const [hotelDetail, setHotelDetail] = React.useState({
     title: 'The Ultra-Luxury Mansions',

@@ -60,7 +60,22 @@ const RecommendedArray = [
     img: "hotel3.jpg",
   },
 ];
-export { ExploreArray, RecommendedArray };
+
+const SearchRegionArray = [
+  {
+    title: "Trojena",
+    logo: "region-trojena.jpg",
+  },
+  {
+    title: "Oxagon",
+    logo: "region-oxagon.jpg",
+  },
+  {
+    title: "Line",
+    logo: "region-line.jpg",
+  },
+];
+export { ExploreArray, RecommendedArray, SearchRegionArray };
 
 /* 
 import oxagonLogoWebp from "../public/images/logos/oxagon.png";

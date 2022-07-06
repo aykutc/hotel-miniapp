@@ -1,6 +1,6 @@
-.recommendCardWrapper {
+.upcomingCardWrapper {
   position: relative;
-  width: 230px;
+  width: 100%;
   min-width: 230px;
   border-radius: 4px;
   display: flex;
@@ -10,13 +10,8 @@
   border: 1px solid #1d1f2212;
   margin-right: 10px;
 }
-.recommendCardWrapper:active {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-}
-.recommendCardWrapper:focus {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-}
-.recommendBottomArea {
+
+.upcomingBottomArea {
   padding: 14px;
   border-top: 1px solid #1d1f2212;
   border-bottom-right-radius: 4px;
@@ -24,12 +19,11 @@
 }
 
 .tag {
-  width: min-content;
+  width: max-content;
   background: #f3efe5;
   border-radius: 4px;
 
   padding: 1px 6px;
-  margin-bottom: 12px;
 }
 
 .hotelName {
@@ -46,13 +40,13 @@
   color: #1d1f22;
 }
 
-.recommendTextArea {
+.upcomingTextArea {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.recommendTitle {
+.upcomingTitle {
   margin: 0px;
   font-style: normal;
   font-weight: 500;
@@ -65,7 +59,7 @@
   text-align: start;
 }
 
-.recommendDescription {
+.upcomingDescription {
   margin: 0;
 
   font-style: normal;
@@ -79,42 +73,11 @@
   margin-bottom: 12px;
 }
 
-.priceArea {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-}
-
-.discountedPrice {
-  margin: 0px;
-
+.upcomingDateText {
   font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.01em;
-
-  color: #1d1f22;
-}
-
-.discountedPrice > span {
-  margin: 0px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 16px;
   color: #565759;
-}
-
-.price {
-  margin: 0px;
-
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
-
-  color: #8e8f90;
-  text-decoration: line-through;
-  text-decoration-color: #ebc03f;
+  margin-bottom: 12px;
 }

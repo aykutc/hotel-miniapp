@@ -15,7 +15,7 @@ const geojson = {
       },
       geometry: {
         type: 'Point',
-        coordinates: [-66.324462, -16.024695],
+        coordinates: [36.7931741, 27.799901],
       },
     },
     {
@@ -25,7 +25,7 @@ const geojson = {
       },
       geometry: {
         type: 'Point',
-        coordinates: [-61.21582, -15.971891],
+        coordinates: [36.7931741, 29.799901],
       },
     },
     {
@@ -35,7 +35,7 @@ const geojson = {
       },
       geometry: {
         type: 'Point',
-        coordinates: [-63.292236, -18.281518],
+        coordinates: [32.7931741, 30.799901],
       },
     },
   ],
@@ -49,9 +49,6 @@ const Map = () => {
       center: [35.7931741, 27.799901], // starting position [lng, lat]
       zoom: 6, // starting zoom
       projection: 'mercator', // display the map as a 3D globe
-    });
-    map.on('style.load', () => {
-      map.setFog({}); // Set the default atmosphere style
     });
 
     for (const marker of geojson.features) {

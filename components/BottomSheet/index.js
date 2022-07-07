@@ -46,7 +46,7 @@ const BottomSheet = ({
     if (isOpen) {
       myPane.current.present({ animate: true });
     } else {
-      myPane.current.destroy({ animate: false });
+      myPane.current.destroy({ animate: true });
     }
   }, [isOpen]);
 
@@ -64,7 +64,7 @@ const BottomSheet = ({
         <HeaderTitle>{title}</HeaderTitle>
         <Close
           onClick={() =>
-            myPane.current.destroy({ animate: false }).then(onDismiss)
+            myPane.current.destroy({ animate: true }).then(onDismiss)
           }
         />
       </div>

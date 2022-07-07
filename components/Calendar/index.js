@@ -7,7 +7,7 @@ import DateBox from "./components/datebox";
 
 const daysNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-const Callendar = ({ setSelection }) => {
+const Callendar = ({ setSelection, datesChoice = {} }) => {
   let [monthChanger, setMonthChanger] = useState(new Date().getMonth());
   const [borderBottom, setBorderBottom] = useState("CHECK-IN");
   const [allDays, setAllDays] = useState([]);
@@ -35,7 +35,7 @@ const Callendar = ({ setSelection }) => {
       duration["CHECK-IN"]?.day !== 0 &&
       (+new Date(duration["CHECK-OUT"]?.day + duration["CHECK-OUT"]?.time) -
         +new Date(duration["CHECK-IN"]?.day + duration["CHECK-IN"]?.time)) /
-        (1000 * 3600 * 24);
+      (1000 * 3600 * 24);
     setSelection({ ...duration, durationAmount });
     setBorderBottom(!duration["CHECK-IN"] ? "CHECK-IN" : "CHECK-OUT");
   }, [duration, setSelection]);
@@ -55,14 +55,14 @@ const Callendar = ({ setSelection }) => {
               onClick={() => setBorderBottom(e)}
             >
               {e === "CHECK-IN" &&
-              "CHECK-IN" in duration &&
-              duration["CHECK-IN"]?.day
+                "CHECK-IN" in duration &&
+                duration["CHECK-IN"]?.day
                 ? dateFormatter(duration, "CHECK-IN")
                 : e === "CHECK-OUT" &&
                   "CHECK-OUT" in duration &&
                   duration["CHECK-OUT"]?.day
-                ? dateFormatter(duration, "CHECK-OUT")
-                : e}
+                  ? dateFormatter(duration, "CHECK-OUT")
+                  : e}
             </div>
           </React.Fragment>
         ))}
@@ -80,6 +80,7 @@ const Callendar = ({ setSelection }) => {
           allDays={allDays}
           borderBottom={borderBottom}
           setDuration={setDuration}
+          datesChoice={datesChoice}
         />
       </div>
     </>

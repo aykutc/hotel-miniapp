@@ -13,21 +13,6 @@
   width: calc(100% + 48px);
   border-bottom: 1px solid #e8e9e9;
 }
-/* .checkInOutBorderBottom {
-  position: absolute;
-  bottom: 0;
-  height: 1px;
-  background-color: #e8e9e9;
-  width: calc(100% + 48px);
-  left: -24px;
-}
-.activeCheckInOutBorderBottom {
-  position: absolute;
-  bottom: 0;
-  height: 1px;
-  background-color: var(--primary-neom-dark);
-  left: -24px;
-} */
 
 .checkInOut {
   display: flex;
@@ -61,5 +46,4 @@
   height: 80vh;
   overflow: scroll;
   margin-top: 24px;
-  /* margin-bottom: 100px; */
 }

@@ -75,7 +75,34 @@ const SearchRegionArray = [
     logo: "region-line.jpg",
   },
 ];
-export { ExploreArray, RecommendedArray, SearchRegionArray };
+
+const RoomSelectionArray = [
+  {
+    id: 1,
+    title: "Superior King Room",
+    info: "2 Guests | 1 King | 310 to 550 ft²",
+    price: "$967.99",
+    selected: false,
+    img: "hotel4.jpg"
+  },
+  {
+    id:2,
+    title: "Deluxe King Room",
+    info: "2 Guests | 1 King | 450 to 690 ft²",
+    price: "$998.99",
+    selected: false,
+    img: "hotel3.jpg"
+  },
+  {
+    id:3,
+    title: "Terrace King Room",
+    info: "2 Guests | 1 King | 450 to 550 ft²",
+    price: "$1220",
+    selected: false,
+    img: "hotel2.jpg"
+  }
+];
+export { ExploreArray, RecommendedArray, SearchRegionArray, RoomSelectionArray };
 
 /* 
 import oxagonLogoWebp from "../public/images/logos/oxagon.png";

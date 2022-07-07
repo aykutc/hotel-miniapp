@@ -12,7 +12,11 @@ import { RecommendedArray } from "data/data";
 import Router, { useRouter } from "next/router";
 import React, { useState } from "react";
 import styles from "./results.module.css";
-
+export async function getStaticProps() {
+  return {
+    props: {},
+  };
+}
 // LIST VIEW ---- MAP VIEW
 function Results() {
   const [selectedTab, setSelectedTab] = useState("LIST VIEW");

@@ -114,6 +114,22 @@ const RoomSelectionArray = [
     selected: false,
     img: "hotel2.jpg",
   },
+  {
+    id: 3,
+    title: "Terrace King Room",
+    info: "2 Guests | 1 King | 450 to 550 ft²",
+    price: "$1220",
+    selected: false,
+    img: "hotel2.jpg",
+  },
+  {
+    id: 3,
+    title: "Terrace King Room",
+    info: "2 Guests | 1 King | 450 to 550 ft²",
+    price: "$1220",
+    selected: false,
+    img: "hotel2.jpg",
+  },
 ];
 export {
   ExploreArray,

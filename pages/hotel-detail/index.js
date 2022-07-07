@@ -205,7 +205,11 @@ function HotelDetail(props) {
         </div>
         {/* Recommend End  */}
       </div>
-      <FloatingBottomButton onClick={() => {}}>
+      <FloatingBottomButton
+        onClick={() => {
+          Router.push("/room-select");
+        }}
+      >
         SEE AVAILABLE ROOMS
       </FloatingBottomButton>
     </div>

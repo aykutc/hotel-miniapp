@@ -2,16 +2,20 @@ import BottomSheet from "@/components/BottomSheet";
 import FilterBottomSheet from "@/components/FilterBottomSheet";
 import Header from "@/components/Header";
 import HeaderTitle from "@/components/HeaderTitle";
-import Arrow from "@/components/icons/Arrow";
+
+import dynamic from "next/dynamic";
+/*  import Map from "@/components/Map";
+ */
+import { Suspense } from "react";
+const Map = dynamic(() => import("@/components/Map"), {});
 import Back from "@/components/icons/Back";
 import Filter from "@/components/icons/Filter";
 import Location from "@/components/icons/Location";
-import Map from "@/components/Map";
 import RecommendedCard from "@/components/RecommendedCard";
 import Tabs from "@/components/Tabs";
 import { getDateSelection, getRegion, getRoomSelection } from "data/api";
 import { RecommendedArray } from "data/data";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import React, { useState } from "react";
 import styles from "./results.module.css";
 export async function getStaticProps() {
@@ -26,8 +30,6 @@ function Results() {
 
   const [checkState, setCheckState] = useState({});
   const { rooms, checkIn, checkOut, kids, adults, region } = checkState;
-
-  const router = useRouter();
 
   React.useEffect(() => {
     const region = getRegion();
@@ -131,7 +133,11 @@ function Results() {
               flex: "1 1 auto",
             }}
           >
-            <Map />
+            <Suspense
+              fallback={<div style={{ width: "100%", height: "100%" }}></div>}
+            >
+              <Map />
+            </Suspense>
           </div>
         )}
         <div className={styles.bottomContainer}>

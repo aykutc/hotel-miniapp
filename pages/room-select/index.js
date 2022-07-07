@@ -5,10 +5,14 @@ import Back from "@/components/icons/Back";
 import styles from "@/styles/Home.module.css";
 import newStyles from "../../components/RecommendedCard/Recommended.module.css";
 import { RoomSelectionArray } from "data/data";
-
+export async function getStaticProps() {
+  return {
+    props: {},
+  };
+}
 const RoomSelect = ({
   accomodationInfo = "Jun24 - Jun 27 (3 Nights)",
-  roomAmount = 1,
+  roomAmount = 4,
 }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
 
@@ -26,36 +30,48 @@ const RoomSelect = ({
   };
 
   return (
-    <div style={{ marginLeft: 24 }}>
+    <div style={{ marginLeft: 24, height: "100vh" }}>
       <div className={styles.header}>
         <Back style={{ marginRight: 32 }}></Back>
         <HeaderTitle>Rooms</HeaderTitle>
       </div>
       <div style={{ height: 16 }}></div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {RoomSelectionArray.map((item) => {
-          return (
-            <div
-              style={{ paddingRight: 24, marginBottom: 16 }}
-              key={item.title}
-            >
-              <RecommendedCard
-                roomSelect
-                updateSelectedRooms={updateSelectedRooms}
-                item={item}
-                title={item.title}
-                info={item.info}
-                img={item.img}
-                price={item.price}
-                imageStyles={{ height: 120, width: "100%", display: "block" }}
-                style={{
-                  width: "100%",
-                  minWidth: "100%",
-                }}
-              />
-            </div>
-          );
-        })}
+      <div
+        style={{
+          display: "flex",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            overflow: "scroll",
+            width: "100%",
+          }}
+        >
+          {RoomSelectionArray.map((item) => {
+            return (
+              <div
+                style={{ paddingRight: 24, marginBottom: 16 }}
+                key={item.title}
+              >
+                <RecommendedCard
+                  roomSelect
+                  updateSelectedRooms={updateSelectedRooms}
+                  item={item}
+                  title={item.title}
+                  info={item.info}
+                  img={item.img}
+                  price={item.price}
+                  imageStyles={{ height: 120, width: "100%", display: "block" }}
+                  style={{
+                    width: "100%",
+                    minWidth: "100%",
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
       {selectedRooms.length > 0 && selectedRooms.length <= roomAmount && (
         <div
@@ -70,6 +86,7 @@ const RoomSelect = ({
             justifyContent: "space-between",
             padding: "16px 24px 40px",
             boxShadow: "inset 0px 1px 0px #E8E9E9",
+            background: "white",
           }}
         >
           <div

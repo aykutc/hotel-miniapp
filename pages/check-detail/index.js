@@ -12,31 +12,38 @@ import RoomsGuests from "@/components/RoomsGuests";
 import RoomSummary from "@/components/RoomSummary";
 import SearchBar from "@/components/SearchBar";
 import SearchBottomSheet from "@/components/SearchBottomSheet";
-import { SearchRegionArray } from "data/data";
-import Router, { useRouter } from "next/router";
+import {
+  getDateSelection,
+  getRegion,
+  getRoomSelection,
+  saveDateSelection,
+  saveRoomSelection,
+} from "data/api";
+
+import Router from "next/router";
 import React, { useEffect, useState } from "react";
 import styles from "./check-detail.module.css";
+
 export async function getStaticProps() {
   return {
     props: {},
   };
 }
 function CheckDetail() {
-  const router = useRouter();
-
-  const { checkIn, checkOut, title, rooms, adults, kids } = router.query;
+  const [checkState, setCheckState] = useState({});
 
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
   const [isRegionModalOpen, setIsRegionModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [dateSelection, setDateSelection] = useState({});
-  const [roomSelection, setRoomSelection] = useState({
-    rooms: rooms | 1,
-    adults: adults | 1,
-    kids: kids | 0,
-  });
-  useEffect(() => {
+  /*   const [roomSelection, setRoomSelection] = useState({
+    rooms: 1,
+    adults: 1,
+    kids: 0,
+  }); */
+
+  /*   useEffect(() => {
     setRoomSelection({
       rooms,
       adults,
@@ -53,7 +60,7 @@ function CheckDetail() {
       },
       durationAmount: 2,
     });
-  }, [router.query]);
+  }, [router.query]); */
 
   const booking = {
     calander: {
@@ -61,99 +68,21 @@ function CheckDetail() {
       time: "3",
     },
   };
+
+  React.useEffect(() => {
+    const region = getRegion();
+    const dateSelection = getDateSelection();
+    const roomSelection = getRoomSelection();
+
+    setCheckState({
+      region,
+      ...dateSelection,
+      ...roomSelection,
+    });
+  }, [isDateModalOpen, isRegionModalOpen, isRoomModalOpen]);
+
   return (
     <>
-      <BottomSheet
-        className={"bottom-sheet-2"}
-        title="DATES"
-        isOpen={isDateModalOpen}
-        onDismiss={() => setIsDateModalOpen(false)}
-      >
-        <div
-          style={{
-            padding: "0px 24px",
-            height: "calc(100vh - 170px)",
-          }}
-        >
-          <Callendar setSelection={setDateSelection} />
-          <FloatingBottomButton
-            onClick={async () => {
-              setIsDateModalOpen(false);
-              Router.push(
-                {
-                  pathname: "/check-detail",
-                  query: {
-                    checkIn:
-                      dateSelection["CHECK-IN"].day +
-                      " " +
-                      dateSelection["CHECK-IN"].time,
-                    checkOut:
-                      dateSelection["CHECK-OUT"].day +
-                      " " +
-                      dateSelection["CHECK-OUT"].time,
-                    title,
-                    rooms: roomSelection.rooms,
-                    kids: roomSelection.kids,
-                    adults: roomSelection.adults,
-                  },
-                },
-                undefined,
-                { shallow: true }
-              );
-            }}
-          >
-            {dateSelection.durationAmount
-              ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
-              : `SELECT ${
-                  dateSelection["CHECK-IN"] === undefined
-                    ? "CHECK IN"
-                    : "CHECK OUT"
-                } DATE`}
-          </FloatingBottomButton>
-        </div>
-      </BottomSheet>
-      <BottomSheet
-        className={"bottom-sheet-1"}
-        title="ROOMS & GUESTS"
-        isOpen={isRoomModalOpen}
-        onDismiss={() => setIsRoomModalOpen(false)}
-      >
-        <RoomBottomSheet
-          onClick={(rooms) => {
-            setIsRoomModalOpen(false);
-            setRoomSelection({
-              rooms: rooms.count,
-              kids: rooms.kids,
-              adults: rooms.adults,
-            });
-            Router.push(
-              {
-                pathname: "/check-detail",
-                query: {
-                  checkIn,
-                  checkOut,
-                  title,
-                  rooms: rooms.count,
-                  kids: rooms.kids,
-                  adults: rooms.adults,
-                },
-              },
-              undefined,
-              { shallow: true }
-            );
-          }}
-          setIsRoomModalOpen={setIsDateModalOpen}
-        ></RoomBottomSheet>
-      </BottomSheet>
-      <BottomSheet
-        className={"bottom-sheet-3"}
-        title="REGION"
-        isOpen={isRegionModalOpen}
-        onDismiss={() => setIsRegionModalOpen(false)}
-      >
-        <SearchBottomSheet />
-      </BottomSheet>
-
       <div className={styles.checkDetailContainer}>
         <Header>
           <Arrow
@@ -172,15 +101,15 @@ function CheckDetail() {
           }}
         >
           <Location />
-          <p className={styles.regionText}>{router.query.title}</p>
+          <p className={styles.regionText}>{checkState.region}</p>
         </div>
         <RoomSummary
-          checkIn={checkIn}
-          checkOut={checkOut}
+          checkIn={checkState.checkIn}
+          checkOut={checkState.checkOut}
           booking={booking}
-          rooms={roomSelection.rooms}
-          kids={roomSelection.kids}
-          adults={roomSelection.adults}
+          rooms={checkState.rooms}
+          kids={checkState.kids}
+          adults={checkState.adults}
           onDateClick={() => {
             setIsDateModalOpen(true);
           }}
@@ -192,20 +121,99 @@ function CheckDetail() {
           onClick={() => {
             Router.push({
               pathname: "/results",
-              query: {
-                checkIn,
-                checkOut,
-                title,
-                rooms: roomSelection.rooms,
-                kids: roomSelection.kids,
-                adults: roomSelection.adults,
-              },
             });
           }}
         >
           SEE RESULTS
         </FloatingBottomButton>
       </div>
+      <BottomSheet
+        className={"bottom-sheet-2"}
+        title="DATES"
+        isOpen={isDateModalOpen}
+        onDismiss={() => setIsDateModalOpen(false)}
+        onClose={() => setIsDateModalOpen(false)}
+      >
+        <div
+          style={{
+            padding: "0px 24px",
+            height: "calc(100vh - 170px)",
+          }}
+        >
+          <Callendar setSelection={setDateSelection} />
+          <FloatingBottomButton
+            onClick={async () => {
+              saveDateSelection({
+                checkIn:
+                  dateSelection["CHECK-IN"].day +
+                  " " +
+                  dateSelection["CHECK-IN"].time,
+                checkOut:
+                  dateSelection["CHECK-OUT"].day +
+                  " " +
+                  dateSelection["CHECK-OUT"].time,
+              });
+              setIsDateModalOpen(false);
+            }}
+          >
+            {dateSelection.durationAmount
+              ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
+              : `SELECT ${
+                  dateSelection["CHECK-IN"] === undefined
+                    ? "CHECK IN"
+                    : "CHECK OUT"
+                } DATE`}
+          </FloatingBottomButton>
+        </div>
+      </BottomSheet>
+      <BottomSheet
+        className={"bottom-sheet-1"}
+        title="ROOMS & GUESTS"
+        isOpen={isRoomModalOpen}
+        onDismiss={() => setIsRoomModalOpen(false)}
+        onClose={() => setIsRoomModalOpen(false)}
+      >
+        <RoomBottomSheet
+          onClick={(rooms) => {
+            setIsRoomModalOpen(false);
+
+            saveRoomSelection({
+              rooms: rooms.count,
+              kids: rooms.kids,
+              adults: rooms.adults,
+            });
+            /*  Router.push(
+              {
+                pathname: "/check-detail",
+                query: {
+                  checkIn,
+                  checkOut,
+                  title,
+                  rooms: rooms.count,
+                  kids: rooms.kids,
+                  adults: rooms.adults,
+                },
+              },
+              undefined,
+              { shallow: true }
+            ); */
+          }}
+          setIsRoomModalOpen={setIsDateModalOpen}
+        ></RoomBottomSheet>
+      </BottomSheet>
+      <BottomSheet
+        className={"bottom-sheet-3"}
+        title="REGION"
+        isOpen={isRegionModalOpen}
+        onDismiss={() => setIsRegionModalOpen(false)}
+        onClose={() => setIsRegionModalOpen(false)}
+      >
+        <SearchBottomSheet
+          close={() => {
+            setIsRegionModalOpen(false);
+          }}
+        />
+      </BottomSheet>
     </>
   );
 }

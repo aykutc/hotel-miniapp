@@ -13,8 +13,23 @@ const getItemLocalStroage = (key) => {
   return JSON.parse(localStorage.getItem(key));
 };
 
+const getRegion = (value) => {
+  return getItemSessionStroage("region");
+};
 const saveRegion = (value) => {
   saveItemSessionStorage("region", value);
+};
+const getRoomSelection = (value) => {
+  return getItemSessionStroage("room");
+};
+const saveRoomSelection = (value) => {
+  saveItemSessionStorage("room", value);
+};
+const getDateSelection = (value) => {
+  return getItemSessionStroage("date");
+};
+const saveDateSelection = (value) => {
+  saveItemSessionStorage("date", value);
 };
 
 const saveHomeActiveTab = (value) => {
@@ -24,4 +39,13 @@ const getHomeActiveTab = (value) => {
   return getItemSessionStroage("homeActiveTab");
 };
 
-export { saveRegion, saveHomeActiveTab, getHomeActiveTab };
+export {
+  saveRegion,
+  saveHomeActiveTab,
+  getHomeActiveTab,
+  getRegion,
+  saveDateSelection,
+  getDateSelection,
+  getRoomSelection,
+  saveRoomSelection,
+};

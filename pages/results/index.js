@@ -8,6 +8,7 @@ import Location from "@/components/icons/Location";
 import Map from "@/components/Map";
 import RecommendedCard from "@/components/RecommendedCard";
 import Tabs from "@/components/Tabs";
+import { getDateSelection, getRegion, getRoomSelection } from "data/api";
 import { RecommendedArray } from "data/data";
 import Router, { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -21,11 +22,27 @@ export async function getStaticProps() {
 function Results() {
   const [selectedTab, setSelectedTab] = useState("LIST VIEW");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+
+  const [checkState, setCheckState] = useState({});
+  const { rooms, checkIn, checkOut, kids, adults, region } = checkState;
+
   const router = useRouter();
-  const { checkIn, checkOut, title, rooms, kids, adults } = router.query;
+
+  React.useEffect(() => {
+    const region = getRegion();
+    const dateSelection = getDateSelection();
+    const roomSelection = getRoomSelection();
+
+    setCheckState({
+      region,
+      ...dateSelection,
+      ...roomSelection,
+    });
+  }, []);
+
   return (
     <div className={styles.resultsContainer}>
-      <BottomSheet
+      {/*  <BottomSheet
         className={"bottom-sheet-filter"}
         title="REGION"
         isOpen={isFilterModalOpen}
@@ -33,7 +50,7 @@ function Results() {
         leftComponent={<p className={styles.resetButton}>Reset</p>}
       >
         <FilterBottomSheet />
-      </BottomSheet>
+      </BottomSheet> */}
       <div
         style={{
           position: "fixed",
@@ -54,7 +71,7 @@ function Results() {
         <div className={styles.selectedFiltersContainer}>
           <div className={styles.filterItem}>
             <Location />
-            <p className={styles.filterText}>{title}</p>
+            <p className={styles.filterText}>{region}</p>
           </div>
           <div className={styles.filterItem}>
             <Location />

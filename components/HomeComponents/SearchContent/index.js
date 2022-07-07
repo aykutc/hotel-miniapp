@@ -1,8 +1,10 @@
 import OptimizedImage from "@/components/OptimizedImage";
 import Title from "@/components/Title";
+import { saveRegion } from "data/api";
+import Router from "next/router";
 import React from "react";
 
-function SearchContent({ searchTerm, searchData }) {
+function SearchContent({ searchTerm, searchData, onClick }) {
   const result =
     searchTerm.length > 2
       ? searchData.filter((item) => {
@@ -20,7 +22,12 @@ function SearchContent({ searchTerm, searchData }) {
           {result.map((item) => {
             return (
               <>
-                <div className="item">
+                <div
+                  className="item"
+                  onClick={() => {
+                    onClick(item.title);
+                  }}
+                >
                   <OptimizedImage
                     src={item.logo}
                     style={{ width: "100%", height: "unset" }}

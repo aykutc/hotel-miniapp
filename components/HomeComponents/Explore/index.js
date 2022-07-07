@@ -2,9 +2,12 @@ import ExploreCard from "@/components/HomeComponents/ExploreCard";
 import HeaderTitle from "@/components/HeaderTitle";
 import RecommendedCard from "@/components/RecommendedCard";
 import styles from "@/styles/Home.module.css";
-import Router from "next/router";
+import { useRouter } from "next/router";
+import { saveRegion } from "data/api";
 
 function Explore({ exploreArray, recommendedArray, user }) {
+  const router = useRouter();
+
   return (
     <>
       {/*  <div className={styles.header}>
@@ -44,12 +47,20 @@ function Explore({ exploreArray, recommendedArray, user }) {
                 logo={item.logo}
                 logoWebp={item.logoWebp}
                 onClick={() => {
-                  Router.push({
+                  /* window.location.assign("/date-selection"); */
+                  /*  window.history.pushState(
+                    { urlPath: "/date-selection" },
+                    "",
+                    "/date-selection"
+                  ); */
+                  saveRegion(item.title);
+
+                  router.push({
                     pathname: "/date-selection",
-                    query: {
-                      title: item.title,
-                    },
                   });
+                  /*   Router.push({
+                    pathname: "/date-selection",
+                  }); */
                 }}
               ></ExploreCard>
             );

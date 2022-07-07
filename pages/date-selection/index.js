@@ -4,7 +4,8 @@ import React from "react";
 import styles from "@/styles/DateSelection.module.css";
 import FloatingBottomButton from "@/components/FloatingBottomButton";
 import Back from "@/components/icons/Back";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
+import { saveDateSelection } from "data/api";
 
 export async function getStaticProps() {
   return {
@@ -17,7 +18,7 @@ function Dates(props) {
     console.log("aa", sessionStorage.getItem("aa"));
   }, []);
  */
-  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <div
@@ -33,22 +34,18 @@ function Dates(props) {
       <Callendar setSelection={setDateSelection}></Callendar>
       <FloatingBottomButton
         onClick={() => {
+          saveDateSelection({
+            checkIn:
+              dateSelection["CHECK-IN"].day +
+              " " +
+              dateSelection["CHECK-IN"].time,
+            checkOut:
+              dateSelection["CHECK-OUT"].day +
+              " " +
+              dateSelection["CHECK-OUT"].time,
+          });
           Router.push({
             pathname: "/check-detail",
-            query: {
-              title: router.query.title,
-              checkIn:
-                dateSelection["CHECK-IN"].day +
-                " " +
-                dateSelection["CHECK-IN"].time,
-              checkOut:
-                dateSelection["CHECK-OUT"].day +
-                " " +
-                dateSelection["CHECK-OUT"].time,
-              rooms: 1,
-              adults: 1,
-              kids: 0,
-            },
           });
         }}
       >

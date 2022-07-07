@@ -12,7 +12,7 @@ import SearchBar from "@/components/SearchBar";
 import Back from "@/components/icons/Back";
 import SearchContent from "@/components/HomeComponents/SearchContent";
 import { getHomeActiveTab } from "data/api";
-import BottomSheet from "@/components/BottomSheet";
+import Router from "next/router";
 /* import dynamic from "next/dynamic";
 const Favorites = dynamic(() => import("@/components/home/Favorites"), {});
   */
@@ -163,6 +163,13 @@ function Home({ exploreArray, recommendedArray, searchData }) {
                 <SearchContent
                   searchTerm={searchTerm}
                   searchData={searchData}
+                  onClick={(value) => {
+                    saveRegion(value);
+
+                    Router.push({
+                      pathname: "/date-selection",
+                    });
+                  }}
                 ></SearchContent>
               ) : (
                 <Explore

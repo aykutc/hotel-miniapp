@@ -1,11 +1,32 @@
-import React from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { CupertinoPane } from "cupertino-pane";
-function BottomSheet() {
-  React.useEffect(() => {
-    window.onload = function () {
-      var myPane = new CupertinoPane(
-        ".cupertino-pane", // Pane container selector
+import Close from "../icons/Close";
+import HeaderTitle from "../HeaderTitle";
+
+const BottomSheet = ({
+  onDismiss,
+  isOpen,
+  children,
+  title,
+  leftComponent,
+  className,
+}) => {
+  let myPane = useRef();
+
+  useEffect(() => {
+    if (!myPane.current) {
+      myPane.current = new CupertinoPane(
+        "." + className,
+        // Pane container selector
         {
+          buttonDestroy: false,
+          showDraggable: false,
           backdrop: true,
           fitHeight: true,
           parentElement: "body", // Parent container
@@ -13,16 +34,44 @@ function BottomSheet() {
             middle: { enabled: true, bounce: true },
           },
           events: {
-            onDrag: () => console.log("Drag event"),
+            onDidDismiss: onDismiss,
           },
           fastSwipeClose: true,
+          bottomClose: true,
+          lowerThanBottom: false,
         }
       );
-      myPane.present({ animate: true }).then((res) => {});
-    };
-  }, []);
+    }
 
-  return <div className="cupertino-pane">BottomSheet</div>;
-}
+    if (isOpen) {
+      myPane.current.present({ animate: true });
+    } else {
+      myPane.current.destroy({ animate: false });
+    }
+  }, [isOpen]);
+
+  return (
+    <div className={className} style={{ visibility: "hidden" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "24px",
+        }}
+      >
+        {leftComponent || <div />}
+        <HeaderTitle>{title}</HeaderTitle>
+        <Close
+          onClick={() =>
+            myPane.current.destroy({ animate: false }).then(onDismiss)
+          }
+        />
+      </div>
+
+      {children}
+    </div>
+  );
+};
 
 export default BottomSheet;

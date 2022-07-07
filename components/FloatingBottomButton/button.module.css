@@ -1,5 +1,5 @@
 .callendarButton {
-  position: absolute;
+  position: fixed;
   bottom: 40px;
   margin-left: auto;
   margin-right: auto;
@@ -14,4 +14,9 @@
   background-color: var(--primary-neom-dark);
   border-radius: 104px;
   color: #fff;
+}
+
+.callendarButton:disabled {
+  background: #E8E9E9;
+  color: #8E8F90;
 }

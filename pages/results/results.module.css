@@ -1,0 +1,59 @@
+.resultsContainer {
+    padding: 0px 24px;
+    padding-bottom: 60px;
+}
+
+.bottomContainer {
+    padding: 14px 24px 20px 24px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    background: #FFFFFF;
+    box-shadow: inset 0px 1px 0px #E8E9E9;
+}
+
+.selectedFiltersContainer {
+    transform: translateX(-24px);
+    padding-left: 24px;
+    padding-right: 24px;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-bottom: 24px;
+    overflow: auto;
+}
+
+.filterItem {
+    display: flex;
+    gap: 8px;
+    padding: 6px 12px;
+    background: #FFFFFF;
+
+    border: 1px solid #E8E9E9;
+    border-radius: 100px;
+    width: auto;
+    flex: none;
+}
+
+.filterText {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #8E8F90;
+
+}
+
+.resetButton {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: right;
+    color: #8E8F90;
+}

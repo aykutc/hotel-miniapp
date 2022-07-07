@@ -1,21 +1,27 @@
-const saveItem = (key, value) => {
+const saveItemSessionStorage = (key, value) => {
   sessionStorage.setItem(key, JSON.stringify(value));
 };
 
-const getItem = (key) => {
+const getItemSessionStroage = (key) => {
   return JSON.parse(sessionStorage.getItem(key));
+};
+const saveItemLocalStorage = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
+
+const getItemLocalStroage = (key) => {
+  return JSON.parse(localStorage.getItem(key));
 };
 
 const saveRegion = (value) => {
-  saveItem("region", value);
+  saveItemSessionStorage("region", value);
 };
 
 const saveHomeActiveTab = (value) => {
-  saveItem("homeActiveTab", value);
+  saveItemSessionStorage("homeActiveTab", value);
 };
 const getHomeActiveTab = (value) => {
-  const val = getItem("homeActiveTab");
-  return val;
+  return getItemSessionStroage("homeActiveTab");
 };
 
 export { saveRegion, saveHomeActiveTab, getHomeActiveTab };

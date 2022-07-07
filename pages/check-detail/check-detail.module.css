@@ -26,9 +26,13 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
-
-    /* Primary / NEOM Dark */
-
+    margin-left: 14px;
     color: #1D1F22;
+    gap: 8px
+}
 
+.search {
+    display: flex;
+    width: 100%;
+    margin-bottom: 16px;
 }

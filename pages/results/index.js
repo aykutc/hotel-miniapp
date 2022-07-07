@@ -30,48 +30,61 @@ function Results() {
       >
         <FilterBottomSheet />
       </BottomSheet>
-
-      <Header>
-        <Arrow
-          style={{ marginRight: 24 }}
-          onClick={() => {
-            Router.back();
-          }}
-          rotate="left"
-        ></Arrow>
-        <HeaderTitle>RESULTS</HeaderTitle>
-      </Header>
-      <div className={styles.selectedFiltersContainer}>
-        <div className={styles.filterItem}>
-          <Location />
-          <p className={styles.filterText}>{title}</p>
-        </div>
-        <div className={styles.filterItem}>
-          <Location />
-          <p className={styles.filterText}>
-            {checkIn?.split(" ")[1] +
-              " " +
-              checkIn?.split(" ")[0] +
-              " - " +
-              checkOut?.split(" ")[1] +
-              " " +
-              checkOut?.split(" ")[0]}
-          </p>
-        </div>
-        <div className={styles.filterItem}>
-          <Location />
-          <p className={styles.filterText}>
-            {rooms == 1 ? rooms + " Room" : rooms + " Rooms"}{" "}
-            {Number(kids) + Number(adults) == 1
-              ? Number(kids) + Number(adults) + " Guest"
-              : Number(kids) + Number(adults) > 1
-              ? Number(kids) + Number(adults) + " Guests"
-              : ""}
-          </p>
+      <div
+        style={{
+          position: "fixed",
+          zIndex: 100,
+          background: "white",
+        }}
+      >
+        <Header>
+          <Arrow
+            style={{ marginRight: 24 }}
+            onClick={() => {
+              Router.back();
+            }}
+            rotate="left"
+          ></Arrow>
+          <HeaderTitle>RESULTS</HeaderTitle>
+        </Header>
+        <div className={styles.selectedFiltersContainer}>
+          <div className={styles.filterItem}>
+            <Location />
+            <p className={styles.filterText}>{title}</p>
+          </div>
+          <div className={styles.filterItem}>
+            <Location />
+            <p className={styles.filterText}>
+              {checkIn?.split(" ")[1] +
+                " " +
+                checkIn?.split(" ")[0] +
+                " - " +
+                checkOut?.split(" ")[1] +
+                " " +
+                checkOut?.split(" ")[0]}
+            </p>
+          </div>
+          <div className={styles.filterItem}>
+            <Location />
+            <p className={styles.filterText}>
+              {rooms == 1 ? rooms + " Room" : rooms + " Rooms"}{" "}
+              {Number(kids) + Number(adults) == 1
+                ? Number(kids) + Number(adults) + " Guest"
+                : Number(kids) + Number(adults) > 1
+                ? Number(kids) + Number(adults) + " Guests"
+                : ""}
+            </p>
+          </div>
         </div>
       </div>
       {selectedTab === "LIST VIEW" ? (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            paddingTop: 110,
+          }}
+        >
           {RecommendedArray.map((item) => {
             return (
               <div style={{ marginBottom: 16 }} key={item.title}>

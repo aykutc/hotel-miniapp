@@ -43,5 +43,6 @@
   align-items: center;
 }
 .gridContainer {
-  width: 100%;
+  width: 105%;
+  /* width: 100%; */
 }

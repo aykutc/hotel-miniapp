@@ -16,7 +16,11 @@ import { SearchRegionArray } from "data/data";
 import Router, { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styles from "./check-detail.module.css";
-
+export async function getStaticProps() {
+  return {
+    props: {},
+  };
+}
 function CheckDetail() {
   const router = useRouter();
 

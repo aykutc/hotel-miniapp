@@ -1,8 +1,9 @@
 import React from "react";
-import RightArrow from "../../icons/RightArrow";
-const StayInfoItem = ({ icon, title }) => {
+import Arrow from "../../icons/Arrow";
+const StayInfoItem = ({ icon, title, onClick }) => {
   return (
     <div
+      onClick={onClick}
       style={{
         display: "flex",
         justifyContent: "space-between",
@@ -33,7 +34,7 @@ const StayInfoItem = ({ icon, title }) => {
           {title}
         </p>
       </div>
-      <RightArrow />
+      <Arrow rotate="right" />
     </div>
   );
 };

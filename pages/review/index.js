@@ -10,6 +10,12 @@ import Room from "@/components/icons/Room";
 import Bed from "@/components/icons/Bed";
 import Dropdown from "@/components/ReviewComponents/Dropdown";
 import FloatingBottomButton from "@/components/FloatingBottomButton";
+
+export async function getStaticProps() {
+  return {
+    props: {},
+  };
+}
 const dropdownData = [
   {
     name: "Jun 24 - Jun 27 (3 nights)",
@@ -21,7 +27,7 @@ const dropdownData = [
   },
 ];
 const Review = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div
       style={{

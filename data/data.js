@@ -82,6 +82,7 @@ const RoomSelectionArray = [
     title: "Superior King Room",
     info: "2 Guests | 1 King | 310 to 550 ft²",
     price: "$967.99",
+    selected: false,
     img: "hotel4.jpg"
   },
   {
@@ -89,6 +90,7 @@ const RoomSelectionArray = [
     title: "Deluxe King Room",
     info: "2 Guests | 1 King | 450 to 690 ft²",
     price: "$998.99",
+    selected: false,
     img: "hotel3.jpg"
   },
   {
@@ -96,6 +98,7 @@ const RoomSelectionArray = [
     title: "Terrace King Room",
     info: "2 Guests | 1 King | 450 to 550 ft²",
     price: "$1220",
+    selected: false,
     img: "hotel2.jpg"
   }
 ];

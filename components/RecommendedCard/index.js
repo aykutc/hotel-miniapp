@@ -21,19 +21,11 @@ function RecommendedCard({
   setSelectedRoom,
   selectedRoom,
   item,
-  roomAmount,
   ...props
 }) {
   const [isLike, setIsLike] = useState(false);
   const [selected, setSelected] = useState(false);
-
-  useEffect(() => {
-    roomSelect && (selected ? setSelectedRoom([...selectedRoom, item]) : selectedRoom.map((e, index) => {
-      item.id === e.id && selectedRoom.splice(index, 1);
-      setSelectedRoom(selectedRoom)
-    })
-    );
-  }, [selected, setSelectedRoom, item, roomSelect]);
+  // console.log(item.id)
 
   return (
     <div
@@ -92,7 +84,10 @@ function RecommendedCard({
           {roomSelect || <p className={styles.price}>{price}</p>}
         </div>
         {roomSelect && <button className={styles.roomsButton}
-          onClick={() => setSelected(!selected)}
+          onClick={() => {
+            setSelectedRoom(item.id);
+            setSelected(!selected);
+          }}
           style={{ backgroundColor: selected ? "#1D1F22" : "#e8e9e9", color: selected ? "#fff" : "#565759" }}
         >
           {selected ? "SELECTED" : "SELECT"}

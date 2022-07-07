@@ -6,21 +6,21 @@ import { RoomSelectionArray } from "data/data";
 import Back from "@/components/icons/Back";
 import { useEffect, useState } from "react";
 
-const RoomSelect = ({ accomodationInfo = "Jun24 - Jun 27 (3 Nights)", roomAmount = 1 }) => {
-    const [selectedRooms, setSelectedRooms] = useState([])
-    const [myRooms, setmyRooms] = useState([])
-    console.log(myRooms)
+const RoomSelect = ({ accomodationInfo = "Jun24 - Jun 27 (3 Nights)", roomAmount = 2 }) => {
+    const [selectedRooms, setSelectedRooms] = useState([]);
+    const [myRooms, setmyRooms] = useState([]);
+    console.log(myRooms);
 
-    useEffect(() => {
-        setSelectedRooms(RoomSelectionArray)
-    }, [])
-    
+    // useEffect(() => {
+    //     setSelectedRooms(RoomSelectionArray)
+    // }, [])
+
     const updateSelectedRooms = (id) => {
         const index = RoomSelectionArray.findIndex(item => item.id === id);
         const selectedRoom = RoomSelectionArray[index];
         RoomSelectionArray.splice(index, 1, { ...selectedRoom, selected: !selectedRoom.selected });
-        setSelectedRooms(RoomSelectionArray)
-        setmyRooms(RoomSelectionArray.filter(e => e.selected === true))
+        setSelectedRooms(RoomSelectionArray);
+        setmyRooms(RoomSelectionArray.filter(e => e.selected === true));
     };
 
     return (
@@ -56,7 +56,7 @@ const RoomSelect = ({ accomodationInfo = "Jun24 - Jun 27 (3 Nights)", roomAmount
                     );
                 })}
             </div >
-            {/* {selectedRoom.length <= roomAmount && selectedRoom.length === 0 && */}
+            {myRooms.length > 0 && myRooms.length <= roomAmount &&
                 <div style={{
                     position: "absolute", bottom: 0, left: 0,
                     width: "100%", height: "108px",
@@ -75,8 +75,9 @@ const RoomSelect = ({ accomodationInfo = "Jun24 - Jun 27 (3 Nights)", roomAmount
 
                         <div className={newStyles.priceArea}>
                             <p className={newStyles.discountedPrice}>
-                                {/* {selectedRoom[0].price} */}
-                                $998.99
+                                ${myRooms.reduce((total, e) => {
+                                    return total + +e.price.slice(1);
+                                }, 0)}
                                 <span>/night</span>
                             </p>
 
@@ -97,10 +98,10 @@ const RoomSelect = ({ accomodationInfo = "Jun24 - Jun 27 (3 Nights)", roomAmount
                         fontWeight: 400, fontSize: "16px",
                         lineHeight: "20px"
                     }}
-                        onClick={() => console.log(selectedRooms)}
+                        onClick={() => console.log(myRooms)}
                     >BOOK</button>
                 </div>
-                {/* } */}
+            }
         </div >
     );
 };

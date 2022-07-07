@@ -10,7 +10,14 @@ import React, {
 import HeaderTitle from "../HeaderTitle";
 import Sheet from "react-modal-sheet";
 
-function BottomSheet({ children, isOpen, onClose, leftComponent, title }) {
+function BottomSheet({
+  children,
+  isOpen,
+  onClose,
+  leftComponent,
+  title,
+  contentStyle,
+}) {
   return (
     <Sheet
       isOpen={isOpen}
@@ -38,7 +45,9 @@ function BottomSheet({ children, isOpen, onClose, leftComponent, title }) {
             <Close onClick={() => onClose()} />
           </div>
         </Sheet.Header>
-        <Sheet.Content>{children}</Sheet.Content>
+        <Sheet.Content disableDrag style={contentStyle}>
+          {children}
+        </Sheet.Content>
       </Sheet.Container>
 
       <Sheet.Backdrop />

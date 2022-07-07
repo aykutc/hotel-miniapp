@@ -1,10 +1,9 @@
 import BottomSheet from "@/components/BottomSheet";
-import Callendar from "@/components/Calendar";
+import Calendar from "@/components/Calendar";
+
 import FloatingBottomButton from "@/components/FloatingBottomButton";
 import Header from "@/components/Header";
 import HeaderTitle from "@/components/HeaderTitle";
-import SearchContent from "@/components/HomeComponents/SearchContent";
-import Arrow from "@/components/icons/Arrow";
 import Back from "@/components/icons/Back";
 import Location from "@/components/icons/Location";
 import RoomBottomSheet from "@/components/RoomBottomSheet";
@@ -85,13 +84,8 @@ function CheckDetail() {
     <>
       <div className={styles.checkDetailContainer}>
         <Header>
-          <Arrow
-            style={{ marginRight: 24 }}
-            onClick={() => {
-              Router.back();
-            }}
-            rotate="left"
-          ></Arrow>
+          <Back style={{ marginRight: 32 }}></Back>
+
           <HeaderTitle>DETAILS</HeaderTitle>
         </Header>
         <div
@@ -133,15 +127,18 @@ function CheckDetail() {
         isOpen={isDateModalOpen}
         onDismiss={() => setIsDateModalOpen(false)}
         onClose={() => setIsDateModalOpen(false)}
+        contentStyle={{ overflow: "hidden" }}
       >
         <div
           style={{
             padding: "0px 24px",
-            height: "calc(100vh - 170px)",
+
+            /* height: "calc(100vh - 170px)", */
           }}
         >
-          <Callendar setSelection={setDateSelection} />
+          <Calendar setSelection={setDateSelection} />
           <FloatingBottomButton
+            style={{ position: "absolute" }}
             onClick={async () => {
               saveDateSelection({
                 checkIn:
@@ -172,6 +169,7 @@ function CheckDetail() {
         isOpen={isRoomModalOpen}
         onDismiss={() => setIsRoomModalOpen(false)}
         onClose={() => setIsRoomModalOpen(false)}
+        contentStyle={{ position: "initial" }}
       >
         <RoomBottomSheet
           onClick={(rooms) => {
@@ -182,21 +180,6 @@ function CheckDetail() {
               kids: rooms.kids,
               adults: rooms.adults,
             });
-            /*  Router.push(
-              {
-                pathname: "/check-detail",
-                query: {
-                  checkIn,
-                  checkOut,
-                  title,
-                  rooms: rooms.count,
-                  kids: rooms.kids,
-                  adults: rooms.adults,
-                },
-              },
-              undefined,
-              { shallow: true }
-            ); */
           }}
           setIsRoomModalOpen={setIsDateModalOpen}
         ></RoomBottomSheet>

@@ -5,7 +5,7 @@ const FloatingBottomButton = ({ children, disabled, onClick, ...props }) => {
   return (
     <button
       disabled={disabled}
-      className={styles.callendarButton}
+      className={styles.button}
       onClick={onClick}
       {...props}
     >

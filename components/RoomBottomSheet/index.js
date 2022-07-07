@@ -8,11 +8,10 @@ function RoomBottomSheet({ onClick }) {
     { roomNo: 1, adults: 1, kids: 0 },
   ]);
   return (
-    <div style={{ overflow: "scroll", height: "calc(100vh - 160px)" }}>
-      <div style={{ paddingBottom: "120px" }}>
-        <RoomsGuests rooms={roomSelection} setRooms={setRoomSelection} />
-      </div>
+    <>
+      <RoomsGuests rooms={roomSelection} setRooms={setRoomSelection} />
       <FloatingBottomButton
+        style={{ position: "absolute" }}
         disabled={roomSelection?.some((item) => item.adults === 0)}
         onClick={async () => {
           onClick({
@@ -24,7 +23,7 @@ function RoomBottomSheet({ onClick }) {
       >
         APPLY
       </FloatingBottomButton>
-    </div>
+    </>
   );
 }
 

@@ -11,7 +11,7 @@ import Stays from "@/components/HomeComponents/Stays";
 import SearchBar from "@/components/SearchBar";
 import Back from "@/components/icons/Back";
 import SearchContent from "@/components/HomeComponents/SearchContent";
-import { getHomeActiveTab } from "data/api";
+import { getHomeActiveTab, saveRegion } from "data/api";
 import Router from "next/router";
 /* import dynamic from "next/dynamic";
 const Favorites = dynamic(() => import("@/components/home/Favorites"), {});

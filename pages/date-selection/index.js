@@ -6,6 +6,7 @@ import FloatingBottomButton from "@/components/FloatingBottomButton";
 import Back from "@/components/icons/Back";
 import Router from "next/router";
 import { saveDateSelection } from "data/api";
+import Calendar from "@/components/Calendar";
 
 export async function getStaticProps() {
   return {
@@ -31,7 +32,7 @@ function Dates(props) {
         <HeaderTitle>Dates</HeaderTitle>
       </div>
 
-      <Callendar setSelection={setDateSelection}></Callendar>
+      <Calendar setSelection={setDateSelection}></Calendar>
       <FloatingBottomButton
         onClick={() => {
           saveDateSelection({

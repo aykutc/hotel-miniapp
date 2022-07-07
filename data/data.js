@@ -56,6 +56,22 @@ const RecommendedArray = [
     price: "$134.43",
     img: "recommended3.jpg",
   },
+  {
+    subTitle: "TROJENA",
+    title: "Ski Village",
+    block: "Block A-42",
+    discountPrice: "$123.99",
+    price: "$134.43",
+    img: "recommended3.jpg",
+  },
+  {
+    subTitle: "TROJENA",
+    title: "Ski Village",
+    block: "Block A-42",
+    discountPrice: "$123.99",
+    price: "$134.43",
+    img: "recommended3.jpg",
+  },
 ];
 
 const SearchRegionArray = [

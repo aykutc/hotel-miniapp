@@ -64,7 +64,7 @@ const Dropdown = ({ data, totalPrice, handleClick, open }) => {
           >
             ${totalPrice}
           </p>
-          <Arrow />
+          {open ? <Arrow rotate="up" /> : <Arrow rotate="down" />}
         </div>
       </div>
       {open && (

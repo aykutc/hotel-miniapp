@@ -27,7 +27,7 @@ const dropdownData = [
   },
 ];
 const Review = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <div
       style={{

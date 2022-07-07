@@ -8,7 +8,7 @@ import { RoomSelectionArray } from "data/data";
 
 const RoomSelect = ({
   accomodationInfo = "Jun24 - Jun 27 (3 Nights)",
-  roomAmount = 2,
+  roomAmount = 1,
 }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
 

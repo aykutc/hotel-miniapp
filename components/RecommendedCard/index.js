@@ -18,16 +18,16 @@ function RecommendedCard({
   imgRect,
   imageStyles,
   showFavorite,
-  rate,
+  favoriteOnClick,
+  isFavorite,
   favorite,
+  rate,
   info,
   roomSelect,
   updateSelectedRooms,
   item,
   ...props
 }) {
-  const [isLike, setIsLike] = useState(false);
-
   return (
     <div
       className={roomSelect ? styles.roomsWrapper : styles.recommendCardWrapper}
@@ -67,9 +67,9 @@ function RecommendedCard({
         <Like
           onClick={(e) => {
             e.stopPropagation();
-            setIsLike(!isLike);
+            favoriteOnClick();
           }}
-          fill={isLike ? "white" : "transparent"}
+          fill={isFavorite ? "white" : "transparent"}
           style={{ position: "absolute", top: 10, right: 10 }}
         />
       )}

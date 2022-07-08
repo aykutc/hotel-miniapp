@@ -49,26 +49,27 @@ function HotelDetail(props) {
     { icon: <Parking />, name: "Parking & Transit" },
     { icon: <Accessibility />, name: "Accessibility" },
   ];
-  const [hotelDetail, setHotelDetail] = React.useState({
-    booking: {
-      calander: {
-        date: "Jun 24 - Jun 27",
-        time: "3",
-      },
-      room: {
-        count: 1,
-        adult: 1,
-        child: 0,
-      },
-    },
-  });
+  const [hotelDetail, setHotelDetail] = React.useState({});
 
   React.useEffect(() => {
     const region = getRegion();
     const dateSelection = getDateSelection();
-    const roomSelection = getRoomSelection();
+
     const hotel = getHotel();
 
+    let roomSelection = getRoomSelection();
+    if (roomSelection === null) {
+      saveRoomSelection({
+        rooms: 1,
+        kids: 0,
+        adults: 1,
+      });
+      roomSelection = {
+        rooms: 1,
+        kids: 0,
+        adults: 1,
+      };
+    }
     setHotelDetail({
       ...hotelDetail,
       region,

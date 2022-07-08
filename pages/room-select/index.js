@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HeaderTitle from "@/components/HeaderTitle";
 import RecommendedCard from "@/components/RecommendedCard";
 import Back from "@/components/icons/Back";
@@ -6,29 +6,55 @@ import styles from "@/styles/Home.module.css";
 import newStyles from "../../components/RecommendedCard/Recommended.module.css";
 import { RoomSelectionArray } from "data/data";
 import Router from "next/router";
+import { getDateSelection, getHotel, getRoomSelection } from "data/api";
 export async function getStaticProps() {
   return {
-    props: {},
+    props: { RoomSelectionArray: RoomSelectionArray },
   };
 }
-const RoomSelect = ({
-  accomodationInfo = "Jun24 - Jun 27 (3 Nights)",
-  roomAmount = 4,
-}) => {
+const RoomSelect = ({ RoomSelectionArray }) => {
+  const [rooms, setRooms] = useState(RoomSelectionArray);
   const [selectedRooms, setSelectedRooms] = useState([]);
+  const [hotelDetail, setHotelDetail] = useState({
+    checkIn: "",
+    checkOut: "",
+  });
+  const { rooms: roomAmount, checkIn, checkOut } = hotelDetail;
+  const accomodationInfo =
+    checkIn?.split(" ")[1] +
+    " " +
+    checkIn?.split(" ")[0] +
+    " - " +
+    checkOut?.split(" ")[1] +
+    " " +
+    checkOut?.split(" ")[0];
 
   const updateSelectedRooms = (id) => {
     const isInclude = selectedRooms.find((item) => item.id === id);
     if (isInclude || selectedRooms.length < roomAmount) {
-      const index = RoomSelectionArray.findIndex((item) => item.id === id);
-      const selectedRoom = RoomSelectionArray[index];
-      RoomSelectionArray.splice(index, 1, {
+      const index = rooms.findIndex((item) => item.id === id);
+      const selectedRoom = rooms[index];
+      rooms.splice(index, 1, {
         ...selectedRoom,
         selected: !selectedRoom.selected,
       });
-      setSelectedRooms(RoomSelectionArray.filter((e) => e.selected === true));
+      setSelectedRooms(rooms.filter((e) => e.selected === true));
     }
   };
+  useEffect(() => {
+    const dateSelection = getDateSelection();
+    const roomSelection = getRoomSelection();
+    const hotel = getHotel();
+
+    setSelectedRooms([]);
+    setHotelDetail({
+      ...hotelDetail,
+
+      ...dateSelection,
+      ...roomSelection,
+      ...hotel,
+    });
+  }, []);
 
   return (
     <div style={{ marginLeft: 24, height: "100vh" }}>
@@ -50,7 +76,7 @@ const RoomSelect = ({
             width: "100%",
           }}
         >
-          {RoomSelectionArray.map((item) => {
+          {rooms.map((item) => {
             return (
               <div
                 style={{ paddingRight: 24, marginBottom: 16 }}

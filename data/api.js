@@ -46,6 +46,13 @@ const getHomeActiveTab = (value) => {
   return getItemSessionStroage("homeActiveTab");
 };
 
+const saveFavorites = (value) => {
+  saveItemLocalStorage("favorites", value);
+};
+const getFavorites = (value) => {
+  return getItemLocalStroage("favorites");
+};
+
 export {
   saveRegion,
   saveHomeActiveTab,
@@ -57,4 +64,6 @@ export {
   saveRoomSelection,
   saveHotel,
   getHotel,
+  getFavorites,
+  saveFavorites,
 };

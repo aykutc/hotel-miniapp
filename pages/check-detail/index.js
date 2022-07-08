@@ -61,17 +61,22 @@ function CheckDetail() {
     });
   }, [router.query]); */
 
-  const booking = {
-    calander: {
-      date: "Jun 24 - Jun 27",
-      time: "3",
-    },
-  };
-
   React.useEffect(() => {
     const region = getRegion();
     const dateSelection = getDateSelection();
-    const roomSelection = getRoomSelection();
+    let roomSelection = getRoomSelection();
+    if (roomSelection === null) {
+      saveRoomSelection({
+        rooms: 1,
+        kids: 0,
+        adults: 1,
+      });
+      roomSelection = {
+        rooms: 1,
+        kids: 0,
+        adults: 1,
+      };
+    }
 
     setCheckState({
       region,
@@ -103,7 +108,6 @@ function CheckDetail() {
           rooms={checkState.rooms}
           kids={checkState.kids}
           adults={checkState.adults}
-          booking={booking}
           onDateClick={() => {
             setIsDateModalOpen(true);
           }}

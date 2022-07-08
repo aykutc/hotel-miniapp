@@ -5,17 +5,20 @@ import React from "react";
 import styles from "@/styles/Home.module.css";
 import HomeMenu from "@/components/HomeComponents/HomeMenu";
 import Explore from "@/components/HomeComponents/Explore";
-import Favorites from "@/components/HomeComponents/Favorites";
-import HeaderTitle from "@/components/HeaderTitle";
+/* import Favorites from "@/components/HomeComponents/Favorites";
+ */ import HeaderTitle from "@/components/HeaderTitle";
 import Stays from "@/components/HomeComponents/Stays";
 import SearchBar from "@/components/SearchBar";
 import Back from "@/components/icons/Back";
 import SearchContent from "@/components/HomeComponents/SearchContent";
 import { getHomeActiveTab, saveRegion } from "data/api";
 import Router from "next/router";
-/* import dynamic from "next/dynamic";
-const Favorites = dynamic(() => import("@/components/home/Favorites"), {});
-  */
+import dynamic from "next/dynamic";
+const Favorites = dynamic(
+  () => import("@/components/HomeComponents/Favorites"),
+  {}
+);
+
 export async function getStaticProps() {
   return {
     props: {
@@ -49,7 +52,7 @@ function Home({ exploreArray, recommendedArray, searchData }) {
     return url;
   };
 
-  /*   React.useEffect(() => {
+  /*  React.useEffect(() => {
     const address =
       window.location.protocol + "//" + window.location.host + "/home";
 
@@ -96,7 +99,7 @@ function Home({ exploreArray, recommendedArray, searchData }) {
 
       const result = await response.json();
       const userObj = result.data;
-      userObj.expire = new Date().getTime() + 1 * 60 * 1000;
+      userObj.expire = new Date().getTime() + 60 * 60 * 1000;
       localStorage.setItem("user", JSON.stringify(userObj));
       setUser(result.data);
     } catch (error) {

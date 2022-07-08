@@ -1,5 +1,5 @@
 import ExploreCard from "@/components/HomeComponents/ExploreCard";
-import HeaderTitle from "@/components/HeaderTitle";
+
 import RecommendedCard from "@/components/RecommendedCard";
 import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
@@ -77,7 +77,7 @@ function Explore({ exploreArray, recommendedArray, user }) {
                 subTitle={item.subTitle}
                 block={item.block}
                 img={item.img}
-                imgWebp={item.imgWebp}
+                imgRect={item.imgRect}
                 price={item.price}
                 discountPrice={item.discountPrice}
                 imageStyles={{ width: "100%", height: 118, display: "block" }}

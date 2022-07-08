@@ -48,7 +48,7 @@ const Review = () => {
         style={{
           display: "flex",
           alignItems: "center",
-          marginBottom: 16,
+          marginBottom: 33,
           height: 58,
         }}
       >

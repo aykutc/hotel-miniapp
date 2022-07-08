@@ -63,7 +63,6 @@ function HotelDetail(props) {
     },
   });
 
-  console.log(hotelDetail);
   React.useEffect(() => {
     const region = getRegion();
     const dateSelection = getDateSelection();
@@ -101,6 +100,7 @@ function HotelDetail(props) {
             minWidth: "100%",
             zIndex: -100,
           }}
+          loading="eager"
           src={hotelDetail.imgRect}
           type="jpg"
         />
@@ -160,7 +160,19 @@ function HotelDetail(props) {
 
             {/* Room Start  */}
             <div style={{ marginBottom: "24px", marginTop: "24px" }}>
-              <RoomSummary booking={hotelDetail.booking} />
+              <RoomSummary
+                checkIn={hotelDetail.checkIn}
+                checkOut={hotelDetail.checkOut}
+                rooms={hotelDetail.rooms}
+                kids={hotelDetail.kids}
+                adults={hotelDetail.adults}
+                onDateClick={() => {
+                  setIsDateModalOpen(true);
+                }}
+                onRoomClick={() => {
+                  setIsRoomModalOpen(true);
+                }}
+              />
             </div>
             {/* Room Start  */}
           </>
@@ -170,7 +182,9 @@ function HotelDetail(props) {
         <div className={styles.mapDetailContainer}>
           <OptimizedImage src={"map.jpg"} type="jpg" />
           <div className={styles.mapDetail}>
-            <p className={styles.locationText}>{hotelDetail.location}</p>
+            <p className={styles.locationText}>
+              {hotelDetail.region} {hotelDetail.location}
+            </p>
             <p className={styles.phoneText}>{hotelDetail.phone}</p>
           </div>
         </div>

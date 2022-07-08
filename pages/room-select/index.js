@@ -5,6 +5,7 @@ import Back from "@/components/icons/Back";
 import styles from "@/styles/Home.module.css";
 import newStyles from "../../components/RecommendedCard/Recommended.module.css";
 import { RoomSelectionArray } from "data/data";
+import Router from "next/router";
 export async function getStaticProps() {
   return {
     props: {},
@@ -40,6 +41,7 @@ const RoomSelect = ({
         style={{
           display: "flex",
           overflow: "hidden",
+          paddingBottom: 120,
         }}
       >
         <div
@@ -126,7 +128,9 @@ const RoomSelect = ({
               fontSize: "16px",
               lineHeight: "20px",
             }}
-            onClick={() => console.log(selectedRooms)}
+            onClick={() => {
+              Router.push("/review");
+            }}
           >
             BOOK
           </button>

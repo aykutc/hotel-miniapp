@@ -100,10 +100,10 @@ function CheckDetail() {
         <RoomSummary
           checkIn={checkState.checkIn}
           checkOut={checkState.checkOut}
-          booking={booking}
           rooms={checkState.rooms}
           kids={checkState.kids}
           adults={checkState.adults}
+          booking={booking}
           onDateClick={() => {
             setIsDateModalOpen(true);
           }}

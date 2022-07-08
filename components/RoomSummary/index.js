@@ -4,7 +4,6 @@ import Calendar from "../icons/Calendar";
 import styles from "./room-summary.module.css";
 
 function RoomSummary({
-  booking,
   onDateClick,
   onRoomClick,
   kids = 0,
@@ -16,9 +15,9 @@ function RoomSummary({
   const subTitle = () => {
     let str = "";
     if (adults == 1) {
-      str += adults.toString() + "Adult";
+      str += adults.toString() + " Adult";
     } else if (adults > 1) {
-      str += adults.toString() + "Adults";
+      str += adults.toString() + " Adults";
     }
     if (kids == 1) {
       str += ", " + kids.toString() + "Kid";

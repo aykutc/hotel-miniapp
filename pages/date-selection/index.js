@@ -35,6 +35,9 @@ function Dates(props) {
       <Calendar setSelection={setDateSelection}></Calendar>
       <FloatingBottomButton
         onClick={() => {
+          if (!dateSelection.durationAmount) {
+            return;
+          }
           saveDateSelection({
             checkIn:
               dateSelection["CHECK-IN"].day +

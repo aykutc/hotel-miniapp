@@ -56,21 +56,46 @@ const RecommendedArray = [
     price: "$134.43",
     img: "recommended3.jpg",
   },
+];
+const HotelsArray = [
   {
-    subTitle: "TROJENA",
-    title: "Ski Village",
-    block: "Block A-42",
-    discountPrice: "$123.99",
-    price: "$134.43",
-    img: "recommended3.jpg",
+    title: "The Ultra-Luxury Mansions",
+    block: "Block A-21",
+    discountPrice: "$124.43",
+    price: "$114.99",
+    img: "hotel1.jpg",
+    imgRect: "hotel1-rect.jpg",
+    distance: 60,
+    rate: 4.9,
+    reviews: "124",
+    location: ", Neom, Saudi Arabia",
+    phone: "+966 123 444 789",
   },
   {
-    subTitle: "TROJENA",
+    title: "The Vault",
+    block: "Block B-12",
+    discountPrice: "$123.99",
+    price: "$132.90",
+    img: "hotel3.jpg",
+    imgRect: "hotel1-rect.jpg",
+    distance: 90,
+    rate: 4.2,
+    reviews: "227",
+    location: ", Neom, Saudi Arabia",
+    phone: "+966 123 000 789",
+  },
+  {
     title: "Ski Village",
     block: "Block A-42",
     discountPrice: "$123.99",
     price: "$134.43",
-    img: "recommended3.jpg",
+    img: "hotel2.jpg",
+    imgRect: "hotel1-rect.jpg",
+    rate: 4.4,
+    distance: 120,
+    reviews: "15",
+    location: ", Neom, Saudi Arabia",
+    phone: "+966 123 040 789",
   },
 ];
 
@@ -96,7 +121,7 @@ const RoomSelectionArray = [
     info: "2 Guests | 1 King | 310 to 550 ft²",
     price: "$967.99",
     selected: false,
-    img: "hotel4.jpg",
+    img: "room1.jpg",
   },
   {
     id: 2,
@@ -104,7 +129,7 @@ const RoomSelectionArray = [
     info: "2 Guests | 1 King | 450 to 690 ft²",
     price: "$998.99",
     selected: false,
-    img: "hotel3.jpg",
+    img: "room2.jpg",
   },
   {
     id: 3,
@@ -112,23 +137,7 @@ const RoomSelectionArray = [
     info: "2 Guests | 1 King | 450 to 550 ft²",
     price: "$1220",
     selected: false,
-    img: "hotel2.jpg",
-  },
-  {
-    id: 3,
-    title: "Terrace King Room",
-    info: "2 Guests | 1 King | 450 to 550 ft²",
-    price: "$1220",
-    selected: false,
-    img: "hotel2.jpg",
-  },
-  {
-    id: 3,
-    title: "Terrace King Room",
-    info: "2 Guests | 1 King | 450 to 550 ft²",
-    price: "$1220",
-    selected: false,
-    img: "hotel2.jpg",
+    img: "room3.jpg",
   },
 ];
 export {
@@ -136,6 +145,7 @@ export {
   RecommendedArray,
   SearchRegionArray,
   RoomSelectionArray,
+  HotelsArray,
 };
 
 /* 

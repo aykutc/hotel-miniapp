@@ -1,3 +1,4 @@
+import { saveHotel } from "data/api";
 import Router from "next/router";
 import React, { useState } from "react";
 import Like from "../icons/Like";
@@ -11,9 +12,13 @@ function RecommendedCard({
   discountPrice,
   price,
   img,
-  imgWebp,
+  reviews,
+  location,
+  phone,
+  imgRect,
   imageStyles,
   showFavorite,
+  rate,
   favorite,
   info,
   roomSelect,
@@ -30,20 +35,24 @@ function RecommendedCard({
       onClick={
         !roomSelect
           ? () => {
+              saveHotel({
+                subTitle,
+                title,
+                block,
+                discountPrice,
+                price,
+                img,
+                imgRect,
+                reviews,
+                location,
+                phone,
+                imageStyles,
+                showFavorite,
+                favorite,
+                rate,
+              });
               Router.push({
                 pathname: "/hotel-detail",
-                query: {
-                  subTitle,
-                  title,
-                  block,
-                  discountPrice,
-                  price,
-                  img,
-                  imgWebp,
-                  imageStyles,
-                  showFavorite,
-                  favorite,
-                },
               });
             }
           : undefined
@@ -89,7 +98,7 @@ function RecommendedCard({
             {price || discountPrice}
             <span>/night</span>
           </p>
-          {roomSelect || <p className={styles.price}>{price}</p>}
+          {roomSelect || <p className={styles.price}>{discountPrice}</p>}
         </div>
         {roomSelect && (
           <button

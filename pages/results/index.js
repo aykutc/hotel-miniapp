@@ -13,20 +13,34 @@ import Filter from "@/components/icons/Filter";
 import Location from "@/components/icons/Location";
 import RecommendedCard from "@/components/RecommendedCard";
 import Tabs from "@/components/Tabs";
-import { getDateSelection, getRegion, getRoomSelection } from "data/api";
-import { RecommendedArray } from "data/data";
-import Router from "next/router";
+import {
+  getDateSelection,
+  getRegion,
+  getRoomSelection,
+  saveDateSelection,
+  saveRoomSelection,
+} from "data/api";
+import { HotelsArray } from "data/data";
+
 import React, { useState } from "react";
 import styles from "./results.module.css";
+import RoomBottomSheet from "@/components/RoomBottomSheet";
+import SearchBottomSheet from "@/components/SearchBottomSheet";
+import Calendar from "@/components/Calendar";
+import FloatingBottomButton from "@/components/FloatingBottomButton";
 export async function getStaticProps() {
   return {
-    props: {},
+    props: { HotelsArray: HotelsArray },
   };
 }
 // LIST VIEW ---- MAP VIEW
-function Results() {
+function Results({ HotelsArray }) {
   const [selectedTab, setSelectedTab] = useState("LIST VIEW");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
+  const [isRegionModalOpen, setIsRegionModalOpen] = useState(false);
+  const [isDateModalOpen, setIsDateModalOpen] = useState(false);
+  const [dateSelection, setDateSelection] = useState({});
 
   const [checkState, setCheckState] = useState({});
   const { rooms, checkIn, checkOut, kids, adults, region } = checkState;
@@ -41,7 +55,7 @@ function Results() {
       ...dateSelection,
       ...roomSelection,
     });
-  }, []);
+  }, [isDateModalOpen, isRegionModalOpen, isRoomModalOpen, isFilterModalOpen]);
 
   return (
     <>
@@ -59,11 +73,21 @@ function Results() {
             <HeaderTitle>RESULTS</HeaderTitle>
           </Header>
           <div className={styles.selectedFiltersContainer}>
-            <div className={styles.filterItem}>
+            <div
+              className={styles.filterItem}
+              onClick={() => {
+                setIsRegionModalOpen(true);
+              }}
+            >
               <Location />
               <p className={styles.filterText}>{region}</p>
             </div>
-            <div className={styles.filterItem}>
+            <div
+              className={styles.filterItem}
+              onClick={() => {
+                setIsDateModalOpen(true);
+              }}
+            >
               <Location />
               <p className={styles.filterText}>
                 {checkIn?.split(" ")[1] +
@@ -75,7 +99,12 @@ function Results() {
                   checkOut?.split(" ")[0]}
               </p>
             </div>
-            <div className={styles.filterItem}>
+            <div
+              className={styles.filterItem}
+              onClick={() => {
+                setIsRoomModalOpen(true);
+              }}
+            >
               <Location />
               <p className={styles.filterText}>
                 {rooms == 1 ? rooms + " Room" : rooms + " Rooms"}{" "}
@@ -99,16 +128,21 @@ function Results() {
                 overflow: "scroll",
               }}
             >
-              {RecommendedArray.map((item) => {
+              {HotelsArray.map((item) => {
                 return (
                   <div style={{ marginBottom: 16 }} key={item.title}>
                     <RecommendedCard
-                      showFavorite
                       key={item.title}
+                      showFavorite
                       title={item.title}
                       subTitle={item.subTitle}
                       block={item.block}
                       img={item.img}
+                      imgRect={item.imgRect}
+                      rate={item.rate}
+                      reviews={item.reviews}
+                      location={item.location}
+                      phone={item.phone}
                       price={item.price}
                       discountPrice={item.discountPrice}
                       imageStyles={{
@@ -162,6 +196,82 @@ function Results() {
         leftComponent={<p className={styles.resetButton}>Reset</p>}
       >
         <FilterBottomSheet />
+      </BottomSheet>
+      <BottomSheet
+        className={"bottom-sheet-2"}
+        title="DATES"
+        isOpen={isDateModalOpen}
+        onDismiss={() => setIsDateModalOpen(false)}
+        onClose={() => setIsDateModalOpen(false)}
+        contentStyle={{ overflow: "hidden" }}
+      >
+        <div
+          style={{
+            padding: "0px 24px",
+
+            /* height: "calc(100vh - 170px)", */
+          }}
+        >
+          <Calendar setSelection={setDateSelection} />
+          <FloatingBottomButton
+            style={{ position: "absolute" }}
+            onClick={async () => {
+              saveDateSelection({
+                checkIn:
+                  dateSelection["CHECK-IN"].day +
+                  " " +
+                  dateSelection["CHECK-IN"].time,
+                checkOut:
+                  dateSelection["CHECK-OUT"].day +
+                  " " +
+                  dateSelection["CHECK-OUT"].time,
+              });
+              setIsDateModalOpen(false);
+            }}
+          >
+            {dateSelection.durationAmount
+              ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
+              : `SELECT ${
+                  dateSelection["CHECK-IN"] === undefined
+                    ? "CHECK IN"
+                    : "CHECK OUT"
+                } DATE`}
+          </FloatingBottomButton>
+        </div>
+      </BottomSheet>
+      <BottomSheet
+        className={"bottom-sheet-1"}
+        title="ROOMS & GUESTS"
+        isOpen={isRoomModalOpen}
+        onDismiss={() => setIsRoomModalOpen(false)}
+        onClose={() => setIsRoomModalOpen(false)}
+        contentStyle={{ position: "initial" }}
+      >
+        <RoomBottomSheet
+          onClick={(rooms) => {
+            setIsRoomModalOpen(false);
+
+            saveRoomSelection({
+              rooms: rooms.count,
+              kids: rooms.kids,
+              adults: rooms.adults,
+            });
+          }}
+          setIsRoomModalOpen={setIsDateModalOpen}
+        ></RoomBottomSheet>
+      </BottomSheet>
+      <BottomSheet
+        className={"bottom-sheet-3"}
+        title="REGION"
+        isOpen={isRegionModalOpen}
+        onDismiss={() => setIsRegionModalOpen(false)}
+        onClose={() => setIsRegionModalOpen(false)}
+      >
+        <SearchBottomSheet
+          close={() => {
+            setIsRegionModalOpen(false);
+          }}
+        />
       </BottomSheet>
     </>
   );

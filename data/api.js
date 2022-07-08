@@ -32,6 +32,13 @@ const saveDateSelection = (value) => {
   saveItemSessionStorage("date", value);
 };
 
+const saveHotel = (value) => {
+  saveItemSessionStorage("hotel", value);
+};
+const getHotel = (value) => {
+  return getItemSessionStroage("hotel");
+};
+
 const saveHomeActiveTab = (value) => {
   saveItemSessionStorage("homeActiveTab", value);
 };
@@ -48,4 +55,6 @@ export {
   getDateSelection,
   getRoomSelection,
   saveRoomSelection,
+  saveHotel,
+  getHotel,
 };

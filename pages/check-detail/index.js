@@ -34,7 +34,7 @@ function CheckDetail() {
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
   const [isRegionModalOpen, setIsRegionModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+
   const [dateSelection, setDateSelection] = useState({});
   /*   const [roomSelection, setRoomSelection] = useState({
     rooms: 1,

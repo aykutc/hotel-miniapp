@@ -58,6 +58,7 @@ function Favorites() {
                 >
                   <RecommendedCard
                     showFavorite
+                    isFavorite={true}
                     favoriteOnClick={() => {
                       const newList = favoriteArray.filter((i) => {
                         return i.id !== item.id;

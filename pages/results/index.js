@@ -15,9 +15,11 @@ import RecommendedCard from "@/components/RecommendedCard";
 import Tabs from "@/components/Tabs";
 import {
   getDateSelection,
+  getFavorites,
   getRegion,
   getRoomSelection,
   saveDateSelection,
+  saveFavorites,
   saveRoomSelection,
 } from "data/api";
 import { HotelsArray } from "data/data";
@@ -35,6 +37,7 @@ export async function getStaticProps() {
 }
 // LIST VIEW ---- MAP VIEW
 function Results({ HotelsArray }) {
+  const [favorites, setFavorites] = useState([]);
   const [selectedTab, setSelectedTab] = useState("LIST VIEW");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
@@ -57,6 +60,12 @@ function Results({ HotelsArray }) {
     });
   }, [isDateModalOpen, isRegionModalOpen, isRoomModalOpen, isFilterModalOpen]);
 
+  React.useEffect(() => {
+    const favList = getFavorites();
+    if (favList) {
+      setFavorites(favList);
+    }
+  }, []);
   return (
     <>
       <div className={styles.resultsContainer}>
@@ -129,10 +138,25 @@ function Results({ HotelsArray }) {
               }}
             >
               {HotelsArray.map((item) => {
+                const isFavorite = favorites.some(
+                  (_item) => _item.id === item.id
+                );
                 return (
-                  <div style={{ marginBottom: 16 }} key={item.title}>
+                  <div style={{ marginBottom: 16 }} key={item.id}>
                     <RecommendedCard
-                      key={item.title}
+                      favoriteOnClick={() => {
+                        if (!isFavorite) {
+                          saveFavorites([item, ...favorites]);
+                          setFavorites([item, ...favorites]);
+                        } else {
+                          const newList = favorites.filter((i) => {
+                            return i.id !== item.id;
+                          });
+                          saveFavorites(newList);
+                          setFavorites(newList);
+                        }
+                      }}
+                      isFavorite={isFavorite}
                       showFavorite
                       title={item.title}
                       subTitle={item.subTitle}

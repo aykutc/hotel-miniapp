@@ -20,7 +20,7 @@ function RecommendedCard({
   showFavorite,
   favoriteOnClick,
   isFavorite,
-  favorite,
+
   rate,
   info,
   roomSelect,
@@ -48,7 +48,6 @@ function RecommendedCard({
                 phone,
                 imageStyles,
                 showFavorite,
-                favorite,
                 rate,
               });
               Router.push({

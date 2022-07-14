@@ -10,27 +10,6 @@ function Explore({ exploreArray, recommendedArray, user }) {
 
   return (
     <>
-      {/*  <div className={styles.header}>
-        <HeaderTitle>
-          <div style={{ marginRight: 6 }}>HI</div>
-          {user ? (
-            user.name + ","
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <div
-                className="shine"
-                style={{ width: 100, height: 16, marginLeft: 4 }}
-              ></div>
-            </div>
-          )}
-        </HeaderTitle>
-      </div> */}
       <div>
         <div style={{ height: 24 }}></div>
         <div className={styles.title}>Explore by NEOM Region,</div>
@@ -58,9 +37,6 @@ function Explore({ exploreArray, recommendedArray, user }) {
                   router.push({
                     pathname: "/date-selection",
                   });
-                  /*   Router.push({
-                    pathname: "/date-selection",
-                  }); */
                 }}
               ></ExploreCard>
             );

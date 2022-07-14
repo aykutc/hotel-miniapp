@@ -10,6 +10,10 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
   }, [selected, setDuration]);
   const selectDay = (day, item) => {
     const { time } = item;
+    /*   console.log(selected["CHECK-IN"]?.day + selected["CHECK-IN"]?.time);
+    console.log(
+      new Date(selected["CHECK-IN"]?.day + selected["CHECK-IN"]?.time)
+    ); */
     setSelected(
       borderBottom === "CHECK-OUT"
         ? new Date(day + time) >

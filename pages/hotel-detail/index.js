@@ -22,10 +22,12 @@ import BottomSheet from "@/components/BottomSheet";
 import RoomBottomSheet from "@/components/RoomBottomSheet";
 import {
   getDateSelection,
+  getFavorites,
   getHotel,
   getRegion,
   getRoomSelection,
   saveDateSelection,
+  saveFavorites,
   saveRoomSelection,
 } from "data/api";
 import Calendar from "@/components/Calendar";
@@ -39,6 +41,7 @@ function HotelDetail(props) {
   const router = useRouter();
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
+  const [favorites, setFavorites] = useState([]);
 
   const [dateSelection, setDateSelection] = useState({});
 
@@ -79,6 +82,15 @@ function HotelDetail(props) {
     });
   }, [isDateModalOpen, isRoomModalOpen]);
 
+  React.useEffect(() => {
+    const favList = getFavorites();
+    if (favList) {
+      setFavorites(favList);
+    }
+  }, []);
+
+  const isFavorite = favorites?.some((_item) => _item.id === hotelDetail.id);
+
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -86,8 +98,24 @@ function HotelDetail(props) {
           <Back fill="white" style={{ paddingRight: 0 }} color="white" />
         </div>
         <div className={styles.headerRightSide}>
-          <div className={styles.circle}>
-            <Like />
+          <div
+            className={styles.circle}
+            onClick={() => {
+              if (!isFavorite) {
+                saveFavorites([hotelDetail, ...favorites]);
+              } else {
+                const newList = favorites.filter((i) => {
+                  return i.id !== hotelDetail.id;
+                });
+                saveFavorites(newList);
+              }
+              const favList = getFavorites();
+              if (favList) {
+                setFavorites(favList);
+              }
+            }}
+          >
+            <Like fill={isFavorite ? "white" : "transparent"} />
           </div>
           <div className={styles.circle}>
             <Share />
@@ -126,9 +154,9 @@ function HotelDetail(props) {
             digitalKeyOnCkick={() => {}}
             messageOnClick={() => {}}
             checkInOnClick={() => {}}
-            hotelName={hotelName}
+            hotelName={hotelDetail.title}
             confirmCode={hotelDetail.confirmCode}
-            totalDay={totalDay}
+            totalDay={"3"}
             checkIn={{
               date: 24,
               day: "FRI",
@@ -222,33 +250,40 @@ function HotelDetail(props) {
         {/* Amenities End  */}
 
         {/* Recommend Start  */}
-        <div className={styles.title}>You May Also Like</div>
-        <div className={styles.recommendedContainer}>
-          {RecommendedArray.map((item) => {
-            return (
-              <RecommendedCard
-                key={item.title}
-                title={item.title}
-                subTitle={item.subTitle}
-                block={item.block}
-                img={item.img}
-                imgWebp={item.imgWebp}
-                price={item.price}
-                discountPrice={item.discountPrice}
-                imageStyles={{ width: "100%", height: 118, display: "block" }}
-              ></RecommendedCard>
-            );
-          })}
-        </div>
+        {!hotelDetail.confirmCode && (
+          <>
+            <div className={styles.title}>You May Also Like</div>
+
+            <div className={styles.recommendedContainer}>
+              {RecommendedArray.map((item) => {
+                return (
+                  <RecommendedCard
+                    key={item.title}
+                    hotel={item}
+                    imageStyles={{
+                      width: "100%",
+                      height: 118,
+                      display: "block",
+                    }}
+                  ></RecommendedCard>
+                );
+              })}
+            </div>
+          </>
+        )}
+
         {/* Recommend End  */}
       </div>
-      <FloatingBottomButton
-        onClick={() => {
-          Router.push("/room-select");
-        }}
-      >
-        SEE AVAILABLE ROOMS
-      </FloatingBottomButton>
+      {!hotelDetail.confirmCode && (
+        <FloatingBottomButton
+          onClick={() => {
+            Router.push("/room-select");
+          }}
+        >
+          SEE AVAILABLE ROOMS
+        </FloatingBottomButton>
+      )}
+
       <BottomSheet
         className={"bottom-sheet-2"}
         title="DATES"

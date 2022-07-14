@@ -1,46 +1,74 @@
-import HeaderTitle from '@/components/HeaderTitle';
-import NoData from '@/components/NoData';
-import Tabs from '@/components/Tabs';
-import styles from '@/styles/Home.module.css';
-import Router from 'next/router';
-import { useState } from 'react';
-import UpcomingCard from '../UpcomingCard';
+import HeaderTitle from "@/components/HeaderTitle";
+import NoData from "@/components/NoData";
+import Tabs from "@/components/Tabs";
+import styles from "@/styles/Home.module.css";
+import { getDate, replaceAll } from "../../../utils";
+import { getStays, saveHotel } from "data/api";
+import Router from "next/router";
+import { useState, useEffect } from "react";
+import UpcomingCard from "../UpcomingCard";
 
 function Stays({}) {
-  const [selectedTab, setSelectedTab] = useState('Upcoming');
-  const tabs = [
+  const [selectedTab, setSelectedTab] = useState("Upcoming");
+  const [tabs, setTabs] = useState([
     {
-      id: 'Upcoming',
-      data: [
-        {
-          img: 'hotel1.jpg',
-          date: 'Jun 24 - Jun 27, 22 (3 nights)',
-          hotelName: 'The Ultra-Luxury Mansions',
-          block: 'Block A-21',
-          status: 'CHECK-IN AVAILABLE',
-        },
-      ],
-      noData: <NoData title={'NO UPCOMING STAYS'} subTitle={'Once you book a stay, it will appear here.'} />,
-    },
-    {
-      id: 'Past',
+      id: "Upcoming",
       data: [],
-      noData: <NoData title={'NO PAST STAYS'} subTitle={'Once a stay is over, it will appear here.'} />,
+      noData: (
+        <NoData
+          title={"NO UPCOMING STAYS"}
+          subTitle={"Once you book a stay, it will appear here."}
+        />
+      ),
     },
     {
-      id: 'Cancelled',
+      id: "Past",
       data: [],
-      noData: <NoData title={'NO CANCELLED STAYS'} subTitle={'Once you cancel a stay, it will appear here.'} />,
+      noData: (
+        <NoData
+          title={"NO PAST STAYS"}
+          subTitle={"Once a stay is over, it will appear here."}
+        />
+      ),
     },
-  ];
+    {
+      id: "Cancelled",
+      data: [],
+      noData: (
+        <NoData
+          title={"NO CANCELLED STAYS"}
+          subTitle={"Once you cancel a stay, it will appear here."}
+        />
+      ),
+    },
+  ]);
+
+  useEffect(() => {
+    const _stays = getStays();
+    const _tabs = [...tabs];
+    _stays.forEach((item) => {
+      if (new Date(item.checkIn).getTime() > new Date().getTime()) {
+        _tabs[0].data = [..._tabs[0].data, item];
+      } else {
+        _tabs[1].data = [..._tabs[1].data, item];
+      }
+    });
+
+    setTabs(_tabs);
+  }, []);
   const currentTab = tabs.find((tab) => tab.id === selectedTab);
+
   return (
     <>
       <div className={styles.header}>
         <HeaderTitle>Stays</HeaderTitle>
       </div>
-      <div style={{ paddingRight: '24px' }}>
-        <Tabs data={['Upcoming', 'Past', 'Cancelled']} selected={selectedTab} setSelected={setSelectedTab} />
+      <div style={{ paddingRight: "24px" }}>
+        <Tabs
+          data={["Upcoming", "Past", "Cancelled"]}
+          selected={selectedTab}
+          setSelected={setSelectedTab}
+        />
       </div>
       <div className={styles.staysContainer}>
         {currentTab?.data.length === 0
@@ -48,20 +76,25 @@ function Stays({}) {
           : currentTab?.data.map((item, index) => {
               return (
                 <div
-                  style={{ width: '100%' }}
+                  style={{ width: "100%" }}
                   key={item + index}
                   onClick={() => {
+                    saveHotel({
+                      ...item,
+                    });
                     Router.push({
-                      pathname: '/hotel-detail',
-                      query: {
-                        confirmCode: '#0099123456',
-                        totalDay: '3',
-                        hotelName: 'The Ultra-Luxury Mansions',
-                      },
+                      pathname: "/hotel-detail",
                     });
                   }}
                 >
-                  <UpcomingCard showFavorite img={item.img} status={item.status} hotelName={item.hotelName} date={item.date} block={item.block} />
+                  <UpcomingCard
+                    showFavorite
+                    img={item.img}
+                    status={"CHECK IN"}
+                    hotelName={item.title}
+                    date={item.checkIn + " - " + item.checkOut}
+                    block={item.block}
+                  />
                 </div>
               );
             })}

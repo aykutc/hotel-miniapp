@@ -86,10 +86,7 @@ const RoomSelect = ({ RoomSelectionArray }) => {
                   roomSelect
                   updateSelectedRooms={updateSelectedRooms}
                   item={item}
-                  title={item.title}
-                  info={item.info}
-                  img={item.img}
-                  price={item.price}
+                  hotel={item}
                   imageStyles={{ height: 120, width: "100%", display: "block" }}
                   style={{
                     width: "100%",

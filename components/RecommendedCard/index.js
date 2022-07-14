@@ -30,6 +30,7 @@ function RecommendedCard({
     rate,
     info,
   } = hotel;
+
   return (
     <div
       className={roomSelect ? styles.roomsWrapper : styles.recommendCardWrapper}
@@ -38,19 +39,9 @@ function RecommendedCard({
         !roomSelect
           ? () => {
               saveHotel({
-                subTitle,
-                title,
-                block,
-                discountPrice,
-                price,
-                img,
-                imgRect,
-                reviews,
-                location,
-                phone,
+                ...hotel,
                 imageStyles,
                 showFavorite,
-                rate,
               });
               Router.push({
                 pathname: "/hotel-detail",

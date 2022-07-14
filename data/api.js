@@ -58,6 +58,52 @@ const saveFavorites = (value) => {
 const getFavorites = (value) => {
   return getItemLocalStroage("favorites");
 };
+const saveStays = (value) => {
+  saveItemLocalStorage("stays", value);
+};
+const getStays = (value) => {
+  const result = getItemLocalStroage("stays");
+  if (!result) {
+    return [
+      {
+        id: 2,
+        title: "The Vault",
+        block: "Block B-12",
+        discountPrice: "$143.99",
+        price: "$132.90",
+        img: "hotel3.jpg",
+        imgRect: "hotel3-rect.jpg",
+        distance: 90,
+        rate: 4.2,
+        reviews: "227",
+        confirmCode: 1323423,
+        location: ", Neom, Saudi Arabia",
+        phone: "+966 123 000 789",
+        checkIn: "16 July 2022",
+        checkOut: "23 July 2022",
+      },
+
+      {
+        id: 1,
+        title: "TEST",
+        block: "Block B-12",
+        discountPrice: "$143.99",
+        price: "$132.90",
+        img: "hotel3.jpg",
+        imgRect: "hotel3-rect.jpg",
+        distance: 90,
+        rate: 4.2,
+        reviews: "227",
+        confirmCode: 13243423,
+        location: ", Neom, Saudi Arabia",
+        phone: "+966 123 000 789",
+        checkIn: "1 June 2022",
+        checkOut: "5 June 2022",
+      },
+    ];
+  }
+  return result;
+};
 
 export {
   saveRegion,
@@ -74,4 +120,6 @@ export {
   saveFavorites,
   saveFilter,
   getFilter,
+  saveStays,
+  getStays,
 };

@@ -38,7 +38,9 @@ function Dates(props) {
           if (!dateSelection.durationAmount) {
             return;
           }
+
           saveDateSelection({
+            duration: dateSelection.durationAmount,
             checkIn:
               dateSelection["CHECK-IN"].day +
               " " +

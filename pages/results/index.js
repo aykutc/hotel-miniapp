@@ -16,10 +16,12 @@ import Tabs from "@/components/Tabs";
 import {
   getDateSelection,
   getFavorites,
+  getFilter,
   getRegion,
   getRoomSelection,
   saveDateSelection,
   saveFavorites,
+  saveFilter,
   saveRoomSelection,
 } from "data/api";
 import { HotelsArray } from "data/data";
@@ -35,6 +37,11 @@ export async function getStaticProps() {
     props: { HotelsArray: HotelsArray },
   };
 }
+
+function safeParseFloat(val) {
+  return parseFloat(isNaN(val) ? val.replace(/[^\d\.]+/g, "") : val);
+}
+
 // LIST VIEW ---- MAP VIEW
 function Results({ HotelsArray }) {
   const [favorites, setFavorites] = useState([]);
@@ -44,6 +51,9 @@ function Results({ HotelsArray }) {
   const [isRegionModalOpen, setIsRegionModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
   const [dateSelection, setDateSelection] = useState({});
+
+  const [resetFilter, setResetFilter] = useState(false);
+  const [filters, setFilters] = useState({});
 
   const [checkState, setCheckState] = useState({});
   const { rooms, checkIn, checkOut, kids, adults, region } = checkState;
@@ -66,6 +76,49 @@ function Results({ HotelsArray }) {
       setFavorites(favList);
     }
   }, []);
+  React.useEffect(() => {
+    const _filters = getFilter();
+    if (_filters) {
+      setFilters(_filters);
+    }
+  }, [isFilterModalOpen]);
+
+  let filteredArray = HotelsArray.filter((item) => {
+    let filtered = false;
+    if (filters.distance) {
+      if (item.distance < filters.distance) {
+        filtered = true;
+      }
+    }
+    const itemPrice = safeParseFloat(item.price);
+    if (filters.priceRange && filtered) {
+      if (
+        itemPrice > filters.priceRange[0] &&
+        itemPrice < filters.priceRange[1]
+      ) {
+        filtered = true;
+      } else {
+        filtered = false;
+      }
+    }
+    return filtered;
+  });
+
+  if (filters.sortBy) {
+    if (filters.sortBy === "Distance") {
+      filteredArray = filteredArray.sort((a, b) => a.distance - b.distance);
+    }
+    if (filters.sortBy === "Rating") {
+      filteredArray = filteredArray.sort((a, b) => a.rate - b.rate);
+    }
+    if (filters.sortBy === "Price Range") {
+      filteredArray = filteredArray.sort(
+        (a, b) => safeParseFloat(a.price) - safeParseFloat(b.price)
+      );
+    }
+  } else {
+    filteredArray = filteredArray.sort((a, b) => a.distance - b.distance);
+  }
   return (
     <>
       <div className={styles.resultsContainer}>
@@ -137,7 +190,7 @@ function Results({ HotelsArray }) {
                 overflow: "scroll",
               }}
             >
-              {HotelsArray.map((item) => {
+              {filteredArray.map((item) => {
                 const isFavorite = favorites.some(
                   (_item) => _item.id === item.id
                 );
@@ -158,17 +211,7 @@ function Results({ HotelsArray }) {
                       }}
                       isFavorite={isFavorite}
                       showFavorite
-                      title={item.title}
-                      subTitle={item.subTitle}
-                      block={item.block}
-                      img={item.img}
-                      imgRect={item.imgRect}
-                      rate={item.rate}
-                      reviews={item.reviews}
-                      location={item.location}
-                      phone={item.phone}
-                      price={item.price}
-                      discountPrice={item.discountPrice}
+                      hotel={item}
                       imageStyles={{
                         height: 120,
                         width: "100%",
@@ -213,13 +256,30 @@ function Results({ HotelsArray }) {
       </div>
       <BottomSheet
         className={"bottom-sheet-filter"}
-        title="REGION"
+        title="Filter"
         isOpen={isFilterModalOpen}
         onDismiss={() => setIsFilterModalOpen(false)}
         onClose={() => setIsFilterModalOpen(false)}
-        leftComponent={<p className={styles.resetButton}>Reset</p>}
+        leftComponent={
+          <p
+            className={styles.resetButton}
+            onClick={() => {
+              setResetFilter(true);
+              saveFilter({
+                distance: 100,
+                priceRange: [100, 2000],
+                sortBy: "Distance",
+              });
+            }}
+          >
+            Reset
+          </p>
+        }
       >
-        <FilterBottomSheet />
+        <FilterBottomSheet
+          onClose={() => setIsFilterModalOpen(false)}
+          reset={resetFilter}
+        />
       </BottomSheet>
       <BottomSheet
         className={"bottom-sheet-2"}

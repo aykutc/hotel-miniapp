@@ -38,6 +38,12 @@ const saveHotel = (value) => {
 const getHotel = (value) => {
   return getItemSessionStroage("hotel");
 };
+const saveFilter = (value) => {
+  saveItemSessionStorage("filter", value);
+};
+const getFilter = (value) => {
+  return getItemSessionStroage("filter");
+};
 
 const saveHomeActiveTab = (value) => {
   saveItemSessionStorage("homeActiveTab", value);
@@ -66,4 +72,6 @@ export {
   getHotel,
   getFavorites,
   saveFavorites,
+  saveFilter,
+  getFilter,
 };

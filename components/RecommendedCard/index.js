@@ -6,28 +6,30 @@ import OptimizedImage from "../OptimizedImage";
 import styles from "./Recommended.module.css";
 
 function RecommendedCard({
-  subTitle,
-  title,
-  block,
-  discountPrice,
-  price,
-  img,
-  reviews,
-  location,
-  phone,
-  imgRect,
   imageStyles,
   showFavorite,
   favoriteOnClick,
   isFavorite,
-
-  rate,
-  info,
+  hotel,
   roomSelect,
   updateSelectedRooms,
   item,
   ...props
 }) {
+  const {
+    subTitle,
+    title,
+    block,
+    discountPrice,
+    price,
+    img,
+    reviews,
+    location,
+    phone,
+    imgRect,
+    rate,
+    info,
+  } = hotel;
   return (
     <div
       className={roomSelect ? styles.roomsWrapper : styles.recommendCardWrapper}

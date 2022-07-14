@@ -9,12 +9,14 @@ import NoData from "@/components/NoData";
 
 function Favorites() {
   const [favoriteArray, setFavoriteArray] = useState([]);
+  const [isLoading, setIsloading] = useState(true);
 
   useEffect(() => {
     const favorites = getFavorites();
     if (favorites) {
       setFavoriteArray(favorites);
     }
+    setIsloading(false);
   }, []);
 
   return (
@@ -24,7 +26,7 @@ function Favorites() {
       </div>
       <div style={{ height: 16 }}></div>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {favoriteArray?.length === 0 && (
+        {favoriteArray?.length === 0 && !isLoading && (
           <div
             style={{
               height: "calc(100vh - 200px)",
@@ -66,14 +68,7 @@ function Favorites() {
                       setFavoriteArray(newList);
                       saveFavorites(newList);
                     }}
-                    key={item.title}
-                    title={item.title}
-                    subTitle={item.subTitle}
-                    block={item.block}
-                    img={item.img}
-                    imgRect={item.imgRect}
-                    price={item.price}
-                    discountPrice={item.discountPrice}
+                    hotel={item}
                     imageStyles={{
                       height: 120,
                       width: "100%",

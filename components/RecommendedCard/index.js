@@ -14,10 +14,10 @@ function RecommendedCard({
   roomSelect,
   updateSelectedRooms,
   item,
+  subTitle,
   ...props
 }) {
   const {
-    subTitle,
     title,
     block,
     discountPrice,

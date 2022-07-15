@@ -26,6 +26,13 @@ const SummaryCard = ({
   digitalKeyOnCkick,
   ...props
 }) => {
+  const checkInDate = new Date(checkIn);
+  const checkOutDate = new Date(checkOut);
+  const monthFormatter = new Intl.DateTimeFormat("en", { month: "short" });
+  const dayFormatter = new Intl.DateTimeFormat("en", { weekday: "short" });
+  console.log(checkInDate.getDay());
+  console.log(checkInDate);
+
   return (
     <div className={styles.container} {...props}>
       <div className={styles.hotel}>
@@ -34,20 +41,28 @@ const SummaryCard = ({
       </div>
       <div className={styles.dates}>
         <div className={styles.checkIn}>
-          <p className={styles.date}>{checkIn?.date}</p>
+          <p className={styles.date}>{checkInDate.getDate()}</p>
           <div>
-            <p className={styles.abbreviationDay}>{checkIn?.day}</p>
-            <p className={styles.abbreviationMonth}>{checkIn?.month}</p>
+            <p className={styles.abbreviationDay}>
+              {dayFormatter.format(checkInDate)}
+            </p>
+            <p className={styles.abbreviationMonth}>
+              {monthFormatter.format(checkInDate)}
+            </p>
           </div>
         </div>
         <div className={styles.totalDay}>
           <p className={styles.total}>{totalDay} Nights</p>
         </div>
         <div className={styles.checkIn}>
-          <p className={styles.date}>{checkOut?.date}</p>
+          <p className={styles.date}>{checkOutDate.getDate()}</p>
           <div>
-            <p className={styles.abbreviationDay}>{checkOut?.day}</p>
-            <p className={styles.abbreviationMonth}>{checkOut?.month}</p>
+            <p className={styles.abbreviationDay}>
+              {dayFormatter.format(checkOutDate)}
+            </p>
+            <p className={styles.abbreviationMonth}>
+              {monthFormatter.format(checkOutDate)}
+            </p>
           </div>
         </div>
       </div>

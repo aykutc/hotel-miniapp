@@ -80,7 +80,8 @@ const getStays = (value) => {
         location: ", Neom, Saudi Arabia",
         phone: "+966 123 000 789",
         checkIn: "16 July 2022",
-        checkOut: "23 July 2022",
+        checkOut: "25 July 2022",
+        duration: 9,
       },
 
       {
@@ -99,6 +100,7 @@ const getStays = (value) => {
         phone: "+966 123 000 789",
         checkIn: "1 June 2022",
         checkOut: "5 June 2022",
+        duration: 4,
       },
     ];
   }

@@ -90,7 +90,7 @@ function HotelDetail(props) {
   }, []);
 
   const isFavorite = favorites?.some((_item) => _item.id === hotelDetail.id);
-
+  console.log(hotelDetail);
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
@@ -156,17 +156,9 @@ function HotelDetail(props) {
             checkInOnClick={() => {}}
             hotelName={hotelDetail.title}
             confirmCode={hotelDetail.confirmCode}
-            totalDay={"3"}
-            checkIn={{
-              date: 24,
-              day: "FRI",
-              month: "JUN",
-            }}
-            checkOut={{
-              date: 27,
-              day: "MON",
-              month: "JUN",
-            }}
+            totalDay={hotelDetail.duration}
+            checkIn={hotelDetail.checkIn}
+            checkOut={hotelDetail.checkOut}
           />
         ) : (
           <>

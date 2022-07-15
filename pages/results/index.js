@@ -57,7 +57,7 @@ function Results({ HotelsArray }) {
 
   const [checkState, setCheckState] = useState({});
   const { rooms, checkIn, checkOut, kids, adults, region } = checkState;
-
+  console.log(region);
   React.useEffect(() => {
     const region = getRegion();
     const dateSelection = getDateSelection();
@@ -84,10 +84,10 @@ function Results({ HotelsArray }) {
   }, [isFilterModalOpen]);
 
   let filteredArray = HotelsArray.filter((item) => {
-    let filtered = false;
+    let filtered = true;
     if (filters.distance) {
-      if (item.distance < filters.distance) {
-        filtered = true;
+      if (item.distance > filters.distance) {
+        filtered = false;
       }
     }
     const itemPrice = safeParseFloat(item.price);
@@ -197,6 +197,7 @@ function Results({ HotelsArray }) {
                 return (
                   <div style={{ marginBottom: 16 }} key={item.id}>
                     <RecommendedCard
+                      subTitle={region}
                       favoriteOnClick={() => {
                         if (!isFavorite) {
                           saveFavorites([item, ...favorites]);

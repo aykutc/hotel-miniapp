@@ -6,7 +6,7 @@
   padding-right: 14px;
   padding-top: 16px;
   padding-bottom: 16px;
-  border: 1px solid #E8E9E9;
+  border: 1px solid #e8e9e9;
 }
 
 .hotel {
@@ -45,13 +45,15 @@
   justify-content: space-between;
   padding-left: 9px;
   padding-right: 9px;
+  text-transform: uppercase;
 }
 
 .checkIn {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 8px
+  gap: 8px;
+  text-transform: uppercase;
 }
 
 .date {
@@ -84,6 +86,7 @@
   font-size: 13px;
   line-height: 16px;
   color: #565759;
+  text-transform: uppercase;
 }
 
 .totalDay {
@@ -94,6 +97,7 @@
   padding: 4px 12px;
   background: #f3efe5;
   border-radius: 100px;
+  text-transform: uppercase;
 }
 
 .total {

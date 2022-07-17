@@ -52,31 +52,37 @@ function Home({ exploreArray, recommendedArray, searchData }) {
     return url;
   };
 
-  /*  React.useEffect(() => {
-    const address =
-      window.location.protocol + "//" + window.location.host + "/home";
+  React.useEffect(() => {
+    const _login = async () => {
+      const address = window.location.protocol + "//" + window.location.host;
+      const user = await checkLogin();
+      if (user) {
+        setUser(user);
+        return;
+      }
+      const urlParams = new URLSearchParams(window.location.href);
+      const myParam = urlParams.get("code");
+      console.log(myParam);
+      if (myParam) {
+        login(myParam, address, generateUrl(address));
+      } else {
+        window.location.assign(generateUrl(address));
+      }
+    };
+    _login();
+  }, []);
 
-    const urlParams = new URLSearchParams(window.location.href);
-    const myParam = urlParams.get("code");
-    if (myParam) {
-      login(myParam, address, generateUrl(address));
-    } else {
-      checkLogin(generateUrl(address));
-    }
-  }, []); */
-
-  const checkLogin = async (authAddress) => {
+  const checkLogin = async () => {
     const user = localStorage.getItem("user");
 
     if (user) {
       const userObj = JSON.parse(user);
       if (userObj.expire > new Date().getTime()) {
         userObj.name = userObj.name + " local";
-        setUser(userObj);
-        return;
+
+        return userObj;
       }
     }
-    window.location.assign(authAddress);
   };
   const login = async (code, redirectUri, authAddress) => {
     var myHeaders = new Headers();

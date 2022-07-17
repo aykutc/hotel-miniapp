@@ -31,6 +31,7 @@ import {
   saveRoomSelection,
 } from "data/api";
 import Calendar from "@/components/Calendar";
+import { formattedDate } from "../../utils";
 
 export async function getStaticProps() {
   return {
@@ -43,7 +44,7 @@ function HotelDetail(props) {
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
   const [favorites, setFavorites] = useState([]);
 
-  const [dateSelection, setDateSelection] = useState({});
+  const [dateSelection, setDateSelection] = useState(null);
 
   const amenities = [
     { icon: <Dining />, name: "Dining" },
@@ -53,14 +54,25 @@ function HotelDetail(props) {
     { icon: <Accessibility />, name: "Accessibility" },
   ];
   const [hotelDetail, setHotelDetail] = React.useState({});
-
   React.useEffect(() => {
     const region = getRegion();
-    const dateSelection = getDateSelection();
+    let _dateSelection = getDateSelection();
 
+    if (_dateSelection === null) {
+      const date = new Date();
+      date.setDate(date.getDate() + 1);
+      _dateSelection = {
+        checkIn: formattedDate(date),
+        checkOut: formattedDate(date.setDate(date.getDate() + 1)),
+        duration: 1,
+      };
+      saveDateSelection(_dateSelection);
+      setDateSelection(_dateSelection);
+    }
     const hotel = getHotel();
 
     let roomSelection = getRoomSelection();
+
     if (roomSelection === null) {
       saveRoomSelection({
         rooms: 1,
@@ -73,21 +85,43 @@ function HotelDetail(props) {
         adults: 1,
       };
     }
+
     setHotelDetail({
       ...hotelDetail,
       region,
-      ...dateSelection,
+      ..._dateSelection,
       ...roomSelection,
       ...hotel,
     });
   }, [isDateModalOpen, isRoomModalOpen]);
-
+  console.log(hotelDetail);
   React.useEffect(() => {
     const favList = getFavorites();
     if (favList) {
       setFavorites(favList);
     }
   }, []);
+  React.useEffect(() => {
+    console.log(dateSelection);
+    if (dateSelection) {
+      const obj = {
+        duration: dateSelection.durationAmount,
+        checkIn: dateSelection.checkIn
+          ? dateSelection.checkIn
+          : dateSelection["CHECK-IN"].day +
+            " " +
+            dateSelection["CHECK-IN"].time,
+        checkOut: dateSelection.checkOut
+          ? dateSelection.checkOut
+          : dateSelection["CHECK-OUT"].day +
+            " " +
+            dateSelection["CHECK-OUT"].time,
+      };
+      setDateSelection(obj);
+      saveDateSelection(obj);
+      setHotelDetail({ ...hotelDetail, ...obj });
+    }
+  }, [isDateModalOpen]);
 
   const isFavorite = favorites?.some((_item) => _item.id === hotelDetail.id);
 
@@ -295,7 +329,7 @@ function HotelDetail(props) {
           <FloatingBottomButton
             style={{ position: "absolute" }}
             onClick={async () => {
-              saveDateSelection({
+              /* saveDateSelection({
                 checkIn:
                   dateSelection["CHECK-IN"].day +
                   " " +
@@ -304,17 +338,19 @@ function HotelDetail(props) {
                   dateSelection["CHECK-OUT"].day +
                   " " +
                   dateSelection["CHECK-OUT"].time,
-              });
+              }); */
               setIsDateModalOpen(false);
             }}
           >
-            {dateSelection.durationAmount
-              ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
-              : `SELECT ${
-                  dateSelection["CHECK-IN"] === undefined
-                    ? "CHECK IN"
-                    : "CHECK OUT"
-                } DATE`}
+            {dateSelection
+              ? dateSelection?.durationAmount
+                ? `CONTINUE - ${dateSelection?.durationAmount} NIGHTS`
+                : `SELECT ${
+                    dateSelection["CHECK-IN"] === undefined
+                      ? "CHECK IN"
+                      : "CHECK OUT"
+                  } DATE`
+              : ""}
           </FloatingBottomButton>
         </div>
       </BottomSheet>

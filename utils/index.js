@@ -14,7 +14,22 @@ function getDate(str) {
 
   return dt;
 }
+
+const formattedDate = (date) => {
+  console.log(date);
+  if (!date) {
+    return "";
+  }
+  return new Date(date)
+    .toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    })
+    .replace(/ /g, " ");
+};
+
 function safeParseFloat(val) {
   return parseFloat(isNaN(val) ? val.replace(/[^\d\.]+/g, "") : val);
 }
-export { replaceAll, getDate, safeParseFloat };
+export { replaceAll, getDate, safeParseFloat, formattedDate };

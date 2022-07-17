@@ -78,8 +78,6 @@ function Home({ exploreArray, recommendedArray, searchData }) {
     if (user) {
       const userObj = JSON.parse(user);
       if (userObj.expire > new Date().getTime()) {
-        userObj.name = userObj.name + " local";
-
         return userObj;
       }
     }

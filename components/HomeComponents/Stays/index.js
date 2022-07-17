@@ -90,7 +90,9 @@ function Stays({}) {
                   <UpcomingCard
                     showFavorite
                     img={item.img}
-                    status={"CHECK IN"}
+                    status={
+                      currentTab.id === "Upcoming" && "CHECK IN AVAILABLE"
+                    }
                     hotelName={item.title}
                     date={item.checkIn + " - " + item.checkOut}
                     block={item.block}

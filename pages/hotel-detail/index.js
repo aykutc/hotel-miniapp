@@ -90,7 +90,7 @@ function HotelDetail(props) {
   }, []);
 
   const isFavorite = favorites?.some((_item) => _item.id === hotelDetail.id);
-  console.log(hotelDetail);
+
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>

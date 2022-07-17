@@ -54,7 +54,7 @@ const Review = () => {
         0
       );
   }
-  console.log(totalPrice);
+
   return (
     <div
       style={{

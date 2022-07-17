@@ -76,7 +76,9 @@ const SummaryCard = ({
         </div>
         <div className={styles.infoBox} onClick={digitalKeyOnCkick}>
           <DigitalKey />
-          <p className={styles.infoText}>Digital Key</p>
+          <p className={styles.infoText} style={{ color: "#8E8F90" }}>
+            Digital Key
+          </p>
         </div>
       </div>
     </div>

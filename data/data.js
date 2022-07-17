@@ -99,6 +99,15 @@ const HotelsArray = [
     reviews: "124",
     location: ", Neom, Saudi Arabia",
     phone: "+966 123 444 789",
+
+    type: "Feature",
+    properties: {
+      message: "164.99/night",
+    },
+    geometry: {
+      type: "Point",
+      coordinates: [35.4931741, 27.799901],
+    },
   },
   {
     id: 2,
@@ -113,6 +122,15 @@ const HotelsArray = [
     reviews: "227",
     location: ", Neom, Saudi Arabia",
     phone: "+966 123 000 789",
+
+    type: "Feature",
+    properties: {
+      message: "132.90/night",
+    },
+    geometry: {
+      type: "Point",
+      coordinates: [35.1931741, 28.799901],
+    },
   },
   {
     id: 3,
@@ -127,6 +145,15 @@ const HotelsArray = [
     reviews: "15",
     location: ", Neom, Saudi Arabia",
     phone: "+966 123 040 789",
+
+    type: "Feature",
+    properties: {
+      message: "234.43/night",
+    },
+    geometry: {
+      type: "Point",
+      coordinates: [35.7931741, 29.799901],
+    },
   },
 ];
 
@@ -151,7 +178,6 @@ const RoomSelectionArray = [
     title: "Superior King Room",
     info: "2 Guests | 1 King | 310 to 550 ft²",
     price: "$967.99",
-    selected: false,
     img: "room1.jpg",
   },
   {
@@ -159,7 +185,6 @@ const RoomSelectionArray = [
     title: "Deluxe King Room",
     info: "2 Guests | 1 King | 450 to 690 ft²",
     price: "$998.99",
-    selected: false,
     img: "room2.jpg",
   },
   {
@@ -167,7 +192,6 @@ const RoomSelectionArray = [
     title: "Terrace King Room",
     info: "2 Guests | 1 King | 450 to 550 ft²",
     price: "$1220",
-    selected: false,
     img: "room3.jpg",
   },
 ];

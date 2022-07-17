@@ -14,5 +14,7 @@ function getDate(str) {
 
   return dt;
 }
-
-export { replaceAll, getDate };
+function safeParseFloat(val) {
+  return parseFloat(isNaN(val) ? val.replace(/[^\d\.]+/g, "") : val);
+}
+export { replaceAll, getDate, safeParseFloat };

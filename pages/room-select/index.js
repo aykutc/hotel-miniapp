@@ -6,14 +6,23 @@ import styles from "@/styles/Home.module.css";
 import newStyles from "../../components/RecommendedCard/Recommended.module.css";
 import { RoomSelectionArray } from "data/data";
 import Router from "next/router";
-import { getDateSelection, getHotel, getRoomSelection } from "data/api";
+import {
+  getDateSelection,
+  getHotel,
+  getRoomSelection,
+  saveSelectedRooms,
+} from "data/api";
 export async function getStaticProps() {
   return {
     props: { RoomSelectionArray: RoomSelectionArray },
   };
 }
 const RoomSelect = ({ RoomSelectionArray }) => {
-  const [rooms, setRooms] = useState(RoomSelectionArray);
+  const [rooms, setRooms] = useState(
+    RoomSelectionArray.map((item) => {
+      return { ...item, selected: false };
+    })
+  );
   const [selectedRooms, setSelectedRooms] = useState([]);
   const [hotelDetail, setHotelDetail] = useState({
     checkIn: "",
@@ -30,7 +39,20 @@ const RoomSelect = ({ RoomSelectionArray }) => {
     checkOut?.split(" ")[0];
 
   const updateSelectedRooms = (id) => {
-    const isInclude = selectedRooms.find((item) => item.id === id);
+    const _rooms = rooms.map((item) => {
+      if (item.id === id) {
+        return { ...item, selected: !item.selected };
+      } else {
+        return { ...item };
+      }
+    });
+    setRooms(_rooms);
+    setSelectedRooms(
+      _rooms.filter((item) => {
+        return item.selected;
+      })
+    );
+    /*  const isInclude = selectedRooms.find((item) => item.id === id);
     if (isInclude || selectedRooms.length < roomAmount) {
       const index = rooms.findIndex((item) => item.id === id);
       const selectedRoom = rooms[index];
@@ -39,14 +61,14 @@ const RoomSelect = ({ RoomSelectionArray }) => {
         selected: !selectedRoom.selected,
       });
       setSelectedRooms(rooms.filter((e) => e.selected === true));
-    }
+    } */
   };
+
   useEffect(() => {
     const dateSelection = getDateSelection();
     const roomSelection = getRoomSelection();
     const hotel = getHotel();
 
-    setSelectedRooms([]);
     setHotelDetail({
       ...hotelDetail,
 
@@ -98,7 +120,7 @@ const RoomSelect = ({ RoomSelectionArray }) => {
           })}
         </div>
       </div>
-      {selectedRooms.length > 0 && selectedRooms.length <= roomAmount && (
+      {selectedRooms.length > 0 && (
         <div
           style={{
             position: "absolute",
@@ -152,6 +174,7 @@ const RoomSelect = ({ RoomSelectionArray }) => {
               lineHeight: "20px",
             }}
             onClick={() => {
+              saveSelectedRooms(selectedRooms);
               Router.push("/review");
             }}
           >

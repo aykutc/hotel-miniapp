@@ -18,10 +18,12 @@ import {
   getFavorites,
   getFilter,
   getRegion,
+  getResultTab,
   getRoomSelection,
   saveDateSelection,
   saveFavorites,
   saveFilter,
+  saveResultTab,
   saveRoomSelection,
 } from "data/api";
 import { HotelsArray } from "data/data";
@@ -57,7 +59,7 @@ function Results({ HotelsArray }) {
 
   const [checkState, setCheckState] = useState({});
   const { rooms, checkIn, checkOut, kids, adults, region } = checkState;
-  console.log(region);
+
   React.useEffect(() => {
     const region = getRegion();
     const dateSelection = getDateSelection();
@@ -74,6 +76,12 @@ function Results({ HotelsArray }) {
     const favList = getFavorites();
     if (favList) {
       setFavorites(favList);
+    }
+  }, []);
+  React.useEffect(() => {
+    const resultTab = getResultTab();
+    if (resultTab) {
+      setSelectedTab(resultTab);
     }
   }, []);
   React.useEffect(() => {
@@ -246,7 +254,10 @@ function Results({ HotelsArray }) {
           <Tabs
             data={["LIST VIEW", "MAP VIEW"]}
             selected={selectedTab}
-            setSelected={setSelectedTab}
+            setSelected={(item) => {
+              setSelectedTab(item);
+              saveResultTab(item);
+            }}
           />
           <Filter
             onClick={() => {

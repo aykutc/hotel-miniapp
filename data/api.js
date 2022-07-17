@@ -38,6 +38,12 @@ const saveHotel = (value) => {
 const getHotel = (value) => {
   return getItemSessionStroage("hotel");
 };
+const saveSelectedRooms = (value) => {
+  saveItemSessionStorage("rooms", value);
+};
+const getSelectedRooms = (value) => {
+  return getItemSessionStroage("rooms");
+};
 const saveFilter = (value) => {
   saveItemSessionStorage("filter", value);
 };
@@ -50,6 +56,12 @@ const saveHomeActiveTab = (value) => {
 };
 const getHomeActiveTab = (value) => {
   return getItemSessionStroage("homeActiveTab");
+};
+const saveResultTab = (value) => {
+  saveItemSessionStorage("resultTab", value);
+};
+const getResultTab = (value) => {
+  return getItemSessionStroage("resultTab");
 };
 
 const saveFavorites = (value) => {
@@ -124,4 +136,8 @@ export {
   getFilter,
   saveStays,
   getStays,
+  saveSelectedRooms,
+  getSelectedRooms,
+  saveResultTab,
+  getResultTab,
 };

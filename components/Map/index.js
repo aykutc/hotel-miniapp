@@ -13,36 +13,12 @@ const geojson = {
   type: "FeatureCollection",
   features: [
     {
-      type: "Feature",
-      properties: {
-        message: "123.99/night",
-      },
-      geometry: {
-        type: "Point",
-        coordinates: [36.7931741, 27.799901],
-      },
       ...HotelsArray[0],
     },
     {
-      type: "Feature",
-      properties: {
-        message: "139.99/night",
-      },
-      geometry: {
-        type: "Point",
-        coordinates: [36.7931741, 29.799901],
-      },
       ...HotelsArray[1],
     },
     {
-      type: "Feature",
-      properties: {
-        message: "200.99/night",
-      },
-      geometry: {
-        type: "Point",
-        coordinates: [32.7931741, 30.799901],
-      },
       ...HotelsArray[2],
     },
   ],

@@ -30,8 +30,6 @@ const SummaryCard = ({
   const checkOutDate = new Date(checkOut);
   const monthFormatter = new Intl.DateTimeFormat("en", { month: "short" });
   const dayFormatter = new Intl.DateTimeFormat("en", { weekday: "short" });
-  console.log(checkInDate.getDay());
-  console.log(checkInDate);
 
   return (
     <div className={styles.container} {...props}>

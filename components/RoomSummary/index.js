@@ -20,9 +20,9 @@ function RoomSummary({
       str += adults.toString() + " Adults";
     }
     if (kids == 1) {
-      str += ", " + kids.toString() + "Kid";
+      str += ", " + kids.toString() + " Kid";
     } else if (kids > 1) {
-      str += ", " + kids.toString() + "Kids";
+      str += ", " + kids.toString() + " Kids";
     }
     return str;
   };

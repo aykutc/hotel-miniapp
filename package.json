@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build && next export",
     "deploy": "next build && next export && firebase deploy",
     "openid": "next build && next export && firebase hosting:channel:deploy openid",
     "image": "next build && next export && firebase hosting:channel:deploy image",

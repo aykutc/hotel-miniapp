@@ -67,11 +67,7 @@ function RecommendedCard({
       )}
 
       <div className={styles.recommendBottomArea}>
-        {subTitle && (
-          <div className={styles.tag}>
-            <p className={styles.hotelName}>{subTitle}</p>
-          </div>
-        )}
+        {subTitle && <span className={styles.tag}>{subTitle}</span>}
         <div className={styles.recommendTextArea}>
           <p className={styles.recommendTitle}>{title}</p>
           <p

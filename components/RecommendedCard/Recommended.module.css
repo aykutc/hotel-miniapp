@@ -21,15 +21,11 @@
 }
 
 .tag {
-  width: min-content;
   background: #f3efe5;
   border-radius: 4px;
 
   padding: 1px 6px;
-  margin-bottom: 12px;
-}
-
-.hotelName {
+  margin: 13px !important;
   margin: 0px;
   font-family: "Outfit";
   font-style: normal;
@@ -41,6 +37,9 @@
   text-transform: uppercase;
 
   color: #1d1f22;
+}
+
+.hotelName {
 }
 
 .recommendTextArea {

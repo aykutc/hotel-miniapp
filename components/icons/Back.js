@@ -1,7 +1,7 @@
 import * as React from "react";
 import Router from "next/router";
 
-const Back = ({ onClick, fill = "#8E8F90", ...props }) => (
+const Back = ({ onClick, disableClick, fill = "#8E8F90", ...props }) => (
   <div
     className="div"
     style={{
@@ -11,7 +11,11 @@ const Back = ({ onClick, fill = "#8E8F90", ...props }) => (
       alignItems: "center",
       ...props.style,
     }}
-    onClick={() => {
+    onClick={(e) => {
+      e.preventDefault();
+      if (disableClick) {
+        return;
+      }
       if (onClick) {
         onClick();
       } else {

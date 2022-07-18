@@ -16,7 +16,7 @@ import Spa from "@/components/icons/Spa";
 import Parking from "@/components/icons/Parking";
 import Accessibility from "@/components/icons/Accessibility";
 import SummaryCard from "@/components/HotelDetails/SummaryCard";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import RoomSummary from "@/components/RoomSummary";
 import BottomSheet from "@/components/BottomSheet";
 import RoomBottomSheet from "@/components/RoomBottomSheet";
@@ -39,7 +39,6 @@ export async function getStaticProps() {
   };
 }
 function HotelDetail(props) {
-  const router = useRouter();
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
   const [favorites, setFavorites] = useState([]);
@@ -128,8 +127,18 @@ function HotelDetail(props) {
   return (
     <div className={styles.container}>
       <div className={styles.headerContainer}>
-        <div className={styles.circle}>
-          <Back fill="white" style={{ paddingRight: 0 }} color="white" />
+        <div
+          className={styles.circle}
+          onClick={() => {
+            Router.back();
+          }}
+        >
+          <Back
+            disableClick
+            fill="white"
+            style={{ paddingRight: 0 }}
+            color="white"
+          />
         </div>
         <div className={styles.headerRightSide}>
           <div

@@ -102,7 +102,7 @@ function HotelDetail(props) {
   }, []);
   React.useEffect(() => {
     console.log(dateSelection);
-    if (dateSelection) {
+    if (dateSelection && dateSelection.durationAmount) {
       const obj = {
         duration: dateSelection.durationAmount,
         checkIn: dateSelection.checkIn
@@ -159,9 +159,6 @@ function HotelDetail(props) {
             }}
           >
             <Like fill={isFavorite ? "white" : "transparent"} />
-          </div>
-          <div className={styles.circle}>
-            <Share />
           </div>
         </div>
       </div>

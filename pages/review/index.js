@@ -53,6 +53,7 @@ const Review = () => {
         (a, b) => a + safeParseFloat(b.price),
         0
       );
+    totalPrice = parseFloat(totalPrice).toFixed(2);
   }
 
   return (

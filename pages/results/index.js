@@ -313,6 +313,7 @@ function Results({ HotelsArray }) {
             style={{ position: "absolute" }}
             onClick={async () => {
               saveDateSelection({
+                duration: dateSelection.durationAmount,
                 checkIn:
                   dateSelection["CHECK-IN"].day +
                   " " +

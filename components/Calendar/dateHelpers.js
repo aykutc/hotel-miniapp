@@ -73,9 +73,9 @@ export const dateFormatter = (duration, type) => {
     "Nov",
     "Dec",
   ];
-  const dayNo = new Date(day + time).getDay();
-  const monthNo = new Date(day + time).getMonth();
-  const year = new Date(day + time).getFullYear();
+  const dayNo = new Date(day + " " + time).getDay();
+  const monthNo = new Date(day + " " + time).getMonth();
+  const year = new Date(day + " " + time).getFullYear();
 
   return `${days[dayNo]}, ${months[monthNo]} ${year}`;
 };

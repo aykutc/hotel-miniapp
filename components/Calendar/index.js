@@ -33,8 +33,8 @@ const Callendar = ({ setSelection, datesChoice = {} }) => {
       ("CHECK-IN" in duration || "CHECK-OUT" in duration) &&
       duration["CHECK-OUT"]?.day !== 0 &&
       duration["CHECK-IN"]?.day !== 0 &&
-      (+new Date(duration["CHECK-OUT"]?.day + duration["CHECK-OUT"]?.time) -
-        +new Date(duration["CHECK-IN"]?.day + duration["CHECK-IN"]?.time)) /
+      (+new Date(duration["CHECK-OUT"]?.day + " " + duration["CHECK-OUT"]?.time) -
+        +new Date(duration["CHECK-IN"]?.day + " " + duration["CHECK-IN"]?.time)) /
       (1000 * 3600 * 24);
     setSelection({ ...duration, durationAmount });
     setBorderBottom(!duration["CHECK-IN"] ? "CHECK-IN" : "CHECK-OUT");

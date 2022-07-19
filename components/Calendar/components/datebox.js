@@ -5,7 +5,7 @@ import styles from "./datebox.module.css";
 const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
   const [selected, setSelected] = useState(datesChoice);
 
-  console.log(selected)
+  console.log(selected);
 
   useEffect(() => {
     setDuration(selected);
@@ -14,11 +14,12 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
     const { time } = item;
     setSelected(
       borderBottom === "CHECK-OUT"
-        ? new Date(day + time) >
+        ?
+        new Date(day + " " + time) >
           (selected["CHECK-IN"]?.day
-            ? new Date(selected["CHECK-IN"]?.day + selected["CHECK-IN"]?.time)
+            ? new Date(selected["CHECK-IN"]?.day + " " + selected["CHECK-IN"]?.time)
             : 0) &&
-          isLaterFromToday(new Date(day + time), new Date(), borderBottom)
+          isLaterFromToday(new Date(day + " " + time), new Date(), borderBottom)
           ? {
             ...selected,
             [`${borderBottom}`]: {
@@ -28,14 +29,15 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
             },
           }
           : selected
-        : borderBottom === "CHECK-IN"
-          ? new Date(day + time) <
+        :
+        borderBottom === "CHECK-IN"
+          ? new Date(day + " " + time) <
             (selected["CHECK-OUT"]?.day
               ? new Date(
-                selected["CHECK-OUT"]?.day + selected["CHECK-OUT"]?.time
+                selected["CHECK-OUT"]?.day + " " + selected["CHECK-OUT"]?.time
               )
               : Infinity) &&
-            isLaterFromToday(new Date(day + time), new Date(), borderBottom)
+            isLaterFromToday(new Date(day + " " + time), new Date(), borderBottom)
             ? {
               ...selected,
               [`${borderBottom}`]: {
@@ -45,7 +47,8 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
               },
             }
             : selected
-          : {
+          :
+          {
             ...selected,
             [`${borderBottom}`]: { ...selected[`${borderBottom}`], time, day },
           }
@@ -101,7 +104,7 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
                     }
                     style={{
                       color: isLaterFromToday(
-                        new Date(day + item.time),
+                        new Date(day + " " + item.time),
                         new Date(),
                         "CHECK-IN"
                       )
@@ -111,19 +114,19 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
                             selected["CHECK-OUT"]?.time === item.time)
                           ? "#fff"
                           : isBetweenTwoDates(
-                            new Date(day + item.time),
+                            new Date(day + " " + item.time),
                             selected["CHECK-IN"]?.day
                               ? new Date(
-                                selected["CHECK-IN"]?.day +
+                                selected["CHECK-IN"]?.day + " " +
                                 selected["CHECK-IN"]?.time
                               )
                               : false,
                             "CHECK-IN"
                           ) &&
                             isBetweenTwoDates(
-                              new Date(day + item.time),
+                              new Date(day + " " + item.time),
                               new Date(
-                                selected["CHECK-OUT"]?.day +
+                                selected["CHECK-OUT"]?.day + " " +
                                 selected["CHECK-OUT"]?.time
                               ),
                               "CHECK-OUT"
@@ -133,19 +136,19 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
                         : "#8E8F90",
                       background:
                         isBetweenTwoDates(
-                          new Date(day + item.time),
+                          new Date(day + " " + item.time),
                           selected["CHECK-IN"]?.day
                             ? new Date(
-                              selected["CHECK-IN"]?.day +
+                              selected["CHECK-IN"]?.day + " " +
                               selected["CHECK-IN"]?.time
                             )
                             : false,
                           "CHECK-IN"
                         ) &&
                           isBetweenTwoDates(
-                            new Date(day + item.time),
+                            new Date(day + " " + item.time),
                             new Date(
-                              selected["CHECK-OUT"]?.day +
+                              selected["CHECK-OUT"]?.day + " " +
                               selected["CHECK-OUT"]?.time
                             ),
                             "CHECK-OUT"
@@ -159,17 +162,17 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
                             : "transparent",
                       padding:
                         isBetweenTwoDates(
-                          new Date(day + item.time),
+                          new Date(day + " " + item.time),
                           new Date(
-                            selected["CHECK-IN"]?.day +
+                            selected["CHECK-IN"]?.day + " " +
                             selected["CHECK-IN"]?.time
                           ),
                           "CHECK-IN"
                         ) &&
                           isBetweenTwoDates(
-                            new Date(day + item.time),
+                            new Date(day + " " + item.time),
                             new Date(
-                              selected["CHECK-OUT"]?.day +
+                              selected["CHECK-OUT"]?.day + " " +
                               selected["CHECK-OUT"]?.time
                             ),
                             "CHECK-OUT"
@@ -200,7 +203,7 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
           </div>
         </React.Fragment>
       ))}
-      <div style={{height:"90px"}}></div>
+      <div style={{ height: "90px" }}></div>
     </>
   );
 };

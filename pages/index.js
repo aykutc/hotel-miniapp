@@ -55,9 +55,12 @@ function Home({ exploreArray, recommendedArray, searchData }) {
   React.useEffect(() => {
     const _login = async () => {
       const address = window.location.protocol + "//" + window.location.host;
-      const user = await checkLogin();
       if (user) {
-        setUser(user);
+        return;
+      }
+      const _user = await checkLogin();
+      if (_user) {
+        setUser(_user);
         return;
       }
       const urlParams = new URLSearchParams(window.location.href);
@@ -103,7 +106,7 @@ function Home({ exploreArray, recommendedArray, searchData }) {
 
       const result = await response.json();
       const userObj = result.data;
-      userObj.expire = new Date().getTime() + 60 * 60 * 1000;
+      userObj.expire = new Date().getTime() + 30 * 60 * 60 * 1000;
       localStorage.setItem("user", JSON.stringify(userObj));
       setUser(result.data);
     } catch (error) {

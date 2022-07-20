@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   background-color: #f6f6f6;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   border-radius: 100px;

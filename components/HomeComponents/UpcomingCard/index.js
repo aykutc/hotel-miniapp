@@ -10,12 +10,13 @@ function UpcomingCard({
   block,
   img,
   showFavorite,
+  isFavorite,
   status,
   date,
   imageStyles,
+  favoriteOnClick,
   ...props
 }) {
-  const [isLike, setIsLike] = useState(false);
   return (
     <div className={styles.upcomingCardWrapper} {...props}>
       <OptimizedImage
@@ -25,8 +26,11 @@ function UpcomingCard({
       ></OptimizedImage>
       {showFavorite && (
         <Like
-          onClick={() => setIsLike(!isLike)}
-          fill={isLike ? "white" : "transparent"}
+          onClick={(e) => {
+            e.stopPropagation();
+            favoriteOnClick();
+          }}
+          fill={isFavorite ? "white" : "transparent"}
           style={{ position: "absolute", top: 10, right: 10 }}
         />
       )}

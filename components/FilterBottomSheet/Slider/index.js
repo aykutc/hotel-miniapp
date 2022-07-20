@@ -23,7 +23,7 @@ const Slider = ({
           padding: 0,
           margin: 0,
           fontStyle: "normal",
-          fontWeight: "500",
+          fontWeight: "600",
           fontSize: 16,
           color: "#1D1F22",
           paddingBottom: 2,

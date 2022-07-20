@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "export": "next build && next export",
+    "export-s3": "next build && next export && aws s3 sync out s3://neom-hotel-nextjs.westerops.com && aws cloudfront create-invalidation --distribution-id E3VS5BIL6N0P0W --paths '/*'",
     "deploy": "next build && next export && firebase deploy",
     "openid": "next build && next export && firebase hosting:channel:deploy openid",
     "image": "next build && next export && firebase hosting:channel:deploy image",

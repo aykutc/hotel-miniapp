@@ -57,6 +57,14 @@ const saveHomeActiveTab = (value) => {
 const getHomeActiveTab = (value) => {
   return getItemSessionStroage("homeActiveTab");
 };
+const saveStaysTab = (value) => {
+  saveItemSessionStorage("staysTab", value);
+};
+const getStaysTab = (value) => {
+  const a = getItemSessionStroage("staysTab");
+  console.log("a", a);
+  return getItemSessionStroage("staysTab");
+};
 const saveResultTab = (value) => {
   saveItemSessionStorage("resultTab", value);
 };
@@ -140,4 +148,6 @@ export {
   getSelectedRooms,
   saveResultTab,
   getResultTab,
+  saveStaysTab,
+  getStaysTab,
 };

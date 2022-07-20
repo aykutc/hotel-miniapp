@@ -8,11 +8,12 @@ const Tabs = ({ data, selected, setSelected }) => {
     if (ref.current) {
       setWidth(ref?.current?.clientWidth);
     }
-  }, [ref]);
+  }, [ref, selected]);
 
   const index = data.findIndex((val) => {
     return val === selected;
   });
+  console.log(index);
 
   return (
     <div className={styles.container}>
@@ -22,7 +23,13 @@ const Tabs = ({ data, selected, setSelected }) => {
           className={styles.item}
           onClick={() => setSelected(item)}
           style={{
-            flex: 1 / data.length,
+            flexBasis: "0px",
+            flexGrow: 1,
+            flexShrink: 0,
+
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
             /* backgroundColor: item === selected ? "#1D1F22" : "transparent", */
             color: item === selected ? "#FFF" : "#8E8F90",
             zIndex: 200,

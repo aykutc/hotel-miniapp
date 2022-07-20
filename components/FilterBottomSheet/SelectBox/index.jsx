@@ -1,7 +1,7 @@
-import CheckIn from '@/components/icons/CheckIn';
-import Tick from '@/components/icons/Tick';
-import React from 'react';
-import Filter from '../../icons/Filter';
+import CheckIn from "@/components/icons/CheckIn";
+import Tick from "@/components/icons/Tick";
+import React from "react";
+import Filter from "../../icons/Filter";
 
 const SelectBox = ({ title, data, selected, setSelected, ...props }) => {
   return (
@@ -11,9 +11,9 @@ const SelectBox = ({ title, data, selected, setSelected, ...props }) => {
           style={{
             padding: 0,
             margin: 0,
-            fontWeight: '500',
+            fontWeight: "600",
             fontSize: 16,
-            color: '#1D1F22',
+            color: "#1D1F22",
             paddingBottom: 2,
           }}
         >
@@ -25,10 +25,10 @@ const SelectBox = ({ title, data, selected, setSelected, ...props }) => {
           <div
             onClick={() => setSelected(item)}
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              borderBottom: '1px solid #E8E9E9',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              borderBottom: "1px solid #E8E9E9",
             }}
             key={index}
           >
@@ -38,10 +38,10 @@ const SelectBox = ({ title, data, selected, setSelected, ...props }) => {
                 margin: 0,
                 paddingTop: 14,
                 paddingBottom: 14,
-                fontWeight: '400',
+                fontWeight: "400",
                 fontSize: 16,
-                letterSpacing: '0.01em',
-                color: '#1D1F22',
+                letterSpacing: "0.01em",
+                color: "#1D1F22",
               }}
             >
               {item}

@@ -58,7 +58,7 @@ function Dates(props) {
         {dateSelection.durationAmount
           ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
           : `SELECT ${
-              dateSelection["CHECK-IN"] === undefined ? "CHECK IN" : "CHECK OUT"
+              dateSelection["CHECK-IN"] === undefined ? "CHECK-IN" : "CHECK-OUT"
             } DATE`}
       </FloatingBottomButton>
     </div>

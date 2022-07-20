@@ -19,6 +19,7 @@ class MyDocument extends Document {
             type="text/css"
             crossOrigin
           ></link> */}
+          <link rel="icon" href="data:,"></link>
         </Head>
         <body>
           <Main />

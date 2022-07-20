@@ -31,6 +31,7 @@ export async function getStaticProps() {
 function CheckDetail() {
   const [checkState, setCheckState] = useState({});
 
+  const [addBottomSheet, setaddBottomSheet] = useState(false);
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
   const [isRegionModalOpen, setIsRegionModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
@@ -85,6 +86,12 @@ function CheckDetail() {
     });
   }, [isDateModalOpen, isRegionModalOpen, isRoomModalOpen]);
 
+  const removeBottomSheet = (fun) => {
+    fun(false);
+    setTimeout(() => {
+      setaddBottomSheet(false);
+    }, 100);
+  };
   return (
     <>
       <div className={styles.checkDetailContainer}>
@@ -96,7 +103,10 @@ function CheckDetail() {
         <div
           className={styles.regionContainer}
           onClick={() => {
-            setIsRegionModalOpen(true);
+            setaddBottomSheet(true);
+            setTimeout(() => {
+              setIsRegionModalOpen(true);
+            }, 10);
           }}
         >
           <Location />
@@ -109,10 +119,16 @@ function CheckDetail() {
           kids={checkState.kids}
           adults={checkState.adults}
           onDateClick={() => {
-            setIsDateModalOpen(true);
+            setaddBottomSheet(true);
+            setTimeout(() => {
+              setIsDateModalOpen(true);
+            }, 10);
           }}
           onRoomClick={() => {
-            setIsRoomModalOpen(true);
+            setaddBottomSheet(true);
+            setTimeout(() => {
+              setIsRoomModalOpen(true);
+            }, 10);
           }}
         />
         <FloatingBottomButton
@@ -125,82 +141,90 @@ function CheckDetail() {
           SEE RESULTS
         </FloatingBottomButton>
       </div>
-      <BottomSheet
-        className={"bottom-sheet-2"}
-        title="DATES"
-        isOpen={isDateModalOpen}
-        onDismiss={() => setIsDateModalOpen(false)}
-        onClose={() => setIsDateModalOpen(false)}
-        contentStyle={{ overflow: "hidden" }}
-      >
-        <div
-          style={{
-            padding: "0px 24px",
-
-            /* height: "calc(100vh - 170px)", */
+      {addBottomSheet && (
+        <BottomSheet
+          key={"bottom-sheet-2"}
+          title="DATES"
+          isOpen={isDateModalOpen}
+          onClose={() => {
+            removeBottomSheet(setIsDateModalOpen);
           }}
+          contentStyle={{ overflow: "hidden" }}
         >
-          <Calendar setSelection={setDateSelection} />
-          <FloatingBottomButton
-            style={{ position: "absolute" }}
-            onClick={async () => {
-              saveDateSelection({
-                checkIn:
-                  dateSelection["CHECK-IN"].day +
-                  " " +
-                  dateSelection["CHECK-IN"].time,
-                checkOut:
-                  dateSelection["CHECK-OUT"].day +
-                  " " +
-                  dateSelection["CHECK-OUT"].time,
-              });
-              setIsDateModalOpen(false);
+          <div
+            style={{
+              padding: "0px 24px",
+
+              /* height: "calc(100vh - 170px)", */
             }}
           >
-            {dateSelection.durationAmount
-              ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
-              : `SELECT ${
-                  dateSelection["CHECK-IN"] === undefined
-                    ? "CHECK IN"
-                    : "CHECK OUT"
-                } DATE`}
-          </FloatingBottomButton>
-        </div>
-      </BottomSheet>
-      <BottomSheet
-        className={"bottom-sheet-1"}
-        title="ROOMS & GUESTS"
-        isOpen={isRoomModalOpen}
-        onDismiss={() => setIsRoomModalOpen(false)}
-        onClose={() => setIsRoomModalOpen(false)}
-        contentStyle={{ position: "initial" }}
-      >
-        <RoomBottomSheet
-          onClick={(rooms) => {
-            setIsRoomModalOpen(false);
+            <Calendar setSelection={setDateSelection} />
+            <FloatingBottomButton
+              style={{ position: "absolute" }}
+              onClick={async () => {
+                saveDateSelection({
+                  checkIn:
+                    dateSelection["CHECK-IN"].day +
+                    " " +
+                    dateSelection["CHECK-IN"].time,
+                  checkOut:
+                    dateSelection["CHECK-OUT"].day +
+                    " " +
+                    dateSelection["CHECK-OUT"].time,
+                });
+                removeBottomSheet(setIsDateModalOpen);
+              }}
+            >
+              {dateSelection.durationAmount
+                ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
+                : `SELECT ${
+                    dateSelection["CHECK-IN"] === undefined
+                      ? "CHECK IN"
+                      : "CHECK OUT"
+                  } DATE`}
+            </FloatingBottomButton>
+          </div>
+        </BottomSheet>
+      )}
+      {addBottomSheet && (
+        <BottomSheet
+          key={"bottom-sheet-1"}
+          title="ROOMS & GUESTS"
+          isOpen={isRoomModalOpen}
+          onClose={() => {
+            removeBottomSheet(setIsRoomModalOpen);
+          }}
+          contentStyle={{ position: "initial" }}
+        >
+          <RoomBottomSheet
+            onClick={(rooms) => {
+              removeBottomSheet(setIsRoomModalOpen);
 
-            saveRoomSelection({
-              rooms: rooms.count,
-              kids: rooms.kids,
-              adults: rooms.adults,
-            });
+              saveRoomSelection({
+                rooms: rooms.count,
+                kids: rooms.kids,
+                adults: rooms.adults,
+              });
+            }}
+          ></RoomBottomSheet>
+        </BottomSheet>
+      )}
+      {addBottomSheet && (
+        <BottomSheet
+          key={"bottom-sheet-3"}
+          title="REGION"
+          isOpen={isRegionModalOpen}
+          onClose={() => {
+            removeBottomSheet(setIsRegionModalOpen);
           }}
-          setIsRoomModalOpen={setIsDateModalOpen}
-        ></RoomBottomSheet>
-      </BottomSheet>
-      <BottomSheet
-        className={"bottom-sheet-3"}
-        title="REGION"
-        isOpen={isRegionModalOpen}
-        onDismiss={() => setIsRegionModalOpen(false)}
-        onClose={() => setIsRegionModalOpen(false)}
-      >
-        <SearchBottomSheet
-          close={() => {
-            setIsRegionModalOpen(false);
-          }}
-        />
-      </BottomSheet>
+        >
+          <SearchBottomSheet
+            close={() => {
+              removeBottomSheet(setIsRegionModalOpen);
+            }}
+          />
+        </BottomSheet>
+      )}
     </>
   );
 }

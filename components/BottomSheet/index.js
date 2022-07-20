@@ -20,12 +20,13 @@ function BottomSheet({
 }) {
   return (
     <Sheet
+      rootId="root"
       isOpen={isOpen}
       onClose={onClose}
       snapPoints={[0.9]}
       initialSnap={0}
       springConfig={{
-        stiffness: 300,
+        stiffness: 200,
         damping: 30,
         mass: 1,
       }}
@@ -50,7 +51,11 @@ function BottomSheet({
         </Sheet.Content>
       </Sheet.Container>
 
-      <Sheet.Backdrop />
+      <Sheet.Backdrop
+        onTap={() => {
+          onClose();
+        }}
+      />
     </Sheet>
   );
 }

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styles from "@/styles/DateSelection.module.css";
+import React, { useState, useEffect } from "react";
+
 import Back from "@/components/icons/Back";
 import HeaderTitle from "@/components/HeaderTitle";
 import OptimizedImage from "@/components/OptimizedImage";
@@ -10,24 +10,52 @@ import Room from "@/components/icons/Room";
 import Bed from "@/components/icons/Bed";
 import Dropdown from "@/components/ReviewComponents/Dropdown";
 import FloatingBottomButton from "@/components/FloatingBottomButton";
+import {
+  getDateSelection,
+  getHotel,
+  getRoomSelection,
+  getSelectedRooms,
+} from "data/api";
+import { safeParseFloat } from "../../utils";
 
 export async function getStaticProps() {
   return {
     props: {},
   };
 }
-const dropdownData = [
-  {
-    name: "Jun 24 - Jun 27 (3 nights)",
-    price: "1,271.97",
-  },
-  {
-    name: "Tax",
-    price: "0.00",
-  },
-];
+
 const Review = () => {
   const [open, setOpen] = useState(true);
+  const [hotelDetail, setHotelDetail] = useState(null);
+  useEffect(() => {
+    const dateSelection = getDateSelection();
+    const roomSelection = getRoomSelection();
+    const selectedRooms = getSelectedRooms();
+    const hotel = getHotel();
+
+    setHotelDetail({
+      ...hotelDetail,
+      selectedRooms: selectedRooms,
+      ...dateSelection,
+      ...roomSelection,
+      ...hotel,
+    });
+  }, []);
+  const checkInDate = new Date(hotelDetail?.checkIn);
+  const checkOutDate = new Date(hotelDetail?.checkOut);
+  const monthFormatter = new Intl.DateTimeFormat("en", { month: "short" });
+
+  let totalPrice = 0;
+  if (hotelDetail) {
+    totalPrice =
+      hotelDetail.duration *
+      hotelDetail?.selectedRooms.reduce(
+        (a, b) => a + safeParseFloat(b.price),
+        0
+      );
+    totalPrice = parseFloat(totalPrice).toFixed(2);
+  }
+
   return (
     <div
       style={{
@@ -48,7 +76,7 @@ const Review = () => {
         style={{
           display: "flex",
           alignItems: "center",
-          marginBottom: 16,
+          marginBottom: 33,
           height: 58,
         }}
       >
@@ -63,11 +91,14 @@ const Review = () => {
           marginBottom: 40,
         }}
       >
-        <OptimizedImage
-          src="hotel1.jpg"
-          maxWidth={64}
-          style={{ width: "64px", height: "64px", borderRadius: "4px" }}
-        ></OptimizedImage>
+        {hotelDetail && (
+          <OptimizedImage
+            src={hotelDetail.imgRect}
+            maxWidth={64}
+            style={{ width: "64px", height: "64px", borderRadius: "4px" }}
+          ></OptimizedImage>
+        )}
+
         <div
           style={{
             display: "flex",
@@ -90,7 +121,7 @@ const Review = () => {
               color: "#1d1f22",
             }}
           >
-            The Ultra-Luxury Mansions
+            {hotelDetail?.title}
           </p>
           <p
             style={{
@@ -103,7 +134,7 @@ const Review = () => {
               lineHeight: "18px",
             }}
           >
-            Block A-21
+            {hotelDetail?.block}
           </p>
         </div>
       </div>
@@ -111,21 +142,78 @@ const Review = () => {
         Stay Information
       </Title>
       <div style={{ marginTop: 8, marginBottom: 40 }}>
-        <StayInfoItem icon={<Calendar />} title="Jun 24 - Jun 27 (3 nights)" />
-        <StayInfoItem icon={<Room />} title="1 Room, 2 Guests " />
-        <StayInfoItem icon={<Bed />} title="Superior King Room" />
+        {hotelDetail && (
+          <StayInfoItem
+            icon={<Calendar />}
+            title={
+              monthFormatter.format(checkInDate) +
+              " " +
+              checkInDate.getDate() +
+              " - " +
+              monthFormatter.format(checkOutDate) +
+              " " +
+              checkOutDate.getDate() +
+              " (" +
+              hotelDetail.duration +
+              " nights)"
+            }
+          />
+        )}
+
+        <StayInfoItem
+          icon={<Room />}
+          title={
+            hotelDetail?.selectedRooms.length +
+            " Room, " +
+            parseInt(
+              parseInt(hotelDetail?.kids) + parseInt(hotelDetail?.adults)
+            ) +
+            " Guests "
+          }
+        />
+        <StayInfoItem
+          icon={<Bed />}
+          title={hotelDetail?.selectedRooms.map((item, index) => {
+            if (index > 0) {
+              return ", " + item.title;
+            }
+            return item.title;
+          })}
+        />
       </div>
       <Title style={{ letterSpacing: "0.01em", lineHeight: "20px" }}>
         Charges Summary
       </Title>
-      <div style={{ marginTop: 16, marginBottom: 40 }}>
-        <Dropdown
-          data={dropdownData}
-          totalPrice="1,271.97"
-          open={open}
-          handleClick={() => setOpen(!open)}
-        />
-      </div>
+      {hotelDetail && (
+        <div style={{ marginTop: 16, marginBottom: 40 }}>
+          <Dropdown
+            data={[
+              {
+                name:
+                  monthFormatter.format(checkInDate) +
+                  " " +
+                  checkInDate.getDate() +
+                  " - " +
+                  monthFormatter.format(checkOutDate) +
+                  " " +
+                  checkOutDate.getDate() +
+                  " (" +
+                  hotelDetail.duration +
+                  " nights)",
+                price: totalPrice,
+              },
+              {
+                name: "Tax",
+                price: "0.00",
+              },
+            ]}
+            totalPrice={totalPrice}
+            open={open}
+            handleClick={() => setOpen(!open)}
+          />
+        </div>
+      )}
+
       <Title style={{ letterSpacing: "0.01em", lineHeight: "20px" }}>
         Cancellation Policy
       </Title>

@@ -12,6 +12,10 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
   }, [selected, setDuration]);
   const selectDay = (day, item) => {
     const { time } = item;
+    /*   console.log(selected["CHECK-IN"]?.day + selected["CHECK-IN"]?.time);
+    console.log(
+      new Date(selected["CHECK-IN"]?.day + selected["CHECK-IN"]?.time)
+    ); */
     setSelected(
       borderBottom === "CHECK-OUT"
         ?
@@ -21,13 +25,13 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
             : 0) &&
           isLaterFromToday(new Date(day + " " + time), new Date(), borderBottom)
           ? {
-            ...selected,
-            [`${borderBottom}`]: {
-              ...selected[`${borderBottom}`],
-              time,
-              day,
-            },
-          }
+              ...selected,
+              [`${borderBottom}`]: {
+                ...selected[`${borderBottom}`],
+                time,
+                day,
+              },
+            }
           : selected
         :
         borderBottom === "CHECK-IN"
@@ -88,8 +92,8 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
                           ? "linear-gradient(90deg, #fff 50%, #1D1F22 50%)"
                           : selected["CHECK-OUT"]?.day === day &&
                             selected["CHECK-OUT"]?.time === item.time
-                            ? "linear-gradient(90deg, #1D1F22 50%, #fff 50%)"
-                            : "transparent"
+                          ? "linear-gradient(90deg, #1D1F22 50%, #fff 50%)"
+                          : "transparent"
                         : "transparent",
                   }}
                 >
@@ -97,8 +101,8 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
                     className={
                       (selected["CHECK-IN"]?.day === day &&
                         selected["CHECK-IN"]?.time === item.time) ||
-                        (selected["CHECK-OUT"]?.day === day &&
-                          selected["CHECK-OUT"]?.time === item.time)
+                      (selected["CHECK-OUT"]?.day === day &&
+                        selected["CHECK-OUT"]?.time === item.time)
                         ? styles.selectedCurrentDays
                         : styles.currentDays
                     }
@@ -109,7 +113,7 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
                         "CHECK-IN"
                       )
                         ? (selected["CHECK-IN"]?.day === day &&
-                          selected["CHECK-IN"]?.time === item.time) ||
+                            selected["CHECK-IN"]?.time === item.time) ||
                           (selected["CHECK-OUT"]?.day === day &&
                             selected["CHECK-OUT"]?.time === item.time)
                           ? "#fff"
@@ -131,8 +135,8 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
                               ),
                               "CHECK-OUT"
                             )
-                            ? "#fff"
-                            : "#1D1F22"
+                          ? "#fff"
+                          : "#1D1F22"
                         : "#8E8F90",
                       background:
                         isBetweenTwoDates(
@@ -150,16 +154,16 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
                             new Date(
                               selected["CHECK-OUT"]?.day + " " +
                               selected["CHECK-OUT"]?.time
-                            ),
-                            "CHECK-OUT"
-                          )
+                          ),
+                          "CHECK-OUT"
+                        )
                           ? "#1D1F22"
                           : (selected["CHECK-IN"]?.day === day &&
-                            selected["CHECK-IN"]?.time === item.time) ||
+                              selected["CHECK-IN"]?.time === item.time) ||
                             (selected["CHECK-OUT"]?.day === day &&
                               selected["CHECK-OUT"]?.time === item.time)
-                            ? "#1D1F22"
-                            : "transparent",
+                          ? "#1D1F22"
+                          : "transparent",
                       padding:
                         isBetweenTwoDates(
                           new Date(day + " " + item.time),
@@ -174,16 +178,16 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
                             new Date(
                               selected["CHECK-OUT"]?.day + " " +
                               selected["CHECK-OUT"]?.time
-                            ),
-                            "CHECK-OUT"
-                          )
+                          ),
+                          "CHECK-OUT"
+                        )
                           ? "10px calc(((100%)/2) - 16px)"
                           : (selected["CHECK-IN"]?.day === day &&
-                            selected["CHECK-IN"]?.time === item.time) ||
+                              selected["CHECK-IN"]?.time === item.time) ||
                             (selected["CHECK-OUT"]?.day === day &&
                               selected["CHECK-OUT"]?.time === item.time)
-                            ? "10px"
-                            : "null",
+                          ? "10px"
+                          : "null",
                     }}
                     onClick={() => selectDay(day, item)}
                   >

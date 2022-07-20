@@ -1,33 +1,15 @@
 import ExploreCard from "@/components/HomeComponents/ExploreCard";
-import HeaderTitle from "@/components/HeaderTitle";
+
 import RecommendedCard from "@/components/RecommendedCard";
 import styles from "@/styles/Home.module.css";
-import Router from "next/router";
+import { useRouter } from "next/router";
+import { saveRegion } from "data/api";
 
 function Explore({ exploreArray, recommendedArray, user }) {
+  const router = useRouter();
+
   return (
     <>
-      {/*  <div className={styles.header}>
-        <HeaderTitle>
-          <div style={{ marginRight: 6 }}>HI</div>
-          {user ? (
-            user.name + ","
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <div
-                className="shine"
-                style={{ width: 100, height: 16, marginLeft: 4 }}
-              ></div>
-            </div>
-          )}
-        </HeaderTitle>
-      </div> */}
       <div>
         <div style={{ height: 24 }}></div>
         <div className={styles.title}>Explore by NEOM Region,</div>
@@ -44,11 +26,16 @@ function Explore({ exploreArray, recommendedArray, user }) {
                 logo={item.logo}
                 logoWebp={item.logoWebp}
                 onClick={() => {
-                  Router.push({
+                  /* window.location.assign("/date-selection"); */
+                  /*  window.history.pushState(
+                    { urlPath: "/date-selection" },
+                    "",
+                    "/date-selection"
+                  ); */
+                  saveRegion(item.title);
+
+                  router.push({
                     pathname: "/date-selection",
-                    query: {
-                      title: item.title,
-                    },
                   });
                 }}
               ></ExploreCard>
@@ -62,13 +49,7 @@ function Explore({ exploreArray, recommendedArray, user }) {
             return (
               <RecommendedCard
                 key={item.title}
-                title={item.title}
-                subTitle={item.subTitle}
-                block={item.block}
-                img={item.img}
-                imgWebp={item.imgWebp}
-                price={item.price}
-                discountPrice={item.discountPrice}
+                hotel={item}
                 imageStyles={{ width: "100%", height: 118, display: "block" }}
               ></RecommendedCard>
             );

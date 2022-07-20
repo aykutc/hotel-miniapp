@@ -1,3 +1,4 @@
+import { saveHotel } from "data/api";
 import Router from "next/router";
 import React, { useState } from "react";
 import Like from "../icons/Like";
@@ -5,23 +6,30 @@ import OptimizedImage from "../OptimizedImage";
 import styles from "./Recommended.module.css";
 
 function RecommendedCard({
-  subTitle,
-  title,
-  block,
-  discountPrice,
-  price,
-  img,
-  imgWebp,
   imageStyles,
   showFavorite,
-  favorite,
-  info,
+  favoriteOnClick,
+  isFavorite,
+  hotel,
   roomSelect,
   updateSelectedRooms,
   item,
+  subTitle,
   ...props
 }) {
-  const [isLike, setIsLike] = useState(false);
+  const {
+    title,
+    block,
+    discountPrice,
+    price,
+    img,
+    reviews,
+    location,
+    phone,
+    imgRect,
+    rate,
+    info,
+  } = hotel;
 
   return (
     <div
@@ -30,20 +38,13 @@ function RecommendedCard({
       onClick={
         !roomSelect
           ? () => {
+              saveHotel({
+                ...hotel,
+                imageStyles,
+                showFavorite,
+              });
               Router.push({
                 pathname: "/hotel-detail",
-                query: {
-                  subTitle,
-                  title,
-                  block,
-                  discountPrice,
-                  price,
-                  img,
-                  imgWebp,
-                  imageStyles,
-                  showFavorite,
-                  favorite,
-                },
               });
             }
           : undefined
@@ -58,19 +59,15 @@ function RecommendedCard({
         <Like
           onClick={(e) => {
             e.stopPropagation();
-            setIsLike(!isLike);
+            favoriteOnClick();
           }}
-          fill={isLike ? "white" : "transparent"}
+          fill={isFavorite ? "white" : "transparent"}
           style={{ position: "absolute", top: 10, right: 10 }}
         />
       )}
 
       <div className={styles.recommendBottomArea}>
-        {subTitle && (
-          <div className={styles.tag}>
-            <p className={styles.hotelName}>{subTitle}</p>
-          </div>
-        )}
+        {subTitle && <span className={styles.tag}>{subTitle}</span>}
         <div className={styles.recommendTextArea}>
           <p className={styles.recommendTitle}>{title}</p>
           <p
@@ -89,7 +86,7 @@ function RecommendedCard({
             {price || discountPrice}
             <span>/night</span>
           </p>
-          {roomSelect || <p className={styles.price}>{price}</p>}
+          {roomSelect || <p className={styles.price}>{discountPrice}</p>}
         </div>
         {roomSelect && (
           <button

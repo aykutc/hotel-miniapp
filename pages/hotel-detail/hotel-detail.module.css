@@ -70,7 +70,6 @@
 .textArea {
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
 .title {
@@ -169,7 +168,7 @@
   font-size: 18px;
   line-height: 23px;
   color: var(--primary-neom-dark);
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 /* Recommend End */

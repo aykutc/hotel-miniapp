@@ -7,7 +7,7 @@ import DateBox from "./components/datebox";
 
 const daysNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-const Callendar = ({ setSelection, datesChoice = {} }) => {
+const Calendar = ({ setSelection, datesChoice = {} }) => {
   let [monthChanger, setMonthChanger] = useState(new Date().getMonth());
   const [borderBottom, setBorderBottom] = useState("CHECK-IN");
   const [allDays, setAllDays] = useState([]);
@@ -55,14 +55,14 @@ const Callendar = ({ setSelection, datesChoice = {} }) => {
               onClick={() => setBorderBottom(e)}
             >
               {e === "CHECK-IN" &&
-                "CHECK-IN" in duration &&
-                duration["CHECK-IN"]?.day
+              "CHECK-IN" in duration &&
+              duration["CHECK-IN"]?.day
                 ? dateFormatter(duration, "CHECK-IN")
                 : e === "CHECK-OUT" &&
                   "CHECK-OUT" in duration &&
                   duration["CHECK-OUT"]?.day
-                  ? dateFormatter(duration, "CHECK-OUT")
-                  : e}
+                ? dateFormatter(duration, "CHECK-OUT")
+                : e}
             </div>
           </React.Fragment>
         ))}
@@ -87,4 +87,4 @@ const Callendar = ({ setSelection, datesChoice = {} }) => {
   );
 };
 
-export default Callendar;
+export default Calendar;

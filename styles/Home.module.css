@@ -104,6 +104,8 @@
 
 .staysContainer {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
   flex: 1;
   width: 100%;
   padding-top: 24px;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import Router from "next/router";
 
-const Back = ({ onClick, props }) => (
+const Back = ({ onClick, disableClick, fill = "#8E8F90", ...props }) => (
   <div
     className="div"
     style={{
@@ -9,8 +9,13 @@ const Back = ({ onClick, props }) => (
       paddingRight: 32,
       justifyContent: "center",
       alignItems: "center",
+      ...props.style,
     }}
-    onClick={() => {
+    onClick={(e) => {
+      e.preventDefault();
+      if (disableClick) {
+        return;
+      }
       if (onClick) {
         onClick();
       } else {
@@ -21,7 +26,7 @@ const Back = ({ onClick, props }) => (
     <svg width={10} height={16} fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="m1.5 8-.707-.707L.086 8l.707.707L1.5 8ZM7.793.293l-7 7 1.414 1.414 7-7L7.793.293Zm-7 8.414 7 7 1.414-1.414-7-7L.793 8.707Z"
-        fill="#8E8F90"
+        fill={fill}
       />
     </svg>
     <style jsx>{`

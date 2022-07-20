@@ -74,8 +74,9 @@ function Image({
 
   const mediaMap = [
     "(max-width: 360px)",
-    "(min-width: 361px) and (max-width: 720px)",
-    "(min-width: 721px)",
+    "(min-width: 361px) and (max-width: 480px)",
+    "(min-width: 481px) and (max-width: 600px)",
+    "(min-width: 601px)",
   ];
 
   return (

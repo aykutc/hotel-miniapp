@@ -4,6 +4,8 @@ import styles from "./mapbox.module.css";
 
 import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require('mapbox-gl');"
 import Router from "next/router";
+import { HotelsArray } from "data/data";
+import { saveHotel } from "data/api";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoid2VlcGVyIiwiYSI6ImNrcHh0b2tsMTA2NnIycG82eDY2ejgzM3UifQ.iVEdDIHQE5uK14tVmk1NGg";
@@ -11,34 +13,13 @@ const geojson = {
   type: "FeatureCollection",
   features: [
     {
-      type: "Feature",
-      properties: {
-        message: "123.99/night",
-      },
-      geometry: {
-        type: "Point",
-        coordinates: [36.7931741, 27.799901],
-      },
+      ...HotelsArray[0],
     },
     {
-      type: "Feature",
-      properties: {
-        message: "139.99/night",
-      },
-      geometry: {
-        type: "Point",
-        coordinates: [36.7931741, 29.799901],
-      },
+      ...HotelsArray[1],
     },
     {
-      type: "Feature",
-      properties: {
-        message: "200.99/night",
-      },
-      geometry: {
-        type: "Point",
-        coordinates: [32.7931741, 30.799901],
-      },
+      ...HotelsArray[2],
     },
   ],
 };
@@ -64,6 +45,9 @@ const Map = () => {
       subEl.className = styles.markerContent;
       subEl.innerText = marker.properties.message;
       subEl.onclick = () => {
+        saveHotel({
+          ...marker,
+        });
         Router.push({
           pathname: "/hotel-detail",
         });

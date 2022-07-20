@@ -5,17 +5,20 @@ import React from "react";
 import styles from "@/styles/Home.module.css";
 import HomeMenu from "@/components/HomeComponents/HomeMenu";
 import Explore from "@/components/HomeComponents/Explore";
-import Favorites from "@/components/HomeComponents/Favorites";
-import HeaderTitle from "@/components/HeaderTitle";
+/* import Favorites from "@/components/HomeComponents/Favorites";
+ */ import HeaderTitle from "@/components/HeaderTitle";
 import Stays from "@/components/HomeComponents/Stays";
 import SearchBar from "@/components/SearchBar";
 import Back from "@/components/icons/Back";
 import SearchContent from "@/components/HomeComponents/SearchContent";
-import { getHomeActiveTab } from "data/api";
-import BottomSheet from "@/components/BottomSheet";
-/* import dynamic from "next/dynamic";
-const Favorites = dynamic(() => import("@/components/home/Favorites"), {});
-  */
+import { getHomeActiveTab, saveRegion } from "data/api";
+import Router from "next/router";
+import dynamic from "next/dynamic";
+const Favorites = dynamic(
+  () => import("@/components/HomeComponents/Favorites"),
+  {}
+);
+
 export async function getStaticProps() {
   return {
     props: {
@@ -49,31 +52,35 @@ function Home({ exploreArray, recommendedArray, searchData }) {
     return url;
   };
 
-  /*   React.useEffect(() => {
-    const address =
-      window.location.protocol + "//" + window.location.host + "/home";
+  React.useEffect(() => {
+    const _login = async () => {
+      const address = window.location.protocol + "//" + window.location.host;
+      const user = await checkLogin();
+      if (user) {
+        setUser(user);
+        return;
+      }
+      const urlParams = new URLSearchParams(window.location.href);
+      const myParam = urlParams.get("code");
+      console.log(myParam);
+      if (myParam) {
+        login(myParam, address, generateUrl(address));
+      } else {
+        window.location.assign(generateUrl(address));
+      }
+    };
+    _login();
+  }, []);
 
-    const urlParams = new URLSearchParams(window.location.href);
-    const myParam = urlParams.get("code");
-    if (myParam) {
-      login(myParam, address, generateUrl(address));
-    } else {
-      checkLogin(generateUrl(address));
-    }
-  }, []); */
-
-  const checkLogin = async (authAddress) => {
+  const checkLogin = async () => {
     const user = localStorage.getItem("user");
 
     if (user) {
       const userObj = JSON.parse(user);
       if (userObj.expire > new Date().getTime()) {
-        userObj.name = userObj.name + " local";
-        setUser(userObj);
-        return;
+        return userObj;
       }
     }
-    window.location.assign(authAddress);
   };
   const login = async (code, redirectUri, authAddress) => {
     var myHeaders = new Headers();
@@ -96,7 +103,7 @@ function Home({ exploreArray, recommendedArray, searchData }) {
 
       const result = await response.json();
       const userObj = result.data;
-      userObj.expire = new Date().getTime() + 1 * 60 * 1000;
+      userObj.expire = new Date().getTime() + 60 * 60 * 1000;
       localStorage.setItem("user", JSON.stringify(userObj));
       setUser(result.data);
     } catch (error) {
@@ -163,6 +170,13 @@ function Home({ exploreArray, recommendedArray, searchData }) {
                 <SearchContent
                   searchTerm={searchTerm}
                   searchData={searchData}
+                  onClick={(value) => {
+                    saveRegion(value);
+
+                    Router.push({
+                      pathname: "/date-selection",
+                    });
+                  }}
                 ></SearchContent>
               ) : (
                 <Explore

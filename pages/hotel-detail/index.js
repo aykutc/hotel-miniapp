@@ -164,160 +164,162 @@ function HotelDetail(props) {
           </div>
         </div>
       </div>
-      {hotelDetail.imgRect && (
-        <OptimizedImage
-          style={{
-            height: "294px",
-            minWidth: "100%",
-            zIndex: -100,
-          }}
-          loading="eager"
-          src={hotelDetail.imgRect}
-          type="jpg"
-        />
-      )}
-
-      <div
-        className={styles.detailContainer}
-        style={{
-          transform: hotelDetail.confirmCode
-            ? "translateY(-82px)"
-            : "translateY(0)",
-        }}
-      >
-        {!!hotelDetail.confirmCode ? (
-          <SummaryCard
+      <div>
+        {hotelDetail.imgRect && (
+          <OptimizedImage
             style={{
-              /* marginTop: "-82px", */
-
-              marginBottom: "24px",
-              zIndex: 100,
+              height: "294px",
+              minWidth: "100%",
+              zIndex: -100,
             }}
-            digitalKeyOnCkick={() => {}}
-            messageOnClick={() => {}}
-            checkInOnClick={() => {}}
-            hotelName={hotelDetail.title}
-            confirmCode={hotelDetail.confirmCode}
-            totalDay={hotelDetail.duration}
-            checkIn={hotelDetail.checkIn}
-            checkOut={hotelDetail.checkOut}
+            loading="eager"
+            src={hotelDetail.imgRect}
+            type="jpg"
           />
-        ) : (
-          <>
-            {/* Detail Start  */}
-            <div className={styles.tag}>
-              <p className={styles.hotelName}>{hotelDetail.region}</p>
-            </div>
-            <div className={styles.textArea}>
-              <p className={styles.title}>{hotelDetail.title}</p>
-              <p className={styles.description}>{hotelDetail.block}</p>
-            </div>
-            <div className={styles.ratingArea}>
-              <Star />
-              <p className={styles.rate}>{hotelDetail.rate}</p>
-              <span className={styles.divider} />
-              <p className={styles.reviews}>{hotelDetail.reviews} reviews</p>
-            </div>
-
-            {/* Detail End  */}
-
-            {/* Room Start  */}
-            <div style={{ marginBottom: "24px", marginTop: "24px" }}>
-              <RoomSummary
-                checkIn={hotelDetail.checkIn}
-                checkOut={hotelDetail.checkOut}
-                duration={hotelDetail.duration}
-                rooms={hotelDetail.rooms}
-                kids={hotelDetail.kids}
-                adults={hotelDetail.adults}
-                onDateClick={() => {
-                  setIsDateModalOpen(true);
-                }}
-                onRoomClick={() => {
-                  setIsRoomModalOpen(true);
-                }}
-              />
-            </div>
-            {/* Room Start  */}
-          </>
         )}
 
-        {/* Map Detail Start  */}
-        <div className={styles.mapDetailContainer}>
-          <OptimizedImage src={"map.jpg"} type="jpg" />
-          <div className={styles.mapDetail}>
-            <p className={styles.locationText}>
-              {hotelDetail.region} {hotelDetail.location}
-            </p>
-            <p className={styles.phoneText}>{hotelDetail.phone}</p>
+        <div
+          className={styles.detailContainer}
+          style={{
+            transform: hotelDetail.confirmCode
+              ? "translateY(-82px)"
+              : "translateY(0)",
+          }}
+        >
+          {!!hotelDetail.confirmCode ? (
+            <SummaryCard
+              style={{
+                /* marginTop: "-82px", */
+
+                marginBottom: "24px",
+                zIndex: 100,
+              }}
+              digitalKeyOnCkick={() => {}}
+              messageOnClick={() => {}}
+              checkInOnClick={() => {}}
+              hotelName={hotelDetail.title}
+              confirmCode={hotelDetail.confirmCode}
+              totalDay={hotelDetail.duration}
+              checkIn={hotelDetail.checkIn}
+              checkOut={hotelDetail.checkOut}
+            />
+          ) : (
+            <>
+              {/* Detail Start  */}
+              <div className={styles.tag}>
+                <p className={styles.hotelName}>{hotelDetail.region}</p>
+              </div>
+              <div className={styles.textArea}>
+                <p className={styles.title}>{hotelDetail.title}</p>
+                <p className={styles.description}>{hotelDetail.block}</p>
+              </div>
+              <div className={styles.ratingArea}>
+                <Star />
+                <p className={styles.rate}>{hotelDetail.rate}</p>
+                <span className={styles.divider} />
+                <p className={styles.reviews}>{hotelDetail.reviews} reviews</p>
+              </div>
+
+              {/* Detail End  */}
+
+              {/* Room Start  */}
+              <div style={{ marginBottom: "24px", marginTop: "24px" }}>
+                <RoomSummary
+                  checkIn={hotelDetail.checkIn}
+                  checkOut={hotelDetail.checkOut}
+                  duration={hotelDetail.duration}
+                  rooms={hotelDetail.rooms}
+                  kids={hotelDetail.kids}
+                  adults={hotelDetail.adults}
+                  onDateClick={() => {
+                    setIsDateModalOpen(true);
+                  }}
+                  onRoomClick={() => {
+                    setIsRoomModalOpen(true);
+                  }}
+                />
+              </div>
+              {/* Room Start  */}
+            </>
+          )}
+
+          {/* Map Detail Start  */}
+          <div className={styles.mapDetailContainer}>
+            <OptimizedImage src={"map.jpg"} type="jpg" />
+            <div className={styles.mapDetail}>
+              <p className={styles.locationText}>
+                {hotelDetail.region} {hotelDetail.location}
+              </p>
+              <p className={styles.phoneText}>{hotelDetail.phone}</p>
+            </div>
           </div>
+          {/* Map Detail End  */}
+
+          {/* About Start  */}
+          <div className={styles.aboutContainer}>
+            <div className={styles.title}>About</div>
+            <p
+              className={styles.aboutText}
+              style={{
+                display: readMore ? "block" : "-webkit-box",
+              }}
+            >
+              TROJENA will redefine mountain tourism for the world by creating a
+              place based on the principles of ecotourism, highlighting our
+              efforts to preserve nature and enhance the ....
+            </p>
+            <span
+              className={styles.readMore}
+              onClick={() => setReadMore(!readMore)}
+            >
+              {readMore ? "Read Less" : "Read More"}
+            </span>
+            <div className={styles.horizontalDivider}></div>
+          </div>
+          {/* About End  */}
+
+          {/* Amenities Start  */}
+          <div className={styles.amentiensContainer}>
+            <div className={styles.title}>Amenities</div>
+            {amenities.map((amenity, index) => {
+              return (
+                <>
+                  <div className={styles.amenity} key={amenity.name + index}>
+                    <div>{amenity.icon}</div>
+                    <div className={styles.amenityText}>{amenity.name}</div>
+                  </div>
+                  <div className={styles.horizontalDivider} />
+                </>
+              );
+            })}
+          </div>
+          {/* Amenities End  */}
+
+          {/* Recommend Start  */}
+          {!hotelDetail.confirmCode && (
+            <>
+              <div className={styles.title}>You May Also Like</div>
+
+              <div className={styles.recommendedContainer}>
+                {RecommendedArray.map((item) => {
+                  return (
+                    <RecommendedCard
+                      key={item.title}
+                      hotel={item}
+                      imageStyles={{
+                        width: "100%",
+                        height: 118,
+                        display: "block",
+                      }}
+                    ></RecommendedCard>
+                  );
+                })}
+              </div>
+            </>
+          )}
+
+          {/* Recommend End  */}
         </div>
-        {/* Map Detail End  */}
-
-        {/* About Start  */}
-        <div className={styles.aboutContainer}>
-          <div className={styles.title}>About</div>
-          <p
-            className={styles.aboutText}
-            style={{
-              display: readMore ? "block" : "-webkit-box",
-            }}
-          >
-            TROJENA will redefine mountain tourism for the world by creating a
-            place based on the principles of ecotourism, highlighting our
-            efforts to preserve nature and enhance the ....
-          </p>
-          <span
-            className={styles.readMore}
-            onClick={() => setReadMore(!readMore)}
-          >
-            {readMore ? "Read Less" : "Read More"}
-          </span>
-          <div className={styles.horizontalDivider}></div>
-        </div>
-        {/* About End  */}
-
-        {/* Amenities Start  */}
-        <div className={styles.amentiensContainer}>
-          <div className={styles.title}>Amenities</div>
-          {amenities.map((amenity, index) => {
-            return (
-              <>
-                <div className={styles.amenity} key={amenity.name + index}>
-                  <div>{amenity.icon}</div>
-                  <div className={styles.amenityText}>{amenity.name}</div>
-                </div>
-                <div className={styles.horizontalDivider} />
-              </>
-            );
-          })}
-        </div>
-        {/* Amenities End  */}
-
-        {/* Recommend Start  */}
-        {!hotelDetail.confirmCode && (
-          <>
-            <div className={styles.title}>You May Also Like</div>
-
-            <div className={styles.recommendedContainer}>
-              {RecommendedArray.map((item) => {
-                return (
-                  <RecommendedCard
-                    key={item.title}
-                    hotel={item}
-                    imageStyles={{
-                      width: "100%",
-                      height: 118,
-                      display: "block",
-                    }}
-                  ></RecommendedCard>
-                );
-              })}
-            </div>
-          </>
-        )}
-
-        {/* Recommend End  */}
       </div>
       {!hotelDetail.confirmCode && (
         <FloatingBottomButton

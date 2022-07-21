@@ -20,17 +20,6 @@ html {
   scroll-behavior: smooth;
 }
 
-#__next {
-  width: 100vw;
-  height: 100vh;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-#__next::-webkit-scrollbar {
-  display: none;
-}
 /* Sections
    ========================================================================== */
 

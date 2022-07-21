@@ -224,6 +224,7 @@ function HotelDetail(props) {
               <RoomSummary
                 checkIn={hotelDetail.checkIn}
                 checkOut={hotelDetail.checkOut}
+                duration={hotelDetail.duration}
                 rooms={hotelDetail.rooms}
                 kids={hotelDetail.kids}
                 adults={hotelDetail.adults}

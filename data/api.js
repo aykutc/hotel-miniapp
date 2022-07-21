@@ -61,8 +61,6 @@ const saveStaysTab = (value) => {
   saveItemSessionStorage("staysTab", value);
 };
 const getStaysTab = (value) => {
-  const a = getItemSessionStroage("staysTab");
-  console.log("a", a);
   return getItemSessionStroage("staysTab");
 };
 const saveResultTab = (value) => {

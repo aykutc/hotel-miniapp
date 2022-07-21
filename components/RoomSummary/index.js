@@ -9,6 +9,7 @@ function RoomSummary({
   kids = 0,
   adults = 1,
   rooms = 1,
+  duration,
   checkIn = "24 JUN 22",
   checkOut = "27 JUN 22",
 }) {
@@ -41,7 +42,7 @@ function RoomSummary({
               checkOut?.split(" ")[0]}
           </p>
           <p className={styles.roomSubTitle}>
-            {Number(checkOut?.split(" ")[0]) - Number(checkIn?.split(" ")[0])}{" "}
+            {duration + " "}
             Nights
           </p>
         </div>

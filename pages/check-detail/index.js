@@ -37,30 +37,6 @@ function CheckDetail() {
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
 
   const [dateSelection, setDateSelection] = useState({});
-  /*   const [roomSelection, setRoomSelection] = useState({
-    rooms: 1,
-    adults: 1,
-    kids: 0,
-  }); */
-
-  /*   useEffect(() => {
-    setRoomSelection({
-      rooms,
-      adults,
-      kids,
-    });
-    setDateSelection({
-      "CHECK-IN": {
-        time: checkIn?.split(" ")[1] + " " + checkIn?.split(" ")[2],
-        day: Number(checkIn?.split(" ")[0]),
-      },
-      "CHECK-OUT": {
-        time: checkOut?.split(" ")[1] + " " + checkOut?.split(" ")[2],
-        day: Number(checkOut?.split(" ")[0]),
-      },
-      durationAmount: 2,
-    });
-  }, [router.query]); */
 
   React.useEffect(() => {
     const region = getRegion();
@@ -84,6 +60,7 @@ function CheckDetail() {
       ...dateSelection,
       ...roomSelection,
     });
+    setDateSelection(dateSelection);
   }, [isDateModalOpen, isRegionModalOpen, isRoomModalOpen]);
 
   const removeBottomSheet = (fun) => {
@@ -92,6 +69,7 @@ function CheckDetail() {
       setaddBottomSheet(false);
     }, 100);
   };
+
   return (
     <>
       <div className={styles.checkDetailContainer}>
@@ -115,6 +93,7 @@ function CheckDetail() {
         <RoomSummary
           checkIn={checkState.checkIn}
           checkOut={checkState.checkOut}
+          duration={checkState.duration}
           rooms={checkState.rooms}
           kids={checkState.kids}
           adults={checkState.adults}
@@ -158,11 +137,15 @@ function CheckDetail() {
               /* height: "calc(100vh - 170px)", */
             }}
           >
-            <Calendar setSelection={setDateSelection} />
+            <Calendar
+              setSelection={setDateSelection}
+              datesChoice={{ ...dateSelection }}
+            />
             <FloatingBottomButton
               style={{ position: "absolute" }}
               onClick={async () => {
                 saveDateSelection({
+                  duration: dateSelection.durationAmount,
                   checkIn:
                     dateSelection["CHECK-IN"].day +
                     " " +

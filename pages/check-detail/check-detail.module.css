@@ -1,38 +1,40 @@
 .header {
-    height: 58px;
-    display: flex;
-    align-items: center;
+  height: 58px;
+  display: flex;
+  align-items: center;
 }
 
 .checkDetailContainer {
-    padding: 0px 24px 24px 24px;
-    display: flex;
-    flex-direction: column;
+  padding: 0px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .regionContainer {
-    background: #FFFFFF;
-    padding: 14px;
-    border: 1px solid #E8E9E9;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 12px;
-    margin-top: 24px;
+  background: #ffffff;
+  padding: 14px;
+  border: 1px solid #e8e9e9;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12px;
+  margin-top: 24px;
 }
 
 .regionText {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    margin-left: 14px;
-    color: #1D1F22;
-    gap: 8px
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  margin-left: 14px;
+  color: #1d1f22;
+  gap: 8px;
 }
 
 .search {
-    display: flex;
-    width: 100%;
-    margin-bottom: 16px;
+  display: flex;
+  width: 100%;
+  margin-bottom: 16px;
 }

@@ -52,7 +52,7 @@ function Home({ exploreArray, recommendedArray, searchData }) {
     return url;
   };
 
-  React.useEffect(() => {
+  /*  React.useEffect(() => {
     const _login = async () => {
       const address = window.location.protocol + "//" + window.location.host;
       if (user) {
@@ -73,7 +73,7 @@ function Home({ exploreArray, recommendedArray, searchData }) {
       }
     };
     _login();
-  }, []);
+  }, []); */
 
   const checkLogin = async () => {
     const user = localStorage.getItem("user");

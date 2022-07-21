@@ -6,11 +6,7 @@ export async function getStaticProps() {
   };
 }
 function Rooms() {
-  return (
-    <div>
-      <RoomsGuests />
-    </div>
-  );
+  return <RoomsGuests />;
 }
 
 export default Rooms;

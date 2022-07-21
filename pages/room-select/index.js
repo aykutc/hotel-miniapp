@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import HeaderTitle from "@/components/HeaderTitle";
 import RecommendedCard from "@/components/RecommendedCard";
 import Back from "@/components/icons/Back";
-import styles from "@/styles/Home.module.css";
 import newStyles from "../../components/RecommendedCard/Recommended.module.css";
 import { RoomSelectionArray } from "data/data";
 import Router from "next/router";
@@ -12,6 +11,7 @@ import {
   getRoomSelection,
   saveSelectedRooms,
 } from "data/api";
+import Header from "@/components/Header";
 export async function getStaticProps() {
   return {
     props: { RoomSelectionArray: RoomSelectionArray },
@@ -79,51 +79,60 @@ const RoomSelect = ({ RoomSelectionArray }) => {
   }, []);
 
   return (
-    <div style={{ marginLeft: 24, height: "100vh" }}>
-      <div className={styles.header}>
+    <div
+      style={{
+        marginLeft: 24,
+        display: "flex",
+        flex: "1",
+        flexDirection: "column",
+        position: "relative",
+        height: "100vh",
+        overflow: "hidden",
+        overscrollBehavior: "none",
+      }}
+    >
+      <Header>
         <Back style={{ marginRight: 32 }}></Back>
         <HeaderTitle>Rooms</HeaderTitle>
-      </div>
+      </Header>
+
       <div style={{ height: 16 }}></div>
+
       <div
         style={{
           display: "flex",
-          overflow: "hidden",
+          flexDirection: "column",
           paddingBottom: 120,
+          width: "100%",
+          overflow: "scroll",
         }}
       >
-        <div
-          style={{
-            overflow: "scroll",
-            width: "100%",
-          }}
-        >
-          {rooms.map((item) => {
-            return (
-              <div
-                style={{ paddingRight: 24, marginBottom: 16 }}
-                key={item.title}
-              >
-                <RecommendedCard
-                  roomSelect
-                  updateSelectedRooms={updateSelectedRooms}
-                  item={item}
-                  hotel={item}
-                  imageStyles={{ height: 120, width: "100%", display: "block" }}
-                  style={{
-                    width: "100%",
-                    minWidth: "100%",
-                  }}
-                />
-              </div>
-            );
-          })}
-        </div>
+        {rooms.map((item) => {
+          return (
+            <div
+              style={{ paddingRight: 24, marginBottom: 16 }}
+              key={item.title}
+            >
+              <RecommendedCard
+                roomSelect
+                updateSelectedRooms={updateSelectedRooms}
+                item={item}
+                hotel={item}
+                imageStyles={{ height: 120, width: "100%", display: "block" }}
+                style={{
+                  width: "100%",
+                  minWidth: "100%",
+                }}
+              />
+            </div>
+          );
+        })}
       </div>
+
       {selectedRooms.length > 0 && (
         <div
           style={{
-            position: "absolute",
+            position: "fixed",
             bottom: 0,
             left: 0,
             width: "100%",

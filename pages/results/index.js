@@ -135,6 +135,7 @@ function Results({ HotelsArray }) {
             display: "flex",
             flexDirection: "column",
             padding: "0 24px",
+            flexShrink: 0,
           }}
         >
           <Header>
@@ -250,6 +251,7 @@ function Results({ HotelsArray }) {
             </Suspense>
           </div>
         )}
+        <div style={{ height: 120 }}></div>
         <div className={styles.bottomContainer}>
           <Tabs
             data={["LIST VIEW", "MAP VIEW"]}

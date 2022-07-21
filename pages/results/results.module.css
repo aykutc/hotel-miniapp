@@ -3,37 +3,38 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 .bottomContainer {
   padding: 14px 24px 20px 24px;
-
+  position: fixed;
   width: 100%;
   bottom: 0;
   left: 0;
   display: flex;
 
   flex-direction: row;
-  gap: 14px;
+
   background: #ffffff;
   box-shadow: inset 0px 1px 0px #e8e9e9;
 }
 
 .selectedFiltersContainer {
-  transform: translateX(-24px);
-  padding-left: 24px;
   padding-right: 24px;
   width: 100vw;
   display: flex;
   flex-direction: row;
-  gap: 8px;
   margin-bottom: 24px;
-  overflow: auto;
+  height: 46px;
+  align-items: center;
+  overflow-x: scroll;
+  flex-shrink: 0;
 }
 
 .filterItem {
   display: flex;
-  gap: 8px;
+  margin: 0px 4px;
   padding: 6px 12px;
   background: #ffffff;
 

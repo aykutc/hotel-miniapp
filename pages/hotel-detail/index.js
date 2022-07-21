@@ -90,7 +90,7 @@ function HotelDetail(props) {
 
     setHotelDetail({
       ...hotelDetail,
-      region,
+      region: region ? region : "Trojena",
       ..._dateSelection,
       ...roomSelection,
       ...hotel,
@@ -104,20 +104,19 @@ function HotelDetail(props) {
     }
   }, []);
   React.useEffect(() => {
-    console.log(dateSelection);
     if (dateSelection && dateSelection.durationAmount) {
       const obj = {
         duration: dateSelection.durationAmount,
         checkIn: dateSelection.checkIn
           ? dateSelection.checkIn
           : dateSelection["CHECK-IN"].day +
-          " " +
-          dateSelection["CHECK-IN"].time,
+            " " +
+            dateSelection["CHECK-IN"].time,
         checkOut: dateSelection.checkOut
           ? dateSelection.checkOut
           : dateSelection["CHECK-OUT"].day +
-          " " +
-          dateSelection["CHECK-OUT"].time,
+            " " +
+            dateSelection["CHECK-OUT"].time,
       };
       setDateSelection(obj);
       saveDateSelection(obj);
@@ -194,9 +193,9 @@ function HotelDetail(props) {
               marginBottom: "24px",
               zIndex: 100,
             }}
-            digitalKeyOnCkick={() => { }}
-            messageOnClick={() => { }}
-            checkInOnClick={() => { }}
+            digitalKeyOnCkick={() => {}}
+            messageOnClick={() => {}}
+            checkInOnClick={() => {}}
             hotelName={hotelDetail.title}
             confirmCode={hotelDetail.confirmCode}
             totalDay={hotelDetail.duration}
@@ -258,16 +257,20 @@ function HotelDetail(props) {
         {/* About Start  */}
         <div className={styles.aboutContainer}>
           <div className={styles.title}>About</div>
-          <p className={styles.aboutText} style={{
-            display: readMore ? "block" : "-webkit-box"
-          }}>
+          <p
+            className={styles.aboutText}
+            style={{
+              display: readMore ? "block" : "-webkit-box",
+            }}
+          >
             TROJENA will redefine mountain tourism for the world by creating a
             place based on the principles of ecotourism, highlighting our
             efforts to preserve nature and enhance the ....
           </p>
-          <span className={styles.readMore} onClick={
-            () => setReadMore(!readMore)
-          }>
+          <span
+            className={styles.readMore}
+            onClick={() => setReadMore(!readMore)}
+          >
             {readMore ? "Read Less" : "Read More"}
           </span>
           <div className={styles.horizontalDivider}></div>
@@ -325,7 +328,6 @@ function HotelDetail(props) {
           SEE AVAILABLE ROOMS
         </FloatingBottomButton>
       )}
-
       <BottomSheet
         className={"bottom-sheet-2"}
         title="DATES"
@@ -361,10 +363,11 @@ function HotelDetail(props) {
             {dateSelection
               ? dateSelection?.durationAmount
                 ? `CONTINUE - ${dateSelection?.durationAmount} NIGHTS`
-                : `SELECT ${dateSelection["CHECK-IN"] === undefined
-                  ? "CHECK IN"
-                  : "CHECK OUT"
-                } DATE`
+                : `SELECT ${
+                    dateSelection["CHECK-IN"] === undefined
+                      ? "CHECK IN"
+                      : "CHECK OUT"
+                  } DATE`
               : ""}
           </FloatingBottomButton>
         </div>

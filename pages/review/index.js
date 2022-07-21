@@ -17,6 +17,7 @@ import {
   getSelectedRooms,
 } from "data/api";
 import { safeParseFloat } from "../../utils";
+import Header from "@/components/Header";
 
 export async function getStaticProps() {
   return {
@@ -61,192 +62,187 @@ const Review = () => {
       style={{
         paddingLeft: 24,
         paddingRight: 24,
-        paddingTop: 18,
+
         paddingBottom: 70,
         display: "flex",
         flex: "1",
         flexDirection: "column",
         position: "relative",
-        overflow: "hidden",
-        overflowY: "scroll",
         height: "100vh",
+        overflow: "hidden",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: 33,
-          height: 58,
-        }}
-      >
+      <Header style={{ marginBottom: 12 }}>
         <Back style={{ marginRight: 32 }}></Back>
-        <HeaderTitle>REVIEW</HeaderTitle>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          gap: 14,
-          marginBottom: 40,
-        }}
-      >
-        {hotelDetail && (
-          <OptimizedImage
-            src={hotelDetail.imgRect}
-            maxWidth={64}
-            style={{ width: "64px", height: "64px", borderRadius: "4px" }}
-          ></OptimizedImage>
-        )}
 
+        <HeaderTitle>RESULTS</HeaderTitle>
+      </Header>
+      <div style={{ overflow: "scroll" }}>
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "flex-start",
-            gap: 4,
+            justifyContent: "flex-start",
+            gap: 14,
+            marginBottom: 40,
           }}
         >
-          <p
+          {hotelDetail && (
+            <OptimizedImage
+              src={hotelDetail.imgRect}
+              maxWidth={64}
+              style={{ width: "64px", height: "64px", borderRadius: "4px" }}
+            ></OptimizedImage>
+          )}
+
+          <div
             style={{
-              margin: 0,
-              fontFamily: "Outfit",
-              fontStyle: "normal",
-              fontWeight: "500",
-              fontSize: 16,
-              letterSpacing: "0.01em",
-              lineHeight: "20px",
-              textTransform: "uppercase",
-              color: "#1d1f22",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "flex-start",
+              marginLeft: 8,
             }}
           >
-            {hotelDetail?.title}
-          </p>
-          <p
-            style={{
-              margin: 0,
-              fontFamily: "Outfit",
-              fontStyle: "normal",
-              fontWeight: "300",
-              fontSize: 13,
-              color: "#565759",
-              lineHeight: "18px",
-            }}
-          >
-            {hotelDetail?.block}
-          </p>
+            <p
+              style={{
+                margin: 0,
+                fontFamily: "Outfit",
+                fontStyle: "normal",
+                fontWeight: "500",
+                fontSize: 16,
+                letterSpacing: "0.01em",
+                lineHeight: "20px",
+                textTransform: "uppercase",
+                color: "#1d1f22",
+              }}
+            >
+              {hotelDetail?.title}
+            </p>
+            <p
+              style={{
+                margin: 0,
+                fontFamily: "Outfit",
+                fontStyle: "normal",
+                fontWeight: "300",
+                fontSize: 13,
+                color: "#565759",
+                lineHeight: "18px",
+              }}
+            >
+              {hotelDetail?.block}
+            </p>
+          </div>
         </div>
-      </div>
-      <Title style={{ letterSpacing: "0.01em", lineHeight: "20px" }}>
-        Stay Information
-      </Title>
-      <div style={{ marginTop: 8, marginBottom: 40 }}>
-        {hotelDetail && (
+        <Title style={{ letterSpacing: "0.01em", lineHeight: "20px" }}>
+          Stay Information
+        </Title>
+        <div style={{ marginTop: 8, marginBottom: 40 }}>
+          {hotelDetail && (
+            <StayInfoItem
+              icon={<Calendar />}
+              title={
+                monthFormatter.format(checkInDate) +
+                " " +
+                checkInDate.getDate() +
+                " - " +
+                monthFormatter.format(checkOutDate) +
+                " " +
+                checkOutDate.getDate() +
+                " (" +
+                hotelDetail.duration +
+                " nights)"
+              }
+            />
+          )}
+
           <StayInfoItem
-            icon={<Calendar />}
+            icon={<Room />}
             title={
-              monthFormatter.format(checkInDate) +
-              " " +
-              checkInDate.getDate() +
-              " - " +
-              monthFormatter.format(checkOutDate) +
-              " " +
-              checkOutDate.getDate() +
-              " (" +
-              hotelDetail.duration +
-              " nights)"
+              hotelDetail?.selectedRooms.length +
+              " Room, " +
+              parseInt(
+                parseInt(hotelDetail?.kids) + parseInt(hotelDetail?.adults)
+              ) +
+              " Guests "
             }
           />
+          <StayInfoItem
+            icon={<Bed />}
+            title={hotelDetail?.selectedRooms.map((item, index) => {
+              if (index > 0) {
+                return ", " + item.title;
+              }
+              return item.title;
+            })}
+          />
+        </div>
+        <Title style={{ letterSpacing: "0.01em", lineHeight: "20px" }}>
+          Charges Summary
+        </Title>
+        {hotelDetail && (
+          <div style={{ marginTop: 16, marginBottom: 40 }}>
+            <Dropdown
+              data={[
+                {
+                  name:
+                    monthFormatter.format(checkInDate) +
+                    " " +
+                    checkInDate.getDate() +
+                    " - " +
+                    monthFormatter.format(checkOutDate) +
+                    " " +
+                    checkOutDate.getDate() +
+                    " (" +
+                    hotelDetail.duration +
+                    " nights)",
+                  price: totalPrice,
+                },
+                {
+                  name: "Tax",
+                  price: "0.00",
+                },
+              ]}
+              totalPrice={totalPrice}
+              open={open}
+              handleClick={() => setOpen(!open)}
+            />
+          </div>
         )}
 
-        <StayInfoItem
-          icon={<Room />}
-          title={
-            hotelDetail?.selectedRooms.length +
-            " Room, " +
-            parseInt(
-              parseInt(hotelDetail?.kids) + parseInt(hotelDetail?.adults)
-            ) +
-            " Guests "
-          }
-        />
-        <StayInfoItem
-          icon={<Bed />}
-          title={hotelDetail?.selectedRooms.map((item, index) => {
-            if (index > 0) {
-              return ", " + item.title;
-            }
-            return item.title;
-          })}
-        />
+        <Title style={{ letterSpacing: "0.01em", lineHeight: "20px" }}>
+          Cancellation Policy
+        </Title>
+        <p
+          style={{
+            margin: 0,
+            fontFamily: "Outfit",
+            fontStyle: "normal",
+            fontWeight: "400",
+            fontSize: 14,
+            color: "#565759",
+            lineHeight: "21px",
+            letterSpacing: "0.01em",
+            marginBottom: 40,
+            marginTop: 8,
+          }}
+        >
+          Cancellation policies may vary depending on the rate or dates of your
+          reservation. Please refer to your reservation confirmation to verify
+          your cancellation policy. If you need further assistance, call the
+          hotel directly or contact Customer Support.
+          <br />
+          <br />
+          You can check the cancellation policy for your reservation and make
+          the cancellations online or by contacting Customer Support.
+          <br />
+          <br />
+          We are aware of a systems issue where pre-arrival emails are still
+          sent for recently cancelled reservations. If this happens, check your
+          app and / or account first to see if the reservation is still showing.
+          If its not, disregard the check-in email.
+        </p>
+        <FloatingBottomButton onClick={() => {}}>BOOK NOW</FloatingBottomButton>
       </div>
-      <Title style={{ letterSpacing: "0.01em", lineHeight: "20px" }}>
-        Charges Summary
-      </Title>
-      {hotelDetail && (
-        <div style={{ marginTop: 16, marginBottom: 40 }}>
-          <Dropdown
-            data={[
-              {
-                name:
-                  monthFormatter.format(checkInDate) +
-                  " " +
-                  checkInDate.getDate() +
-                  " - " +
-                  monthFormatter.format(checkOutDate) +
-                  " " +
-                  checkOutDate.getDate() +
-                  " (" +
-                  hotelDetail.duration +
-                  " nights)",
-                price: totalPrice,
-              },
-              {
-                name: "Tax",
-                price: "0.00",
-              },
-            ]}
-            totalPrice={totalPrice}
-            open={open}
-            handleClick={() => setOpen(!open)}
-          />
-        </div>
-      )}
-
-      <Title style={{ letterSpacing: "0.01em", lineHeight: "20px" }}>
-        Cancellation Policy
-      </Title>
-      <p
-        style={{
-          margin: 0,
-          fontFamily: "Outfit",
-          fontStyle: "normal",
-          fontWeight: "400",
-          fontSize: 14,
-          color: "#565759",
-          lineHeight: "21px",
-          letterSpacing: "0.01em",
-          marginBottom: 40,
-          marginTop: 8,
-        }}
-      >
-        Cancellation policies may vary depending on the rate or dates of your
-        reservation. Please refer to your reservation confirmation to verify
-        your cancellation policy. If you need further assistance, call the hotel
-        directly or contact Customer Support.
-        <br />
-        <br />
-        You can check the cancellation policy for your reservation and make the
-        cancellations online or by contacting Customer Support.
-        <br />
-        <br />
-        We are aware of a systems issue where pre-arrival emails are still sent
-        for recently cancelled reservations. If this happens, check your app and
-        / or account first to see if the reservation is still showing. If its
-        not, disregard the check-in email.
-      </p>
-      <FloatingBottomButton onClick={() => {}}>BOOK NOW</FloatingBottomButton>
     </div>
   );
 };

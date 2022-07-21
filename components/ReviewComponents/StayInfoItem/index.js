@@ -16,7 +16,7 @@ const StayInfoItem = ({ icon, title, onClick }) => {
       <div
         style={{
           display: "flex",
-          gap: 14,
+
           justifyContent: "flex-start",
           alignItems: "flex-start",
         }}
@@ -27,6 +27,7 @@ const StayInfoItem = ({ icon, title, onClick }) => {
             fontFamily: "Outfit",
             fontStyle: "normal",
             fontWeight: "400",
+            marginLeft: 14,
             fontSize: 16,
             color: "#1D1F22",
           }}

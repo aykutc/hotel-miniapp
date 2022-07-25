@@ -25,7 +25,14 @@ function Favorites() {
         <HeaderTitle>Favorites</HeaderTitle>
       </div>
       <div style={{ height: 16 }}></div>
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          overflow: "auto",
+          paddingBottom: 120,
+        }}
+      >
         {favoriteArray?.length === 0 && !isLoading && (
           <div
             style={{

@@ -1,4 +1,3 @@
-import Callendar from "@/components/Calendar";
 import HeaderTitle from "@/components/HeaderTitle";
 import React from "react";
 import styles from "@/styles/DateSelection.module.css";
@@ -19,6 +18,13 @@ function Dates(props) {
     console.log("aa", sessionStorage.getItem("aa"));
   }, []);
  */
+
+  React.useEffect(() => {
+    // Prefetch the dashboard page
+    setTimeout(() => {
+      Router.prefetch("/check-detail");
+    }, 300);
+  }, []);
   return (
     <div className={styles.container}>
       <div

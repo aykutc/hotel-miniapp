@@ -41,10 +41,11 @@ function UpcomingCard({
           <p className={styles.upcomingTitle}>{hotelName}</p>
           <p className={styles.upcomingDescription}>{block}</p>
         </div>
-
-        <div className={styles.tag}>
-          <p className={styles.hotelName}>{status}</p>
-        </div>
+        {status && (
+          <div className={styles.tag}>
+            <p className={styles.hotelName}>{status}</p>
+          </div>
+        )}
       </div>
     </div>
   );

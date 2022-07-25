@@ -77,7 +77,12 @@ const RoomSelect = ({ RoomSelectionArray }) => {
       ...hotel,
     });
   }, []);
-
+  useEffect(() => {
+    // Prefetch the dashboard page
+    setTimeout(() => {
+      Router.prefetch("/review");
+    }, 300);
+  }, []);
   return (
     <div
       style={{

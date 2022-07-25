@@ -102,7 +102,7 @@ const HotelsArray = [
 
     type: "Feature",
     properties: {
-      message: "164.99/night",
+      message: "$164.99/night",
     },
     geometry: {
       type: "Point",
@@ -125,7 +125,7 @@ const HotelsArray = [
 
     type: "Feature",
     properties: {
-      message: "132.90/night",
+      message: "$132.90/night",
     },
     geometry: {
       type: "Point",
@@ -148,7 +148,7 @@ const HotelsArray = [
 
     type: "Feature",
     properties: {
-      message: "234.43/night",
+      message: "$234.43/night",
     },
     geometry: {
       type: "Point",

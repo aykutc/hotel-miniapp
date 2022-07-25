@@ -75,7 +75,7 @@ const Review = () => {
       <Header style={{ marginBottom: 12 }}>
         <Back style={{ marginRight: 32 }}></Back>
 
-        <HeaderTitle>RESULTS</HeaderTitle>
+        <HeaderTitle>REVIEW</HeaderTitle>
       </Header>
       <div style={{ overflow: "scroll" }}>
         <div

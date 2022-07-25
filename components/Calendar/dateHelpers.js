@@ -44,7 +44,7 @@ export const callendarHandler = (monthChanger) => {
   for (let x = firstDayIndex === 7 ? -1 : firstDayIndex - 1; x >= 0; x--) {
     prevDays.push(prevLastDay - x);
   }
-  console.log(prevDays)
+  console.log(prevDays);
 
   for (let i = 1; i <= lastDay; i++) {
     days.push(i);
@@ -75,17 +75,18 @@ export const dateFormatter = (duration, type) => {
     "Dec",
   ];
   const dayNo = new Date(day + " " + time).getDay();
+  const dayDate = new Date(day + " " + time).getDate();
   const monthNo = new Date(day + " " + time).getMonth();
   const year = new Date(day + " " + time).getFullYear();
 
-  return `${days[dayNo]}, ${months[monthNo]} ${year}`;
+  return `${days[dayNo]}, ${months[monthNo]} ${dayDate}`;
 };
 
 export const isLaterFromToday = (d1, d2, borderBottom) => {
   return (
     (d1.getFullYear() === d2.getFullYear() &&
-    d1.getMonth() === d2.getMonth() &&
-    borderBottom === "CHECK-IN"
+      d1.getMonth() === d2.getMonth() &&
+      borderBottom === "CHECK-IN"
       ? d1.getDate() >= d2.getDate()
       : d1.getDate() > d2.getDate()) ||
     d1.getMonth() > d2.getMonth() ||

@@ -54,6 +54,12 @@ function HotelDetail(props) {
   ];
   const [hotelDetail, setHotelDetail] = React.useState({});
   React.useEffect(() => {
+    // Prefetch the dashboard page
+    setTimeout(() => {
+      Router.prefetch("/room-select");
+    }, 300);
+  }, []);
+  React.useEffect(() => {
     const region = getRegion();
     let _dateSelection = getDateSelection();
 

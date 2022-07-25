@@ -52,7 +52,7 @@ function Home({ exploreArray, recommendedArray, searchData }) {
     return url;
   };
 
-  /*  React.useEffect(() => {
+  React.useEffect(() => {
     const _login = async () => {
       const address = window.location.protocol + "//" + window.location.host;
       if (user) {
@@ -73,7 +73,7 @@ function Home({ exploreArray, recommendedArray, searchData }) {
       }
     };
     _login();
-  }, []); */
+  }, []);
 
   const checkLogin = async () => {
     const user = localStorage.getItem("user");
@@ -115,6 +115,13 @@ function Home({ exploreArray, recommendedArray, searchData }) {
     }
   };
 
+  React.useEffect(() => {
+    // Prefetch the dashboard page
+    setTimeout(() => {
+      Router.prefetch("/date-selection");
+      Router.prefetch("/hotel-detail");
+    }, 500);
+  }, []);
   return (
     <div className={styles.container}>
       <Head>
@@ -198,7 +205,6 @@ function Home({ exploreArray, recommendedArray, searchData }) {
         <Favorites recommendedArray={recommendedArray} />
       )}
       {activeMenu === "Stays" && <Stays />}
-      <div style={{ height: 100 }}></div>
       {!focusedSearch && (
         <HomeMenu
           activeMenu={activeMenu}
@@ -232,7 +238,7 @@ function Home({ exploreArray, recommendedArray, searchData }) {
           align-items: center;
         }
         .any {
-          height: 200px;
+          height: 120px;
         }
       `}</style>
     </div>

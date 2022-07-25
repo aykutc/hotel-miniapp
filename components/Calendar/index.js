@@ -12,7 +12,7 @@ const Calendar = ({ setSelection, datesChoice = {} }) => {
   const [borderBottom, setBorderBottom] = useState("CHECK-IN");
   const [allDays, setAllDays] = useState([]);
   const [duration, setDuration] = useState({});
-
+  console.log("datesChoice", datesChoice);
   useEffect(() => {
     if (monthChanger < 13) {
       const { time, days, prevDays, nextDays } = callendarHandler(monthChanger);
@@ -39,7 +39,7 @@ const Calendar = ({ setSelection, datesChoice = {} }) => {
         +new Date(
           duration["CHECK-IN"]?.day + " " + duration["CHECK-IN"]?.time
         )) /
-        (1000 * 3600 * 24);
+      (1000 * 3600 * 24);
     setSelection({ ...duration, durationAmount });
 
     setBorderBottom(!duration["CHECK-IN"] ? "CHECK-IN" : "CHECK-OUT");
@@ -60,14 +60,14 @@ const Calendar = ({ setSelection, datesChoice = {} }) => {
               onClick={() => setBorderBottom(e)}
             >
               {e === "CHECK-IN" &&
-              "CHECK-IN" in duration &&
-              duration["CHECK-IN"]?.day
+                "CHECK-IN" in duration &&
+                duration["CHECK-IN"]?.day
                 ? dateFormatter(duration, "CHECK-IN")
                 : e === "CHECK-OUT" &&
                   "CHECK-OUT" in duration &&
                   duration["CHECK-OUT"]?.day
-                ? dateFormatter(duration, "CHECK-OUT")
-                : e}
+                  ? dateFormatter(duration, "CHECK-OUT")
+                  : e}
             </div>
           </React.Fragment>
         ))}

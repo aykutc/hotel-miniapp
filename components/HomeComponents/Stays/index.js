@@ -2,7 +2,7 @@ import HeaderTitle from "@/components/HeaderTitle";
 import NoData from "@/components/NoData";
 import Tabs from "@/components/Tabs";
 import styles from "@/styles/Home.module.css";
-import { getDate, replaceAll } from "../../../utils";
+
 import {
   getFavorites,
   getStays,

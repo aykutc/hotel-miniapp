@@ -43,7 +43,6 @@ function HotelDetail(props) {
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [readMore, setReadMore] = useState(false);
-
   const [dateSelection, setDateSelection] = useState(null);
 
   const amenities = [

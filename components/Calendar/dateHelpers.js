@@ -74,10 +74,11 @@ export const dateFormatter = (duration, type) => {
     "Dec",
   ];
   const dayNo = new Date(day + " " + time).getDay();
+  const dayDate = new Date(day + " " + time).getDate();
   const monthNo = new Date(day + " " + time).getMonth();
   const year = new Date(day + " " + time).getFullYear();
 
-  return `${days[dayNo]}, ${months[monthNo]} ${year}`;
+  return `${days[dayNo]}, ${months[monthNo]} ${dayDate}`;
 };
 
 export const isLaterFromToday = (d1, d2, borderBottom) => {

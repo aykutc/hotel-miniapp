@@ -11,6 +11,7 @@
   height: 58px;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .title {
@@ -111,4 +112,6 @@
   width: 100%;
   padding-top: 24px;
   padding-right: 24px;
+  overflow: auto;
+  padding-bottom: 120px;
 }

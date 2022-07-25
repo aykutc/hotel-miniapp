@@ -37,7 +37,12 @@ function CheckDetail() {
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
 
   const [dateSelection, setDateSelection] = useState({});
-
+  React.useEffect(() => {
+    // Prefetch the dashboard page
+    setTimeout(() => {
+      Router.prefetch("/results");
+    }, 300);
+  }, []);
   React.useEffect(() => {
     const region = getRegion();
     const dateSelection = getDateSelection();
@@ -69,7 +74,6 @@ function CheckDetail() {
       setaddBottomSheet(false);
     }, 100);
   };
-
   return (
     <>
       <div className={styles.checkDetailContainer}>
@@ -137,10 +141,7 @@ function CheckDetail() {
               /* height: "calc(100vh - 170px)", */
             }}
           >
-            <Calendar
-              setSelection={setDateSelection}
-              datesChoice={{ ...dateSelection }}
-            />
+            <Calendar setSelection={setDateSelection} />
             <FloatingBottomButton
               style={{ position: "absolute" }}
               onClick={async () => {
@@ -162,8 +163,8 @@ function CheckDetail() {
                 ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
                 : `SELECT ${
                     dateSelection["CHECK-IN"] === undefined
-                      ? "CHECK IN"
-                      : "CHECK OUT"
+                      ? "CHECK-IN"
+                      : "CHECK-OUT"
                   } DATE`}
             </FloatingBottomButton>
           </div>

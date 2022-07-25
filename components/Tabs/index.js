@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./tabs.module.css";
 
-const Tabs = ({ data, selected, setSelected }) => {
+const Tabs = ({ data, selected, setSelected, backgroundColor }) => {
   const ref = useRef();
   const [width, setWidth] = useState(null);
   useEffect(() => {
@@ -13,10 +13,9 @@ const Tabs = ({ data, selected, setSelected }) => {
   const index = data.findIndex((val) => {
     return val === selected;
   });
-  console.log(index);
 
   return (
-    <div className={styles.container}>
+    <div style={{ backgroundColor }} className={styles.container}>
       {data.map((item, index) => (
         <a
           ref={ref}

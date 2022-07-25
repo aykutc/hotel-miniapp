@@ -44,8 +44,6 @@ function HotelDetail(props) {
   const [favorites, setFavorites] = useState([]);
   const [readMore, setReadMore] = useState(false);
 
-  console.log(readMore);
-
   const [dateSelection, setDateSelection] = useState(null);
 
   const amenities = [
@@ -56,6 +54,12 @@ function HotelDetail(props) {
     { icon: <Accessibility />, name: "Accessibility" },
   ];
   const [hotelDetail, setHotelDetail] = React.useState({});
+  React.useEffect(() => {
+    // Prefetch the dashboard page
+    setTimeout(() => {
+      Router.prefetch("/room-select");
+    }, 300);
+  }, []);
   React.useEffect(() => {
     const region = getRegion();
     let _dateSelection = getDateSelection();

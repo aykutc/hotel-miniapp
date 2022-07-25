@@ -27,17 +27,22 @@ function RoomSummary({
     }
     return str;
   };
+
+  const checkInDate = new Date(checkIn);
+  const checkOutDate = new Date(checkOut);
+  const monthFormatter = new Intl.DateTimeFormat("en", { month: "short" });
+
   return (
     <div className={styles.roomContainer}>
       <div className={styles.dateWrapper} onClick={onDateClick}>
         <Calendar />
         <div className={styles.roomTextWrapper}>
           <p className={styles.roomTitle}>
-            {checkIn?.split(" ")[1] +
+            {monthFormatter.format(checkInDate) +
               " " +
               checkIn?.split(" ")[0] +
               " - " +
-              checkOut?.split(" ")[1] +
+              monthFormatter.format(checkOutDate) +
               " " +
               checkOut?.split(" ")[0]}
           </p>

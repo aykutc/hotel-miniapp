@@ -262,6 +262,7 @@ function Results({ HotelsArray }) {
             }}
           />
           <Filter
+            style={{ marginLeft: 4 }}
             onClick={() => {
               setIsFilterModalOpen(true);
             }}

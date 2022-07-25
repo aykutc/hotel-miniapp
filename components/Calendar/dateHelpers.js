@@ -44,7 +44,6 @@ export const callendarHandler = (monthChanger) => {
   for (let x = firstDayIndex === 7 ? -1 : firstDayIndex - 1; x >= 0; x--) {
     prevDays.push(prevLastDay - x);
   }
-  console.log(prevDays);
 
   for (let i = 1; i <= lastDay; i++) {
     days.push(i);

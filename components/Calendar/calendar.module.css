@@ -6,7 +6,7 @@
 
 .checkContainer {
   height: 52px;
-  /* margin-top: 17px; */
+  margin-top: 17px;
   display: flex;
   position: relative;
   left: -24px;

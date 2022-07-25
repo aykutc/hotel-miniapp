@@ -23,7 +23,7 @@ function BottomSheet({
       rootId="root"
       isOpen={isOpen}
       onClose={onClose}
-      snapPoints={[0.9]}
+      snapPoints={[0.93]}
       initialSnap={0}
       springConfig={{
         stiffness: 200,
@@ -38,7 +38,7 @@ function BottomSheet({
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              padding: "24px",
+              padding: "21px",
             }}
           >
             {leftComponent || <div />}

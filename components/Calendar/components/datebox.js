@@ -3,19 +3,14 @@ import { isLaterFromToday, isBetweenTwoDates } from "../dateHelpers";
 import styles from "./datebox.module.css";
 
 const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
-  const [selected, setSelected] = useState(datesChoice);
-
-  /*   console.log(selected);
-   */
+    const [selected, setSelected] = useState(datesChoice);
+  
   useEffect(() => {
     setDuration(selected);
   }, [selected, setDuration]);
   const selectDay = (day, item) => {
     const { time } = item;
-    /*   console.log(selected["CHECK-IN"]?.day + selected["CHECK-IN"]?.time);
-    console.log(
-      new Date(selected["CHECK-IN"]?.day + selected["CHECK-IN"]?.time)
-    ); */
+
     setSelected(
       borderBottom === "CHECK-OUT"
         ? new Date(day + " " + time) >
@@ -212,7 +207,7 @@ const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
           </div>
         </React.Fragment>
       ))}
-      <div style={{ height: "90px" }}></div>
+      <div style={{ height: "170px" }}></div>
     </>
   );
 };

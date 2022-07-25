@@ -128,7 +128,7 @@ function CheckDetail() {
           onClose={() => {
             removeBottomSheet(setIsDateModalOpen);
           }}
-          contentStyle={{ overflow: "hidden" }}
+          contentStyle={{ overflow: "hidden", height: "min-content" }}
         >
           <div
             style={{

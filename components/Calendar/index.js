@@ -14,7 +14,7 @@ const Calendar = ({ setSelection, datesChoice = {} }) => {
   const [duration, setDuration] = useState({});
 
   useEffect(() => {
-    if (monthChanger < 12) {
+    if (monthChanger < 13) {
       const { time, days, prevDays, nextDays } = callendarHandler(monthChanger);
       const currentMonth = {
         month: monthChanger + 1,

@@ -41,9 +41,10 @@ export const callendarHandler = (monthChanger) => {
   ).getDay();
   const nextDaysCount = lastDayIndex ? 6 - lastDayIndex : 6;
 
-  for (let x = firstDayIndex - 1; x >= 0; x--) {
+  for (let x = firstDayIndex === 7 ? -1 : firstDayIndex - 1; x >= 0; x--) {
     prevDays.push(prevLastDay - x);
   }
+  console.log(prevDays)
 
   for (let i = 1; i <= lastDay; i++) {
     days.push(i);
@@ -99,9 +100,10 @@ export const isBetweenTwoDates = (d1, d2, types) => {
       d1.getMonth() === d2.getMonth()
     ) {
       return d1.getDate() > d2.getDate();
-    } else if (d1.getMonth() > d2.getMonth()) {
+    } else if (d1 > d2) {
       return true;
-    } else if (d1.getFullYear() > d2.getFullYear()) {
+    }
+    else if (d1.getFullYear() > d2.getFullYear()) {
       return true;
     } else {
       return false;
@@ -114,9 +116,7 @@ export const isBetweenTwoDates = (d1, d2, types) => {
       d1.getMonth() === d2.getMonth()
     ) {
       return d1.getDate() < d2.getDate();
-    } else if (d1.getMonth() < d2.getMonth()) {
-      return true;
-    } else if (d1.getFullYear() < d2.getFullYear()) {
+    } else if (d1 < d2) {
       return true;
     } else {
       return false;

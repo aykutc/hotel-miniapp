@@ -12,7 +12,7 @@ const Calendar = ({ setSelection, datesChoice = {} }) => {
   const [borderBottom, setBorderBottom] = useState("CHECK-IN");
   const [allDays, setAllDays] = useState([]);
   const [duration, setDuration] = useState({});
-  console.log("datesChoice", datesChoice);
+
   useEffect(() => {
     if (monthChanger < 13) {
       const { time, days, prevDays, nextDays } = callendarHandler(monthChanger);

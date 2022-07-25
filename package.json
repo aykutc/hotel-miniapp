@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@fontsource/outfit": "^4.5.8",
+    "@steveeeie/react-page-transition": "^1.3.0",
     "cupertino-pane": "^1.3.0",
     "framer-motion": "^6.4.2",
     "imagemin-gifsicle": "^7.0.0",
@@ -33,8 +34,10 @@
     "react-modal-sheet": "^1.5.2",
     "react-scroll-hooks": "^0.1.1",
     "react-ssr-prepass": "npm:preact-ssr-prepass",
+    "react-transition-group": "^4.4.2",
     "responsive-loader": "^3.0.4",
     "sharp": "latest",
+    "styled-components": "^5.3.5",
     "url-loader": "^4.1.1",
     "webp-loader": "^0.6.0"
   },

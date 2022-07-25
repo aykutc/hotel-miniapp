@@ -1,3 +1,4 @@
+import Transition from "@/components/Transition";
 import Head from "next/head";
 
 import "../styles/globals.css";
@@ -11,7 +12,9 @@ function MyApp({ Component, pageProps }) {
           content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover"
         />
       </Head>
-      <Component {...pageProps} />
+      <Transition>
+        <Component {...pageProps} />
+      </Transition>
     </>
   );
 }

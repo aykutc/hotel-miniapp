@@ -20,6 +20,7 @@ const Back = ({ onClick, disableClick, fill = "#8E8F90", ...props }) => (
         onClick();
       } else {
         Router.back();
+        /* window.history.back(); */
       }
     }}
   >

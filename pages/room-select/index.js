@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import HeaderTitle from "@/components/HeaderTitle";
 import RecommendedCard from "@/components/RecommendedCard";
 import Back from "@/components/icons/Back";
-import newStyles from "../../components/RecommendedCard/Recommended.module.css";
 import { RoomSelectionArray } from "data/data";
 import Router from "next/router";
 import {
@@ -84,119 +83,156 @@ const RoomSelect = ({ RoomSelectionArray }) => {
     }, 300);
   }, []);
   return (
-    <div
-      style={{
-        marginLeft: 24,
-        display: "flex",
-        flex: "1",
-        flexDirection: "column",
-        position: "relative",
-        height: "100vh",
-        overflow: "hidden",
-        overscrollBehavior: "none",
-      }}
-    >
-      <Header>
-        <Back style={{ marginRight: 32 }}></Back>
-        <HeaderTitle>Rooms</HeaderTitle>
-      </Header>
-
-      <div style={{ height: 16 }}></div>
-
+    <>
       <div
         style={{
+          marginLeft: 24,
           display: "flex",
+          flex: "1",
           flexDirection: "column",
-          paddingBottom: 120,
-          width: "100%",
-          overflow: "scroll",
+          position: "relative",
+          height: "100vh",
+          overflow: "hidden",
+          overscrollBehavior: "none",
         }}
       >
-        {rooms.map((item) => {
-          return (
-            <div
-              style={{ paddingRight: 24, marginBottom: 16 }}
-              key={item.title}
-            >
-              <RecommendedCard
-                roomSelect
-                updateSelectedRooms={updateSelectedRooms}
-                item={item}
-                hotel={item}
-                imageStyles={{ height: 120, width: "100%", display: "block" }}
-                style={{
-                  width: "100%",
-                  minWidth: "100%",
-                }}
-              />
-            </div>
-          );
-        })}
-      </div>
+        <Header>
+          <Back style={{ marginRight: 32 }}></Back>
+          <HeaderTitle>Rooms</HeaderTitle>
+        </Header>
 
-      {selectedRooms.length > 0 && (
+        <div style={{ height: 16 }}></div>
+
         <div
           style={{
-            position: "fixed",
-            bottom: 0,
-            left: 0,
-            width: "100%",
-            height: "108px",
-            zIndex: "999",
             display: "flex",
-            justifyContent: "space-between",
-            padding: "16px 24px 40px",
-            boxShadow: "inset 0px 1px 0px #E8E9E9",
-            background: "white",
+            flexDirection: "column",
+            paddingBottom: 120,
+            width: "100%",
+            overflow: "scroll",
           }}
         >
+          {rooms.map((item) => {
+            return (
+              <div
+                style={{ paddingRight: 24, marginBottom: 16 }}
+                key={item.title}
+              >
+                <RecommendedCard
+                  roomSelect
+                  updateSelectedRooms={updateSelectedRooms}
+                  item={item}
+                  hotel={item}
+                  imageStyles={{ height: 120, width: "100%", display: "block" }}
+                  style={{
+                    width: "100%",
+                    minWidth: "100%",
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        {selectedRooms.length > 0 && (
           <div
             style={{
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              height: "108px",
+              zIndex: "999",
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
+              justifyContent: "space-between",
+              padding: "16px 24px 40px",
+              boxShadow: "inset 0px 1px 0px #E8E9E9",
+              background: "white",
             }}
           >
-            <div className={newStyles.priceArea}>
-              <p className={newStyles.discountedPrice}>
-                $
-                {selectedRooms.reduce((total, e) => {
-                  return total + +e.price.slice(1);
-                }, 0)}
-                <span>/night</span>
-              </p>
-            </div>
-            <p
-              className={newStyles.recommendDescription}
+            <div
               style={{
-                marginTop: "4px",
-                marginBottom: 0,
-                fontWeight: 400,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
               }}
             >
-              {accomodationInfo}
-            </p>
+              <div className={"priceArea"}>
+                <p className={"discountedPrice"}>
+                  $
+                  {selectedRooms.reduce((total, e) => {
+                    return total + +e.price.slice(1);
+                  }, 0)}
+                  <span>/night</span>
+                </p>
+              </div>
+              <p
+                className={"recommendDescription"}
+                style={{
+                  marginTop: "4px",
+                  marginBottom: 0,
+                  fontWeight: 400,
+                }}
+              >
+                {accomodationInfo}
+              </p>
+            </div>
+            <button
+              style={{
+                backgroundColor: "#1D1F22",
+                borderRadius: "104px",
+                padding: "16px 56px",
+                color: "#fff",
+                fontWeight: 400,
+                fontSize: "16px",
+                lineHeight: "20px",
+              }}
+              onClick={() => {
+                saveSelectedRooms(selectedRooms);
+                Router.push("/review");
+              }}
+            >
+              BOOK
+            </button>
           </div>
-          <button
-            style={{
-              backgroundColor: "#1D1F22",
-              borderRadius: "104px",
-              padding: "16px 56px",
-              color: "#fff",
-              fontWeight: 400,
-              fontSize: "16px",
-              lineHeight: "20px",
-            }}
-            onClick={() => {
-              saveSelectedRooms(selectedRooms);
-              Router.push("/review");
-            }}
-          >
-            BOOK
-          </button>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+      <style jsx>{`
+        .priceArea {
+          display: flex;
+          align-items: flex-end;
+          gap: 8px;
+        }
+        .discountedPrice {
+          margin: 0px;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 20px;
+          letter-spacing: 0.01em;
+          color: #1d1f22;
+        }
+
+        .discountedPrice > span {
+          margin: 0px;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 18px;
+          color: #565759;
+        }
+        .recommendDescription {
+          margin: 0;
+          font-style: normal;
+          font-weight: 300;
+          font-size: 13px;
+          line-height: 16px;
+          color: #565759;
+          text-align: start;
+          margin-bottom: 12px;
+        }
+      `}</style>
+    </>
   );
 };
 

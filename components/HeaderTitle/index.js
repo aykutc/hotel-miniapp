@@ -1,8 +1,23 @@
 import React from "react";
-import styles from "./HeaderTitle.module.css";
 
 function HeaderTitle({ children }) {
-  return <div className={styles.headerTitle}>{children}</div>;
+  return (
+    <>
+      <div className={"headerTitle"}>{children}</div>
+      <style jsx>{`
+        .headerTitle {
+          display: inline-flex;
+          font-size: 18px;
+          color: var(--primary-neom-dark);
+          text-transform: uppercase;
+          font-weight: 600;
+          line-height: 23px;
+          /* identical to box height */
+          letter-spacing: 0.08em;
+        }
+      `}</style>
+    </>
+  );
 }
 
 export default HeaderTitle;

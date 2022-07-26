@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import { callendarHandler, dateFormatter } from "./dateHelpers";
-import styles from "./calendar.module.css";
-import FloatingBottomButton from "../FloatingBottomButton";
 import DateBox from "./components/datebox";
 
 const daysNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -47,11 +45,11 @@ const Calendar = ({ setSelection, datesChoice = {} }) => {
 
   return (
     <>
-      <div className={styles.checkContainer}>
+      <div className={"checkContainer"}>
         {["CHECK-IN", "CHECK-OUT"].map((e) => (
           <React.Fragment key={e}>
             <div
-              className={styles.checkInOut}
+              className={"checkInOut"}
               style={
                 [e].includes(borderBottom)
                   ? { borderBottom: "1px solid #1D1F22" }
@@ -71,16 +69,16 @@ const Calendar = ({ setSelection, datesChoice = {} }) => {
             </div>
           </React.Fragment>
         ))}
-        <div className={styles.checkInOutBorderBottom}></div>
+        <div className={"checkInOutBorderBottom"}></div>
       </div>
-      <div className={styles.daysContainer}>
+      <div className={"daysContainer"}>
         {daysNames.map((e) => (
           <React.Fragment key={e}>
-            <div className={styles.daysNames}>{e}</div>
+            <div className={"daysNames"}>{e}</div>
           </React.Fragment>
         ))}
       </div>
-      <div className={styles.dateboxContainer}>
+      <div className={"dateboxContainer"}>
         <DateBox
           allDays={allDays}
           borderBottom={borderBottom}
@@ -88,6 +86,58 @@ const Calendar = ({ setSelection, datesChoice = {} }) => {
           datesChoice={datesChoice}
         />
       </div>
+      <style jsx>{`
+        .back {
+          position: absolute;
+          top: 22px;
+          left: 24.5px;
+        }
+
+        .checkContainer {
+          height: 52px;
+          margin-top: 17px;
+          display: flex;
+          position: relative;
+          left: -24px;
+          width: calc(100% + 48px);
+          border-bottom: 1px solid #e8e9e9;
+        }
+
+        .checkInOut {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 50%;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 20px;
+        }
+
+        .daysContainer {
+          height: 46px;
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          justify-items: center;
+          align-items: center;
+          margin-top: 24px;
+        }
+
+        .daysNames {
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 16px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: #8e8f90;
+        }
+
+        .dateboxContainer {
+          height: 80vh;
+          overflow-y: scroll;
+          overflow-x: hidden;
+          margin-top: 24px;
+        }
+      `}</style>
     </>
   );
 };

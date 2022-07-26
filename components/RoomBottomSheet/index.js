@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import RoomsGuests from "../RoomsGuests";
 import FloatingBottomButton from "../FloatingBottomButton";
-import { Router } from "next/router";
 
 function RoomBottomSheet({ onClick }) {
   const [roomSelection, setRoomSelection] = useState([

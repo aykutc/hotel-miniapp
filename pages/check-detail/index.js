@@ -7,9 +7,7 @@ import HeaderTitle from "@/components/HeaderTitle";
 import Back from "@/components/icons/Back";
 import Location from "@/components/icons/Location";
 import RoomBottomSheet from "@/components/RoomBottomSheet";
-import RoomsGuests from "@/components/RoomsGuests";
 import RoomSummary from "@/components/RoomSummary";
-import SearchBar from "@/components/SearchBar";
 import SearchBottomSheet from "@/components/SearchBottomSheet";
 import {
   getDateSelection,
@@ -21,7 +19,6 @@ import {
 
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
-import styles from "./check-detail.module.css";
 
 export async function getStaticProps() {
   return {
@@ -76,14 +73,14 @@ function CheckDetail() {
   };
   return (
     <>
-      <div className={styles.checkDetailContainer}>
+      <div className={"checkDetailContainer"}>
         <Header>
           <Back style={{ marginRight: 32 }}></Back>
 
           <HeaderTitle>DETAILS</HeaderTitle>
         </Header>
         <div
-          className={styles.regionContainer}
+          className={"regionContainer"}
           onClick={() => {
             setaddBottomSheet(true);
             setTimeout(() => {
@@ -92,7 +89,7 @@ function CheckDetail() {
           }}
         >
           <Location />
-          <p className={styles.regionText}>{checkState.region}</p>
+          <p className={"regionText"}>{checkState.region}</p>
         </div>
         <RoomSummary
           checkIn={checkState.checkIn}
@@ -209,6 +206,48 @@ function CheckDetail() {
           />
         </BottomSheet>
       )}
+      <style jsx>{`
+        .header {
+          height: 58px;
+          display: flex;
+          align-items: center;
+        }
+
+        .checkDetailContainer {
+          padding: 0px 24px 24px 24px;
+          display: flex;
+          flex-direction: column;
+          height: 100vh;
+          overflow: hidden;
+        }
+
+        .regionContainer {
+          background: #ffffff;
+          padding: 14px;
+          border: 1px solid #e8e9e9;
+          border-radius: 4px;
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 12px;
+          margin-top: 24px;
+        }
+
+        .regionText {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 20px;
+          margin-left: 14px;
+          color: #1d1f22;
+          gap: 8px;
+        }
+
+        .search {
+          display: flex;
+          width: 100%;
+          margin-bottom: 16px;
+        }
+      `}</style>
     </>
   );
 }

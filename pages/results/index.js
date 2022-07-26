@@ -29,7 +29,6 @@ import {
 import { HotelsArray } from "data/data";
 
 import React, { useState } from "react";
-import styles from "./results.module.css";
 import RoomBottomSheet from "@/components/RoomBottomSheet";
 import SearchBottomSheet from "@/components/SearchBottomSheet";
 import Calendar from "@/components/Calendar";
@@ -129,7 +128,7 @@ function Results({ HotelsArray }) {
   }
   return (
     <>
-      <div className={styles.resultsContainer}>
+      <div className={"resultsContainer"}>
         <div
           style={{
             display: "flex",
@@ -143,24 +142,24 @@ function Results({ HotelsArray }) {
 
             <HeaderTitle>RESULTS</HeaderTitle>
           </Header>
-          <div className={styles.selectedFiltersContainer}>
+          <div className={"selectedFiltersContainer"}>
             <div
-              className={styles.filterItem}
+              className={"filterItem"}
               onClick={() => {
                 setIsRegionModalOpen(true);
               }}
             >
               <Location />
-              <p className={styles.filterText}>{region}</p>
+              <p className={"filterText"}>{region}</p>
             </div>
             <div
-              className={styles.filterItem}
+              className={"filterItem"}
               onClick={() => {
                 setIsDateModalOpen(true);
               }}
             >
               <Location />
-              <p className={styles.filterText}>
+              <p className={"filterText"}>
                 {checkIn?.split(" ")[1] +
                   " " +
                   checkIn?.split(" ")[0] +
@@ -171,13 +170,13 @@ function Results({ HotelsArray }) {
               </p>
             </div>
             <div
-              className={styles.filterItem}
+              className={"filterItem"}
               onClick={() => {
                 setIsRoomModalOpen(true);
               }}
             >
               <Location />
-              <p className={styles.filterText}>
+              <p className={"filterText"}>
                 {rooms == 1 ? rooms + " Room" : rooms + " Rooms"}{" "}
                 {Number(kids) + Number(adults) == 1
                   ? Number(kids) + Number(adults) + " Guest"
@@ -252,7 +251,7 @@ function Results({ HotelsArray }) {
           </div>
         )}
         <div style={{ height: 120 }}></div>
-        <div className={styles.bottomContainer}>
+        <div className={"bottomContainer"}>
           <Tabs
             data={["LIST VIEW", "MAP VIEW"]}
             selected={selectedTab}
@@ -277,7 +276,7 @@ function Results({ HotelsArray }) {
         onClose={() => setIsFilterModalOpen(false)}
         leftComponent={
           <p
-            className={styles.resetButton}
+            className={"resetButton"}
             onClick={() => {
               setResetFilter(true);
               saveFilter({
@@ -373,6 +372,70 @@ function Results({ HotelsArray }) {
           }}
         />
       </BottomSheet>
+
+      <style jsx>{`
+        .resultsContainer {
+          display: flex;
+          flex-direction: column;
+          height: 100vh;
+          overflow: hidden;
+        }
+
+        .bottomContainer {
+          padding: 14px 24px 20px 24px;
+          position: fixed;
+          width: 100%;
+          bottom: 0;
+          left: 0;
+          display: flex;
+
+          flex-direction: row;
+
+          background: #ffffff;
+          box-shadow: inset 0px 1px 0px #e8e9e9;
+        }
+
+        .selectedFiltersContainer {
+          padding-right: 24px;
+          width: 100vw;
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 24px;
+          height: 46px;
+          align-items: center;
+          overflow-x: scroll;
+          flex-shrink: 0;
+        }
+
+        .filterItem {
+          display: flex;
+          margin: 0px 4px;
+          padding: 6px 12px;
+          background: #ffffff;
+
+          border: 1px solid #e8e9e9;
+          border-radius: 100px;
+          width: auto;
+          flex: none;
+        }
+
+        .filterText {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 18px;
+          color: #8e8f90;
+        }
+
+        .resetButton {
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 20px;
+          text-align: right;
+          color: #8e8f90;
+        }
+      `}</style>
     </>
   );
 }

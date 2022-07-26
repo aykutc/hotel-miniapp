@@ -1,7 +1,6 @@
 import HeaderTitle from "@/components/HeaderTitle";
 import NoData from "@/components/NoData";
 import Tabs from "@/components/Tabs";
-import styles from "@/styles/Home.module.css";
 
 import {
   getFavorites,
@@ -78,7 +77,7 @@ function Stays({}) {
   const currentTab = tabs.find((tab) => tab.id === selectedTab);
   return (
     <>
-      <div className={styles.header}>
+      <div className={"header"}>
         <HeaderTitle>Stays</HeaderTitle>
       </div>
       <div style={{ paddingRight: "24px" }}>
@@ -91,7 +90,7 @@ function Stays({}) {
           }}
         />
       </div>
-      <div className={styles.staysContainer}>
+      <div className={"staysContainer"}>
         {currentTab?.data.length === 0
           ? currentTab?.noData
           : currentTab?.data.map((item, index) => {
@@ -139,6 +138,25 @@ function Stays({}) {
               );
             })}
       </div>
+      <style jsx>{`
+        .header {
+          height: 58px;
+          display: flex;
+          align-items: center;
+          flex-shrink: 0;
+        }
+        .staysContainer {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          flex: 1;
+          width: 100%;
+          padding-top: 24px;
+          padding-right: 24px;
+          overflow: auto;
+          padding-bottom: 120px;
+        }
+      `}</style>
     </>
   );
 }

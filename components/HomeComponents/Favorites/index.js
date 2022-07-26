@@ -1,5 +1,5 @@
 import HeaderTitle from "@/components/HeaderTitle";
-import styles from "@/styles/Home.module.css";
+
 import RecommendedCard from "@/components/RecommendedCard";
 import { AnimatePresence, m, LazyMotion, domAnimation } from "framer-motion";
 
@@ -21,7 +21,7 @@ function Favorites() {
 
   return (
     <>
-      <div className={styles.header}>
+      <div className={"header"}>
         <HeaderTitle>Favorites</HeaderTitle>
       </div>
       <div style={{ height: 16 }}></div>
@@ -92,6 +92,14 @@ function Favorites() {
           </AnimatePresence>
         </LazyMotion>
       </div>
+      <style jsx>{`
+        .header {
+          height: 58px;
+          display: flex;
+          align-items: center;
+          flex-shrink: 0;
+        }
+      `}</style>
     </>
   );
 }

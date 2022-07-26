@@ -1,7 +1,6 @@
 import ExploreCard from "@/components/HomeComponents/ExploreCard";
 
 import RecommendedCard from "@/components/RecommendedCard";
-import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
 import { saveRegion } from "data/api";
 
@@ -12,8 +11,8 @@ function Explore({ exploreArray, recommendedArray, user }) {
     <>
       <div>
         <div style={{ height: 24 }}></div>
-        <div className={styles.title}>Explore by NEOM Region,</div>
-        <div className={styles.exploreContainer}>
+        <div className={"title"}>Explore by NEOM Region,</div>
+        <div className={"exploreContainer"}>
           {exploreArray.map((item, index) => {
             return (
               <ExploreCard
@@ -43,8 +42,8 @@ function Explore({ exploreArray, recommendedArray, user }) {
           })}
         </div>
         <div style={{ height: 24 }}></div>
-        <div className={styles.title}>Recommended For You</div>
-        <div className={styles.recommendedContainer}>
+        <div className={"title"}>Recommended For You</div>
+        <div className={"recommendedContainer"}>
           {recommendedArray.map((item) => {
             return (
               <RecommendedCard
@@ -55,8 +54,47 @@ function Explore({ exploreArray, recommendedArray, user }) {
             );
           })}
         </div>
+        <div style={{ height: 80 }}></div>
       </div>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .title {
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 23px;
+          color: var(--primary-neom-dark);
+          margin-bottom: 8px;
+        }
+
+        .exploreContainer {
+          display: flex;
+          flex-direction: row;
+          overflow-x: scroll;
+          padding: 12px 0px;
+          -ms-overflow-style: none;
+
+          /* IE and Edge */
+          scrollbar-width: none;
+          /* Firefox */
+        }
+        .recommendedContainer {
+          display: flex;
+          flex-direction: row;
+          overflow-x: scroll;
+          padding: 12px 0px;
+          -ms-overflow-style: none;
+          /* IE and Edge */
+          scrollbar-width: none;
+          /* Firefox */
+        }
+
+        .exploreContainer::-webkit-scrollbar {
+          display: none;
+        }
+
+        .recommendedContainer::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </>
   );
 }

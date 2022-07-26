@@ -129,7 +129,7 @@ const Transition = ({ children }) => {
             },
           }} */
         >
-          {children}
+          <div style={{ height: "100vh", overflow: "scroll" }}>{children}</div>
         </motion.div>
       </AnimatePresence>
     </div>

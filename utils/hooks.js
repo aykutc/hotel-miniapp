@@ -8,6 +8,7 @@ export const useRouterPush = () => {
     /*   console.log(f7router);
     setBack(false);
     console.log("push"); */
+    console.log(f7router);
     f7router.navigate(path);
 
     /*   setTimeout(() => {
@@ -24,8 +25,9 @@ export const useRouterPush = () => {
 export const useRouterBack = () => {
   /* const router = useRouter(); */
   const back = (f7router) => {
+    /*  console.log("back", f7router);
     f7router.back();
-
+ */
     /* setBack(true);
     console.log("back");
     setTimeout(() => {

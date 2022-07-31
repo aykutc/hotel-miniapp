@@ -78,7 +78,7 @@ function CheckDetail({ f7router }) {
     <Page>
       <div className={"checkDetailContainer"}>
         <Header>
-          <Back style={{ marginRight: 32 }}></Back>
+          <Back style={{ marginRight: 32 }} f7router={f7router}></Back>
 
           <HeaderTitle>DETAILS</HeaderTitle>
         </Header>
@@ -115,7 +115,8 @@ function CheckDetail({ f7router }) {
           }}
         />
         <FloatingBottomButton
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             push("/results", f7router);
             /*  Router.push({
               pathname: "/results",
@@ -133,7 +134,7 @@ function CheckDetail({ f7router }) {
           onClose={() => {
             removeBottomSheet(setIsDateModalOpen);
           }}
-          contentStyle={{ overflow: "hidden", marginTop: -17}}
+          contentStyle={{ overflow: "hidden", marginTop: -17 }}
         >
           <div
             style={{
@@ -161,10 +162,11 @@ function CheckDetail({ f7router }) {
             >
               {dateSelection.durationAmount
                 ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
-                : `SELECT ${dateSelection["CHECK-IN"] === undefined
-                  ? "CHECK-IN"
-                  : "CHECK-OUT"
-                } DATE`}
+                : `SELECT ${
+                    dateSelection["CHECK-IN"] === undefined
+                      ? "CHECK-IN"
+                      : "CHECK-OUT"
+                  } DATE`}
             </FloatingBottomButton>
           </div>
         </BottomSheet>

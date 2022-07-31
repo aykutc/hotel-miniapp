@@ -32,6 +32,7 @@ import {
 import Calendar from "@/components/Calendar";
 import { formattedDate } from "../../utils";
 import { Page } from "framework7-react";
+import { useRouterBack, useRouterPush } from "@/utils/hooks";
 
 export async function getStaticProps() {
   return {
@@ -99,7 +100,7 @@ function HotelDetail({ f7router }) {
       ...hotel,
     });
   }, [isDateModalOpen, isRoomModalOpen]);
-  console.log(hotelDetail);
+
   React.useEffect(() => {
     const favList = getFavorites();
     if (favList) {
@@ -128,7 +129,8 @@ function HotelDetail({ f7router }) {
   }, [isDateModalOpen]);
 
   const isFavorite = favorites?.some((_item) => _item.id === hotelDetail.id);
-
+  const push = useRouterPush();
+  const back = useRouterBack();
   return (
     <Page>
       <div className={"container"}>
@@ -138,7 +140,7 @@ function HotelDetail({ f7router }) {
             onClick={() => {
               /*  console.log("called");
               Router.back(); */
-              f7router.back();
+              back(f7router);
             }}
           >
             <Back
@@ -330,7 +332,7 @@ function HotelDetail({ f7router }) {
         {!hotelDetail.confirmCode && (
           <FloatingBottomButton
             onClick={() => {
-              Router.push("/room-select");
+              push("/room-select", f7router);
             }}
           >
             SEE AVAILABLE ROOMS

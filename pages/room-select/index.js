@@ -11,12 +11,14 @@ import {
   saveSelectedRooms,
 } from "data/api";
 import Header from "@/components/Header";
+import { Page } from "framework7-react";
+import { useRouterPush } from "@/utils/hooks";
 export async function getStaticProps() {
   return {
-    props: { RoomSelectionArray: RoomSelectionArray },
+    props: {},
   };
 }
-const RoomSelect = ({ RoomSelectionArray }) => {
+const RoomSelect = ({ f7router }) => {
   const [rooms, setRooms] = useState(
     RoomSelectionArray.map((item) => {
       return { ...item, selected: false };
@@ -76,14 +78,15 @@ const RoomSelect = ({ RoomSelectionArray }) => {
       ...hotel,
     });
   }, []);
-  useEffect(() => {
+  /*   useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/review");
     }, 300);
-  }, []);
+  }, []); */
+  const push = useRouterPush();
   return (
-    <>
+    <Page>
       <div
         style={{
           marginLeft: 24,
@@ -97,7 +100,7 @@ const RoomSelect = ({ RoomSelectionArray }) => {
         }}
       >
         <Header>
-          <Back style={{ marginRight: 32 }}></Back>
+          <Back style={{ marginRight: 32 }} f7router={f7router}></Back>
           <HeaderTitle>Rooms</HeaderTitle>
         </Header>
 
@@ -189,7 +192,8 @@ const RoomSelect = ({ RoomSelectionArray }) => {
               }}
               onClick={() => {
                 saveSelectedRooms(selectedRooms);
-                Router.push("/review");
+                /* Router.push("/review"); */
+                push("/review", f7router);
               }}
             >
               BOOK
@@ -232,7 +236,7 @@ const RoomSelect = ({ RoomSelectionArray }) => {
           margin-bottom: 12px;
         }
       `}</style>
-    </>
+    </Page>
   );
 };
 

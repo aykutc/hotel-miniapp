@@ -23,6 +23,7 @@ const Back = ({
       onClick={(e) => {
         e.preventDefault();
         if (disableClick) {
+          console.log("disable click");
           return;
         }
         if (onClick) {

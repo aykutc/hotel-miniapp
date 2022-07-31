@@ -6,7 +6,10 @@ const FloatingBottomButton = ({ children, disabled, onClick, ...props }) => {
       <button
         disabled={disabled}
         className={"button"}
-        onClick={onClick}
+        onClick={(e) => {
+          e.preventDefault();
+          onClick();
+        }}
         {...props}
       >
         {children}

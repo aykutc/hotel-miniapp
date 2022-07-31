@@ -3138,12 +3138,12 @@ framework7-icons@^4.0.2:
   resolved "https://registry.yarnpkg.com/framework7-icons/-/framework7-icons-4.0.2.tgz#bd6ad936422efc12341e8fbe69975b7d557afc66"
   integrity sha512-YxEe5RwH86P/5ysPOyG4e4tfFTwnkQUDdzRpoa/eyPVXPIlVWoSmet2NialmvpGlHXRb+oHP32k0Ka5K0Ex6oQ==
 
-framework7-react@^6.0.11:
+framework7-react@^6.3.17:
   version "6.3.17"
   resolved "https://registry.yarnpkg.com/framework7-react/-/framework7-react-6.3.17.tgz#650c9964dcb91e36fe6f3727830b511a9a07a025"
   integrity sha512-6hZizSlUoBuA6SsOJ2DR/nyIl17/wuR8T/t0xngn1xtSRsHs3tJiCJuiG0E96USziFgq8hluK1UNQiQ5+93sQw==
 
-framework7@^6.0.11:
+framework7@^6.3.17:
   version "6.3.17"
   resolved "https://registry.yarnpkg.com/framework7/-/framework7-6.3.17.tgz#0b8b2d67537c80f59a1c48854cbff3bc99fc3de0"
   integrity sha512-NTDnoyUBvyrqhKaZQQORbGPL0QLF4cH8+qNKU4aM9Tw9WmXiyZidASb5RRdJF14bICjKnGIEE+IUtY8gqsk9dg==

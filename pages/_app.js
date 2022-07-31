@@ -70,9 +70,11 @@ function MyApp({ Component, pageProps }) {
       <View
         main
         browserHistory
+        allowDuplicateUrls={false}
+        stackPages={false}
         browserHistorySeparator=""
         browserHistoryInitialMatch={true}
-        browserHistoryStoreHistory={false}
+        browserHistoryStoreHistory={true}
         url="/"
         bgColor="white"
       >

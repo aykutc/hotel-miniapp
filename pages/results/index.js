@@ -141,7 +141,7 @@ function Results({ f7router }) {
           }}
         >
           <Header>
-            <Back style={{ marginRight: 32 }}></Back>
+            <Back style={{ marginRight: 32 }} f7router={f7router}></Back>
 
             <HeaderTitle>RESULTS</HeaderTitle>
           </Header>

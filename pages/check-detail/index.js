@@ -133,12 +133,11 @@ function CheckDetail({ f7router }) {
           onClose={() => {
             removeBottomSheet(setIsDateModalOpen);
           }}
-          contentStyle={{ overflow: "hidden" }}
+          contentStyle={{ overflow: "hidden", marginTop: -17}}
         >
           <div
             style={{
               padding: "0px 24px",
-
               /* height: "calc(100vh - 170px)", */
             }}
           >
@@ -162,11 +161,10 @@ function CheckDetail({ f7router }) {
             >
               {dateSelection.durationAmount
                 ? `CONTINUE - ${dateSelection.durationAmount} NIGHTS`
-                : `SELECT ${
-                    dateSelection["CHECK-IN"] === undefined
-                      ? "CHECK-IN"
-                      : "CHECK-OUT"
-                  } DATE`}
+                : `SELECT ${dateSelection["CHECK-IN"] === undefined
+                  ? "CHECK-IN"
+                  : "CHECK-OUT"
+                } DATE`}
             </FloatingBottomButton>
           </div>
         </BottomSheet>

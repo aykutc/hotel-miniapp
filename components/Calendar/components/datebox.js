@@ -4,17 +4,12 @@ import { isLaterFromToday, isBetweenTwoDates } from "../dateHelpers";
 const DateBox = ({ allDays, borderBottom, setDuration, datesChoice }) => {
   const [selected, setSelected] = useState(datesChoice);
 
-  /*   console.log(selected);
-   */
   useEffect(() => {
     setDuration(selected);
   }, [selected, setDuration]);
   const selectDay = (day, item) => {
     const { time } = item;
-    /*   console.log(selected["CHECK-IN"]?.day + selected["CHECK-IN"]?.time);
-    console.log(
-      new Date(selected["CHECK-IN"]?.day + selected["CHECK-IN"]?.time)
-    ); */
+
     setSelected(
       borderBottom === "CHECK-OUT"
         ? new Date(day + " " + time) >

@@ -5,7 +5,7 @@ import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require('mapbox-gl');"
 import Router from "next/router";
 import { HotelsArray } from "data/data";
 import { saveHotel } from "data/api";
-
+import styles from "./mapbox.module.css";
 mapboxgl.accessToken =
   "pk.eyJ1Ijoid2VlcGVyIiwiYSI6ImNrcHh0b2tsMTA2NnIycG82eDY2ejgzM3UifQ.iVEdDIHQE5uK14tVmk1NGg";
 const geojson = {

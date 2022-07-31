@@ -9,6 +9,7 @@ import Location from "@/components/icons/Location";
 import RoomBottomSheet from "@/components/RoomBottomSheet";
 import RoomSummary from "@/components/RoomSummary";
 import SearchBottomSheet from "@/components/SearchBottomSheet";
+import { useRouterPush } from "@/utils/hooks";
 import {
   getDateSelection,
   getRegion,
@@ -16,6 +17,7 @@ import {
   saveDateSelection,
   saveRoomSelection,
 } from "data/api";
+import { Page } from "framework7-react";
 
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
@@ -25,7 +27,8 @@ export async function getStaticProps() {
     props: {},
   };
 }
-function CheckDetail() {
+function CheckDetail({ f7router }) {
+  const push = useRouterPush();
   const [checkState, setCheckState] = useState({});
 
   const [addBottomSheet, setaddBottomSheet] = useState(false);
@@ -34,12 +37,12 @@ function CheckDetail() {
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
 
   const [dateSelection, setDateSelection] = useState({});
-  React.useEffect(() => {
+  /*  React.useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/results");
     }, 300);
-  }, []);
+  }, []); */
   React.useEffect(() => {
     const region = getRegion();
     const dateSelection = getDateSelection();
@@ -72,7 +75,7 @@ function CheckDetail() {
     }, 100);
   };
   return (
-    <>
+    <Page>
       <div className={"checkDetailContainer"}>
         <Header>
           <Back style={{ marginRight: 32 }}></Back>
@@ -113,9 +116,10 @@ function CheckDetail() {
         />
         <FloatingBottomButton
           onClick={() => {
-            Router.push({
+            push("/results", f7router);
+            /*  Router.push({
               pathname: "/results",
-            });
+            }); */
           }}
         >
           SEE RESULTS
@@ -248,7 +252,7 @@ function CheckDetail() {
           margin-bottom: 16px;
         }
       `}</style>
-    </>
+    </Page>
   );
 }
 

@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { getFavorites, saveFavorites } from "data/api";
 import NoData from "@/components/NoData";
 
-function Favorites() {
+function Favorites({ f7router }) {
   const [favoriteArray, setFavoriteArray] = useState([]);
   const [isLoading, setIsloading] = useState(true);
 
@@ -66,6 +66,7 @@ function Favorites() {
                   exit={{ opacity: 0 }}
                 >
                   <RecommendedCard
+                    f7router={f7router}
                     showFavorite
                     isFavorite={true}
                     favoriteOnClick={() => {

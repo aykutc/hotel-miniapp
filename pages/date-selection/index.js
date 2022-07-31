@@ -5,27 +5,30 @@ import Back from "@/components/icons/Back";
 import Router from "next/router";
 import { saveDateSelection } from "data/api";
 import Calendar from "@/components/Calendar";
+import { Page } from "framework7-react";
+import { useRouterPush } from "@/utils/hooks";
 
 export async function getStaticProps() {
   return {
     props: {},
   };
 }
-function Dates(props) {
+function Dates({ f7router }) {
   const [dateSelection, setDateSelection] = React.useState({});
   /*   React.useEffect(() => {
     console.log("aa", sessionStorage.getItem("aa"));
   }, []);
  */
 
-  React.useEffect(() => {
+  /*  React.useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/check-detail");
     }, 300);
-  }, []);
+  }, []); */
+  const push = useRouterPush();
   return (
-    <>
+    <Page>
       <div className={"container"}>
         <div
           style={{
@@ -33,7 +36,7 @@ function Dates(props) {
             alignItems: "center",
           }}
         >
-          <Back style={{ marginRight: 32 }}></Back>
+          <Back style={{ marginRight: 32 }} f7router={f7router}></Back>
           <HeaderTitle>Dates</HeaderTitle>
         </div>
 
@@ -55,9 +58,7 @@ function Dates(props) {
                 " " +
                 dateSelection["CHECK-OUT"].time,
             });
-            Router.push({
-              pathname: "/check-detail",
-            });
+            push("/check-detail", f7router);
           }}
         >
           {dateSelection.durationAmount
@@ -98,7 +99,7 @@ function Dates(props) {
           line-height: 20px;
         }
       `}</style>
-    </>
+    </Page>
   );
 }
 

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { saveRegion } from "data/api";
 import { useRouterPush } from "@/utils/hooks";
 
-function Explore({ exploreArray, recommendedArray, user }) {
+function Explore({ exploreArray, recommendedArray, f7router }) {
   /* const router = useRouter(); */
   const push = useRouterPush();
 
@@ -34,7 +34,7 @@ function Explore({ exploreArray, recommendedArray, user }) {
                     "/date-selection"
                   ); */
                   saveRegion(item.title);
-                  push("/date-selection");
+                  push("/date-selection", f7router);
                   /*   router.push({
                     pathname: "/date-selection",
                   }); */
@@ -49,6 +49,7 @@ function Explore({ exploreArray, recommendedArray, user }) {
           {recommendedArray.map((item) => {
             return (
               <RecommendedCard
+                f7router={f7router}
                 key={item.title}
                 hotel={item}
                 imageStyles={{ width: "100%", height: 118, display: "block" }}

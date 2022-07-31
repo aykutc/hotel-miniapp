@@ -2,7 +2,13 @@ import * as React from "react";
 import Router from "next/router";
 import { useRouterBack } from "@/utils/hooks";
 
-const Back = ({ onClick, disableClick, fill = "#8E8F90", ...props }) => {
+const Back = ({
+  onClick,
+  disableClick,
+  fill = "#8E8F90",
+  f7router,
+  ...props
+}) => {
   const back = useRouterBack();
   return (
     <div
@@ -22,7 +28,7 @@ const Back = ({ onClick, disableClick, fill = "#8E8F90", ...props }) => {
         if (onClick) {
           onClick();
         } else {
-          back();
+          back(f7router);
           /* Router.back(); */
           /* window.history.back(); */
         }

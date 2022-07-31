@@ -1,14 +1,19 @@
 import { setBack } from "data/api";
+import { f7 } from "framework7-react";
 import { useRouter } from "next/router";
 
 export const useRouterPush = () => {
-  const router = useRouter();
-  const push = (path) => {
+  /* const router = useRouter(); */
+  const push = (path, f7router) => {
+    /*   console.log(f7router);
     setBack(false);
-    console.log("push");
-    setTimeout(() => {
-      router.push(path);
-    }, 10);
+    console.log("push"); */
+    f7router.navigate(path);
+
+    /*   setTimeout(() => {
+      f7router.navigate(path);
+    }, 10); */
+    /* router.push(path); */
     /*   setTimeout(() => {
       setBack(true);
     }, 100); */
@@ -17,13 +22,15 @@ export const useRouterPush = () => {
 };
 
 export const useRouterBack = () => {
-  const router = useRouter();
-  const back = (path) => {
-    setBack(true);
+  /* const router = useRouter(); */
+  const back = (f7router) => {
+    f7router.back();
+
+    /* setBack(true);
     console.log("back");
     setTimeout(() => {
-      router.back();
-    }, 10);
+      f7router.back();
+    }, 10); */
   };
   return back;
 };

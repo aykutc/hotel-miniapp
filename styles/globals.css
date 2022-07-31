@@ -22,7 +22,9 @@ html {
 
 /* Sections
    ========================================================================== */
-
+:root {
+  --f7-page-bg-color: white;
+}
 /**
  * Remove the margin in all browsers.
  */

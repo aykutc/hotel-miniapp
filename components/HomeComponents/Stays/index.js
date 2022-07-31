@@ -1,6 +1,7 @@
 import HeaderTitle from "@/components/HeaderTitle";
 import NoData from "@/components/NoData";
 import Tabs from "@/components/Tabs";
+import { useRouterPush } from "@/utils/hooks";
 
 import {
   getFavorites,
@@ -14,10 +15,10 @@ import Router from "next/router";
 import { useState, useEffect } from "react";
 import UpcomingCard from "../UpcomingCard";
 
-function Stays({}) {
+function Stays({ f7router }) {
   const [selectedTab, setSelectedTab] = useState("Upcoming");
   const [favorites, setFavorites] = useState([]);
-
+  const push = useRouterPush();
   const [tabs, setTabs] = useState([
     {
       id: "Upcoming",
@@ -106,9 +107,11 @@ function Stays({}) {
                     saveHotel({
                       ...item,
                     });
-                    Router.push({
+                    push("/hotel-detail", f7router);
+
+                    /*   Router.push({
                       pathname: "/hotel-detail",
-                    });
+                    }); */
                   }}
                 >
                   <UpcomingCard

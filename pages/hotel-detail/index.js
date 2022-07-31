@@ -31,13 +31,14 @@ import {
 } from "data/api";
 import Calendar from "@/components/Calendar";
 import { formattedDate } from "../../utils";
+import { Page } from "framework7-react";
 
 export async function getStaticProps() {
   return {
     props: {},
   };
 }
-function HotelDetail(props) {
+function HotelDetail({ f7router }) {
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
   const [favorites, setFavorites] = useState([]);
@@ -53,12 +54,12 @@ function HotelDetail(props) {
     { icon: <Accessibility />, name: "Accessibility" },
   ];
   const [hotelDetail, setHotelDetail] = React.useState({});
-  React.useEffect(() => {
+  /*   React.useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/room-select");
     }, 300);
-  }, []);
+  }, []); */
   React.useEffect(() => {
     const region = getRegion();
     let _dateSelection = getDateSelection();
@@ -130,13 +131,15 @@ function HotelDetail(props) {
   const isFavorite = favorites?.some((_item) => _item.id === hotelDetail.id);
 
   return (
-    <>
+    <Page>
       <div className={"container"}>
         <div className={"headerContainer"}>
           <div
             className={"circle"}
             onClick={() => {
-              Router.back();
+              /*  console.log("called");
+              Router.back(); */
+              f7router.back();
             }}
           >
             <Back
@@ -727,7 +730,7 @@ function HotelDetail(props) {
 
         /* Room End */
       `}</style>
-    </>
+    </Page>
   );
 }
 

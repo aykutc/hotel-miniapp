@@ -1,3 +1,4 @@
+import { useRouterPush } from "@/utils/hooks";
 import { saveHotel } from "data/api";
 import Router from "next/router";
 import React, { useState } from "react";
@@ -14,6 +15,7 @@ function RecommendedCard({
   updateSelectedRooms,
   item,
   subTitle,
+  f7router,
   ...props
 }) {
   const {
@@ -29,7 +31,7 @@ function RecommendedCard({
     rate,
     info,
   } = hotel;
-
+  const push = useRouterPush();
   return (
     <>
       <div
@@ -43,9 +45,10 @@ function RecommendedCard({
                   imageStyles,
                   showFavorite,
                 });
-                Router.push({
+                push("/hotel-detail", f7router);
+                /*  Router.push({
                   pathname: "/hotel-detail",
-                });
+                }); */
               }
             : undefined
         }

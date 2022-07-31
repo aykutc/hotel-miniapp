@@ -33,6 +33,8 @@ import RoomBottomSheet from "@/components/RoomBottomSheet";
 import SearchBottomSheet from "@/components/SearchBottomSheet";
 import Calendar from "@/components/Calendar";
 import FloatingBottomButton from "@/components/FloatingBottomButton";
+import { Page } from "framework7-react";
+import { useRouterPush } from "@/utils/hooks";
 export async function getStaticProps() {
   return {
     props: { HotelsArray: HotelsArray },
@@ -44,7 +46,8 @@ function safeParseFloat(val) {
 }
 
 // LIST VIEW ---- MAP VIEW
-function Results({ HotelsArray }) {
+function Results({ f7router }) {
+  const push = useRouterPush();
   const [favorites, setFavorites] = useState([]);
   const [selectedTab, setSelectedTab] = useState("LIST VIEW");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -127,7 +130,7 @@ function Results({ HotelsArray }) {
     filteredArray = filteredArray.sort((a, b) => a.distance - b.distance);
   }
   return (
-    <>
+    <Page>
       <div className={"resultsContainer"}>
         <div
           style={{
@@ -205,6 +208,7 @@ function Results({ HotelsArray }) {
                 return (
                   <div style={{ marginBottom: 16 }} key={item.id}>
                     <RecommendedCard
+                      f7router={f7router}
                       subTitle={region}
                       favoriteOnClick={() => {
                         if (!isFavorite) {
@@ -436,7 +440,7 @@ function Results({ HotelsArray }) {
           color: #8e8f90;
         }
       `}</style>
-    </>
+    </Page>
   );
 }
 

@@ -3,9 +3,11 @@ import ExploreCard from "@/components/HomeComponents/ExploreCard";
 import RecommendedCard from "@/components/RecommendedCard";
 import { useRouter } from "next/router";
 import { saveRegion } from "data/api";
+import { useRouterPush } from "@/utils/hooks";
 
 function Explore({ exploreArray, recommendedArray, user }) {
-  const router = useRouter();
+  /* const router = useRouter(); */
+  const push = useRouterPush();
 
   return (
     <>
@@ -32,10 +34,10 @@ function Explore({ exploreArray, recommendedArray, user }) {
                     "/date-selection"
                   ); */
                   saveRegion(item.title);
-
-                  router.push({
+                  push("/date-selection");
+                  /*   router.push({
                     pathname: "/date-selection",
-                  });
+                  }); */
                 }}
               ></ExploreCard>
             );

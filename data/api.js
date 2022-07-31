@@ -12,7 +12,12 @@ const saveItemLocalStorage = (key, value) => {
 const getItemLocalStroage = (key) => {
   return JSON.parse(localStorage.getItem(key));
 };
-
+const getBack = (value) => {
+  return getItemSessionStroage("back");
+};
+const setBack = (value) => {
+  saveItemSessionStorage("back", value);
+};
 const getRegion = (value) => {
   return getItemSessionStroage("region");
 };
@@ -184,4 +189,6 @@ export {
   getResultTab,
   saveStaysTab,
   getStaysTab,
+  getBack,
+  setBack,
 };

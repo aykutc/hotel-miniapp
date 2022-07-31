@@ -1,3 +1,4 @@
+import { getBack } from "data/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
@@ -5,20 +6,60 @@ const transition = { ease: "easeInOut", duration: 0.3 };
 
 const Transition = ({ children }) => {
   const { asPath, ...router } = useRouter();
-  const [back, setback] = useState(false);
+  /*   const [back, setback] = useState(true);
+   */ /*   const [back, setback] = useState(false);
+   */ const [push, setpush] = useState([]);
   /*  const [prev, setprev] = useState(-1); */
 
-  useEffect(() => {
+  /*   useEffect(() => {
     router.beforePopState(({ url, as, options }) => {
       setback(true);
-      setTimeout(() => {
-        setback(false);
-      }, 120);
-
+    
       return true;
     });
-  }, []);
+  }, []); */
 
+  /*  useEffect(() => {
+    const handleRouteChange = (url, { shallow }) => {
+      if (
+        push.find((i) => {
+          return i === url;
+        })
+      ) {
+
+        console.log("found");
+      } else {
+        setback(false);
+        setpush([...push, url]);
+      }
+
+      console.log(
+        `App is changing to ${url} ${
+          shallow ? "with" : "without"
+        } shallow routing`
+      );
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, [push]); */
+  /*   useEffect(() => {
+    console.log("render", getBack());
+    const back = getBack() ? getBack() : false;
+    console.log("first", back);
+    setback(back);
+  }, [asPath]);
+   */
+  let back = false;
+  try {
+    back = getBack();
+    console.log("second", getBack());
+  } catch (error) {}
   const variants = {
     enter() {
       // if isPush is true, this is the eventual destination of the top page (sliding in from the right)
@@ -96,7 +137,13 @@ const Transition = ({ children }) => {
   };
   return (
     <div className="effect-1">
-      <AnimatePresence initial={false} custom={{ action: back }}>
+      <AnimatePresence
+        initial={false}
+        custom={{ action: back }}
+        /*  onExitComplete={() => {
+          setback(false);
+        }} */
+      >
         <motion.div
           key={asPath}
           initial="initial"

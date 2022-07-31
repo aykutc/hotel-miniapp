@@ -1,11 +1,21 @@
 import React from "react";
-import styles from "./Title.module.css";
 
 function Title({ children, ...props }) {
   return (
-    <div className={styles.title} {...props}>
-      {children}
-    </div>
+    <>
+      <div className={"title"} {...props}>
+        {children}
+      </div>
+      <style jsx>{`
+        .title {
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 23px;
+          color: var(--primary-neom-dark);
+          margin-bottom: 8px;
+        }
+      `}</style>
+    </>
   );
 }
 

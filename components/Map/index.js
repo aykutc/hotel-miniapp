@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
-import styles from "./mapbox.module.css";
 
 import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require('mapbox-gl');"
 import Router from "next/router";
@@ -61,7 +60,66 @@ const Map = () => {
 
   return (
     <>
-      <div className={styles.map} id="map" />
+      <div className={"map"} id="map" />
+      <style jsx>{`
+        .map {
+          height: 100vh;
+          width: 100%;
+        }
+
+        .container {
+          width: 1024px;
+          height: 1024px;
+          background-color: yellow;
+        }
+
+        .markerContent {
+          position: absolute;
+          top: -50px;
+          left: 2px;
+
+          width: 133px;
+          height: 40px;
+          background-color: black;
+          border-radius: 100px;
+          color: white;
+
+          font-family: "Outfit";
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 20px;
+          letter-spacing: 0.01em;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .markerContent::before {
+          content: "";
+          position: absolute;
+
+          width: 1px;
+          height: 25px;
+          left: 1px;
+
+          background-color: black;
+          top: 25px;
+        }
+
+        .marker {
+          display: block;
+          border: none;
+          border-radius: 50%;
+          cursor: pointer;
+          padding: 0;
+          width: 10;
+          height: 10;
+          box-sizing: border-box;
+          border: 1px solid black;
+        }
+      `}</style>
     </>
   );
 };

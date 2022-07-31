@@ -23,7 +23,7 @@ const geojson = {
   ],
 };
 
-const Map = () => {
+const Map = ({ f7router }) => {
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: "map", // container ID
@@ -47,9 +47,7 @@ const Map = () => {
         saveHotel({
           ...marker,
         });
-        Router.push({
-          pathname: "/hotel-detail",
-        });
+        f7router.navigate("/hotel-detail");
       };
       el.appendChild(subEl);
 

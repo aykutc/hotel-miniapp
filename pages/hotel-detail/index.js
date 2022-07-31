@@ -135,16 +135,14 @@ function HotelDetail({ f7router }) {
     <Page>
       <div className={"container"}>
         <div className={"headerContainer"}>
-          <div
-            className={"circle"}
-            onClick={() => {
-              /*  console.log("called");
-              Router.back(); */
-              back(f7router);
-            }}
-          >
+          <div className={"circle"}>
             <Back
-              disableClick
+              onClick={() => {
+                f7router.back();
+                /*  console.log("called");
+              Router.back(); */
+                /* back(f7router); */
+              }}
               fill="white"
               style={{ paddingRight: 0 }}
               color="white"
@@ -332,7 +330,11 @@ function HotelDetail({ f7router }) {
         {!hotelDetail.confirmCode && (
           <FloatingBottomButton
             onClick={() => {
-              push("/room-select", f7router);
+              f7router.navigate("/room-select");
+              /*               f7router.navigate("/room-select");
+               */
+              /*               push("/room-select", f7router);
+               */
             }}
           >
             SEE AVAILABLE ROOMS

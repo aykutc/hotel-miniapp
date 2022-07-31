@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }) {
     Here we need to know (mostly on server-side) on what URL user opens our app
   */
   const url = `${"http://localhost:3000"}${router.asPath}`;
-  console.log(url);
+
   return (
     /*
       Here we pass initial server URL and routes to the Framework7's App.
@@ -70,13 +70,12 @@ function MyApp({ Component, pageProps }) {
       <View
         main
         browserHistory
-        allowDuplicateUrls={false}
-        stackPages={false}
         browserHistorySeparator=""
-        browserHistoryInitialMatch={true}
-        browserHistoryStoreHistory={true}
+        browserHistoryInitialMatch={false}
+        browserHistoryStoreHistory={false}
         url="/"
         bgColor="white"
+        stackPages
       >
         {/*
           Initial page components (returned by Next.js).

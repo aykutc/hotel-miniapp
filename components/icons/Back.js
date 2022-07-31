@@ -22,11 +22,14 @@ const Back = ({
       }}
       onClick={(e) => {
         e.preventDefault();
+        e.stopPropagation();
+
         if (disableClick) {
           console.log("disable click");
           return;
         }
         if (onClick) {
+          console.log("onclick");
           onClick();
         } else {
           back(f7router);

@@ -37,7 +37,7 @@ function CheckDetail({ f7router }) {
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
 
   const [dateSelection, setDateSelection] = useState({});
-  /*  React.useEffect(() => {
+  /* React.useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/results");
@@ -78,7 +78,13 @@ function CheckDetail({ f7router }) {
     <Page>
       <div className={"checkDetailContainer"}>
         <Header>
-          <Back style={{ marginRight: 32 }} f7router={f7router}></Back>
+          <Back
+            style={{ marginRight: 32 }}
+            onClick={() => {
+              console.log("f7  back");
+              f7router.back();
+            }}
+          ></Back>
 
           <HeaderTitle>DETAILS</HeaderTitle>
         </Header>
@@ -115,8 +121,7 @@ function CheckDetail({ f7router }) {
           }}
         />
         <FloatingBottomButton
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={() => {
             push("/results", f7router);
             /*  Router.push({
               pathname: "/results",

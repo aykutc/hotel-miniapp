@@ -75,7 +75,13 @@ const Review = ({ f7router }) => {
         }}
       >
         <Header style={{ marginBottom: 12 }}>
-          <Back style={{ marginRight: 32 }} f7router={f7router}></Back>
+          <Back
+            style={{ marginRight: 32 }}
+            onClick={() => {
+              console.log("f7  back");
+              f7router.back();
+            }}
+          ></Back>
 
           <HeaderTitle>REVIEW</HeaderTitle>
         </Header>
@@ -243,10 +249,8 @@ const Review = ({ f7router }) => {
             your app and / or account first to see if the reservation is still
             showing. If its not, disregard the check-in email.
           </p>
-          <FloatingBottomButton onClick={() => {}}>
-            BOOK NOW
-          </FloatingBottomButton>
         </div>
+        <FloatingBottomButton onClick={() => {}}>BOOK NOW</FloatingBottomButton>
       </div>
     </Page>
   );

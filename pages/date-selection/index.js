@@ -20,7 +20,7 @@ function Dates({ f7router }) {
   }, []);
  */
 
-  /*  React.useEffect(() => {
+  /* React.useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/check-detail");
@@ -36,7 +36,13 @@ function Dates({ f7router }) {
             alignItems: "center",
           }}
         >
-          <Back style={{ marginRight: 32 }} f7router={f7router}></Back>
+          <Back
+            style={{ marginRight: 32 }}
+            onClick={() => {
+              console.log("f7  back");
+              f7router.back();
+            }}
+          ></Back>
           <HeaderTitle>Dates</HeaderTitle>
         </div>
 

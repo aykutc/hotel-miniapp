@@ -35,6 +35,7 @@ import Calendar from "@/components/Calendar";
 import FloatingBottomButton from "@/components/FloatingBottomButton";
 import { Page } from "framework7-react";
 import { useRouterPush } from "@/utils/hooks";
+import { Router } from "next/router";
 export async function getStaticProps() {
   return {
     props: { HotelsArray: HotelsArray },
@@ -129,6 +130,13 @@ function Results({ f7router }) {
   } else {
     filteredArray = filteredArray.sort((a, b) => a.distance - b.distance);
   }
+  /*  React.useEffect(() => {
+    // Prefetch the dashboard page
+    setTimeout(() => {
+      Router.prefetch("/review");
+    }, 300);
+  }, []); */
+
   return (
     <Page>
       <div className={"resultsContainer"}>
@@ -141,7 +149,13 @@ function Results({ f7router }) {
           }}
         >
           <Header>
-            <Back style={{ marginRight: 32 }} f7router={f7router}></Back>
+            <Back
+              style={{ marginRight: 32 }}
+              onClick={() => {
+                console.log("f7  back");
+                f7router.back();
+              }}
+            ></Back>
 
             <HeaderTitle>RESULTS</HeaderTitle>
           </Header>
@@ -250,7 +264,7 @@ function Results({ f7router }) {
             <Suspense
               fallback={<div style={{ width: "100%", height: "100%" }}></div>}
             >
-              <Map />
+              <Map f7router={f7router} />
             </Suspense>
           </div>
         )}

@@ -100,7 +100,13 @@ const RoomSelect = ({ f7router }) => {
         }}
       >
         <Header>
-          <Back style={{ marginRight: 32 }} f7router={f7router}></Back>
+          <Back
+            style={{ marginRight: 32 }}
+            onClick={() => {
+              console.log("f7  back");
+              f7router.back();
+            }}
+          ></Back>
           <HeaderTitle>Rooms</HeaderTitle>
         </Header>
 

@@ -20,12 +20,12 @@ function Dates({ f7router }) {
   }, []);
  */
 
-  /* React.useEffect(() => {
+  React.useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/check-detail");
     }, 300);
-  }, []); */
+  }, []);
   const push = useRouterPush();
   return (
     <Page>

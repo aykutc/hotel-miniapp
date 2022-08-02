@@ -15,7 +15,7 @@ const Back = ({
       className="div"
       style={{
         display: "flex",
-        paddingRight: 32,
+
         justifyContent: "center",
         alignItems: "center",
         ...props.style,
@@ -55,6 +55,11 @@ const Back = ({
         }
         path {
           transition: all 1s;
+        }
+        div {
+          height: 36px;
+          width: 36px;
+          border-radius: 50%;
         }
       `}</style>
     </div>

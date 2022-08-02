@@ -78,12 +78,12 @@ const RoomSelect = ({ f7router }) => {
       ...hotel,
     });
   }, []);
-  /*   useEffect(() => {
+  useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/review");
     }, 300);
-  }, []); */
+  }, []);
   const push = useRouterPush();
   return (
     <Page>

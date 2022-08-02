@@ -130,12 +130,12 @@ function Results({ f7router }) {
   } else {
     filteredArray = filteredArray.sort((a, b) => a.distance - b.distance);
   }
-  /*  React.useEffect(() => {
+  React.useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/review");
     }, 300);
-  }, []); */
+  }, []);
 
   return (
     <Page>

@@ -37,12 +37,12 @@ function CheckDetail({ f7router }) {
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
 
   const [dateSelection, setDateSelection] = useState({});
-  /* React.useEffect(() => {
+  React.useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/results");
     }, 300);
-  }, []); */
+  }, []);
   React.useEffect(() => {
     const region = getRegion();
     const dateSelection = getDateSelection();

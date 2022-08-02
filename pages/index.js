@@ -118,13 +118,13 @@ function Home({
     }
   };
 
-  /*   React.useEffect(() => {
+  React.useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/date-selection");
       Router.prefetch("/hotel-detail");
     }, 500);
-  }, []); */
+  }, []);
 
   return (
     <Page>

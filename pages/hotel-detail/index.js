@@ -33,6 +33,7 @@ import Calendar from "@/components/Calendar";
 import { formattedDate } from "../../utils";
 import { Page } from "framework7-react";
 import { useRouterBack, useRouterPush } from "@/utils/hooks";
+import QRBottomSheet from "@/components/QRBottomSheet";
 
 export async function getStaticProps() {
   return {
@@ -41,6 +42,7 @@ export async function getStaticProps() {
 }
 function HotelDetail({ f7router }) {
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [readMore, setReadMore] = useState(false);
@@ -202,7 +204,9 @@ function HotelDetail({ f7router }) {
                 }}
                 digitalKeyOnCkick={() => {}}
                 messageOnClick={() => {}}
-                checkInOnClick={() => {}}
+                checkInOnClick={() => {
+                  setIsQRModalOpen(true);
+                }}
                 hotelName={hotelDetail.title}
                 confirmCode={hotelDetail.confirmCode}
                 totalDay={hotelDetail.duration}
@@ -405,18 +409,13 @@ function HotelDetail({ f7router }) {
             setIsRoomModalOpen={setIsDateModalOpen}
           ></RoomBottomSheet>
         </BottomSheet>
+        <QRBottomSheet
+          show={isQRModalOpen}
+          setShow={setIsQRModalOpen}
+        ></QRBottomSheet>
       </div>
       <style jsx>{`
         .container {
-          /*  padding-left: 24px;
-    padding-right: 24px;
-    padding-top: 18px; */
-          /*   position: relative;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden; */
           position: relative;
         }
 
@@ -547,8 +546,6 @@ function HotelDetail({ f7router }) {
         .horizontalDivider {
           width: 100%;
           height: 0px;
-          left: 24px;
-          top: 1047px;
 
           /* Grayscale/Gray 40% */
 

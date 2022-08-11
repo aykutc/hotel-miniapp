@@ -49,15 +49,18 @@ function Home({
   }, []);
   const generateUrl = (redirectUri) => {
     const url =
-      "https://idp.kobilshift-app01-eotsr.shift.kobil.com/auth/realms/flutter/protocol/openid-connect/auth?client_id=test-openid&redirect_uri=" +
+      "https://idp.neom-poc.shift.kobil.com/auth/realms/kurtis/protocol/openid-connect/auth?client_id=miniapp-openid&redirect_uri=" +
       redirectUri +
       "&scope=openid&response_type=code&response_mode=query&nonce=o3w1vsredlp";
     return url;
   };
 
-  /*   React.useEffect(() => {
+  /*   console.log("home");
+  React.useEffect(() => {
+    console.log("login girdi");
     const _login = async () => {
       const address = window.location.protocol + "//" + window.location.host;
+
       if (user) {
         return;
       }
@@ -76,8 +79,8 @@ function Home({
       }
     };
     _login();
-  }, []); */
-
+  }, []);
+ */
   const checkLogin = async () => {
     const user = localStorage.getItem("user");
 
@@ -93,14 +96,17 @@ function Home({
     myHeaders.append("Content-Type", "application/json");
 
     try {
-      const response = await fetch("https://auth.hotel.westerops.com/login", {
-        method: "POST",
-        headers: myHeaders,
-        body: JSON.stringify({
-          code: code,
-          redirectUrl: redirectUri,
-        }),
-      });
+      const response = await fetch(
+        "https://neomapi.westerops.com/auth/login/",
+        {
+          method: "POST",
+          headers: myHeaders,
+          body: JSON.stringify({
+            code: code,
+            redirectUrl: redirectUri,
+          }),
+        }
+      );
       console.log(response);
       if (!response.ok) {
         console.log("girdi");

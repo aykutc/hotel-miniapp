@@ -219,9 +219,10 @@ const SummaryCard = ({
           justify-content: center;
           align-items: center;
           gap: 8px;
+          text-wrap: no-wrap;
         }
 
-        ."infoText" {
+        .infoText {
           margin: 0px;
           padding: 0px;
           font-style: normal;

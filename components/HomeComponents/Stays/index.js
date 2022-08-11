@@ -104,9 +104,17 @@ function Stays({ f7router }) {
                   style={{ width: "100%" }}
                   key={item + index}
                   onClick={() => {
-                    saveHotel({
-                      ...item,
-                    });
+                    if (currentTab.id === "Upcoming") {
+                      saveHotel({
+                        ...item,
+                        confirmCode: new Date().getTime(),
+                      });
+                    } else {
+                      saveHotel({
+                        ...item,
+                      });
+                    }
+
                     push("/hotel-detail", f7router);
 
                     /*   Router.push({

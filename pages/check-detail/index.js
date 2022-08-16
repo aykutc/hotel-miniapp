@@ -1,5 +1,6 @@
 import BottomSheet from "@/components/BottomSheet";
 import Calendar from "@/components/Calendar";
+import F7Navbar from "@/components/F7Navbar";
 
 import FloatingBottomButton from "@/components/FloatingBottomButton";
 import Header from "@/components/Header";
@@ -77,17 +78,19 @@ function CheckDetail({ f7router }) {
   return (
     <Page>
       <div className={"checkDetailContainer"}>
-        <Header>
-          <Back
-            style={{ marginRight: 32 }}
-            onClick={() => {
-              console.log("f7  back");
-              f7router.back();
-            }}
-          ></Back>
+        <F7Navbar>
+          <Header>
+            <Back
+              style={{ marginRight: 32 }}
+              onClick={() => {
+                console.log("f7  back");
+                f7router.back();
+              }}
+            ></Back>
 
-          <HeaderTitle>DETAILS</HeaderTitle>
-        </Header>
+            <HeaderTitle>DETAILS</HeaderTitle>
+          </Header>
+        </F7Navbar>
         <div
           className={"regionContainer"}
           onClick={() => {
@@ -238,7 +241,6 @@ function CheckDetail({ f7router }) {
           display: flex;
           flex-direction: row;
           margin-bottom: 12px;
-          margin-top: 24px;
         }
 
         .regionText {

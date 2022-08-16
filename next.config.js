@@ -18,6 +18,13 @@ const nextConfig = {
     disableStaticImages: true,
   },
   reactStrictMode: false,
+  env: {
+    /* host: "http://test:3000", */
+    host: "https://neom-hotel.web.app",
+    openIdClient: "test-openid",
+    openidHost:
+      "https://idp.kobilshift-app01-eotsr.shift.kobil.com/auth/realms/flutter/",
+  },
 };
 module.exports = withPlugins(
   [

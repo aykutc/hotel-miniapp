@@ -79,7 +79,8 @@ const saveFavorites = (value) => {
   saveItemLocalStorage("favorites", value);
 };
 const getFavorites = (value) => {
-  return getItemLocalStroage("favorites");
+  /*   alert(getItemLocalStroage("favorites"));
+   */ return getItemLocalStroage("favorites");
 };
 const saveStays = (value) => {
   saveItemLocalStorage("stays", value);

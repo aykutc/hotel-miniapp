@@ -34,8 +34,8 @@ import SearchBottomSheet from "@/components/SearchBottomSheet";
 import Calendar from "@/components/Calendar";
 import FloatingBottomButton from "@/components/FloatingBottomButton";
 import { Page } from "framework7-react";
-import { useRouterPush } from "@/utils/hooks";
-import { Router } from "next/router";
+import Router from "next/router";
+import F7Navbar from "@/components/F7Navbar";
 export async function getStaticProps() {
   return {
     props: { HotelsArray: HotelsArray },
@@ -48,7 +48,6 @@ function safeParseFloat(val) {
 
 // LIST VIEW ---- MAP VIEW
 function Results({ f7router }) {
-  const push = useRouterPush();
   const [favorites, setFavorites] = useState([]);
   const [selectedTab, setSelectedTab] = useState("LIST VIEW");
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -148,17 +147,18 @@ function Results({ f7router }) {
             flexShrink: 0,
           }}
         >
-          <Header>
-            <Back
-              style={{ marginRight: 32 }}
-              onClick={() => {
-                console.log("f7  back");
-                f7router.back();
-              }}
-            ></Back>
+          <F7Navbar>
+            <Header>
+              <Back
+                style={{ marginRight: 32 }}
+                onClick={() => {
+                  f7router.back();
+                }}
+              ></Back>
 
-            <HeaderTitle>RESULTS</HeaderTitle>
-          </Header>
+              <HeaderTitle>RESULTS</HeaderTitle>
+            </Header>
+          </F7Navbar>
           <div className={"selectedFiltersContainer"}>
             <div
               className={"filterItem"}

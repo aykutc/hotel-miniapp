@@ -8,6 +8,7 @@ function Header({ children, ...props }) {
       </div>
       <style jsx>{`
         .header {
+          min-height: 58px;
           height: 58px;
           display: flex;
           align-items: center;

@@ -58,7 +58,6 @@ const Transition = ({ children }) => {
   let back = false;
   try {
     back = getBack();
-    console.log("second", getBack());
   } catch (error) {}
   const variants = {
     enter() {

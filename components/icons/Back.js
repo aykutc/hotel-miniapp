@@ -25,7 +25,6 @@ const Back = ({
         e.stopPropagation();
 
         if (disableClick) {
-          console.log("disable click");
           return;
         }
         if (onClick) {

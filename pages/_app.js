@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 // Import icons and styles
 import "framework7/framework7-bundle.css";
 import "../styles/globals.css";
+import Head from "next/head";
+import { useEffect } from "react";
 
 // Install Framework7 React plugin for Framework7
 Framework7.use(Framework7React);
@@ -54,8 +56,11 @@ function MyApp({ Component, pageProps }) {
   /*
     Here we need to know (mostly on server-side) on what URL user opens our app
   */
-  const url = `${"http://localhost:3000"}${router.asPath}`;
-
+  const url = `${process.env.host}${router.pathname}`;
+  /*   useEffect(() => {
+    alert("appjs" + router.asPath);
+  }, [router.asPath]);
+ */
   return (
     /*
       Here we pass initial server URL and routes to the Framework7's App.
@@ -81,6 +86,13 @@ function MyApp({ Component, pageProps }) {
           Initial page components (returned by Next.js).
           Here it is mandatory to set `initialPage` prop on it.
         */}
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover"
+          />
+        </Head>
+
         <Component initialPage {...pageProps} />
       </View>
     </App>

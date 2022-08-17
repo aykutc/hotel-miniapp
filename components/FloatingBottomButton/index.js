@@ -1,6 +1,13 @@
 import React from "react";
+import Spinner from "../Spinner";
 
-const FloatingBottomButton = ({ children, disabled, onClick, ...props }) => {
+const FloatingBottomButton = ({
+  children,
+  spinner,
+  disabled,
+  onClick,
+  ...props
+}) => {
   return (
     <>
       <button
@@ -8,11 +15,13 @@ const FloatingBottomButton = ({ children, disabled, onClick, ...props }) => {
         className={"button"}
         onClick={(e) => {
           e.preventDefault();
-          onClick();
+          if (!spinner) {
+            onClick();
+          }
         }}
         {...props}
       >
-        {children}
+        {spinner ? <Spinner></Spinner> : children}
       </button>
       <style jsx>{`
         .button {
@@ -36,8 +45,8 @@ const FloatingBottomButton = ({ children, disabled, onClick, ...props }) => {
         }
 
         .button:disabled {
-          background: #e8e9e9;
-          color: #8e8f90;
+          background: #8e8f90;
+          color: white;
         }
 
         .button:active {

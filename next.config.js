@@ -21,6 +21,9 @@ const nextConfig = {
   env: {
     /* host: "http://test:3000", */
     host: "https://neom-hotel.web.app",
+    api: "https://neomapi.westerops.com",
+    chatDeeplink:
+      "https://share.neom.kobil.com/kobilservice?sID=da6e6fe3-c99c-4346-acdd-22bdcdb39adb",
     openIdClient: "test-openid",
     openidHost:
       "https://idp.kobilshift-app01-eotsr.shift.kobil.com/auth/realms/flutter/",

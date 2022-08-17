@@ -228,7 +228,9 @@ function HotelDetail({ f7router }) {
                       zIndex: 100,
                     }}
                     digitalKeyOnCkick={() => {}}
-                    messageOnClick={() => {}}
+                    messageOnClick={() => {
+                      window.location.assign(process.env.chatDeeplink);
+                    }}
                     checkInOnClick={() => {
                       setIsQRModalOpen(true);
                     }}

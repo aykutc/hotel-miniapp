@@ -127,29 +127,82 @@ const getStays = (value) => {
       },
     ];
   }
-  return result;
+  return [
+    ...result,
+    [
+      {
+        id: 444,
+        title: "The Vault",
+        block: "Block B-12",
+        discountPrice: "$143.99",
+        price: "$132.90",
+        img: "hotel3.jpg",
+        imgRect: "hotel3-rect.jpg",
+        distance: 90,
+        rate: 4.2,
+        reviews: "227",
+        location: ", Neom, Saudi Arabia",
+        phone: "+966 123 000 789",
+        checkIn: "26 July 2022",
+        checkOut: "30 July 2022",
+        duration: 9,
+      },
+
+      {
+        id: 445,
+        title: "Ski Village",
+        block: "Block A-42",
+        discountPrice: "$243.99",
+        price: "$234.43",
+        img: "hotel2.jpg",
+        imgRect: "hotel2-rect.jpg",
+        rate: 4.4,
+        distance: 120,
+        reviews: "15",
+        location: ", Neom, Saudi Arabia",
+        phone: "+966 123 040 789",
+
+        checkIn: "28 November 2022",
+        checkOut: "30 November 2022",
+        duration: 4,
+      },
+    ],
+  ];
 };
 
 const startPayment = async (payment) => {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
-  const response = await fetch(
-    "https://neomapi.westerops.com/payment/hotel-payment",
-    {
-      method: "POST",
-      headers: myHeaders,
-      body: JSON.stringify(payment),
-    }
-  );
+  const response = await fetch(process.env.api + "/payment/hotel-payment", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify(payment),
+  });
 
   if (!response.ok) {
     /* alert("response not ok"); */
     throw Error("a");
   }
-  return response;
+  return Promise.resolve(await response.json());
 };
 
+const findTransaction = async (transactionId) => {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const response = await fetch(process.env.api + "/payment/find-transaction", {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify({ transactionId: transactionId }),
+  });
+
+  if (!response.ok) {
+    /* alert("response not ok"); */
+    throw Error("a");
+  }
+  return Promise.resolve(await response.json());
+};
 export {
   startPayment,
   saveRegion,
@@ -176,4 +229,5 @@ export {
   getStaysTab,
   getBack,
   setBack,
+  findTransaction,
 };

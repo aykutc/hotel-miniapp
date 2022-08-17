@@ -11,10 +11,14 @@ import Bed from "@/components/icons/Bed";
 import Dropdown from "@/components/ReviewComponents/Dropdown";
 import FloatingBottomButton from "@/components/FloatingBottomButton";
 import {
+  findTransaction,
   getDateSelection,
   getHotel,
   getRoomSelection,
   getSelectedRooms,
+  getStays,
+  saveHomeActiveTab,
+  saveStays,
   startPayment,
 } from "data/api";
 import { safeParseFloat } from "../../utils";
@@ -31,12 +35,14 @@ export async function getStaticProps() {
 const Review = ({ f7router }) => {
   const [open, setOpen] = useState(true);
   const [hotelDetail, setHotelDetail] = useState(null);
+  const [loading, setloading] = useState(false);
+  const [transaction, setTransaction] = useState(null);
   useEffect(() => {
     const dateSelection = getDateSelection();
+    const hotel = getHotel();
     const roomSelection = getRoomSelection();
     const selectedRooms = getSelectedRooms();
     const user = localStorage.getItem("userinfo");
-    const hotel = getHotel();
 
     setHotelDetail({
       ...hotelDetail,
@@ -48,7 +54,6 @@ const Review = ({ f7router }) => {
     });
   }, []);
 
-  console.log(hotelDetail);
   const checkInDate = new Date(hotelDetail?.checkIn);
   const checkOutDate = new Date(hotelDetail?.checkOut);
   const monthFormatter = new Intl.DateTimeFormat("en", { month: "short" });
@@ -64,33 +69,72 @@ const Review = ({ f7router }) => {
     totalPrice = parseFloat(totalPrice).toFixed(2);
   }
 
-  const startPay = () => {
-    startPayment({
-      price: totalPrice,
-      /* text: hotelDetail.selectedRooms.map((item) => {
-        return {
-          key: item.title.toString(),
-          value: item.price,
-        };
-      }), */
+  const startPay = async () => {
+    setloading(true);
+    try {
+      const response = await startPayment({
+        price: totalPrice,
 
-      text: [
-        {
-          key:
-            hotelDetail.duration +
-            " nights, " +
-            hotelDetail?.selectedRooms.map((item, index) => {
-              if (index > 0) {
-                return " " + item.title;
-              }
-              return item.title;
-            }),
-          value: "$" + totalPrice,
-        },
-      ],
-      email: hotelDetail.username,
-    });
+        text: [
+          {
+            key:
+              hotelDetail.duration +
+              " nights, " +
+              hotelDetail?.selectedRooms.map((item, index) => {
+                if (index > 0) {
+                  return " " + item.title;
+                }
+                return item.title;
+              }),
+            value: totalPrice,
+          },
+        ],
+        email: hotelDetail.preferred_username,
+      });
+      console.log(response.result);
+      setTransaction(response.result);
+    } catch (error) {
+      setloading(false);
+    }
+
+    /* setloading(false); */
   };
+  console.log(transaction);
+
+  useEffect(() => {
+    let interval;
+    const find = async () => {
+      if (transaction) {
+        if (transaction.status === "new") {
+          interval = setInterval(async () => {
+            const response = await findTransaction(transaction.transactionId);
+            console.log(response.result);
+            if (response.result.status !== "new") {
+              setTransaction(response.result);
+              setloading(false);
+              clearInterval(interval);
+            }
+          }, 2000);
+        } else if (transaction.status === "finished") {
+          const dateSelection = getDateSelection();
+          const hotel = getHotel();
+          const stays = getStays();
+          saveHomeActiveTab("Stays");
+          saveStays([{ ...hotel, ...dateSelection }, ...stays]);
+          f7router.navigate("/", { clearPreviousHistory: true });
+        }
+      }
+    };
+
+    find();
+    console.log(interval);
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [transaction]);
+
   return (
     <Page>
       <div
@@ -285,7 +329,7 @@ const Review = ({ f7router }) => {
           </p>
         </div>
         <FloatingBottomButton
-          disabled={hotelDetail === null}
+          spinner={loading}
           onClick={() => {
             startPay();
           }}

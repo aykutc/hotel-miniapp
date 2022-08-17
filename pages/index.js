@@ -49,6 +49,8 @@ function Home({
 
   React.useEffect(() => {
     const active = getHomeActiveTab();
+    /* localStorage.removeItem("userinfo"); */
+
     if (active) {
       setActiveMenu(active);
     }
@@ -139,11 +141,12 @@ function Home({
       localStorage.setItem("userinfo", JSON.stringify(userObj));
 
       setUser(userObj);
+      console.log(userObj);
     } catch (error) {
       console.log("err", error);
       /* alert("error login, redirect call"); */
       console.log("error", JSON.stringify(error));
-      /* window.location.assign(authAddress); */
+      window.location.assign(authAddress);
     }
   };
   React.useEffect(() => {
@@ -171,7 +174,11 @@ function Home({
             <HeaderTitle>
               <div style={{ marginRight: 6 }}>HI</div>
               {user ? (
-                user.given_name + ","
+                user.given_name ? (
+                  user.given_name + ","
+                ) : (
+                  " Guest" + ","
+                )
               ) : (
                 <div
                   style={{

@@ -62,7 +62,8 @@ function Home({
       process.env.openIdClient +
       "&redirect_uri=" +
       redirectUri +
-      "&scope=openid&response_type=code&response_mode=query&nonce=o3w1vsredlp&prompt=none";
+      "&scope=openid&response_type=code&response_mode=query&nonce=o3w1vsredlp";
+    /* &prompt=none */
     return url;
   };
 
@@ -114,34 +115,35 @@ function Home({
     myHeaders.append("Content-Type", "application/json");
 
     try {
-      const response = await fetch("https://auth.hotel.westerops.com/login", {
+      const response = await fetch("https://neomapi.westerops.com/auth/login", {
         method: "POST",
         headers: myHeaders,
         body: JSON.stringify({
           code: code,
-          redirectUrl: redirectUri,
+          redirect_uri: redirectUri,
         }),
       });
 
       if (!response.ok) {
         /* alert("response not ok"); */
-        throw Error("a");
+        throw await response.json();
       }
 
-      const result = await response.json();
+      const apiResultJson = await response.json();
       /* alert(JSON.stringify(result)); */
-
-      const userObj = result.data;
+      console.log(apiResultJson);
+      const userObj = apiResultJson.result;
 
       userObj.expire = new Date().getTime() + 30 * 60 * 60 * 1000 * 30;
 
       localStorage.setItem("userinfo", JSON.stringify(userObj));
 
-      setUser(result.data);
+      setUser(userObj);
     } catch (error) {
+      console.log("err", error);
       /* alert("error login, redirect call"); */
-      console.log("error", error);
-      window.location.assign(authAddress);
+      console.log("error", JSON.stringify(error));
+      /* window.location.assign(authAddress); */
     }
   };
   React.useEffect(() => {
@@ -169,7 +171,7 @@ function Home({
             <HeaderTitle>
               <div style={{ marginRight: 6 }}>HI</div>
               {user ? (
-                user.name + ","
+                user.given_name + ","
               ) : (
                 <div
                   style={{

@@ -9,7 +9,7 @@ const Calendar = ({ setSelection, datesChoice = {} }) => {
   let [monthChanger, setMonthChanger] = useState(new Date().getMonth());
   const [borderBottom, setBorderBottom] = useState("CHECK-IN");
   const [allDays, setAllDays] = useState([]);
-  const [duration, setDuration] = useState({});false
+  const [duration, setDuration] = useState({});
 
   useEffect(() => {
     const lastMonthOfCalendar = new Date().getMonth() + 6

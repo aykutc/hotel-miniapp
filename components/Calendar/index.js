@@ -9,10 +9,11 @@ const Calendar = ({ setSelection, datesChoice = {} }) => {
   let [monthChanger, setMonthChanger] = useState(new Date().getMonth());
   const [borderBottom, setBorderBottom] = useState("CHECK-IN");
   const [allDays, setAllDays] = useState([]);
-  const [duration, setDuration] = useState({});
+  const [duration, setDuration] = useState({});false
 
   useEffect(() => {
-    if (monthChanger < 13) {
+    const lastMonthOfCalendar = new Date().getMonth() + 6
+    if (monthChanger < lastMonthOfCalendar) {
       const { time, days, prevDays, nextDays } = callendarHandler(monthChanger);
       const currentMonth = {
         month: monthChanger + 1,

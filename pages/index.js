@@ -1,7 +1,7 @@
 import { ExploreArray, RecommendedArray, SearchRegionArray } from "data/data";
 
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
 import HomeMenu from "@/components/HomeComponents/HomeMenu";
 import Explore from "@/components/HomeComponents/Explore";
 /* import Favorites from "@/components/HomeComponents/Favorites";
@@ -11,10 +11,11 @@ import SearchBar from "@/components/SearchBar";
 import Back from "@/components/icons/Back";
 import SearchContent from "@/components/HomeComponents/SearchContent";
 import { getHomeActiveTab, saveRegion } from "data/api";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import dynamic from "next/dynamic";
-import { Page } from "framework7-react";
+import { Navbar, Page } from "framework7-react";
 import { useRouterPush } from "@/utils/hooks";
+import F7Navbar from "@/components/F7Navbar";
 const Favorites = dynamic(
   () => import("@/components/HomeComponents/Favorites"),
   {}
@@ -30,34 +31,45 @@ function Home({
   recommendedArray = RecommendedArray,
   searchData = SearchRegionArray,
   f7router,
-  ...props
 }) {
   const [activeMenu, setActiveMenu] = React.useState("Explore");
   const [focusedSearch, setFocusedSearch] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState("");
   const push = useRouterPush();
   const [user, setUser] = React.useState(null);
+  const router = useRouter();
 
   React.useEffect(() => {
-    if (activeMenu) {
-      window.document?.getElementById("exploreContainer")?.scroll(0, 105);
-    }
+    try {
+      if (activeMenu) {
+        window.document?.getElementById("exploreContainer")?.scroll(0, 105);
+      }
+    } catch (error) {}
   }, [activeMenu]);
 
   React.useEffect(() => {
-    setActiveMenu(getHomeActiveTab() || "Explore");
+    const active = getHomeActiveTab();
+    if (active) {
+      setActiveMenu(active);
+    }
+    /* console.log("active", active); */
   }, []);
+
   const generateUrl = (redirectUri) => {
     const url =
-      "https://idp.neom-poc.shift.kobil.com/auth/realms/kurtis/protocol/openid-connect/auth?client_id=miniapp-openid&redirect_uri=" +
+      process.env.openidHost +
+      "protocol/openid-connect/auth?client_id=" +
+      process.env.openIdClient +
+      "&redirect_uri=" +
       redirectUri +
-      "&scope=openid&response_type=code&response_mode=query&nonce=o3w1vsredlp";
+      "&scope=openid&response_type=code&response_mode=query&nonce=o3w1vsredlp&prompt=none";
     return url;
   };
 
-  /*   console.log("home");
   React.useEffect(() => {
-    console.log("login girdi");
+    if (!router.isReady) {
+      return;
+    }
     const _login = async () => {
       const address = window.location.protocol + "//" + window.location.host;
 
@@ -65,30 +77,36 @@ function Home({
         return;
       }
       const _user = await checkLogin();
+
       if (_user) {
         setUser(_user);
         return;
       }
       const urlParams = new URLSearchParams(window.location.href);
       const myParam = urlParams.get("code");
-      console.log(myParam);
       if (myParam) {
         login(myParam, address, generateUrl(address));
       } else {
+        /* alert("redirect"); */
         window.location.assign(generateUrl(address));
       }
     };
     _login();
-  }, []);
- */
-  const checkLogin = async () => {
-    const user = localStorage.getItem("user");
+  }, [router]);
 
-    if (user) {
-      const userObj = JSON.parse(user);
-      if (userObj.expire > new Date().getTime()) {
-        return userObj;
+  const checkLogin = async () => {
+    try {
+      const user = localStorage.getItem("userinfo");
+
+      if (user) {
+        let userObj = JSON.parse(user);
+        if (userObj.expire > new Date().getTime()) {
+          return userObj;
+        }
       }
+      return null;
+    } catch (error) {
+      return null;
     }
   };
   const login = async (code, redirectUri, authAddress) => {
@@ -96,34 +114,36 @@ function Home({
     myHeaders.append("Content-Type", "application/json");
 
     try {
-      const response = await fetch(
-        "https://neomapi.westerops.com/auth/login/",
-        {
-          method: "POST",
-          headers: myHeaders,
-          body: JSON.stringify({
-            code: code,
-            redirectUrl: redirectUri,
-          }),
-        }
-      );
-      console.log(response);
+      const response = await fetch("https://auth.hotel.westerops.com/login", {
+        method: "POST",
+        headers: myHeaders,
+        body: JSON.stringify({
+          code: code,
+          redirectUrl: redirectUri,
+        }),
+      });
+
       if (!response.ok) {
-        console.log("girdi");
+        /* alert("response not ok"); */
         throw Error("a");
       }
 
       const result = await response.json();
+      /* alert(JSON.stringify(result)); */
+
       const userObj = result.data;
-      userObj.expire = new Date().getTime() + 30 * 60 * 60 * 1000;
-      localStorage.setItem("user", JSON.stringify(userObj));
+
+      userObj.expire = new Date().getTime() + 30 * 60 * 60 * 1000 * 30;
+
+      localStorage.setItem("userinfo", JSON.stringify(userObj));
+
       setUser(result.data);
     } catch (error) {
+      /* alert("error login, redirect call"); */
       console.log("error", error);
       window.location.assign(authAddress);
     }
   };
-
   React.useEffect(() => {
     // Prefetch the dashboard page
     setTimeout(() => {
@@ -132,6 +152,11 @@ function Home({
     }, 500);
   }, []);
 
+  /*  React.useEffect(() => {
+    // Prefetch the dashboard page
+    alert("active" + activeMenu);
+  }, [activeMenu]);
+ */
   return (
     <Page>
       <div className={"container"}>
@@ -139,9 +164,8 @@ function Home({
           <title>Neom Hotels</title>
           <meta name="description" content="Generated by create next app" />
         </Head>
-
         {(activeMenu === "Explore" || focusedSearch) && (
-          <div className="header">
+          <F7Navbar className="header">
             <HeaderTitle>
               <div style={{ marginRight: 6 }}>HI</div>
               {user ? (
@@ -161,9 +185,15 @@ function Home({
                 </div>
               )}
             </HeaderTitle>
-          </div>
+          </F7Navbar>
         )}
         {/* <BottomSheet></BottomSheet> */}
+        {/* <motion.div
+          key={activeMenu}
+          initial={{ opacity: 0.5, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ ease: "easeOut", duration: 0.5 }}
+        > */}
         {activeMenu === "Explore" && (
           <>
             <div className="exploreContainer" id="exploreContainer">
@@ -171,6 +201,7 @@ function Home({
                 <div className="search">
                   {focusedSearch && (
                     <Back
+                      style={{ alignSelf: "center" }}
                       onClick={() => {
                         setFocusedSearch(false);
                         setSearchTerm("");
@@ -212,18 +243,19 @@ function Home({
             </div>
           </>
         )}
-
         {activeMenu === "Favorites" && (
           <Favorites recommendedArray={recommendedArray} f7router={f7router} />
         )}
-        {activeMenu === "Stays" && <Stays f7router={f7router} />}
+        {activeMenu === "Stays" && <Stays f7router={f7router} />}{" "}
+        {/* </motion.div> */}
         {!focusedSearch && (
-          <HomeMenu
-            activeMenu={activeMenu}
-            setActiveMenu={setActiveMenu}
-          ></HomeMenu>
+          <>
+            <HomeMenu
+              activeMenu={activeMenu}
+              setActiveMenu={setActiveMenu}
+            ></HomeMenu>
+          </>
         )}
-
         <style jsx>{`
           .search {
             padding-right: 24px;

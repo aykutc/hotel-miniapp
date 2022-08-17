@@ -6,6 +6,7 @@ import { AnimatePresence, m, LazyMotion, domAnimation } from "framer-motion";
 import { useState, useEffect } from "react";
 import { getFavorites, saveFavorites } from "data/api";
 import NoData from "@/components/NoData";
+import F7Navbar from "@/components/F7Navbar";
 
 function Favorites({ f7router }) {
   const [favoriteArray, setFavoriteArray] = useState([]);
@@ -21,9 +22,9 @@ function Favorites({ f7router }) {
 
   return (
     <>
-      <div className={"header"}>
+      <F7Navbar className={"header"}>
         <HeaderTitle>Favorites</HeaderTitle>
-      </div>
+      </F7Navbar>
       <div style={{ height: 16 }}></div>
       <div
         style={{
@@ -58,10 +59,9 @@ function Favorites({ f7router }) {
                   /*     initial={{ opacity: 0, x: -300 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0 }} */
-                  initial={{ opacity: 0, y: -100 }}
+                  initial={{ opacity: 0 }}
                   animate={{
                     opacity: 1,
-                    y: 0,
                   }}
                   exit={{ opacity: 0 }}
                 >

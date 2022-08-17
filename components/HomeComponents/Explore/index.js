@@ -57,7 +57,7 @@ function Explore({ exploreArray, recommendedArray, f7router }) {
             );
           })}
         </div>
-        <div style={{ height: 80 }}></div>
+        <div style={{ height: 140 }}></div>
       </div>
       <style jsx>{`
         .title {

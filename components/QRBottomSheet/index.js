@@ -17,8 +17,6 @@ function QRBottomSheet({ show, setShow }) {
     };
 
     function handleSuccess(stream) {
-      console.log(stream);
-      console.log(videoRef);
       if (videoRef.current) {
         /*         window.stream = stream; // make stream available to browser console */
         videoRef.current.srcObject = stream;

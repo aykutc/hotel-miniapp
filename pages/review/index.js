@@ -19,6 +19,7 @@ import {
 import { safeParseFloat } from "../../utils";
 import Header from "@/components/Header";
 import { Page } from "framework7-react";
+import F7Navbar from "@/components/F7Navbar";
 
 export async function getStaticProps() {
   return {
@@ -74,17 +75,18 @@ const Review = ({ f7router }) => {
           overflow: "hidden",
         }}
       >
-        <Header style={{ marginBottom: 12 }}>
-          <Back
-            style={{ marginRight: 32 }}
-            onClick={() => {
-              console.log("f7  back");
-              f7router.back();
-            }}
-          ></Back>
+        <F7Navbar>
+          <Header>
+            <Back
+              style={{ marginRight: 32 }}
+              onClick={() => {
+                f7router.back();
+              }}
+            ></Back>
 
-          <HeaderTitle>REVIEW</HeaderTitle>
-        </Header>
+            <HeaderTitle>REVIEW</HeaderTitle>
+          </Header>
+        </F7Navbar>
         <div style={{ overflow: "scroll" }}>
           <div
             style={{

@@ -1,3 +1,4 @@
+import F7Navbar from "@/components/F7Navbar";
 import HeaderTitle from "@/components/HeaderTitle";
 import NoData from "@/components/NoData";
 import Tabs from "@/components/Tabs";
@@ -78,9 +79,9 @@ function Stays({ f7router }) {
   const currentTab = tabs.find((tab) => tab.id === selectedTab);
   return (
     <>
-      <div className={"header"}>
+      <F7Navbar className={"header"}>
         <HeaderTitle>Stays</HeaderTitle>
-      </div>
+      </F7Navbar>
       <div style={{ paddingRight: "24px" }}>
         <Tabs
           data={["Upcoming", "Past", "Cancelled"]}

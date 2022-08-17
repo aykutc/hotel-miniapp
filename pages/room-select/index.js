@@ -13,6 +13,7 @@ import {
 import Header from "@/components/Header";
 import { Page } from "framework7-react";
 import { useRouterPush } from "@/utils/hooks";
+import F7Navbar from "@/components/F7Navbar";
 export async function getStaticProps() {
   return {
     props: {},
@@ -99,17 +100,18 @@ const RoomSelect = ({ f7router }) => {
           overscrollBehavior: "none",
         }}
       >
-        <Header>
-          <Back
-            style={{ marginRight: 32 }}
-            onClick={() => {
-              console.log("f7  back");
-              f7router.back();
-            }}
-          ></Back>
-          <HeaderTitle>Rooms</HeaderTitle>
-        </Header>
-
+        <F7Navbar>
+          <Header>
+            <Back
+              style={{ marginRight: 32 }}
+              onClick={() => {
+                console.log("f7  back");
+                f7router.back();
+              }}
+            ></Back>
+            <HeaderTitle>Rooms</HeaderTitle>
+          </Header>
+        </F7Navbar>
         <div style={{ height: 16 }}></div>
 
         <div

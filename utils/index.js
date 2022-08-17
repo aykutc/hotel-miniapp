@@ -16,7 +16,6 @@ function getDate(str) {
 }
 
 const formattedDate = (date) => {
-  console.log(date);
   if (!date) {
     return "";
   }

@@ -7,6 +7,7 @@ import { saveDateSelection } from "data/api";
 import Calendar from "@/components/Calendar";
 import { Page } from "framework7-react";
 import { useRouterPush } from "@/utils/hooks";
+import F7Navbar from "@/components/F7Navbar";
 
 export async function getStaticProps() {
   return {
@@ -15,10 +16,6 @@ export async function getStaticProps() {
 }
 function Dates({ f7router }) {
   const [dateSelection, setDateSelection] = React.useState({});
-  /*   React.useEffect(() => {
-    console.log("aa", sessionStorage.getItem("aa"));
-  }, []);
- */
 
   React.useEffect(() => {
     // Prefetch the dashboard page
@@ -30,21 +27,22 @@ function Dates({ f7router }) {
   return (
     <Page>
       <div className={"container"}>
-        <div
+        <F7Navbar
           style={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "flex-start",
           }}
         >
           <Back
             style={{ marginRight: 32 }}
             onClick={() => {
-              console.log("f7  back");
               f7router.back();
             }}
           ></Back>
+
           <HeaderTitle>Dates</HeaderTitle>
-        </div>
+        </F7Navbar>
 
         <Calendar setSelection={setDateSelection}></Calendar>
         <FloatingBottomButton

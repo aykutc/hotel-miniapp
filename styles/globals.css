@@ -41,7 +41,12 @@ body {
 main {
   display: block;
 }
-
+.page-content {
+  overflow: hidden;
+}
+.ios .navbar-inner {
+  justify-content: unset;
+}
 /**
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.

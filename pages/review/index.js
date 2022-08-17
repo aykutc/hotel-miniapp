@@ -15,6 +15,7 @@ import {
   getHotel,
   getRoomSelection,
   getSelectedRooms,
+  startPayment,
 } from "data/api";
 import { safeParseFloat } from "../../utils";
 import Header from "@/components/Header";
@@ -34,6 +35,7 @@ const Review = ({ f7router }) => {
     const dateSelection = getDateSelection();
     const roomSelection = getRoomSelection();
     const selectedRooms = getSelectedRooms();
+    const user = localStorage.getItem("userinfo");
     const hotel = getHotel();
 
     setHotelDetail({
@@ -42,8 +44,11 @@ const Review = ({ f7router }) => {
       ...dateSelection,
       ...roomSelection,
       ...hotel,
+      ...JSON.parse(user),
     });
   }, []);
+
+  console.log(hotelDetail);
   const checkInDate = new Date(hotelDetail?.checkIn);
   const checkOutDate = new Date(hotelDetail?.checkOut);
   const monthFormatter = new Intl.DateTimeFormat("en", { month: "short" });
@@ -59,6 +64,33 @@ const Review = ({ f7router }) => {
     totalPrice = parseFloat(totalPrice).toFixed(2);
   }
 
+  const startPay = () => {
+    startPayment({
+      price: totalPrice,
+      /* text: hotelDetail.selectedRooms.map((item) => {
+        return {
+          key: item.title.toString(),
+          value: item.price,
+        };
+      }), */
+
+      text: [
+        {
+          key:
+            hotelDetail.duration +
+            " nights, " +
+            hotelDetail?.selectedRooms.map((item, index) => {
+              if (index > 0) {
+                return " " + item.title;
+              }
+              return item.title;
+            }),
+          value: "$" + totalPrice,
+        },
+      ],
+      email: hotelDetail.username,
+    });
+  };
   return (
     <Page>
       <div
@@ -252,7 +284,14 @@ const Review = ({ f7router }) => {
             showing. If its not, disregard the check-in email.
           </p>
         </div>
-        <FloatingBottomButton onClick={() => {}}>BOOK NOW</FloatingBottomButton>
+        <FloatingBottomButton
+          disabled={hotelDetail === null}
+          onClick={() => {
+            startPay();
+          }}
+        >
+          BOOK NOW
+        </FloatingBottomButton>
       </div>
     </Page>
   );

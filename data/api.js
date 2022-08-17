@@ -130,7 +130,28 @@ const getStays = (value) => {
   return result;
 };
 
+const startPayment = async (payment) => {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const response = await fetch(
+    "https://neomapi.westerops.com/payment/hotel-payment",
+    {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify(payment),
+    }
+  );
+
+  if (!response.ok) {
+    /* alert("response not ok"); */
+    throw Error("a");
+  }
+  return response;
+};
+
 export {
+  startPayment,
   saveRegion,
   saveHomeActiveTab,
   getHomeActiveTab,

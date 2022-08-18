@@ -121,7 +121,7 @@ const Review = ({ f7router }) => {
           const stays = getStays();
           saveHomeActiveTab("Stays");
           saveStays([{ ...hotel, ...dateSelection }, ...stays]);
-          f7router.navigate("/", { clearPreviousHistory: true });
+          f7router.navigate("/payment-complete");
         }
       }
     };

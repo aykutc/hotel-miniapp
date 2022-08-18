@@ -48,6 +48,10 @@ const routes = [
     path: "/room-select",
     asyncComponent: () => import("./room-select/index"),
   },
+  {
+    path: "/payment-complete",
+    asyncComponent: () => import("./payment-complete/index"),
+  },
 ];
 
 function MyApp({ Component, pageProps }) {
@@ -67,7 +71,7 @@ function MyApp({ Component, pageProps }) {
       It is required because Framework7 will be initialized on server-side,
       and we need to know this URL to correctly load pages by Framework7 router
     */
-    <App url={url} routes={routes}>
+    <App url={url} routes={routes} touch={{ mdTouchRipple: false }}>
       {/*
         Create main View.
         Apparently we need to enable browserHistory to navigating by URL

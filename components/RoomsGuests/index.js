@@ -78,6 +78,11 @@ const RoomsGuests = ({
         </button>
       </div>
       <style jsx>{`
+        .addRoomSpan {
+          margin-left: 8px;
+          margin-top: 2px;
+        }
+
         .roomsGuests {
           padding: 0 24px;
           padding-bottom: 120px;

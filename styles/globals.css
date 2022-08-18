@@ -536,3 +536,34 @@ a {
     stroke-dashoffset: -124;
   }
 }
+
+.mapboxgl-ctrl-top-right {
+  bottom: 225px !important;
+  top: unset !important;
+}
+
+.mapboxgl-ctrl-group {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.mapboxgl-ctrl-geolocate {
+  width: 56px !important;
+  height: 56px !important;
+  background: transparent !important;
+}
+
+.mapboxgl-ctrl-geolocate > .mapboxgl-ctrl-icon {
+  background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2256%22%20height%3D%2256%22%20viewBox%3D%220%200%2064%2064%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cg%20filter%3D%22url(%23filter0_d_2167_6267)%22%3E%0A%3Ccircle%20cx%3D%2232%22%20cy%3D%2228%22%20r%3D%2228%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fg%3E%0A%3Cpath%20d%3D%22M39.6177%2019.7304C40.0276%2019.5634%2040.4364%2019.9721%2040.2694%2020.3821L33.4116%2037.2147C33.2412%2037.6329%2032.6475%2037.6288%2032.483%2037.2082L29.837%2030.4462C29.7861%2030.3163%2029.6834%2030.2136%2029.5535%2030.1628L22.7915%2027.5168C22.3709%2027.3522%2022.3668%2026.7585%2022.7851%2026.5881L39.6177%2019.7304Z%22%20fill%3D%22%23B89535%22%2F%3E%0A%3Cdefs%3E%0A%3Cfilter%20id%3D%22filter0_d_2167_6267%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2264%22%20height%3D%2264%22%20filterUnits%3D%22userSpaceOnUse%22%20color-interpolation-filters%3D%22sRGB%22%3E%0A%3CfeFlood%20flood-opacity%3D%220%22%20result%3D%22BackgroundImageFix%22%2F%3E%0A%3CfeColorMatrix%20in%3D%22SourceAlpha%22%20type%3D%22matrix%22%20values%3D%220%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%20127%200%22%20result%3D%22hardAlpha%22%2F%3E%0A%3CfeOffset%20dy%3D%224%22%2F%3E%0A%3CfeGaussianBlur%20stdDeviation%3D%222%22%2F%3E%0A%3CfeComposite%20in2%3D%22hardAlpha%22%20operator%3D%22out%22%2F%3E%0A%3CfeColorMatrix%20type%3D%22matrix%22%20values%3D%220%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200.16%200%22%2F%3E%0A%3CfeBlend%20mode%3D%22normal%22%20in2%3D%22BackgroundImageFix%22%20result%3D%22effect1_dropShadow_2167_6267%22%2F%3E%0A%3CfeBlend%20mode%3D%22normal%22%20in%3D%22SourceGraphic%22%20in2%3D%22effect1_dropShadow_2167_6267%22%20result%3D%22shape%22%2F%3E%0A%3C%2Ffilter%3E%0A%3C%2Fdefs%3E%0A%3C%2Fsvg%3E%0A") !important;
+  animation: none !important;
+}
+
+.mapboxgl-user-location-dot,
+.mapboxgl-user-location-dot:before {
+  background-color: #b89535 !important;
+}
+
+.mapboxgl-user-location-heading {
+  display: none !important;
+}

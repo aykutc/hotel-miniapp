@@ -117,7 +117,7 @@ function Home({
     myHeaders.append("Content-Type", "application/json");
 
     try {
-      const response = await fetch("https://neomapi.westerops.com/auth/login", {
+      const response = await fetch(process.env.openIdRequest, {
         method: "POST",
         headers: myHeaders,
         body: JSON.stringify({

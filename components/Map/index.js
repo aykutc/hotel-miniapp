@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
-import "mapbox-gl/dist/mapbox-gl.css";
+import React, { useEffect } from 'react';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-import mapboxgl from "mapbox-gl"; // or "const mapboxgl = require('mapbox-gl');"
-import Router from "next/router";
-import { HotelsArray } from "data/data";
-import { saveHotel } from "data/api";
-import styles from "./mapbox.module.css";
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import Router from 'next/router';
+import { HotelsArray } from 'data/data';
+import { saveHotel } from 'data/api';
+import styles from './mapbox.module.css';
 
-mapboxgl.accessToken =
-  "pk.eyJ1Ijoid2VlcGVyIiwiYSI6ImNrcHh0b2tsMTA2NnIycG82eDY2ejgzM3UifQ.iVEdDIHQE5uK14tVmk1NGg";
+mapboxgl.accessToken = 'pk.eyJ1Ijoid2VlcGVyIiwiYSI6ImNrcHh0b2tsMTA2NnIycG82eDY2ejgzM3UifQ.iVEdDIHQE5uK14tVmk1NGg';
 const geojson = {
-  type: "FeatureCollection",
+  type: 'FeatureCollection',
   features: [
     {
       ...HotelsArray[0],
@@ -26,29 +25,33 @@ const geojson = {
 
 const Map = ({ f7router }) => {
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log('user succesfully located', position.coords);
+    });
+
     const map = new mapboxgl.Map({
-      container: "map", // container ID
-      style: "mapbox://styles/weeper/cl57rowp8001i14ns4he9xs4u", // style URL
+      container: 'map', // container ID
+      style: 'mapbox://styles/weeper/cl57rowp8001i14ns4he9xs4u', // style URL
       center: [35.7931741, 27.799901], // starting position [lng, lat]
       zoom: 6, // starting zoom
-      projection: "mercator", // display the map as a 3D globe
+      projection: 'mercator', // display the map as a 3D globe
     });
 
     for (const marker of geojson.features) {
       // Create a DOM element for each marker.
-      const el = document.createElement("div");
+      const el = document.createElement('div');
       el.className = styles.marker;
       el.style.width = `10px`;
       el.style.height = `10px`;
 
-      const subEl = document.createElement("div");
+      const subEl = document.createElement('div');
       subEl.className = styles.markerContent;
       subEl.innerText = marker.properties.message;
       subEl.onclick = () => {
         saveHotel({
           ...marker,
         });
-        f7router.navigate("/hotel-detail");
+        f7router.navigate('/hotel-detail');
       };
       el.appendChild(subEl);
 
@@ -70,7 +73,7 @@ const Map = ({ f7router }) => {
 
   return (
     <>
-      <div className={"map"} id="map" />
+      <div className={'map'} id="map" />
       <style jsx>{`
         .map {
           height: 100%;
@@ -94,7 +97,7 @@ const Map = ({ f7router }) => {
           border-radius: 100px;
           color: white;
 
-          font-family: "Outfit";
+          font-family: 'Outfit';
           font-style: normal;
           font-weight: 500;
           font-size: 16px;
@@ -107,7 +110,7 @@ const Map = ({ f7router }) => {
         }
 
         .markerContent::before {
-          content: "";
+          content: '';
           position: absolute;
 
           width: 1px;

@@ -259,6 +259,7 @@ function Results({ f7router }) {
             style={{
               overflow: "scroll",
               flex: "1 1 auto",
+              height: "100%",
             }}
           >
             <Suspense
@@ -268,7 +269,7 @@ function Results({ f7router }) {
             </Suspense>
           </div>
         )}
-        <div style={{ height: 120 }}></div>
+        {/* <div style={{ height: 120 }}></div> */}
         <div className={"bottomContainer"}>
           <Tabs
             data={["LIST VIEW", "MAP VIEW"]}
@@ -401,7 +402,7 @@ function Results({ f7router }) {
 
         .bottomContainer {
           padding: 14px 24px 20px 24px;
-          position: fixed;
+
           width: 100%;
           bottom: 0;
           left: 0;

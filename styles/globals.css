@@ -538,7 +538,8 @@ a {
 }
 
 .mapboxgl-ctrl-top-right {
-  bottom: 225px !important;
+  bottom: 35px !important;
+  right: 10px;
   top: unset !important;
 }
 

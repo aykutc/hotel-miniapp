@@ -23,10 +23,9 @@ const nextConfig = {
     host: "https://neom-hotel.web.app",
     api: "https://neomapi.westerops.com",
     chatDeeplink:
-      "https://share.neom.kobil.com/kobilservice?sID=da6e6fe3-c99c-4346-acdd-22bdcdb39adb",
-    openIdClient: "test-openid",
-    openidHost:
-      "https://idp.kobilshift-app01-eotsr.shift.kobil.com/auth/realms/flutter/",
+      "https://share.neom.kobil.com/kobilservice?sID=5754d3f0-5836-4bf5-b462-68c26d9fc867",
+    openIdClient: "miniapp-openid",
+    openidHost: "https://idp.neom-poc.shift.kobil.com/auth/realms/kurtis/",
   },
 };
 module.exports = withPlugins(

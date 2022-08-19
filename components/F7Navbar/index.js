@@ -9,7 +9,7 @@ function F7Navbar({ children, ...props }) {
       largeTransparent
       backLinkShowText={false}
       backLink={false}
-      style={{ marginBottom: 12, flexShrink: 0 }}
+      style={{ marginBottom: 12, flexShrink: 0, position: "relative", top: 6 }}
       {...props}
     >
       {children}

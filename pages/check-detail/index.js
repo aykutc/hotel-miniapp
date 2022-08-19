@@ -83,7 +83,6 @@ function CheckDetail({ f7router }) {
             <Back
               style={{ marginRight: 32 }}
               onClick={() => {
-                console.log("f7  back");
                 f7router.back();
               }}
             ></Back>

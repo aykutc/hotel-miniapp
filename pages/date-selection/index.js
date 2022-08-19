@@ -8,6 +8,7 @@ import Calendar from "@/components/Calendar";
 import { Page } from "framework7-react";
 import { useRouterPush } from "@/utils/hooks";
 import F7Navbar from "@/components/F7Navbar";
+import Header from "@/components/Header";
 
 export async function getStaticProps() {
   return {
@@ -32,16 +33,21 @@ function Dates({ f7router }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
+            flexShrink: 0,
+            position: "relative",
+            top: 7,
           }}
         >
-          <Back
-            style={{ marginRight: 32 }}
-            onClick={() => {
-              f7router.back();
-            }}
-          ></Back>
+          <Header>
+            <Back
+              style={{ marginRight: 32 }}
+              onClick={() => {
+                f7router.back();
+              }}
+            ></Back>
 
-          <HeaderTitle>Dates</HeaderTitle>
+            <HeaderTitle>Dates</HeaderTitle>
+          </Header>
         </F7Navbar>
 
         <Calendar setSelection={setDateSelection}></Calendar>
@@ -78,7 +84,7 @@ function Dates({ f7router }) {
         .container {
           padding-left: 24px;
           padding-right: 24px;
-          padding-top: 18px;
+
           height: 100vh;
           overflow: hidden;
 

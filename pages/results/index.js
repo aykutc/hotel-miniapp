@@ -401,7 +401,7 @@ function Results({ f7router }) {
         }
 
         .bottomContainer {
-          padding: 14px 24px 20px 24px;
+          padding: 14px 24px 40px 24px;
 
           width: 100%;
           bottom: 0;

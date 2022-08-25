@@ -23,7 +23,7 @@ const nextConfig = {
     host: "https://neom-hotel.web.app",
     api: "https://neomapi.westerops.com",
     chatDeeplink:
-      "https://share.neom.kobil.com/kobilservice?sID=5754d3f0-5836-4bf5-b462-68c26d9fc867",
+      "https://share.neom.kobil.com/kobilservice?sID=0cab564a-c1a2-4452-abb2-0d80c4949ed2",
     openIdClient: "miniapp-hotel",
     openIdRequest: "https://neomapi.westerops.com/auth/login-hotel",
     openidHost: "https://idp.neom-poc.shift.kobil.com/auth/realms/kurtis/",

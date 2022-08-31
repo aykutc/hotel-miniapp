@@ -76,6 +76,7 @@ function Stays({ f7router }) {
 
     setTabs(_tabs);
   }, []);
+
   const currentTab = tabs.find((tab) => tab.id === selectedTab);
   return (
     <>
@@ -96,6 +97,9 @@ function Stays({ f7router }) {
         {currentTab?.data.length === 0
           ? currentTab?.noData
           : currentTab?.data.map((item, index) => {
+              if (Array.isArray(item)) {
+                return <div></div>;
+              }
               const isFavorite = favorites.some(
                 (_item) => _item.id === item.id
               );

@@ -21,7 +21,7 @@ import {
 import { Page } from "framework7-react";
 
 import Router from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export async function getStaticProps() {
   return {
@@ -31,19 +31,18 @@ export async function getStaticProps() {
 function CheckDetail({ f7router }) {
   const push = useRouterPush();
   const [checkState, setCheckState] = useState({});
-
   const [addBottomSheet, setaddBottomSheet] = useState(false);
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
   const [isRegionModalOpen, setIsRegionModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
-
   const [dateSelection, setDateSelection] = useState({});
+
   React.useEffect(() => {
-    // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/results");
     }, 300);
   }, []);
+
   React.useEffect(() => {
     const region = getRegion();
     const dateSelection = getDateSelection();
@@ -75,6 +74,7 @@ function CheckDetail({ f7router }) {
       setaddBottomSheet(false);
     }, 100);
   };
+
   return (
     <Page>
       <div className={"checkDetailContainer"}>
@@ -125,9 +125,6 @@ function CheckDetail({ f7router }) {
         <FloatingBottomButton
           onClick={() => {
             push("/results", f7router);
-            /*  Router.push({
-              pathname: "/results",
-            }); */
           }}
         >
           SEE RESULTS
@@ -146,7 +143,6 @@ function CheckDetail({ f7router }) {
           <div
             style={{
               padding: "0px 24px",
-              /* height: "calc(100vh - 170px)", */
             }}
           >
             <Calendar setSelection={setDateSelection} />

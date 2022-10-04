@@ -165,9 +165,6 @@ function Image({
             height={fallbackSource.height}
             {...props}
             style={{
-              /*     backgroundImage: `url("${fallbackSource.placeholder}")`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "100% 100%", */
               ...props.style,
             }}
           />

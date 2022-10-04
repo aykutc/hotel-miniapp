@@ -4,8 +4,7 @@ import Head from "next/head";
 import React, { useEffect } from "react";
 import HomeMenu from "@/components/HomeComponents/HomeMenu";
 import Explore from "@/components/HomeComponents/Explore";
-/* import Favorites from "@/components/HomeComponents/Favorites";
- */ import HeaderTitle from "@/components/HeaderTitle";
+import HeaderTitle from "@/components/HeaderTitle";
 import Stays from "@/components/HomeComponents/Stays";
 import SearchBar from "@/components/SearchBar";
 import Back from "@/components/icons/Back";
@@ -49,40 +48,27 @@ function Home({
 
   React.useEffect(() => {
     const active = getHomeActiveTab();
-    /* localStorage.removeItem("userinfo"); */
-
     if (active) {
       setActiveMenu(active);
     }
-    /* console.log("active", active); */
   }, []);
 
   const generateUrl = (redirectUri) => {
-    const url =
+    const authorizationURL =
       process.env.openidHost +
       "protocol/openid-connect/auth?client_id=" +
       process.env.openIdClient +
       "&redirect_uri=" +
       redirectUri +
       "&scope=openid&response_type=code&response_mode=query&nonce=o3w1vsredlp";
-    /* &prompt=none */
-    return url;
+    return authorizationURL;
   };
 
   React.useEffect(() => {
-    if (!router.isReady) {
-      return;
-    }
     const _login = async () => {
       const address = window.location.protocol + "//" + window.location.host;
 
       if (user) {
-        return;
-      }
-      const _user = await checkLogin();
-
-      if (_user) {
-        setUser(_user);
         return;
       }
       const urlParams = new URLSearchParams(window.location.href);
@@ -90,30 +76,14 @@ function Home({
       if (myParam) {
         login(myParam, address, generateUrl(address));
       } else {
-        /* alert("redirect"); */
         window.location.assign(generateUrl(address));
       }
     };
     _login();
   }, [router]);
 
-  const checkLogin = async () => {
-    try {
-      const user = localStorage.getItem("userinfo");
-
-      if (user) {
-        let userObj = JSON.parse(user);
-        if (userObj.expire > new Date().getTime()) {
-          return userObj;
-        }
-      }
-      return null;
-    } catch (error) {
-      return null;
-    }
-  };
   const login = async (code, redirectUri, authAddress) => {
-    var myHeaders = new Headers();
+    const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     try {
@@ -132,36 +102,19 @@ function Home({
       }
 
       const apiResultJson = await response.json();
-      /* alert(JSON.stringify(result)); */
-      console.log(apiResultJson);
       const userObj = apiResultJson.result;
-
-      userObj.expire = new Date().getTime() + 30 * 60 * 60 * 1000 * 30;
-
-      localStorage.setItem("userinfo", JSON.stringify(userObj));
-
       setUser(userObj);
-      console.log(userObj);
     } catch (error) {
-      console.log("err", error);
-      /* alert("error login, redirect call"); */
-      console.log("error", JSON.stringify(error));
       window.location.assign(authAddress);
     }
   };
   React.useEffect(() => {
-    // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/date-selection");
       Router.prefetch("/hotel-detail");
     }, 500);
   }, []);
 
-  /*  React.useEffect(() => {
-    // Prefetch the dashboard page
-    alert("active" + activeMenu);
-  }, [activeMenu]);
- */
   return (
     <Page>
       <div className={"container"}>
@@ -196,13 +149,6 @@ function Home({
             </HeaderTitle>
           </F7Navbar>
         )}
-        {/* <BottomSheet></BottomSheet> */}
-        {/* <motion.div
-          key={activeMenu}
-          initial={{ opacity: 0.5, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ ease: "easeOut", duration: 0.5 }}
-        > */}
         {activeMenu === "Explore" && (
           <>
             <div className="exploreContainer" id="exploreContainer">
@@ -234,9 +180,6 @@ function Home({
                     onClick={(value) => {
                       saveRegion(value);
                       push("/date-selection", f7router);
-                      /*  Router.push({
-                        pathname: "/date-selection",
-                      }); */
                     }}
                   ></SearchContent>
                 ) : (
@@ -256,7 +199,6 @@ function Home({
           <Favorites recommendedArray={recommendedArray} f7router={f7router} />
         )}
         {activeMenu === "Stays" && <Stays f7router={f7router} />}{" "}
-        {/* </motion.div> */}
         {!focusedSearch && (
           <>
             <HomeMenu
@@ -279,12 +221,8 @@ function Home({
             position: relative;
             overflow: scroll;
             height: ${focusedSearch ? "unset" : "95vh"};
+          }
 
-            /* transform: translateY(-200px); */
-          }
-          .searchContainer {
-            /* background-color: yellow; */
-          }
           .header {
             height: 58px;
             display: flex;

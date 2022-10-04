@@ -58,7 +58,6 @@ function HotelDetail({ f7router }) {
   ];
   const [hotelDetail, setHotelDetail] = React.useState({});
   React.useEffect(() => {
-    // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/room-select");
     }, 300);

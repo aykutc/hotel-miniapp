@@ -19,7 +19,6 @@ function Dates({ f7router }) {
   const [dateSelection, setDateSelection] = React.useState({});
 
   React.useEffect(() => {
-    // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/check-detail");
     }, 300);

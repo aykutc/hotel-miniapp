@@ -14,11 +14,13 @@ import Header from "@/components/Header";
 import { Page } from "framework7-react";
 import { useRouterPush } from "@/utils/hooks";
 import F7Navbar from "@/components/F7Navbar";
+
 export async function getStaticProps() {
   return {
     props: {},
   };
 }
+
 const RoomSelect = ({ f7router }) => {
   const [rooms, setRooms] = useState(
     RoomSelectionArray.map((item) => {
@@ -54,16 +56,6 @@ const RoomSelect = ({ f7router }) => {
         return item.selected;
       })
     );
-    /*  const isInclude = selectedRooms.find((item) => item.id === id);
-    if (isInclude || selectedRooms.length < roomAmount) {
-      const index = rooms.findIndex((item) => item.id === id);
-      const selectedRoom = rooms[index];
-      rooms.splice(index, 1, {
-        ...selectedRoom,
-        selected: !selectedRoom.selected,
-      });
-      setSelectedRooms(rooms.filter((e) => e.selected === true));
-    } */
   };
 
   useEffect(() => {
@@ -79,13 +71,15 @@ const RoomSelect = ({ f7router }) => {
       ...hotel,
     });
   }, []);
+
   useEffect(() => {
-    // Prefetch the dashboard page
     setTimeout(() => {
       Router.prefetch("/review");
     }, 300);
   }, []);
+
   const push = useRouterPush();
+
   return (
     <Page>
       <div
